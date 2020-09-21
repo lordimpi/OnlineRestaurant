@@ -8,9 +8,9 @@ import co.unicauca.onlinerestaurant.server.infra.OnlineRestaurantServerSocket;
  * @author Santiago Acuña
  */
 public class OnlineRestaurantApplication {
-    public static void main(String[] args) {
+
+    public static void main(String args[]) {
         OnlineRestaurantServerSocket server = new OnlineRestaurantServerSocket();
         server.start();
     }
-
 }

@@ -1,7 +1,9 @@
 package co.unicauca.onlinerestaurant.commons.domain;
 
+import java.util.Date;
+
 /**
- * Cliente del restaurante
+ * Cliente de la agencia de viajes
  *
  * @author Santiago Acuña
  */
@@ -124,4 +126,5 @@ public class Customer {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
 }

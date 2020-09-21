@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
+ * Utilidades varias utilizadas por otras clases
  *
  * @author Santiago Acuña
  */

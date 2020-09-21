@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author Santiago Acuña
  */
-public class CustomerRepositoryImplArrays implements ICustomerRepository {
+public final class CustomerRepositoryImplArrays implements ICustomerRepository {
 
     /**
      * Array List de clientes
@@ -61,4 +61,5 @@ public class CustomerRepositoryImplArrays implements ICustomerRepository {
         customers.add(customer);
         return customer.getId();
     }
+
 }

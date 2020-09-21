@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Repositorio de Clientes en MySWL
+ * Repositorio de Clientes en MySQL
  *
  * @author Santiago Acuña
  */
@@ -118,4 +118,5 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.FINER, "Error al cerrar Connection", ex);
         }
     }
+
 }

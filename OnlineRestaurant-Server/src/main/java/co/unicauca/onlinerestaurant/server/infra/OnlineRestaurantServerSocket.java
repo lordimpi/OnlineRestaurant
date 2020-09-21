@@ -272,4 +272,5 @@ public class OnlineRestaurantServerSocket implements Runnable {
         String strObject = gson.toJson(customer);
         return strObject;
     }
+
 }

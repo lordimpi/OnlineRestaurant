@@ -3,6 +3,7 @@ package co.unicauca.onlinerestaurant.server.access;
 import co.unicauca.onlinerestaurant.commons.domain.Customer;
 
 /**
+ * Interface del respositorio de clientes
  *
  * @author Santiago Acuña
  */
@@ -17,4 +18,5 @@ public interface ICustomerRepository {
     public Customer findCustomer(String id);
 
     public String createCustomer(Customer customer);
+
 }
