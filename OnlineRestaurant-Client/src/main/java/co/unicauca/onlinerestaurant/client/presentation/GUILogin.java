@@ -112,7 +112,7 @@ public class GUILogin extends javax.swing.JFrame {
         if (true) {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    GUIMenu ins = new GUIMenu();
+                    GUIMenu2 ins = new GUIMenu2();
                     ins.setExtendedState(MAXIMIZED_BOTH);
                     ins.setVisible(true);
                 }
