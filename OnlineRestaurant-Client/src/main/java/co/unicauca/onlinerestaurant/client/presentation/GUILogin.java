@@ -31,7 +31,7 @@ public class GUILogin extends javax.swing.JFrame {
     public GUILogin() {
         initComponents();
         setLocationRelativeTo(null);
-        ImageIcon img = new ImageIcon("src/main/java/resources/bg.png");
+        ImageIcon img = new ImageIcon("src/main/java/resources/bg2.png");
         Icon icono = new ImageIcon(img.getImage().getScaledInstance(
                 jLbLogo.getWidth(),
                 jLbLogo.getHeight(),
