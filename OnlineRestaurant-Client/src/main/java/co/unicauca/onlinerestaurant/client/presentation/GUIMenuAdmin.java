@@ -16,9 +16,8 @@ import javax.swing.JLabel;
  */
 public class GUIMenuAdmin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GUIMenuAdmin
-     */
+    private boolean state = false;
+
     public GUIMenuAdmin() {
         initComponents();
         setLocationRelativeTo(null);
@@ -57,6 +56,9 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLbHide = new javax.swing.JLabel();
+        jLbClose1 = new javax.swing.JLabel();
+        jLbMaxMin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -277,6 +279,39 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
         jPnlBg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 800, 140));
 
+        jLbHide.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLbHide.setForeground(new java.awt.Color(102, 102, 102));
+        jLbHide.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLbHide.setText("-");
+        jLbHide.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLbHideMouseClicked(evt);
+            }
+        });
+        jPnlBg.add(jLbHide, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, 20, 20));
+
+        jLbClose1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLbClose1.setForeground(new java.awt.Color(102, 102, 102));
+        jLbClose1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLbClose1.setText("X");
+        jLbClose1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLbClose1MouseClicked(evt);
+            }
+        });
+        jPnlBg.add(jLbClose1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 0, 20, 20));
+
+        jLbMaxMin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLbMaxMin.setForeground(new java.awt.Color(102, 102, 102));
+        jLbMaxMin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLbMaxMin.setText("[]");
+        jLbMaxMin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLbMaxMinMouseClicked(evt);
+            }
+        });
+        jPnlBg.add(jLbMaxMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 0, 20, 20));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -290,6 +325,26 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLbClose1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbClose1MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLbClose1MouseClicked
+
+    private void jLbMaxMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbMaxMinMouseClicked
+
+        if (state) {
+            this.setExtendedState(NORMAL);
+            state = false;
+        }
+        else{
+            this.setExtendedState(MAXIMIZED_BOTH);
+            state = true;
+        }
+    }//GEN-LAST:event_jLbMaxMinMouseClicked
+
+    private void jLbHideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbHideMouseClicked
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_jLbHideMouseClicked
 
     /**
      * @param args the command line arguments
@@ -337,8 +392,11 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLbClose1;
+    private javax.swing.JLabel jLbHide;
     private javax.swing.JLabel jLbHomePage;
     private javax.swing.JLabel jLbHomePageIcono;
+    private javax.swing.JLabel jLbMaxMin;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

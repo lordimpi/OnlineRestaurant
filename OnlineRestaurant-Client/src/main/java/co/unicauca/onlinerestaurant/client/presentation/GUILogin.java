@@ -92,6 +92,7 @@ public class GUILogin extends javax.swing.JFrame {
         TxbUser.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         TxbUser.setForeground(new java.awt.Color(102, 102, 102));
         TxbUser.setText("User");
+        TxbUser.setToolTipText("Enter your user name");
         TxbUser.setBorder(null);
 
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
@@ -103,7 +104,7 @@ public class GUILogin extends javax.swing.JFrame {
         jPswField.setBackground(new java.awt.Color(255, 255, 255));
         jPswField.setForeground(new java.awt.Color(102, 102, 102));
         jPswField.setText("jPasswordField1");
-        jPswField.setToolTipText("");
+        jPswField.setToolTipText("Enter your password");
         jPswField.setBorder(null);
         jPswField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -113,6 +114,7 @@ public class GUILogin extends javax.swing.JFrame {
 
         BtnIngresar.setBackground(new java.awt.Color(114, 210, 66));
         BtnIngresar.setText("Ingresar");
+        BtnIngresar.setToolTipText("Click here to login");
         BtnIngresar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         BtnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         BtnIngresar.addActionListener(new java.awt.event.ActionListener() {
@@ -125,6 +127,7 @@ public class GUILogin extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("X");
+        jLabel4.setToolTipText("Close the application");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
