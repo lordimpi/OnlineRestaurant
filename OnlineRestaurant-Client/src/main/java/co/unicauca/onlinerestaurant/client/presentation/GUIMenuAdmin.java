@@ -5,6 +5,11 @@
  */
 package co.unicauca.onlinerestaurant.client.presentation;
 
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 /**
  *
  * @author Santiago Acuña
@@ -16,6 +21,10 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
      */
     public GUIMenuAdmin() {
         initComponents();
+        setLocationRelativeTo(null);
+        addIcon(jLbHomePageIcono, "src/main/java/resources/home.png");
+        addIcon(jLabel7, "src/main/java/resources/add.png");
+
     }
 
     /**
@@ -29,9 +38,9 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
         jPnlBg = new javax.swing.JPanel();
         jPnlSide = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jPnlHomePage = new javax.swing.JPanel();
+        jLbHomePageIcono = new javax.swing.JLabel();
+        jLbHomePage = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -60,37 +69,36 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         jPnlSide.setBackground(new java.awt.Color(54, 33, 88));
         jPnlSide.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(85, 65, 118));
+        jPnlHomePage.setBackground(new java.awt.Color(85, 65, 118));
 
-        jLabel1.setPreferredSize(new java.awt.Dimension(34, 35));
+        jLbHomePageIcono.setPreferredSize(new java.awt.Dimension(34, 35));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel2.setText("Home page");
+        jLbHomePage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLbHomePage.setForeground(new java.awt.Color(204, 204, 204));
+        jLbHomePage.setText("Home page");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPnlHomePageLayout = new javax.swing.GroupLayout(jPnlHomePage);
+        jPnlHomePage.setLayout(jPnlHomePageLayout);
+        jPnlHomePageLayout.setHorizontalGroup(
+            jPnlHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnlHomePageLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLbHomePageIcono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLbHomePage, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)))
+        jPnlHomePageLayout.setVerticalGroup(
+            jPnlHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnlHomePageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPnlHomePageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLbHomePage)
+                    .addComponent(jLbHomePageIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21))
         );
 
-        jPnlSide.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 280, 40));
+        jPnlSide.add(jPnlHomePage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 280, 40));
 
         jPanel3.setBackground(new java.awt.Color(64, 43, 100));
 
@@ -162,7 +170,7 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel8.setText("Home page");
+        jLabel8.setText("Add new 1");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -319,11 +327,9 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -331,14 +337,26 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLbHomePage;
+    private javax.swing.JLabel jLbHomePageIcono;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPnlBg;
+    private javax.swing.JPanel jPnlHomePage;
     private javax.swing.JPanel jPnlSide;
     // End of variables declaration//GEN-END:variables
+
+    private void addIcon(JLabel lb, String pathIcon) {
+        ImageIcon img = new ImageIcon(pathIcon);
+        Icon icono = new ImageIcon(img.getImage().getScaledInstance(
+                lb.getWidth(),
+                lb.getHeight(),
+                Image.SCALE_DEFAULT));
+        lb.setIcon(icono);
+        this.repaint();
+    }
 }
