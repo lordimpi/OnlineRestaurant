@@ -27,19 +27,19 @@ public class GUIMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        BtnConsultar = new javax.swing.JButton();
         dskEscritorio = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Online Restaurant");
 
-        jButton1.setText("Consultar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnConsultar.setText("Consultar");
+        BtnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnConsultarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(BtnConsultar, java.awt.BorderLayout.PAGE_START);
 
         javax.swing.GroupLayout dskEscritorioLayout = new javax.swing.GroupLayout(dskEscritorio);
         dskEscritorio.setLayout(dskEscritorioLayout);
@@ -57,14 +57,14 @@ public class GUIMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConsultarActionPerformed
         GUICustomer ins = new GUICustomer();
         ins.setMaximizable(true);
 
         dskEscritorio.add(ins);
         ins.show();
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnConsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,7 +103,7 @@ public class GUIMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnConsultar;
     private javax.swing.JDesktopPane dskEscritorio;
-    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

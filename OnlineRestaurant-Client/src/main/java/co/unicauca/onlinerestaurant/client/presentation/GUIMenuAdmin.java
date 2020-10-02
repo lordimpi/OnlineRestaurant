@@ -81,7 +81,7 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         jLbMaxMin = new javax.swing.JLabel();
         jLbHide = new javax.swing.JLabel();
         jLbClose1 = new javax.swing.JLabel();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        dskEscritorio = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -473,20 +473,20 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
         jPnlBg.add(jPnlCMH, java.awt.BorderLayout.PAGE_START);
 
-        jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
+        dskEscritorio.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout dskEscritorioLayout = new javax.swing.GroupLayout(dskEscritorio);
+        dskEscritorio.setLayout(dskEscritorioLayout);
+        dskEscritorioLayout.setHorizontalGroup(
+            dskEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 800, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        dskEscritorioLayout.setVerticalGroup(
+            dskEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 596, Short.MAX_VALUE)
         );
 
-        jPnlBg.add(jDesktopPane1, java.awt.BorderLayout.CENTER);
+        jPnlBg.add(dskEscritorio, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPnlBg, java.awt.BorderLayout.CENTER);
 
@@ -584,7 +584,14 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         resetColor(BtnDrinks);
         setColor(BtnCustomers);
         resetColor(BtnUsers);
-        resetColor(BtnAccounting);    }//GEN-LAST:event_BtnCustomersMousePressed
+        resetColor(BtnAccounting);
+        
+        GUICustomer ins = new GUICustomer();
+        ins.setMaximizable(true);
+
+        dskEscritorio.add(ins);
+        ins.show();
+    }//GEN-LAST:event_BtnCustomersMousePressed
 
     private void BtnUsersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnUsersMousePressed
         resetColor(BtnHomePage);
@@ -651,7 +658,7 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel BtnMenus;
     private javax.swing.JPanel BtnRestaurant;
     private javax.swing.JPanel BtnUsers;
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane dskEscritorio;
     private javax.swing.JLabel jLbAccounting;
     private javax.swing.JLabel jLbAccountingIcon;
     private javax.swing.JLabel jLbClose1;
