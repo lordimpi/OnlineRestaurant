@@ -6,6 +6,8 @@
 package co.unicauca.onlinerestaurant.client.presentation;
 
 import java.awt.Image;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -17,6 +19,8 @@ import javax.swing.JLabel;
 public class GUIMenuAdmin extends javax.swing.JFrame {
 
     private boolean state = false;
+    private int x = 0;
+    private int y = 0;
 
     public GUIMenuAdmin() {
         initComponents();
@@ -55,18 +59,19 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jPnlCMH = new javax.swing.JPanel();
+        jLbMaxMin = new javax.swing.JLabel();
         jLbHide = new javax.swing.JLabel();
         jLbClose1 = new javax.swing.JLabel();
-        jLbMaxMin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1080, 646));
         setResizable(false);
 
         jPnlBg.setBackground(new java.awt.Color(255, 255, 255));
-        jPnlBg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPnlBg.setLayout(new java.awt.BorderLayout());
 
         jPnlSide.setBackground(new java.awt.Color(54, 33, 88));
         jPnlSide.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -262,47 +267,22 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
         jPnlSide.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, -1, 40));
 
-        jPnlBg.add(jPnlSide, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 606));
+        jPnlBg.add(jPnlSide, java.awt.BorderLayout.LINE_START);
 
-        jPanel1.setBackground(new java.awt.Color(122, 72, 221));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 140, Short.MAX_VALUE)
-        );
-
-        jPnlBg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 800, 140));
-
-        jLbHide.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLbHide.setForeground(new java.awt.Color(102, 102, 102));
-        jLbHide.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLbHide.setText("-");
-        jLbHide.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLbHideMouseClicked(evt);
+        jPnlCMH.setBackground(new java.awt.Color(122, 72, 221));
+        jPnlCMH.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPnlCMHMouseDragged(evt);
             }
         });
-        jPnlBg.add(jLbHide, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, 20, 20));
-
-        jLbClose1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLbClose1.setForeground(new java.awt.Color(102, 102, 102));
-        jLbClose1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLbClose1.setText("X");
-        jLbClose1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLbClose1MouseClicked(evt);
+        jPnlCMH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPnlCMHMousePressed(evt);
             }
         });
-        jPnlBg.add(jLbClose1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 0, 20, 20));
 
         jLbMaxMin.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLbMaxMin.setForeground(new java.awt.Color(102, 102, 102));
+        jLbMaxMin.setForeground(new java.awt.Color(255, 255, 255));
         jLbMaxMin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLbMaxMin.setText("[]");
         jLbMaxMin.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -310,18 +290,54 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
                 jLbMaxMinMouseClicked(evt);
             }
         });
-        jPnlBg.add(jLbMaxMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 0, 20, 20));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPnlBg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jLbHide.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLbHide.setForeground(new java.awt.Color(255, 255, 255));
+        jLbHide.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLbHide.setText("-");
+        jLbHide.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLbHideMouseClicked(evt);
+            }
+        });
+
+        jLbClose1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLbClose1.setForeground(new java.awt.Color(255, 255, 255));
+        jLbClose1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLbClose1.setText("X");
+        jLbClose1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLbClose1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPnlCMHLayout = new javax.swing.GroupLayout(jPnlCMH);
+        jPnlCMH.setLayout(jPnlCMHLayout);
+        jPnlCMHLayout.setHorizontalGroup(
+            jPnlCMHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnlCMHLayout.createSequentialGroup()
+                .addContainerGap(1014, Short.MAX_VALUE)
+                .addComponent(jLbHide, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jLbMaxMin, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jLbClose1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPnlBg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        jPnlCMHLayout.setVerticalGroup(
+            jPnlCMHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnlCMHLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPnlCMHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLbMaxMin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLbClose1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLbHide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
+
+        jPnlBg.add(jPnlCMH, java.awt.BorderLayout.PAGE_START);
+
+        getContentPane().add(jPnlBg, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -335,8 +351,7 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         if (state) {
             this.setExtendedState(NORMAL);
             state = false;
-        }
-        else{
+        } else {
             this.setExtendedState(MAXIMIZED_BOTH);
             state = true;
         }
@@ -345,6 +360,16 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
     private void jLbHideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbHideMouseClicked
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_jLbHideMouseClicked
+
+    private void jPnlCMHMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPnlCMHMousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_jPnlCMHMousePressed
+
+    private void jPnlCMHMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPnlCMHMouseDragged
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        setLocation(point.x - x, point.y - y);
+    }//GEN-LAST:event_jPnlCMHMouseDragged
 
     /**
      * @param args the command line arguments
@@ -397,13 +422,13 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLbHomePage;
     private javax.swing.JLabel jLbHomePageIcono;
     private javax.swing.JLabel jLbMaxMin;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPnlBg;
+    private javax.swing.JPanel jPnlCMH;
     private javax.swing.JPanel jPnlHomePage;
     private javax.swing.JPanel jPnlSide;
     // End of variables declaration//GEN-END:variables
