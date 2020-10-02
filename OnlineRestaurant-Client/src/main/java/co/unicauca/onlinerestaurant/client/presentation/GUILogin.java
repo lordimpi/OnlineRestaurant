@@ -83,7 +83,7 @@ public class GUILogin extends javax.swing.JFrame {
         jLbLogo.setMaximumSize(new java.awt.Dimension(46, 40));
         jLbLogo.setMinimumSize(new java.awt.Dimension(46, 40));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("LOGIN");
@@ -95,9 +95,11 @@ public class GUILogin extends javax.swing.JFrame {
         TxbUser.setToolTipText("Enter your user name");
         TxbUser.setBorder(null);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("User");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Password");
 
@@ -112,7 +114,9 @@ public class GUILogin extends javax.swing.JFrame {
             }
         });
 
-        BtnIngresar.setBackground(new java.awt.Color(114, 210, 66));
+        BtnIngresar.setBackground(new java.awt.Color(122, 72, 221));
+        BtnIngresar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnIngresar.setForeground(new java.awt.Color(255, 255, 255));
         BtnIngresar.setText("Ingresar");
         BtnIngresar.setToolTipText("Click here to login");
         BtnIngresar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
