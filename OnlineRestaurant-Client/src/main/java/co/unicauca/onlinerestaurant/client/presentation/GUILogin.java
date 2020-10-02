@@ -214,7 +214,7 @@ public class GUILogin extends javax.swing.JFrame {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     GUIMenuAdmin ins = new GUIMenuAdmin();
-                    ins.setExtendedState(MAXIMIZED_BOTH);
+                    ins.setExtendedState(NORMAL);
                     ins.setVisible(true);
                 }
             });

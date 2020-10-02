@@ -20,8 +20,18 @@ import javax.swing.JPanel;
  */
 public class GUIMenuAdmin extends javax.swing.JFrame {
 
+    /**
+     * Variable para controlar los estados de maximizar o minimizar pantalla
+     */
     private boolean state = false;
+    private GUICustomer MenuCustomer = new GUICustomer();
+    /**
+     * Guarda la coordenada en eje x para poder mover el formulario con el raton
+     */
     private int x = 0;
+    /**
+     * Guarda la coordenada en eje y para poder mover el formulario con el raton
+     */
     private int y = 0;
 
     public GUIMenuAdmin() {
@@ -585,12 +595,12 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         setColor(BtnCustomers);
         resetColor(BtnUsers);
         resetColor(BtnAccounting);
-        
-        GUICustomer ins = new GUICustomer();
-        ins.setMaximizable(true);
 
-        dskEscritorio.add(ins);
-        ins.show();
+        if (!MenuCustomer.isVisible()) {
+            MenuCustomer.setMaximizable(true);
+            dskEscritorio.add(MenuCustomer);
+            MenuCustomer.show();
+        }
     }//GEN-LAST:event_BtnCustomersMousePressed
 
     private void BtnUsersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnUsersMousePressed
