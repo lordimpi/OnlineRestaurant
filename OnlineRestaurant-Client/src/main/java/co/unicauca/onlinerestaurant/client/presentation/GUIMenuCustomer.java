@@ -65,7 +65,6 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         dskEscritorio = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1080, 646));
 
         jPnlBg.setBackground(new java.awt.Color(255, 255, 255));
         jPnlBg.setLayout(new java.awt.BorderLayout());
