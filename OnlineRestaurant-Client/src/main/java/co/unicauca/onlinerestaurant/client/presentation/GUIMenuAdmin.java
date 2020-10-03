@@ -25,6 +25,7 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
      */
     private boolean state = false;
     private GUICustomer MenuCustomer = new GUICustomer();
+    private GUIMenuFoodDishes MenuFoodDishes = new GUIMenuFoodDishes();
     /**
      * Guarda la coordenada en eje x para poder mover el formulario con el raton
      */
@@ -37,15 +38,7 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
     public GUIMenuAdmin() {
         initComponents();
         setLocationRelativeTo(null);
-        addIcon(jLbHomePageIcono, "src/main/java/resources/home.png");
-        addIcon(jLbRestaurantIcon, "src/main/java/resources/restaurant.png");
-        addIcon(jLbMenusIcon, "src/main/java/resources/restaurantMenu.png");
-        addIcon(jLbFoodDishesIcon, "src/main/java/resources/foodDishes.png");
-        addIcon(jLbDrinksIcon, "src/main/java/resources/drinks.png");
-        addIcon(jLbCustomersIcon, "src/main/java/resources/customers.png");
-        addIcon(jLbUsersIcon, "src/main/java/resources/users.png");
-        addIcon(jLbAccountingIcon, "src/main/java/resources/accounting.png");
-        addIcon(jLbUserPhoto, "src/main/java/resources/userPhoto.png");
+        initIcons();
     }
 
     /**
@@ -553,6 +546,7 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         resetColor(BtnCustomers);
         resetColor(BtnUsers);
         resetColor(BtnAccounting);
+
     }//GEN-LAST:event_BtnRestaurantMousePressed
 
     private void BtnMenusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMenusMousePressed
@@ -564,27 +558,8 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         resetColor(BtnCustomers);
         resetColor(BtnUsers);
         resetColor(BtnAccounting);
+
     }//GEN-LAST:event_BtnMenusMousePressed
-
-    private void BtnFoodDishesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnFoodDishesMousePressed
-        resetColor(BtnHomePage);
-        resetColor(BtnRestaurant);
-        resetColor(BtnMenus);
-        setColor(BtnFoodDishes);
-        resetColor(BtnDrinks);
-        resetColor(BtnCustomers);
-        resetColor(BtnUsers);
-        resetColor(BtnAccounting);    }//GEN-LAST:event_BtnFoodDishesMousePressed
-
-    private void BtnDrinksMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnDrinksMousePressed
-        resetColor(BtnHomePage);
-        resetColor(BtnRestaurant);
-        resetColor(BtnMenus);
-        resetColor(BtnFoodDishes);
-        setColor(BtnDrinks);
-        resetColor(BtnCustomers);
-        resetColor(BtnUsers);
-        resetColor(BtnAccounting);    }//GEN-LAST:event_BtnDrinksMousePressed
 
     private void BtnCustomersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCustomersMousePressed
         resetColor(BtnHomePage);
@@ -601,17 +576,8 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
             dskEscritorio.add(MenuCustomer);
             MenuCustomer.show();
         }
-    }//GEN-LAST:event_BtnCustomersMousePressed
 
-    private void BtnUsersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnUsersMousePressed
-        resetColor(BtnHomePage);
-        resetColor(BtnRestaurant);
-        resetColor(BtnMenus);
-        resetColor(BtnFoodDishes);
-        resetColor(BtnDrinks);
-        resetColor(BtnCustomers);
-        setColor(BtnUsers);
-        resetColor(BtnAccounting);    }//GEN-LAST:event_BtnUsersMousePressed
+    }//GEN-LAST:event_BtnCustomersMousePressed
 
     private void BtnAccountingMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAccountingMousePressed
         resetColor(BtnHomePage);
@@ -622,7 +588,50 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         resetColor(BtnCustomers);
         resetColor(BtnUsers);
         setColor(BtnAccounting);
+
     }//GEN-LAST:event_BtnAccountingMousePressed
+
+    private void BtnFoodDishesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnFoodDishesMousePressed
+        resetColor(BtnHomePage);
+        resetColor(BtnRestaurant);
+        resetColor(BtnMenus);
+        setColor(BtnFoodDishes);
+        resetColor(BtnDrinks);
+        resetColor(BtnCustomers);
+        resetColor(BtnUsers);
+        resetColor(BtnAccounting);
+
+        if (!MenuFoodDishes.isVisible()) {
+            MenuFoodDishes.setMaximizable(true);
+            dskEscritorio.add(MenuFoodDishes);
+            MenuFoodDishes.show();
+        }
+
+    }//GEN-LAST:event_BtnFoodDishesMousePressed
+
+    private void BtnDrinksMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnDrinksMousePressed
+        resetColor(BtnHomePage);
+        resetColor(BtnRestaurant);
+        resetColor(BtnMenus);
+        resetColor(BtnFoodDishes);
+        setColor(BtnDrinks);
+        resetColor(BtnCustomers);
+        resetColor(BtnUsers);
+        resetColor(BtnAccounting);
+
+    }//GEN-LAST:event_BtnDrinksMousePressed
+
+    private void BtnUsersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnUsersMousePressed
+        resetColor(BtnHomePage);
+        resetColor(BtnRestaurant);
+        resetColor(BtnMenus);
+        resetColor(BtnFoodDishes);
+        resetColor(BtnDrinks);
+        resetColor(BtnCustomers);
+        setColor(BtnUsers);
+        resetColor(BtnAccounting);
+
+    }//GEN-LAST:event_BtnUsersMousePressed
 
     /**
      * @param args the command line arguments
@@ -705,6 +714,18 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
     private void resetColor(JPanel panel) {
         panel.setBackground(new Color(64, 43, 100));
 
+    }
+
+    private void initIcons() {
+        addIcon(jLbHomePageIcono, "src/main/java/resources/home.png");
+        addIcon(jLbRestaurantIcon, "src/main/java/resources/restaurant.png");
+        addIcon(jLbMenusIcon, "src/main/java/resources/restaurantMenu.png");
+        addIcon(jLbFoodDishesIcon, "src/main/java/resources/foodDishes.png");
+        addIcon(jLbDrinksIcon, "src/main/java/resources/drinks.png");
+        addIcon(jLbCustomersIcon, "src/main/java/resources/customers.png");
+        addIcon(jLbUsersIcon, "src/main/java/resources/users.png");
+        addIcon(jLbAccountingIcon, "src/main/java/resources/accounting.png");
+        addIcon(jLbUserPhoto, "src/main/java/resources/userPhoto.png");
     }
 
     private void addIcon(JLabel lb, String pathIcon) {
