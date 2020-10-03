@@ -9,12 +9,12 @@ package co.unicauca.onlinerestaurant.client.presentation;
  *
  * @author Santiago Acuña
  */
-public class GUIFindDishe extends javax.swing.JInternalFrame {
+public class GUIModifyDishe extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form GUIFindDishe
+     * Creates new form GUIModifyDishe
      */
-    public GUIFindDishe() {
+    public GUIModifyDishe() {
         initComponents();
     }
 
@@ -29,13 +29,14 @@ public class GUIFindDishe extends javax.swing.JInternalFrame {
 
         jPnNorte = new javax.swing.JPanel();
         jPnSur = new javax.swing.JPanel();
-        jBtnCerrar = new javax.swing.JButton();
+        jBtnMidificar = new javax.swing.JButton();
+        jBtnCancelar = new javax.swing.JButton();
         jPnCentro = new javax.swing.JPanel();
 
         setClosable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Buscar Plato");
+        setTitle("Modificar Plato");
 
         jPnNorte.setBackground(new java.awt.Color(54, 33, 88));
         jPnNorte.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -58,13 +59,16 @@ public class GUIFindDishe extends javax.swing.JInternalFrame {
         jPnSur.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPnSur.setPreferredSize(new java.awt.Dimension(450, 50));
 
-        jBtnCerrar.setText("Cerrar");
-        jBtnCerrar.addActionListener(new java.awt.event.ActionListener() {
+        jBtnMidificar.setText("Modificar");
+        jPnSur.add(jBtnMidificar);
+
+        jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCerrarActionPerformed(evt);
+                jBtnCancelarActionPerformed(evt);
             }
         });
-        jPnSur.add(jBtnCerrar);
+        jPnSur.add(jBtnCancelar);
 
         getContentPane().add(jPnSur, java.awt.BorderLayout.PAGE_END);
 
@@ -84,14 +88,15 @@ public class GUIFindDishe extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBtnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCerrarActionPerformed
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
 
         this.doDefaultCloseAction();
-    }//GEN-LAST:event_jBtnCerrarActionPerformed
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnCerrar;
+    private javax.swing.JButton jBtnCancelar;
+    private javax.swing.JButton jBtnMidificar;
     private javax.swing.JPanel jPnCentro;
     private javax.swing.JPanel jPnNorte;
     private javax.swing.JPanel jPnSur;

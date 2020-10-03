@@ -5,15 +5,19 @@
  */
 package co.unicauca.onlinerestaurant.client.presentation;
 
+import static java.awt.Frame.MAXIMIZED_BOTH;
+
 /**
  *
  * @author Santiago Acuña
  */
 public class GUIMenuFoodDishes extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form GUIMenuFoodDishes
-     */
+    private GUICreateDishe CreateDishe = new GUICreateDishe();
+    private GUIFindDishe FindDishe = new GUIFindDishe();
+    private GUIModifyDishe ModifyDishe = new GUIModifyDishe();
+    private GUIDeleteDishe DeleteDishe = new GUIDeleteDishe();
+
     public GUIMenuFoodDishes() {
         initComponents();
         setMaximizable(true);
@@ -28,28 +32,29 @@ public class GUIMenuFoodDishes extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        dskEscritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItemCreateDishe = new javax.swing.JMenuItem();
+        jMenuItemFindDishe = new javax.swing.JMenuItem();
+        jMenuItemModifyDishe = new javax.swing.JMenuItem();
+        jMenuItemDeleteDishe = new javax.swing.JMenuItem();
 
         setClosable(true);
+        setResizable(true);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+        javax.swing.GroupLayout dskEscritorioLayout = new javax.swing.GroupLayout(dskEscritorio);
+        dskEscritorio.setLayout(dskEscritorioLayout);
+        dskEscritorioLayout.setHorizontalGroup(
+            dskEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 535, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 251, Short.MAX_VALUE)
+        dskEscritorioLayout.setVerticalGroup(
+            dskEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 396, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(dskEscritorio, java.awt.BorderLayout.CENTER);
 
         jMenuBar1.setBackground(new java.awt.Color(54, 33, 88));
 
@@ -57,25 +62,45 @@ public class GUIMenuFoodDishes extends javax.swing.JInternalFrame {
         jMenu1.setForeground(new java.awt.Color(204, 204, 204));
         jMenu1.setText("Dishes");
 
-        jMenuItem1.setBackground(new java.awt.Color(54, 33, 88));
-        jMenuItem1.setForeground(new java.awt.Color(204, 204, 204));
-        jMenuItem1.setText("Create Dishe");
-        jMenu1.add(jMenuItem1);
+        jMenuItemCreateDishe.setBackground(new java.awt.Color(54, 33, 88));
+        jMenuItemCreateDishe.setForeground(new java.awt.Color(204, 204, 204));
+        jMenuItemCreateDishe.setText("Create Dishe");
+        jMenuItemCreateDishe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCreateDisheActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemCreateDishe);
 
-        jMenuItem2.setBackground(new java.awt.Color(54, 33, 88));
-        jMenuItem2.setForeground(new java.awt.Color(204, 204, 204));
-        jMenuItem2.setText("Find Dishe");
-        jMenu1.add(jMenuItem2);
+        jMenuItemFindDishe.setBackground(new java.awt.Color(54, 33, 88));
+        jMenuItemFindDishe.setForeground(new java.awt.Color(204, 204, 204));
+        jMenuItemFindDishe.setText("Find Dishe");
+        jMenuItemFindDishe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFindDisheActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemFindDishe);
 
-        jMenuItem3.setBackground(new java.awt.Color(54, 33, 88));
-        jMenuItem3.setForeground(new java.awt.Color(204, 204, 204));
-        jMenuItem3.setText("Update Dishe");
-        jMenu1.add(jMenuItem3);
+        jMenuItemModifyDishe.setBackground(new java.awt.Color(54, 33, 88));
+        jMenuItemModifyDishe.setForeground(new java.awt.Color(204, 204, 204));
+        jMenuItemModifyDishe.setText("Modify Dishe");
+        jMenuItemModifyDishe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemModifyDisheActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemModifyDishe);
 
-        jMenuItem4.setBackground(new java.awt.Color(54, 33, 88));
-        jMenuItem4.setForeground(new java.awt.Color(204, 204, 204));
-        jMenuItem4.setText("Delete Dishe");
-        jMenu1.add(jMenuItem4);
+        jMenuItemDeleteDishe.setBackground(new java.awt.Color(54, 33, 88));
+        jMenuItemDeleteDishe.setForeground(new java.awt.Color(204, 204, 204));
+        jMenuItemDeleteDishe.setText("Delete Dishe");
+        jMenuItemDeleteDishe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDeleteDisheActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemDeleteDishe);
 
         jMenuBar1.add(jMenu1);
 
@@ -84,14 +109,56 @@ public class GUIMenuFoodDishes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItemCreateDisheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCreateDisheActionPerformed
+
+        if (!CreateDishe.isVisible()) {
+            CreateDishe.setMaximizable(true);
+            dskEscritorio.add(CreateDishe);
+            CreateDishe.show();
+        }
+
+    }//GEN-LAST:event_jMenuItemCreateDisheActionPerformed
+
+    private void jMenuItemFindDisheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindDisheActionPerformed
+        if (!FindDishe.isVisible()) {
+            FindDishe.setMaximizable(true);
+            dskEscritorio.add(FindDishe);
+            FindDishe.show();
+        }
+
+    }//GEN-LAST:event_jMenuItemFindDisheActionPerformed
+
+    private void jMenuItemModifyDisheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModifyDisheActionPerformed
+        if (!ModifyDishe.isVisible()) {
+            ModifyDishe.setMaximizable(true);
+            dskEscritorio.add(ModifyDishe);
+            ModifyDishe.show();
+        }        
+        
+    }//GEN-LAST:event_jMenuItemModifyDisheActionPerformed
+
+    private void jMenuItemDeleteDisheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteDisheActionPerformed
+        if (!DeleteDishe.isVisible()) {
+            DeleteDishe.setMaximizable(true);
+            dskEscritorio.add(DeleteDishe);
+            DeleteDishe.show();
+        }        
+        
+    }//GEN-LAST:event_jMenuItemDeleteDisheActionPerformed
+
+    public static void main(String[] args) {
+        GUIMenuFoodDishes gui = new GUIMenuFoodDishes();
+        gui.setVisible(true);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane dskEscritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItemCreateDishe;
+    private javax.swing.JMenuItem jMenuItemDeleteDishe;
+    private javax.swing.JMenuItem jMenuItemFindDishe;
+    private javax.swing.JMenuItem jMenuItemModifyDishe;
     // End of variables declaration//GEN-END:variables
 }

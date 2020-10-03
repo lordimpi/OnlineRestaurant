@@ -9,10 +9,10 @@ package co.unicauca.onlinerestaurant.client.presentation;
  *
  * @author Santiago Acuña
  */
-public class GUIDeleteDishe extends javax.swing.JFrame {
+public class GUIDeleteDishe extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form GUIDeleteDishe
+     * Creates new form GUIUpdateDishe
      */
     public GUIDeleteDishe() {
         initComponents();
@@ -27,57 +27,79 @@ public class GUIDeleteDishe extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPnNorte = new javax.swing.JPanel();
+        jPnSur = new javax.swing.JPanel();
+        jBtnMidificar = new javax.swing.JButton();
+        jBtnCancelar = new javax.swing.JButton();
+        jPnCentro = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Borrar Plato");
+        setPreferredSize(new java.awt.Dimension(495, 329));
+
+        jPnNorte.setBackground(new java.awt.Color(54, 33, 88));
+        jPnNorte.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPnNorte.setPreferredSize(new java.awt.Dimension(450, 50));
+
+        javax.swing.GroupLayout jPnNorteLayout = new javax.swing.GroupLayout(jPnNorte);
+        jPnNorte.setLayout(jPnNorteLayout);
+        jPnNorteLayout.setHorizontalGroup(
+            jPnNorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 491, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPnNorteLayout.setVerticalGroup(
+            jPnNorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 48, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPnNorte, java.awt.BorderLayout.PAGE_START);
+
+        jPnSur.setBackground(new java.awt.Color(54, 33, 88));
+        jPnSur.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPnSur.setPreferredSize(new java.awt.Dimension(450, 50));
+
+        jBtnMidificar.setText("Borrar");
+        jPnSur.add(jBtnMidificar);
+
+        jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
+        jPnSur.add(jBtnCancelar);
+
+        getContentPane().add(jPnSur, java.awt.BorderLayout.PAGE_END);
+
+        javax.swing.GroupLayout jPnCentroLayout = new javax.swing.GroupLayout(jPnCentro);
+        jPnCentro.setLayout(jPnCentroLayout);
+        jPnCentroLayout.setHorizontalGroup(
+            jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 493, Short.MAX_VALUE)
+        );
+        jPnCentroLayout.setVerticalGroup(
+            jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 207, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPnCentro, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIDeleteDishe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIDeleteDishe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIDeleteDishe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIDeleteDishe.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUIDeleteDishe().setVisible(true);
-            }
-        });
-    }
+        this.doDefaultCloseAction();
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnCancelar;
+    private javax.swing.JButton jBtnMidificar;
+    private javax.swing.JPanel jPnCentro;
+    private javax.swing.JPanel jPnNorte;
+    private javax.swing.JPanel jPnSur;
     // End of variables declaration//GEN-END:variables
 }
