@@ -121,8 +121,6 @@ public class GUICreateDishe extends javax.swing.JInternalFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("jLabel6");
         jPnCentro.add(jLabel6);
-
-        jTextField6.setText("jTextField6");
         jPnCentro.add(jTextField6);
 
         getContentPane().add(jPnCentro, java.awt.BorderLayout.CENTER);

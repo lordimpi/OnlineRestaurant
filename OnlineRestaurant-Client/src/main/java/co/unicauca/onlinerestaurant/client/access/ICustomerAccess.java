@@ -21,7 +21,7 @@ public interface ICustomerAccess {
     /**
      * Crea un Customer
      *
-     * @param customer cliente de la agencia de viajes
+     * @param customer cliente del restaurante
      * @return devuelve la cedula del cliente creado
      * @throws Exception error crear el cliente
      */
