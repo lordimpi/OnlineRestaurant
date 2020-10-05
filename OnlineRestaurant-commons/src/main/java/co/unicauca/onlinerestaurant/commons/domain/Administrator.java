@@ -5,111 +5,87 @@ package co.unicauca.onlinerestaurant.commons.domain;
  *
  * @author Ximena
  */
-public class Administrator {
+public class Administrator extends User {
 
     /**
-     * id administrador
-     */
-    private int idAdministrador;
-    /**
-     * Nombre Administrador
-     */
-    private String nombreAdm;
-    /**
-     * Apellido Administrador
-     */
-    private String apellidoadm;
-    /**
-     * Movil
-     */
-    private String mobile;
-
-    /**
-     * usuario
-     */
-    private String userAdm;
-    /**
-     * contraseña
-     */
-    private String password;
-
-    /**
-     * Constructor por defecto
-     */
-    public Administrator() {
-    }
-
-    /**
-     * constructor parametrizado
+     * Constructor parametrizado
      *
-     * @param idAdministrador id
-     * @param nombreAdm nombre
-     * @param apellidoadm apellido
-     * @param mobile movil
-     * @param userAdm usuario
-     * @param password contraseña
+     * @param id cedula
+     * @param firstName nombres
+     * @param lastName apellidos
+     * @param address dirección
+     * @param mobile celular
+     * @param email email
+     * @param gender sexo
      */
-    public Administrator(int idAdministrador, String nombreAdm, String apellidoadm, String mobile, String userAdm, String password) {
-        this.idAdministrador = idAdministrador;
-        this.nombreAdm = nombreAdm;
-        this.apellidoadm = apellidoadm;
+    public Administrator(String id, String firstName, String lastName, String address, String mobile, String email, String gender) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
         this.mobile = mobile;
-        this.userAdm = userAdm;
-        this.password = password;
+        this.email = email;
+        this.gender = gender;
     }
-
-    /**
+        /**
      * Getters and Setters
      *
      * @return
      */
-
-    public int getIdAdministrador() {
-        return idAdministrador;
+    public String getId() {
+        return id;
     }
 
-    public String getNombreAdm() {
-        return nombreAdm;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getApellidoadm() {
-        return apellidoadm;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getMobile() {
         return mobile;
     }
 
-    public String getUserAdm() {
-        return userAdm;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setIdAdministrador(int idAdministrador) {
-        this.idAdministrador = idAdministrador;
-    }
-
-    public void setNombreAdm(String nombreAdm) {
-        this.nombreAdm = nombreAdm;
-    }
-
-    public void setApellidoadm(String apellidoadm) {
-        this.apellidoadm = apellidoadm;
-    }
-
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
-    public void setUserAdm(String userAdm) {
-        this.userAdm = userAdm;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
 }
