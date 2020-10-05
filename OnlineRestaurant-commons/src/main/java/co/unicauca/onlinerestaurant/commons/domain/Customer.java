@@ -7,36 +7,9 @@ import java.util.Date;
  *
  * @author Santiago Acuña
  */
-public class Customer {
+public class Customer extends User{
 
-    /**
-     * Cedula
-     */
-    private String id;
-    /**
-     * Nombres
-     */
-    private String firstName;
-    /**
-     * Apellidos
-     */
-    private String lastName;
-    /**
-     * Dirección de residencia
-     */
-    private String address;
-    /**
-     * Teléfono Móvil
-     */
-    private String mobile;
-    /**
-     * Email
-     */
-    private String email;
-    /**
-     * Sexo
-     */
-    private String gender;
+
 
     /**
      * Constructor parametrizado
