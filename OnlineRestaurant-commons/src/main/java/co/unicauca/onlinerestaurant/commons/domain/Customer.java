@@ -3,7 +3,7 @@ package co.unicauca.onlinerestaurant.commons.domain;
 import java.util.Date;
 
 /**
- * Cliente de la agencia de viajes
+ * Cliente del Restaurante
  *
  * @author Santiago Acuña
  */
