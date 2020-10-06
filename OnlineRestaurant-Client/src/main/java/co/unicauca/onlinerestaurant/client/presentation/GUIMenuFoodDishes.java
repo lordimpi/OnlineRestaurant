@@ -64,7 +64,7 @@ public class GUIMenuFoodDishes extends javax.swing.JInternalFrame {
 
         jMenuItemCreateDishe.setBackground(new java.awt.Color(54, 33, 88));
         jMenuItemCreateDishe.setForeground(new java.awt.Color(204, 204, 204));
-        jMenuItemCreateDishe.setText("Create Dishe");
+        jMenuItemCreateDishe.setText("Create Dish");
         jMenuItemCreateDishe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemCreateDisheActionPerformed(evt);
@@ -74,7 +74,7 @@ public class GUIMenuFoodDishes extends javax.swing.JInternalFrame {
 
         jMenuItemFindDishe.setBackground(new java.awt.Color(54, 33, 88));
         jMenuItemFindDishe.setForeground(new java.awt.Color(204, 204, 204));
-        jMenuItemFindDishe.setText("Find Dishe");
+        jMenuItemFindDishe.setText("Find Dish");
         jMenuItemFindDishe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemFindDisheActionPerformed(evt);
@@ -84,7 +84,7 @@ public class GUIMenuFoodDishes extends javax.swing.JInternalFrame {
 
         jMenuItemModifyDishe.setBackground(new java.awt.Color(54, 33, 88));
         jMenuItemModifyDishe.setForeground(new java.awt.Color(204, 204, 204));
-        jMenuItemModifyDishe.setText("Modify Dishe");
+        jMenuItemModifyDishe.setText("Modify Dish");
         jMenuItemModifyDishe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemModifyDisheActionPerformed(evt);
