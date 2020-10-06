@@ -203,7 +203,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
         String id = protocolRequest.getParameters().get(0).getValue();
         Customer customer = service.findCustomer(id);
         if (customer == null) {
-            String errorJson = generateNotFoundErrorJson();
+            String errorJson = generateNotFoundErrorJson("Cliente no encontrado. Cédula no existe");
             output.println(errorJson);
         } else {
             output.println(objectToJSON(customer));
@@ -215,7 +215,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
         String id = protocolRequest.getParameters().get(0).getValue();
         MainDish mainDish = mdService.findMainDish(id);
         if (mainDish == null) {
-            String errorJson = generateNotFoundErrorJson();
+            String errorJson = generateNotFoundErrorJson("Plato no encontrado. El Id no existe");
             output.println(errorJson);
         } else {
             output.println(objectToJSONMD(mainDish));
@@ -247,7 +247,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
         // Reconstruir el customer a partid de lo que viene en los parámetros
         mainDish.setId_mainDishe(protocolRequest.getParameters().get(0).getValue());
         mainDish.setNameDishe(protocolRequest.getParameters().get(1).getValue());
-        mainDish.setDishPrice(Double.parseDouble( protocolRequest.getParameters().get(2).getValue()));
+        mainDish.setDishPrice(Double.parseDouble(protocolRequest.getParameters().get(2).getValue()));
 
         String response = mdService.createMainDish(mainDish);
         output.println(response);
@@ -258,12 +258,13 @@ public class OnlineRestaurantServerSocket implements Runnable {
      *
      * @return error en formato json
      */
-    private String generateNotFoundErrorJson() {
+    private String generateNotFoundErrorJson(String errorMsg) {
         List<JsonError> errors = new ArrayList<>();
         JsonError error = new JsonError();
         error.setCode("404");
         error.setError("NOT_FOUND");
-        error.setMessage("Cliente no encontrado. Cédula no existe");
+        error.setMessage(errorMsg);
+//        error.setMessage("Cliente no encontrado. Cédula no existe");
         errors.add(error);
 
         Gson gson = new Gson();

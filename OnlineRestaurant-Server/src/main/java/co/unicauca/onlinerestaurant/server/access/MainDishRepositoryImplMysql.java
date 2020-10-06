@@ -52,7 +52,7 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
             pstmt.close();
             this.disconnect();
         } catch (SQLException ex) {
-            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Customer de la base de datos", ex);
+            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Plato de la base de datos", ex);
         }
         return mainDish;
         
@@ -78,7 +78,7 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
             conn = DriverManager.getConnection(url, username, pwd);
             return 1;
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Customer de la base de datos", ex);
+            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Plato de la base de datos", ex);
         }
         return -1;
     }
