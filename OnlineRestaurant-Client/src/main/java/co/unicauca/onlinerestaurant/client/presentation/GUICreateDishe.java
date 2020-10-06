@@ -32,18 +32,12 @@ public class GUICreateDishe extends javax.swing.JInternalFrame {
         jBtnAgregar = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
         jPnCentro = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLbIdPlato = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jLbNombre = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        jLbPrecio = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
 
         setClosable(true);
         setMaximizable(true);
@@ -85,43 +79,25 @@ public class GUICreateDishe extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPnSur, java.awt.BorderLayout.PAGE_END);
 
-        jPnCentro.setLayout(new java.awt.GridLayout(6, 2));
+        jPnCentro.setLayout(new java.awt.GridLayout(3, 2));
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("jLabel1");
-        jPnCentro.add(jLabel1);
+        jLbIdPlato.setBackground(new java.awt.Color(255, 255, 255));
+        jLbIdPlato.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLbIdPlato.setText("Id:");
+        jPnCentro.add(jLbIdPlato);
         jPnCentro.add(jTextField1);
 
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("jLabel2");
-        jPnCentro.add(jLabel2);
+        jLbNombre.setBackground(new java.awt.Color(255, 255, 255));
+        jLbNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLbNombre.setText("Nombre:");
+        jPnCentro.add(jLbNombre);
         jPnCentro.add(jTextField2);
 
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("jLabel3");
-        jPnCentro.add(jLabel3);
+        jLbPrecio.setBackground(new java.awt.Color(255, 255, 255));
+        jLbPrecio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLbPrecio.setText("Precio:");
+        jPnCentro.add(jLbPrecio);
         jPnCentro.add(jTextField3);
-
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("jLabel4");
-        jPnCentro.add(jLabel4);
-        jPnCentro.add(jTextField4);
-
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("jLabel5");
-        jPnCentro.add(jLabel5);
-        jPnCentro.add(jTextField5);
-
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("jLabel6");
-        jPnCentro.add(jLabel6);
-        jPnCentro.add(jTextField6);
 
         getContentPane().add(jPnCentro, java.awt.BorderLayout.CENTER);
 
@@ -138,20 +114,14 @@ public class GUICreateDishe extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAgregar;
     private javax.swing.JButton jBtnCancelar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLbIdPlato;
+    private javax.swing.JLabel jLbNombre;
+    private javax.swing.JLabel jLbPrecio;
     private javax.swing.JPanel jPnCentro;
     private javax.swing.JPanel jPnNorte;
     private javax.swing.JPanel jPnSur;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }

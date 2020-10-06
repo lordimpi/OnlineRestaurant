@@ -32,29 +32,29 @@ public class CustomerServiceTest {
 
     }
     
-    @Test
-    public void testCreateCustomer() {
-        Customer customer = new Customer();
-        customer.setId("123");
-        customer.setFirstName("Juan");
-        customer.setLastName("Perez");
-        customer.setAddress("Calle 12 no. 12-12 Popayan");
-        customer.setEmail("juanperez@gmail.com");
-        customer.setGender("M");
-        customer.setMobile("31234234");
-        
-        ICustomerRepository repo = Factory.getInstance().getRepository();
-        CustomerService instance = new CustomerService(repo);
-        String expResult = "123";
-        String result = instance.createCustomer(customer);
-        assertEquals(expResult, result);
-        
-        // Validar un dato erroneo
-        customer.setFirstName("");
-        result = instance.createCustomer(customer);
-        assertTrue(result.contains("BAD_REQUEST"));
-        
-                
-    }    
-    
+//    @Test
+//    public void testCreateCustomer() {
+//        Customer customer = new Customer();
+//        customer.setId("123");
+//        customer.setFirstName("Juan");
+//        customer.setLastName("Perez");
+//        customer.setAddress("Calle 12 no. 12-12 Popayan");
+//        customer.setEmail("juanperez@gmail.com");
+//        customer.setGender("M");
+//        customer.setMobile("31234234");
+//        
+//        ICustomerRepository repo = Factory.getInstance().getRepository();
+//        CustomerService instance = new CustomerService(repo);
+//        String expResult = "123";
+//        String result = instance.createCustomer(customer);
+//        assertEquals(expResult, result);
+//        
+//        // Validar un dato erroneo
+//        customer.setFirstName("");
+//        result = instance.createCustomer(customer);
+//        assertTrue(result.contains("BAD_REQUEST"));
+//        
+//                
+//    }    
+//    
 }

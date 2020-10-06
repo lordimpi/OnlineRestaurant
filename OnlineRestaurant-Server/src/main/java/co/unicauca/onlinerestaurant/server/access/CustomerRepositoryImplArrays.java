@@ -62,4 +62,14 @@ public final class CustomerRepositoryImplArrays implements ICustomerRepository {
         return customer.getId();
     }
 
+    @Override
+    public boolean deleteCustomer(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Customer> Costomers() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
