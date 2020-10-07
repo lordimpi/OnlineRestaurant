@@ -7,13 +7,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Repositorio de Clientes en MySQL
  *
- * @author Santiago Acuña
+ * @author Santiago Acuña, Ximena gallego
  */
 public class CustomerRepositoryImplMysql implements ICustomerRepository {
 
@@ -63,7 +66,7 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
 
     @Override
     public String createCustomer(Customer customer) {
-
+      
         try {
 
             this.connect();
@@ -86,6 +89,39 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
         return customer.getId();
 
     }
+    /**
+     * Permite eliminar un cliente de la base de datos 
+     * @param id idntificador del cliente 
+     * @return true o false 
+     */
+    @Override
+    public boolean removeCustomer(String id) {
+         Customer customer = null;
+
+        this.connect();
+        try {
+            String sql = "DELETE from customers where id=? ";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            ResultSet res = pstmt.executeQuery();
+            if (res.next()) {
+                customer = new Customer();
+                customer.setId(res.getString("id"));
+                customer.setFirstName(res.getString("first_name"));
+                customer.setLastName(res.getString("last_name"));
+                customer.setAddress(res.getString("address"));
+                customer.setMobile(res.getString("mobile"));
+                customer.setGender(res.getString("gender"));
+                customer.setEmail(res.getString("email"));
+
+            }
+            pstmt.close();
+            this.disconnect();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Customer de la base de datos", ex);
+        }
+        return true;
+    }
 
     /**
      * Permite hacer la conexion con la base de datos
@@ -106,6 +142,40 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
         }
         return -1;
     }
+    
+     /**
+     * Metodo publico encargado de lista los Objetos de tipo Customers
+     *
+     * @return: objetos Customers
+     */
+    @Override
+    public List<Customer> list() {
+        List<Customer> Customer = new ArrayList<>();
+        try {
+
+            String sql = "SELECT id, firstName,lastName,address, mobile,email,gender FROM customers";
+            this.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet res = pstmt.executeQuery();            
+            while (res.next()) {
+                Customer newCustomer = new Customer();
+                newCustomer.setId(res.getString("id"));
+                newCustomer.setFirstName(res.getString("firsName"));
+                newCustomer.setFirstName(res.getString("lastName"));
+                newCustomer.setFirstName(res.getString("address"));
+                newCustomer.setFirstName(res.getString("mobile"));
+                newCustomer.setFirstName(res.getString("email"));
+                newCustomer.setFirstName(res.getString("gender"));
+                               
+                Customer.add(newCustomer);
+            }
+            //this.disconnect();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al Selecionar los datos de la tabla customer de la base de datos", ex);
+        }
+        return Customer;
+    }
 
     /**
      * Cierra la conexion con la base de datos
@@ -118,5 +188,7 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.FINER, "Error al cerrar Connection", ex);
         }
     }
+
+    
 
 }
