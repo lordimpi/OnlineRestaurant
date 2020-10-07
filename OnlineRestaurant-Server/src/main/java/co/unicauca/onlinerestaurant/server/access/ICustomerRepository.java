@@ -35,4 +35,8 @@ public interface ICustomerRepository {
      */
     public List<Customer> list();
 
+    public boolean deleteCustomer(int id);
+
+    public List<Customer> Costomers();
+
 }

@@ -1,6 +1,7 @@
 package co.unicauca.onlinerestaurant.server.infra;
 
 import co.unicauca.onlinerestaurant.commons.domain.Customer;
+import co.unicauca.onlinerestaurant.commons.domain.MainDish;
 import co.unicauca.onlinerestaurant.commons.infra.JsonError;
 import co.unicauca.onlinerestaurant.commons.infra.Protocol;
 import co.unicauca.onlinerestaurant.commons.infra.Utilities;
@@ -14,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import co.unicauca.onlinerestaurant.server.domain.services.CustomerService;
 import co.unicauca.onlinerestaurant.server.access.ICustomerRepository;
+import co.unicauca.onlinerestaurant.server.access.IMainDishRepository;
+import co.unicauca.onlinerestaurant.server.domain.services.MainDishService;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,10 @@ public class OnlineRestaurantServerSocket implements Runnable {
      * Servicio de clientes
      */
     private final CustomerService service;
+    /**
+     * Servicio de platos principales
+     */
+    private final MainDishService mdService;
     /**
      * Server Socket, la orejita
      */
@@ -57,7 +64,9 @@ public class OnlineRestaurantServerSocket implements Runnable {
     public OnlineRestaurantServerSocket() {
         // Se hace la inyección de dependencia
         ICustomerRepository repository = Factory.getInstance().getRepository();
+        IMainDishRepository mdRespository = Factory.getInstance().getRepository2();
         service = new CustomerService(repository);
+        mdService = new MainDishService(mdRespository);
     }
 
     /**
@@ -167,7 +176,17 @@ public class OnlineRestaurantServerSocket implements Runnable {
                 if (protocolRequest.getAction().equals("post")) {
                     // Agregar un customer    
                     processPostCustomer(protocolRequest);
+                }
+                break;
+            case "maindish":
+                if (protocolRequest.getAction().equals("get")) {
+                    // Consultar un customer
+                    processGetMainDish(protocolRequest);
+                }
 
+                if (protocolRequest.getAction().equals("post")) {
+                    // Agregar un customer    
+                    processPostMainDish(protocolRequest);
                 }
                 break;
         }
@@ -184,10 +203,22 @@ public class OnlineRestaurantServerSocket implements Runnable {
         String id = protocolRequest.getParameters().get(0).getValue();
         Customer customer = service.findCustomer(id);
         if (customer == null) {
-            String errorJson = generateNotFoundErrorJson();
+            String errorJson = generateNotFoundErrorJson("Cliente no encontrado. Cédula no existe");
             output.println(errorJson);
         } else {
             output.println(objectToJSON(customer));
+        }
+    }
+
+    private void processGetMainDish(Protocol protocolRequest) {
+        // Extraer el identificador del primer parámetro
+        String id = protocolRequest.getParameters().get(0).getValue();
+        MainDish mainDish = mdService.findMainDish(id);
+        if (mainDish == null) {
+            String errorJson = generateNotFoundErrorJson("Plato no encontrado. El Id no existe");
+            output.println(errorJson);
+        } else {
+            output.println(objectToJSONMD(mainDish));
         }
     }
 
@@ -211,17 +242,29 @@ public class OnlineRestaurantServerSocket implements Runnable {
         output.println(response);
     }
 
+    private void processPostMainDish(Protocol protocolRequest) {
+        MainDish mainDish = new MainDish();
+        // Reconstruir el customer a partid de lo que viene en los parámetros
+        mainDish.setId_mainDishe(protocolRequest.getParameters().get(0).getValue());
+        mainDish.setNameDishe(protocolRequest.getParameters().get(1).getValue());
+        mainDish.setDishPrice(Double.parseDouble(protocolRequest.getParameters().get(2).getValue()));
+
+        String response = mdService.createMainDish(mainDish);
+        output.println(response);
+    }
+
     /**
      * Genera un ErrorJson de cliente no encontrado
      *
      * @return error en formato json
      */
-    private String generateNotFoundErrorJson() {
+    private String generateNotFoundErrorJson(String errorMsg) {
         List<JsonError> errors = new ArrayList<>();
         JsonError error = new JsonError();
         error.setCode("404");
         error.setError("NOT_FOUND");
-        error.setMessage("Cliente no encontrado. Cédula no existe");
+        error.setMessage(errorMsg);
+//        error.setMessage("Cliente no encontrado. Cédula no existe");
         errors.add(error);
 
         Gson gson = new Gson();
@@ -273,4 +316,9 @@ public class OnlineRestaurantServerSocket implements Runnable {
         return strObject;
     }
 
+    private String objectToJSONMD(MainDish mainDish) {
+        Gson gson = new Gson();
+        String strObject = gson.toJson(mainDish);
+        return strObject;
+    }
 }

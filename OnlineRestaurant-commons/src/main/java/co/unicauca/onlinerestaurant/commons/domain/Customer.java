@@ -7,9 +7,7 @@ import java.util.Date;
  *
  * @author Santiago Acuña
  */
-public class Customer extends User{
-
-
+public class Customer extends User {
 
     /**
      * Constructor parametrizado
@@ -38,6 +36,4 @@ public class Customer extends User{
     public Customer() {
 
     }
-   
- 
 }

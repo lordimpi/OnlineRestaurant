@@ -48,4 +48,24 @@ public class Factory {
         return result;
 
     }
+    
+        /**
+     * Método que crea una instancia concreta de la jerarquia IMainDishService
+     *
+     * @return una clase hija de la abstracción IRepositorioPlatoPrincipal
+     */
+    public IMainDishAccess getMainDishService() {
+
+        IMainDishAccess result = null;
+        String type = Utilities.loadProperty("maindish.service");
+
+        switch (type) {
+            case "default":
+                result = new MainDishAccessImplSockets();
+                break;
+        }
+
+        return result;
+
+    }
 }

@@ -7,49 +7,22 @@ package co.unicauca.onlinerestaurant.commons.domain;
 
 /**
  *
- * @author Santiago Acuña
+ * @author soces
  */
-public class User {
-
-    /**
-     * Cedula
-     */
-    protected String id;
-    /**
-     * Nombres
-     */
-    protected String firstName;
-    /**
-     * Apellidos
-     */
-    protected String lastName;
-    /**
-     * Dirección de residencia
-     */
-    protected String address;
-    /**
-     * Teléfono Móvil
-     */
-    protected String mobile;
-    /**
-     * Email
-     */
-    protected String email;
-    /**
-     * Sexo
-     */
-    protected String gender;
-
-
-    /**
-
+public class Admin extends User{
     
-      /**
+    
+        public Admin(String id, String firstName, String lastName, String address, String mobile, String email, String gender) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.mobile = mobile;
+        this.email = email;
+        this.gender = gender;
+    }
+    
 
-     * Getters and Setters
-     *
-     * @return
-     */
     public String getId() {
         return id;
     }
@@ -106,4 +79,6 @@ public class User {
         this.gender = gender;
     }
 
+
+    
 }
