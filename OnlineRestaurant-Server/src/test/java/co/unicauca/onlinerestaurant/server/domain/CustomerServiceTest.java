@@ -16,21 +16,21 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CustomerServiceTest {
 
 
-    @Test
-    public void testFindCustomer() {
-        System.out.println("findCustomer");
-        String id = "98000001";
-        ICustomerRepository repo = Factory.getInstance().getRepository();
-        CustomerService instance = new CustomerService(repo);
-        String expResult = "98000001";
-        Customer result = instance.findCustomer(id);
-        assertEquals(expResult, result.getId());
-        
-        // Customer que no existe
-        result = instance.findCustomer("12345678");
-        assertEquals(null, result);
-
-    }
+//    @Test
+//    public void testFindCustomer() {
+//        System.out.println("findCustomer");
+//        String id = "98000001";
+//        ICustomerRepository repo = Factory.getInstance().getRepository();
+//        CustomerService instance = new CustomerService(repo);
+//        String expResult = "98000001";
+//        Customer result = instance.findCustomer(id);
+//        assertEquals(expResult, result.getId());
+//        
+//        // Customer que no existe
+//        result = instance.findCustomer("12345678");
+//        assertEquals(null, result);
+//
+//    }
     
 //    @Test
 //    public void testCreateCustomer() {

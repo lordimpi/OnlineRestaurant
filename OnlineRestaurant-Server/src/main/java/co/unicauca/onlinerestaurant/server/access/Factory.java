@@ -43,7 +43,7 @@ public class Factory {
 
         switch (type) {
             case "default":
-                result = new CustomerRepositoryImplArrays();
+                
                 break;
             case "mysql":
                 result = new CustomerRepositoryImplMysql();
