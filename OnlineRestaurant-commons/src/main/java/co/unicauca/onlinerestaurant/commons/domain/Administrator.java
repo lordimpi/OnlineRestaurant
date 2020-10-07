@@ -1,49 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.commons.domain;
 
 /**
+ * Clase Administrador Restaurante
  *
- * @author Santiago Acuña
+ * @author Ximena
  */
-public class User {
-
-    /**
-     * Cedula
-     */
-    protected String id;
-    /**
-     * Nombres
-     */
-    protected String firstName;
-    /**
-     * Apellidos
-     */
-    protected String lastName;
-    /**
-     * Dirección de residencia
-     */
-    protected String address;
-    /**
-     * Teléfono Móvil
-     */
-    protected String mobile;
-    /**
-     * Email
-     */
-    protected String email;
-    /**
-     * Sexo
-     */
-    protected String gender;
-      /**
-     * Constructor por defecto
-     */
-    public User() {
-    }
+public class Administrator extends User {
 
     /**
      * Constructor parametrizado
@@ -56,7 +18,7 @@ public class User {
      * @param email email
      * @param gender sexo
      */
-    public User(String id, String firstName, String lastName, String address, String mobile, String email, String gender) {
+    public Administrator(String id, String firstName, String lastName, String address, String mobile, String email, String gender) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -65,8 +27,7 @@ public class User {
         this.email = email;
         this.gender = gender;
     }
-
-    /**
+        /**
      * Getters and Setters
      *
      * @return
@@ -126,4 +87,5 @@ public class User {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
 }
