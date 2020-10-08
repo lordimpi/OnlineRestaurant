@@ -23,12 +23,7 @@ public interface ICustomerRepository {
      * @return una cadena información
      */
     public String createCustomer(Customer customer);
-    /**
-     * Metodo encargado de remover un cliente 
-     * @param id ide del cliente
-     * @return true o false 
-     */
-    public boolean removeCustomer(String id);
+   
     /**
      * lista de clientes 
      * @return 

@@ -88,40 +88,7 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
         }
         return customer.getId();
 
-    }
-    /**
-     * Permite eliminar un cliente de la base de datos 
-     * @param id idntificador del cliente 
-     * @return true o false 
-     */
-    @Override
-    public boolean removeCustomer(String id) {
-         Customer customer = null;
-
-        this.connect();
-        try {
-            String sql = "DELETE from customers where id=? ";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, id);
-            ResultSet res = pstmt.executeQuery();
-            if (res.next()) {
-                customer = new Customer();
-                customer.setId(res.getString("id"));
-                customer.setFirstName(res.getString("first_name"));
-                customer.setLastName(res.getString("last_name"));
-                customer.setAddress(res.getString("address"));
-                customer.setMobile(res.getString("mobile"));
-                customer.setGender(res.getString("gender"));
-                customer.setEmail(res.getString("email"));
-
-            }
-            pstmt.close();
-            this.disconnect();
-        } catch (SQLException ex) {
-            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Customer de la base de datos", ex);
-        }
-        return true;
-    }
+    }   
 
     @Override
     public boolean deleteCustomer(int id) {
