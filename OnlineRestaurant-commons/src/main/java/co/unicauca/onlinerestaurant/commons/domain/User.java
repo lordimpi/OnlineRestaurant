@@ -44,29 +44,7 @@ public class User {
      */
     public User() {
     }
-
-    /**
-     * Constructor parametrizado
-     *
-     * @param id cedula
-     * @param firstName nombres
-     * @param lastName apellidos
-     * @param address dirección
-     * @param mobile celular
-     * @param email email
-     * @param gender sexo
-     */
-    public User(String id, String firstName, String lastName, String address, String mobile, String email, String gender) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.mobile = mobile;
-        this.email = email;
-        this.gender = gender;
-    }
-
-    /**
+    /*
      * Getters and Setters
      *
      * @return

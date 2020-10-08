@@ -5,7 +5,7 @@ import co.unicauca.onlinerestaurant.commons.infra.Utilities;
 /**
  * Fabrica que se encarga de instanciar un repositorio concreto
  *
- * @author Santiago Acuña
+ * @author Santiago Acuña, Ximena Gallego
  */
 public class Factory {
 
@@ -43,7 +43,6 @@ public class Factory {
 
         switch (type) {
             case "default":
-                result = new CustomerRepositoryImplArrays();
                 break;
             case "mysql":
                 result = new CustomerRepositoryImplMysql();
@@ -53,8 +52,8 @@ public class Factory {
         return result;
 
     }
-    
-        /**
+
+    /**
      * Método que crea una instancia concreta de la jerarquia
      * ICustomerRepository
      *
@@ -77,5 +76,23 @@ public class Factory {
 
         return result;
 
+    }
+
+    public IDishEntryRepository getRepository3() {
+        String type = Utilities.loadProperty("dishentry.repository");
+        if (type.isEmpty()) {
+            type = "default";
+        }
+        IDishEntryRepository result = null;
+
+        switch (type) {
+            case "default":
+                break;
+            case "mysql":
+                result = new DishEntryRepositoryImplMysql();
+                break;
+        }
+
+        return result;
     }
 }

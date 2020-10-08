@@ -27,10 +27,10 @@ public class MainDishService {
         this.repo = repo;
     }
 
-    public MainDish findMainDish(String id){
+    public MainDish findMainDish(String id) {
         return repo.findDish(id);
     }
-    
+
     /**
      * Crea un nuevo mainDish. Aplica validaciones de negocio
      *
@@ -39,12 +39,12 @@ public class MainDishService {
      */
     public String createMainDish(MainDish mainDish) {
         List<JsonError> errors = new ArrayList<>();
-        
+
         String id = mainDish.getId_mainDishe();
         String precio = Double.toString(mainDish.getDishPrice());
         // Validaciones y reglas de negocio
         if (id.isEmpty() || mainDish.getNameDishe().isEmpty()
-                || precio.isEmpty() ) {
+                || precio.isEmpty()) {
             errors.add(new JsonError("400", "BAD_REQUEST", "id, nombre y precio son obligatorios. "));
         }
         // Que no esté repetido
@@ -61,5 +61,5 @@ public class MainDishService {
         }
         return repo.createDish(mainDish);
     }
-    
+
 }
