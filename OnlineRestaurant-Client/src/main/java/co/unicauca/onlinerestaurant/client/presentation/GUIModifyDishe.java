@@ -5,6 +5,12 @@
  */
 package co.unicauca.onlinerestaurant.client.presentation;
 
+import co.unicauca.onlinerestaurant.client.access.Factory;
+import co.unicauca.onlinerestaurant.client.access.IMainDishAccess;
+import co.unicauca.onlinerestaurant.client.domain.services.MainDishService;
+import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
+import co.unicauca.onlinerestaurant.commons.domain.MainDish;
+
 /**
  *
  * @author Santiago Acuña
@@ -32,6 +38,9 @@ public class GUIModifyDishe extends javax.swing.JInternalFrame {
         jBtnMidificar = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
         jPnCentro = new javax.swing.JPanel();
+        jTxfId = new javax.swing.JTextField();
+        jTxfNombre = new javax.swing.JTextField();
+        jTxfPrecio = new javax.swing.JTextField();
 
         setClosable(true);
         setMaximizable(true);
@@ -60,6 +69,11 @@ public class GUIModifyDishe extends javax.swing.JInternalFrame {
         jPnSur.setPreferredSize(new java.awt.Dimension(450, 50));
 
         jBtnMidificar.setText("Modificar");
+        jBtnMidificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnMidificarActionPerformed(evt);
+            }
+        });
         jPnSur.add(jBtnMidificar);
 
         jBtnCancelar.setText("Cancelar");
@@ -72,16 +86,19 @@ public class GUIModifyDishe extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPnSur, java.awt.BorderLayout.PAGE_END);
 
-        javax.swing.GroupLayout jPnCentroLayout = new javax.swing.GroupLayout(jPnCentro);
-        jPnCentro.setLayout(jPnCentroLayout);
-        jPnCentroLayout.setHorizontalGroup(
-            jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 493, Short.MAX_VALUE)
-        );
-        jPnCentroLayout.setVerticalGroup(
-            jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 207, Short.MAX_VALUE)
-        );
+        jPnCentro.setLayout(new java.awt.GridLayout(3, 2));
+
+        jTxfId.setBackground(new java.awt.Color(255, 255, 255));
+        jTxfId.setForeground(new java.awt.Color(0, 0, 0));
+        jPnCentro.add(jTxfId);
+
+        jTxfNombre.setBackground(new java.awt.Color(255, 255, 255));
+        jTxfNombre.setForeground(new java.awt.Color(0, 0, 0));
+        jPnCentro.add(jTxfNombre);
+
+        jTxfPrecio.setBackground(new java.awt.Color(255, 255, 255));
+        jTxfPrecio.setForeground(new java.awt.Color(0, 0, 0));
+        jPnCentro.add(jTxfPrecio);
 
         getContentPane().add(jPnCentro, java.awt.BorderLayout.CENTER);
 
@@ -93,6 +110,43 @@ public class GUIModifyDishe extends javax.swing.JInternalFrame {
         this.doDefaultCloseAction();
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
+    private void jBtnMidificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMidificarActionPerformed
+
+        String id = jTxfId.getText().trim();
+
+        IMainDishAccess service = Factory.getInstance().getMainDishService();
+        // Inyecta la dependencia
+        MainDishService mainDishService = new MainDishService(service);
+        if (id.equals("")) {
+            jTxfId.requestFocus();
+            return;
+        }
+
+        MainDish dish;
+        try {
+            dish = mainDishService.updateMainDish(id, this.jTxfNombre.getText(), this.jTxfPrecio.getText());
+        } catch (Exception ex) {
+            clearControls();
+            successMessage(ex.getMessage(), "Atención");
+            return;
+        }
+        clearControls();
+        showData(dish);
+    }//GEN-LAST:event_jBtnMidificarActionPerformed
+
+    private void showData(MainDish mainDish) {
+        jTxfNombre.setText(mainDish.getNameDishe());
+        jTxfPrecio.setText(Double.toString(mainDish.getDishPrice()));
+
+    }
+
+    public void clearControls() {
+
+        jTxfId.setText("");
+        jTxfNombre.setText("");
+        jTxfPrecio.setText("");
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCancelar;
@@ -100,5 +154,8 @@ public class GUIModifyDishe extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPnCentro;
     private javax.swing.JPanel jPnNorte;
     private javax.swing.JPanel jPnSur;
+    private javax.swing.JTextField jTxfId;
+    private javax.swing.JTextField jTxfNombre;
+    private javax.swing.JTextField jTxfPrecio;
     // End of variables declaration//GEN-END:variables
 }
