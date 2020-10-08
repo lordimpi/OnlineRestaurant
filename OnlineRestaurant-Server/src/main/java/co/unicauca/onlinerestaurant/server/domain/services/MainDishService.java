@@ -26,10 +26,20 @@ public class MainDishService {
     public MainDishService(IMainDishRepository repo) {
         this.repo = repo;
     }
-
+    /**
+     * Metodo busqueda de plato principal
+     * @param id
+     * @return 
+     */
     public MainDish findMainDish(String id) {
         return repo.findDish(id);
     }
+    
+   
+    public void updateMainDish(String id,String name,String price) {
+        repo.updateDish(id,name,price);
+    }
+    
 
     /**
      * Crea un nuevo mainDish. Aplica validaciones de negocio

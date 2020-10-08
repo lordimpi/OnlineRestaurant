@@ -192,6 +192,11 @@ public class OnlineRestaurantServerSocket implements Runnable {
                     // Consultar un customer
                     processGetMainDish(protocolRequest);
                 }
+                
+                if (protocolRequest.getAction().equals("set")) {
+                    // Consultar un customer
+                    processSetMainDish(protocolRequest);
+                }
 
                 if (protocolRequest.getAction().equals("post")) {
                     // Agregar un customer    
@@ -234,6 +239,22 @@ public class OnlineRestaurantServerSocket implements Runnable {
     private void processGetMainDish(Protocol protocolRequest) {
         // Extraer el identificador del primer parámetro
         String id = protocolRequest.getParameters().get(0).getValue();
+        MainDish mainDish = mdService.findMainDish(id);
+        if (mainDish == null) {
+            String errorJson = generateNotFoundErrorJson("Plato no encontrado. El Id no existe");
+            output.println(errorJson);
+        } else {
+            output.println(objectToJSONMD(mainDish));
+        }
+    }
+    
+    
+    private void processSetMainDish(Protocol protocolRequest) {
+        // Extraer el identificador del primer parámetro
+        String id = protocolRequest.getParameters().get(0).getValue();
+        String name = protocolRequest.getParameters().get(1).getValue();
+        String price = protocolRequest.getParameters().get(2).getValue();
+        mdService.updateMainDish(id,name,price);
         MainDish mainDish = mdService.findMainDish(id);
         if (mainDish == null) {
             String errorJson = generateNotFoundErrorJson("Plato no encontrado. El Id no existe");

@@ -58,6 +58,37 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
         }
 
     }
+    
+    @Override
+    public MainDish updateMainDish(String id, String name, String price) throws Exception {
+
+        String jsonResponse = null;
+        String requestJson = updateMainDishRequestJson(id,name,price);
+        try {
+            mySocket.connect();
+            jsonResponse = mySocket.sendStream(requestJson);
+            mySocket.closeStream();
+            mySocket.disconnect();
+
+        } catch (IOException ex) {
+            Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
+        }
+        if (jsonResponse == null) {
+            throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
+        } else {
+            if (jsonResponse.contains("error")) {
+                //Devolvió algún error
+                Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
+                throw new Exception(extractMessages(jsonResponse));
+            } else {
+                //Encontró el customer
+                MainDish mainDish = jsonToMainDish(jsonResponse);
+                return mainDish;
+            }
+        }
+
+    }
+    
 
     @Override
     public String createMainDish(MainDish mainDish) throws Exception {
@@ -136,6 +167,26 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
 
         return requestJson;
     }
+    /**
+     * crea una solicitud json para ser enviada por el socket
+     * @param idMainDish
+     * @return 
+     */
+    
+     private String updateMainDishRequestJson(String id,String name, String price) {
+
+        Protocol protocol = new Protocol();
+        protocol.setResource("maindish");
+        protocol.setAction("set");
+        protocol.addParameter("id_dish",id);
+        protocol.addParameter("name",name);
+        protocol.addParameter("price",price);
+        Gson gson = new Gson();
+        String requestJson = gson.toJson(protocol);
+
+        return requestJson;
+    }
+    
 
     /**
      * Crea la solicitud json de creación del maindish para ser enviado por el

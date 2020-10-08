@@ -19,6 +19,6 @@ public interface IMainDishRepository {
      * @param id identificador del plato
      * @return cadena confirmando el estado
      */
-    public String updateDish(String id);
+    public void updateDish(String id,String name,String price);
 
 }

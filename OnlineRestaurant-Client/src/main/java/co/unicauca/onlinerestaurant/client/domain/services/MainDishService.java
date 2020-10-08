@@ -32,6 +32,11 @@ public class MainDishService {
         return service.findMainDish(id);
 
     }
+    
+     public MainDish updateMainDish(String id,String name,String price) throws Exception {
+        return service.updateMainDish(id, name, price);
+
+    }
 
     public String createMainDish(MainDish mainDish) throws Exception {
         return service.createMainDish(mainDish);

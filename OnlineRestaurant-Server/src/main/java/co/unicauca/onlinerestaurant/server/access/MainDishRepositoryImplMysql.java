@@ -66,30 +66,23 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
      * @return cadena
      */
     @Override
-    public String updateDish(String id) {
+    public void updateDish(String id,String name,String price) {
         //UPDATE `maindish` SET `id_dish`=[value-1],`dish_name`=[value-2],`dish_price`=[value-3] WHERE 1
-        MainDish mainDish = null;
-
+        Double DPrice=Double.parseDouble(price);
+        //System.out.println("el id "+id+" el nombre "+name+" el precio "+price+" el precio en entero "+DPrice);
         this.connect();
         try {
-            String sql = "UPDATE maindish SET id_dish="+"?"+"dish_name="+"?"+"dish_price="+"?"+"where=";
+            String sql = "UPDATE maindish SET dish_name="+"?"+", dish_price="+"?"+"where id_dish="+"?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, id);
-            ResultSet res = pstmt.executeQuery();
-            if (res.next()) {
-                mainDish = new MainDish();
-                mainDish.setId_mainDishe(res.getString("id_dish"));
-               // mainDish.setNameDishe(res.getString("dish_name"));
-                //mainDish.setDishPrice(res.getDouble("dish_price"));
-                return "id_dish="+mainDish.getId_mainDishe()+"dish_name="+mainDish.getNameDishe()+"dish_price="+mainDish.getDishPrice();
-            }
+            pstmt.setString(1, name);
+            pstmt.setDouble(2, DPrice);
+            pstmt.setString(3, id);
+            pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
-        } catch (SQLException ex) {
+         }  catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al actualizar Plato de la base de datos", ex);
-        }
-        return mainDish.getId_mainDishe();
-        
+        }    
     }
         /**
      * Permite hacer la conexion con la base de datos

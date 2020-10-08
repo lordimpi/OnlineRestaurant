@@ -16,7 +16,14 @@ public interface IMainDishAccess {
      * @throws Exception error al buscar un plato
      */
     public MainDish findMainDish(String id) throws Exception;
-
+    
+    /**
+     * Actualiza un MainDish
+     * @param id identificador del plato
+     * @return objeto plato
+     * @throws Exception error al actualizar el plato
+     */
+     public MainDish updateMainDish(String id,String name,String price) throws Exception;
     /**
      * Crea un Customer
      *
