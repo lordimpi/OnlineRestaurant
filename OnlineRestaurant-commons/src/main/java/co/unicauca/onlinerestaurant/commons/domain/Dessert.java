@@ -9,7 +9,7 @@ package co.unicauca.onlinerestaurant.commons.domain;
  *
  * @author alejo
  */
-public class Dish_Dessert {
+public class Dessert {
         /**
      * Identificacion
      */

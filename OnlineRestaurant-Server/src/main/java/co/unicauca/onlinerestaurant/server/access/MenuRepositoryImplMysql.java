@@ -50,9 +50,9 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
                 menu.setIdMenu(res.getInt("idMenu"));
                 menu.setEntry(res.getString("entry"));
                 menu.setSalad(res.getString("salad"));
-                menu.setSalad(res.getString("mainDishes"));
-                menu.setSalad(res.getString("dessert"));
-                menu.setSalad(res.getString("drink"));
+                menu.setMainDish(res.getString("mainDishes"));
+                menu.setDessert(res.getString("dessert"));
+                menu.setDrink(res.getString("drink"));
             }
             pstmt.close();
             this.disconnect();
@@ -79,7 +79,7 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
             pstmt.setInt(1, menu.getIdMenu());
             pstmt.setString(2, menu.getEntry());
             pstmt.setString(3, menu.getSalad());
-            pstmt.setString(4, menu.getMainDishes());
+            pstmt.setString(4, menu.getMainDish());
             pstmt.setString(5, menu.getDessert());
             pstmt.setString(6, menu.getDrink());
 
