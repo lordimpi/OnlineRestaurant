@@ -1,6 +1,7 @@
 package co.unicauca.onlinerestaurant.server.infra;
 
 import co.unicauca.onlinerestaurant.commons.domain.Customer;
+import co.unicauca.onlinerestaurant.commons.domain.Dish_Dessert;
 import co.unicauca.onlinerestaurant.commons.domain.MainDish;
 import co.unicauca.onlinerestaurant.commons.infra.JsonError;
 import co.unicauca.onlinerestaurant.commons.infra.Protocol;
@@ -15,7 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import co.unicauca.onlinerestaurant.server.domain.services.CustomerService;
 import co.unicauca.onlinerestaurant.server.access.ICustomerRepository;
+import co.unicauca.onlinerestaurant.server.access.IDish_DessertRepository;
 import co.unicauca.onlinerestaurant.server.access.IMainDishRepository;
+import co.unicauca.onlinerestaurant.server.domain.services.Dish_DessertService;
 import co.unicauca.onlinerestaurant.server.domain.services.MainDishService;
 import com.google.gson.Gson;
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ import java.util.List;
  * Servidor Socket que está escuchando permanentemente solicitudes de los
  * clientes. Cada solicitud la atiende en un hilo de ejecución
  *
- * @author Santiago Acuña
+ * @author Santiago Acuña y Camilo Otaya Bravo
  */
 public class OnlineRestaurantServerSocket implements Runnable {
 
@@ -37,6 +40,10 @@ public class OnlineRestaurantServerSocket implements Runnable {
      * Servicio de platos principales
      */
     private final MainDishService mdService;
+    /**
+     * Servicio de platos principales
+     */
+    private final Dish_DessertService dService;
     /**
      * Server Socket, la orejita
      */
@@ -65,8 +72,10 @@ public class OnlineRestaurantServerSocket implements Runnable {
         // Se hace la inyección de dependencia
         ICustomerRepository repository = Factory.getInstance().getRepository();
         IMainDishRepository mdRespository = Factory.getInstance().getRepository2();
+        IDish_DessertRepository dRepository = Factory.getInstance().getRepository3();
         service = new CustomerService(repository);
         mdService = new MainDishService(mdRespository);
+        dService = new Dish_DessertService(dRepository);
     }
 
     /**
@@ -189,6 +198,17 @@ public class OnlineRestaurantServerSocket implements Runnable {
                     processPostMainDish(protocolRequest);
                 }
                 break;
+            case "Dessert":
+                if (protocolRequest.getAction().equals("get")) {
+                    // Consultar un postre
+                    processGetDessert(protocolRequest);
+                }
+
+                if (protocolRequest.getAction().equals("post")) {
+                    // Agregar un postre    
+                    processPostDessert(protocolRequest);
+                }
+                break;
         }
 
     }
@@ -223,13 +243,30 @@ public class OnlineRestaurantServerSocket implements Runnable {
     }
 
     /**
+     * Procesa la solicitud de consultar un postre
+     *
+     * @param protocolRequest
+     */
+    private void processGetDessert(Protocol protocolRequest) {
+        // Extraer el identificador del primer parámetro
+        String id = protocolRequest.getParameters().get(0).getValue();
+        Dish_Dessert Dessert = dService.findDessert(id);
+        if (Dessert == null) {
+            String errorJson = generateNotFoundErrorJson("Plato no encontrado. El Id no existe");
+            output.println(errorJson);
+        } else {
+            output.println(objectToJSOND(Dessert));
+        }
+    }
+
+    /**
      * Procesa la solicitud de agregar un customer
      *
      * @param protocolRequest Protocolo de la solicitud
      */
     private void processPostCustomer(Protocol protocolRequest) {
         Customer customer = new Customer();
-        // Reconstruir el customer a partid de lo que viene en los parámetros
+        // Reconstruir el customer a partir de lo que viene en los parámetros
         customer.setId(protocolRequest.getParameters().get(0).getValue());
         customer.setFirstName(protocolRequest.getParameters().get(1).getValue());
         customer.setLastName(protocolRequest.getParameters().get(2).getValue());
@@ -253,6 +290,16 @@ public class OnlineRestaurantServerSocket implements Runnable {
         output.println(response);
     }
 
+     private void processPostDessert(Protocol protocolRequest) {
+        Dish_Dessert dessert = new Dish_Dessert();
+        // Reconstruir el customer a partid de lo que viene en los parámetros
+        dessert.setId_Dish_Dessert(protocolRequest.getParameters().get(0).getValue());
+        dessert.setName_Dish_Dessert(protocolRequest.getParameters().get(1).getValue());
+        dessert.setCost_Dish_Dessert(Integer.parseInt(protocolRequest.getParameters().get(2).getValue()));
+
+        String response = dService.createDessert(dessert);
+        output.println(response);
+    }
     /**
      * Genera un ErrorJson de cliente no encontrado
      *
@@ -319,6 +366,19 @@ public class OnlineRestaurantServerSocket implements Runnable {
     private String objectToJSONMD(MainDish mainDish) {
         Gson gson = new Gson();
         String strObject = gson.toJson(mainDish);
+        return strObject;
+    }
+
+    /**
+     * Convierte el objeto Dessert a json para que el servidor lo envie como
+     * respuesta por el socket
+     *
+     * @param Dessert
+     * @return
+     */
+    private String objectToJSOND(Dish_Dessert Dessert) {
+        Gson gson = new Gson();
+        String strObject = gson.toJson(Dessert);
         return strObject;
     }
 }

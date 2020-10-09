@@ -43,7 +43,7 @@ public class Factory {
 
         switch (type) {
             case "default":
-                
+
                 break;
             case "mysql":
                 result = new CustomerRepositoryImplMysql();
@@ -53,8 +53,8 @@ public class Factory {
         return result;
 
     }
-    
-        /**
+
+    /**
      * Método que crea una instancia concreta de la jerarquia
      * ICustomerRepository
      *
@@ -72,6 +72,31 @@ public class Factory {
                 break;
             case "mysql":
                 result = new MainDishRepositoryImplMysql();
+                break;
+        }
+
+        return result;
+
+    }
+
+    /**
+     * Método que crea una instancia concreta de la jerarquia
+     * IDish_DessertRepository
+     *
+     * @return una clase hija de la abstracción IRepositorioPostres
+     */
+    public IDish_DessertRepository getRepository3() {
+        String type = Utilities.loadProperty("dish_dessert.repository");
+        if (type.isEmpty()) {
+            type = "default";
+        }
+        IDish_DessertRepository result = null;
+
+        switch (type) {
+            case "default":
+                break;
+            case "mysql":
+                result = new Dish_DessertRepositoryImplMysql();
                 break;
         }
 

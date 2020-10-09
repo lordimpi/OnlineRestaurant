@@ -1,6 +1,6 @@
 package co.unicauca.onlinerestaurant.server.access;
 
-import co.unicauca.onlinerestaurant.commons.domain.MainDish;
+import co.unicauca.onlinerestaurant.commons.domain.Dish_Dessert;
 import co.unicauca.onlinerestaurant.commons.infra.Utilities;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,75 +11,68 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Repositorio de postres en MySQL
  *
- * @author Santiago Acuña
+ * @author Camilo Otaya Bravo
  */
-public class MainDishRepositoryImplMysql implements IMainDishRepository {
+public class Dish_DessertRepositoryImplMysql implements IDish_DessertRepository {
 
     /**
      * Conección con Mysql
      */
     private Connection conn;
 
-    public MainDishRepositoryImplMysql() {
+    /**
+     * Constructor por defecto
+     */
+    public Dish_DessertRepositoryImplMysql() {
+
     }
 
     /**
-     * Busca en la bd un plato
+     * busca en la base de datos un postre
      *
-     * @param id identificador de plato
-     * @return objeto plato, null si no lo encuentra
+     * @param id identificador del postre
+     * @return objeto postre, null si no lo encuentra
      */
     @Override
-    public MainDish findDish(String id) {
-
-        MainDish mainDish = null;
+    public Dish_Dessert findDessert(String id) {
+        Dish_Dessert dishdessert = null;
 
         this.connect();
         try {
-            String sql = "SELECT * from maindish where id_dish=? ";
+            String sql = "SELECT * from desserts where id_dessert=? ";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, id);
             ResultSet res = pstmt.executeQuery();
             if (res.next()) {
-                mainDish = new MainDish();
-                mainDish.setId_mainDishe(res.getString("id_dish"));
-                mainDish.setNameDishe(res.getString("dish_name"));
-                mainDish.setDishPrice(res.getDouble("dish_price"));
+                dishdessert = new Dish_Dessert();
+                dishdessert.setId_Dish_Dessert(res.getString("id_dessert"));
+                dishdessert.setName_Dish_Dessert(res.getString("dessert_name"));
+                dishdessert.setCost_Dish_Dessert(res.getInt("dessert_cost"));
+
             }
             pstmt.close();
             this.disconnect();
         } catch (SQLException ex) {
-            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Plato de la base de datos", ex);
+            Logger.getLogger(Dish_DessertRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar el postre de la base de datos", ex);
         }
-        return mainDish;
-
+        return dishdessert;
     }
+    /**
+     * crea en la base de datos un postre
+     * 
+     * @param dish
+     * @return 
+     */
 
+    
     @Override
-    public String createMainDish(String id, String name, String cost) {
-
-        MainDish mainDish = null;
-
-        Double price = Double.parseDouble(cost);
-
-        this.connect();
-        try {
-            String sql = "INSERT INTO maindish(id_dish, dish_name, dish_price) VALUES (?,?,?)";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, id);
-            pstmt.setString(2, name);
-            pstmt.setDouble(3, price);
-            pstmt.executeUpdate();
-            pstmt.close();
-            this.disconnect();
-        } catch (SQLException ex) {
-            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Plato de la base de datos", ex);
-        }
-
-        return "";
+    public String  createDessert(Dish_Dessert dish) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    
     /**
      * Permite hacer la conexion con la base de datos
      *
@@ -95,7 +88,7 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
             conn = DriverManager.getConnection(url, username, pwd);
             return 1;
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Plato de la base de datos", ex);
+            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Customer de la base de datos", ex);
         }
         return -1;
     }

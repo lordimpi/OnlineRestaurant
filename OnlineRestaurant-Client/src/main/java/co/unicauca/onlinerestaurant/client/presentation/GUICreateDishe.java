@@ -5,6 +5,12 @@
  */
 package co.unicauca.onlinerestaurant.client.presentation;
 
+import co.unicauca.onlinerestaurant.client.access.Factory;
+import co.unicauca.onlinerestaurant.client.access.IMainDishAccess;
+import co.unicauca.onlinerestaurant.client.domain.services.MainDishService;
+import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
+import co.unicauca.onlinerestaurant.commons.domain.MainDish;
+
 /**
  *
  * @author Santiago Acuña
@@ -33,11 +39,11 @@ public class GUICreateDishe extends javax.swing.JInternalFrame {
         jBtnCancelar = new javax.swing.JButton();
         jPnCentro = new javax.swing.JPanel();
         jLbIdPlato = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_id = new javax.swing.JTextField();
         jLbNombre = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txt_name = new javax.swing.JTextField();
         jLbPrecio = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txt_cost = new javax.swing.JTextField();
 
         setClosable(true);
         setMaximizable(true);
@@ -67,6 +73,11 @@ public class GUICreateDishe extends javax.swing.JInternalFrame {
         jPnSur.setPreferredSize(new java.awt.Dimension(450, 50));
 
         jBtnAgregar.setText("Agregar");
+        jBtnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAgregarActionPerformed(evt);
+            }
+        });
         jPnSur.add(jBtnAgregar);
 
         jBtnCancelar.setText("Cancelar");
@@ -85,19 +96,22 @@ public class GUICreateDishe extends javax.swing.JInternalFrame {
         jLbIdPlato.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLbIdPlato.setText("Id:");
         jPnCentro.add(jLbIdPlato);
-        jPnCentro.add(jTextField1);
+
+        txt_id.setToolTipText("txt_id");
+        jPnCentro.add(txt_id);
+        txt_id.getAccessibleContext().setAccessibleName("");
 
         jLbNombre.setBackground(new java.awt.Color(255, 255, 255));
         jLbNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLbNombre.setText("Nombre:");
         jPnCentro.add(jLbNombre);
-        jPnCentro.add(jTextField2);
+        jPnCentro.add(txt_name);
 
         jLbPrecio.setBackground(new java.awt.Color(255, 255, 255));
         jLbPrecio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLbPrecio.setText("Precio:");
         jPnCentro.add(jLbPrecio);
-        jPnCentro.add(jTextField3);
+        jPnCentro.add(txt_cost);
 
         getContentPane().add(jPnCentro, java.awt.BorderLayout.CENTER);
 
@@ -110,7 +124,43 @@ public class GUICreateDishe extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
+    private void jBtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarActionPerformed
+        IMainDishAccess service = Factory.getInstance().getMainDishService();
+        // Inyecta la dependencia
+        Double cost;
+        cost = Double.parseDouble(txt_cost.getText());
+        MainDishService maindishService = new MainDishService(service);
+        MainDish maindish = new MainDish();
+        maindish.setId_mainDishe(txt_id.getText());
+        maindish.setNameDishe(txt_name.getText());
+        maindish.setDishPrice(cost);
 
+        try {
+            String response = maindishService.createMainDish(maindish);
+            successMessage("Plato " + response + " agregado con éxito.", "Atención");
+            clearControls();
+            txt_id.setText("");
+            jBtnAgregar.setVisible(false);
+
+        } catch (Exception ex) {
+            successMessage(ex.getMessage(), "Atención");
+        }
+    }//GEN-LAST:event_jBtnAgregarActionPerformed
+
+    private void showData(MainDish maindish) {
+        
+        txt_id.setText(maindish.getId_mainDishe());
+        txt_name.setText(maindish.getNameDishe());
+        txt_cost.setText(String.valueOf(maindish.getDishPrice()));
+       
+    }
+
+    public void clearControls() {
+        txt_id.setText("");
+        txt_name.setText("");
+        txt_cost.setText("");
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAgregar;
     private javax.swing.JButton jBtnCancelar;
@@ -120,8 +170,8 @@ public class GUICreateDishe extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPnCentro;
     private javax.swing.JPanel jPnNorte;
     private javax.swing.JPanel jPnSur;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField txt_cost;
+    private javax.swing.JTextField txt_id;
+    private javax.swing.JTextField txt_name;
     // End of variables declaration//GEN-END:variables
 }
