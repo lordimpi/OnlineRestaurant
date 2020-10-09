@@ -7,14 +7,12 @@ package co.unicauca.onlinerestaurant.client.presentation;
 
 import co.unicauca.onlinerestaurant.client.domain.User;
 import static co.unicauca.onlinerestaurant.client.infra.Messages.warningMessage;
-import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 
 /**
  *

@@ -52,7 +52,7 @@ public class CustomerService {
         // Validaciones y reglas de negocio
         if (customer.getId().isEmpty() || customer.getFirstName().isEmpty()
                 || customer.getLastName().isEmpty() || customer.getEmail().isEmpty()
-                || customer.getGender().isEmpty()) {
+                || customer.getRol().isEmpty()) {
             errors.add(new JsonError("400", "BAD_REQUEST", "id, nombres, apellidos, email y género son obligatorios. "));
         }
 
@@ -60,7 +60,7 @@ public class CustomerService {
             errors.add(new JsonError("400", "BAD_REQUEST", "Email debe tener una @. "));
         }
 
-        if (!(customer.getGender().equalsIgnoreCase("M") || customer.getGender().equalsIgnoreCase("F"))) {
+        if (!(customer.getRol().equalsIgnoreCase("M") || customer.getRol().equalsIgnoreCase("F"))) {
             errors.add(new JsonError("400", "BAD_REQUEST", "Sexo debo ser M o F. "));
         }
 

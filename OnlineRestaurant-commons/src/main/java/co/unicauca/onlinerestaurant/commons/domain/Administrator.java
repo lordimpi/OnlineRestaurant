@@ -16,16 +16,16 @@ public class Administrator extends User {
      * @param address dirección
      * @param mobile celular
      * @param email email
-     * @param gender sexo
+     * @param rol sexo
      */
-    public Administrator(String id, String firstName, String lastName, String address, String mobile, String email, String gender) {
+    public Administrator(String id, String firstName, String lastName, String address, String mobile, String email, String rol) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.mobile = mobile;
         this.email = email;
-        this.gender = gender;
+        this.rol = rol;
     }
         /**
      * Getters and Setters
@@ -80,12 +80,12 @@ public class Administrator extends User {
         this.email = email;
     }
 
-    public String getGender() {
-        return gender;
+    public String getRol() {
+        return rol;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
 }

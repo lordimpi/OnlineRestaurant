@@ -15,8 +15,9 @@ public class UserService {
      * @param login login de usuario
      * @param password contraseña
      * @return objeto User cuando la autenticación es exitosa
+     * @throws java.lang.Exception
      */
-    public User autenticacion(String login, String password) {
+    public User autenticacion(String login, String password)  throws Exception{
         return null;
     }
 }

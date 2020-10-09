@@ -36,14 +36,15 @@ public class User {
      */
     protected String email;
     /**
-     * Sexo
+     * Rol
      */
-    protected String gender;
+    protected String rol;
       /**
      * Constructor por defecto
      */
     public User() {
     }
+    
     /*
      * Getters and Setters
      *
@@ -97,11 +98,11 @@ public class User {
         this.email = email;
     }
 
-    public String getGender() {
-        return gender;
+    public String getRol() {
+        return rol;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

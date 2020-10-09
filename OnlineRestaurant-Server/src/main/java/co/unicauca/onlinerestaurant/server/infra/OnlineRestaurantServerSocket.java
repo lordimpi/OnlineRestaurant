@@ -41,7 +41,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
      */
     private final MainDishService mdService;
     /**
-     * Servicio de platos de E
+     * Servicio de platos a eliminar
      */
     private final DishEntryService deService;
     /**
@@ -294,7 +294,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
         customer.setLastName(protocolRequest.getParameters().get(2).getValue());
         customer.setAddress(protocolRequest.getParameters().get(3).getValue());
         customer.setEmail(protocolRequest.getParameters().get(4).getValue());
-        customer.setGender(protocolRequest.getParameters().get(5).getValue());
+        customer.setRol(protocolRequest.getParameters().get(5).getValue());
         customer.setMobile(protocolRequest.getParameters().get(6).getValue());
 
         String response = service.createCustomer(customer);
