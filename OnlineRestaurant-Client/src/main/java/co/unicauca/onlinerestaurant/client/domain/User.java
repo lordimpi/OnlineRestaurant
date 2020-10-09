@@ -8,7 +8,7 @@ package co.unicauca.onlinerestaurant.client.domain;
 public class User {
 
     /**
-     *
+     * Nombre del usuario
      */
     private String login;
     /**

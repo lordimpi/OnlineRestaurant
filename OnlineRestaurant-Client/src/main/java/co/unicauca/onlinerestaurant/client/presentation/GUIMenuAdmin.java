@@ -24,7 +24,13 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
      * Variable para controlar los estados de maximizar o minimizar pantalla
      */
     private boolean state = false;
+    /**
+     * Guarda la instancia del formulario del menu clientes
+     */
     private GUICustomer MenuCustomer = new GUICustomer();
+    /**
+     *  Guarda la instancia del formulario Menu platos principales
+     */
     private GUIMenuFoodDishes MenuFoodDishes = new GUIMenuFoodDishes();
     /**
      * Guarda la coordenada en eje x para poder mover el formulario con el raton
@@ -35,6 +41,9 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
      */
     private int y = 0;
 
+    /**
+     * Constructor que inicializa el formulario Menu admin
+     */
     public GUIMenuAdmin() {
         initComponents();
         setLocationRelativeTo(null);
@@ -496,10 +505,18 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton para cerrar el formulario
+     * @param evt Evento del boton cerrar
+     */
     private void jLbClose1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbClose1MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLbClose1MouseClicked
 
+    /**
+     * Boton para Maximizar o Minimizar el formulario
+     * @param evt Evento del boton Max Min form
+     */
     private void jLbMaxMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbMaxMinMouseClicked
 
         if (state) {
@@ -511,20 +528,36 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLbMaxMinMouseClicked
 
+    /**
+     * Boton para ocultar el formulario
+     * @param evt Evento del boton ocultar
+     */
     private void jLbHideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbHideMouseClicked
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_jLbHideMouseClicked
 
+    /**
+     *  Metodo encargado de capturar las coordenadas del raton para poder mover el formulario
+     * @param evt Evento del Mouse pressed
+     */
     private void jPnlCMHMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPnlCMHMousePressed
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jPnlCMHMousePressed
 
+    /**
+     * Metodo encargado de insertar las coordenada del formulario para ubicar el formulario luego de mover con el raton
+     * @param evt Evento del mouse dragged
+     */
     private void jPnlCMHMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPnlCMHMouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jPnlCMHMouseDragged
 
+    /**
+     * Boton para regresar a la pagina principal del restaurante
+     * @param evt Evento del boton home
+     */
     private void BtnHomePageMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnHomePageMousePressed
         setColor(BtnHomePage);
         resetColor(BtnRestaurant);
@@ -537,6 +570,10 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_BtnHomePageMousePressed
 
+    /**
+     * Boton que despliega los restaurantes que estan disponibles
+     * @param evt Evento del boton restaurante disponibles
+     */
     private void BtnRestaurantMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRestaurantMousePressed
         resetColor(BtnHomePage);
         setColor(BtnRestaurant);
@@ -549,6 +586,10 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_BtnRestaurantMousePressed
 
+    /**
+     * Boton que despliega los menus del dia
+     * @param evt Evento del boton menus
+     */
     private void BtnMenusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMenusMousePressed
         resetColor(BtnHomePage);
         resetColor(BtnRestaurant);
@@ -560,7 +601,11 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         resetColor(BtnAccounting);
 
     }//GEN-LAST:event_BtnMenusMousePressed
-
+    
+    /**
+     * Boton que despliega los clientes que hay en la base de datos
+     * @param evt Evento del boton
+     */
     private void BtnCustomersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCustomersMousePressed
         resetColor(BtnHomePage);
         resetColor(BtnRestaurant);
@@ -579,6 +624,11 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_BtnCustomersMousePressed
 
+    /**
+     * Boton que despliega las opciones para contabilidad
+     *
+     * @param evt Evento del boton contabilidad
+     */
     private void BtnAccountingMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAccountingMousePressed
         resetColor(BtnHomePage);
         resetColor(BtnRestaurant);
@@ -591,6 +641,11 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_BtnAccountingMousePressed
 
+    /**
+     * Boton que despliega las opciones para platos principales
+     *
+     * @param evt Evento del boton platos principales
+     */
     private void BtnFoodDishesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnFoodDishesMousePressed
         resetColor(BtnHomePage);
         resetColor(BtnRestaurant);
@@ -609,6 +664,11 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_BtnFoodDishesMousePressed
 
+    /**
+     * Boton que despliega las opciones para bebidas
+     *
+     * @param evt Evento del boton Bebidas
+     */
     private void BtnDrinksMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnDrinksMousePressed
         resetColor(BtnHomePage);
         resetColor(BtnRestaurant);
@@ -621,6 +681,11 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_BtnDrinksMousePressed
 
+    /**
+     * Boton que despliega las opcciones de usuario
+     *
+     * @param evt Evento del boton
+     */
     private void BtnUsersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnUsersMousePressed
         resetColor(BtnHomePage);
         resetColor(BtnRestaurant);
@@ -706,16 +771,30 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Asigna un especifico a un panel
+     *
+     * @param panel Panel a cambiar el color
+     */
     private void setColor(JPanel panel) {
         panel.setBackground(new Color(85, 65, 118));
 
     }
 
+    /**
+     * Metodo encargado de reiniciar un color en especifico
+     *
+     * @param panel Paenel al que se le reiniciara el colo
+     */
     private void resetColor(JPanel panel) {
         panel.setBackground(new Color(64, 43, 100));
 
     }
 
+    /**
+     * Metodo encargado de cargar varios iconos para varias etiquetas del
+     * formulario
+     */
     private void initIcons() {
         addIcon(jLbHomePageIcono, "src/main/java/resources/home.png");
         addIcon(jLbRestaurantIcon, "src/main/java/resources/restaurant.png");
@@ -728,6 +807,12 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         addIcon(jLbUserPhoto, "src/main/java/resources/userPhoto.png");
     }
 
+    /**
+     * Metodo encargado de cargar un icono para una etiquetas
+     *
+     * @param lb Etiqueta que funciona como icono
+     * @param pathIcon Direccion donde se encuentra el icono
+     */
     private void addIcon(JLabel lb, String pathIcon) {
         ImageIcon img = new ImageIcon(pathIcon);
         Icon icono = new ImageIcon(img.getImage().getScaledInstance(
