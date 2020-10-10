@@ -17,22 +17,26 @@ import java.util.logging.Logger;
  *
  * @author Ximena Gallego
  */
-public class RestaurantRepositoryImplMysql implements IRestaurantRepository{
+public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
+
     /**
      * Conección con Mysql
      */
     private Connection conn;
+
     /**
-     * Constructor por defecto 
+     * Constructor por defecto
      */
     public RestaurantRepositoryImplMysql() {
 
     }
-   /**
-    * Metodo encargado de buscar un restaurante
-    * @param id identificador del restaurante
-    * @return objeto de tipo restaurante 
-    */
+
+    /**
+     * Metodo encargado de buscar un restaurante
+     *
+     * @param id identificador del restaurante
+     * @return objeto de tipo restaurante
+     */
     @Override
     public Restaurant findRestaurant(String id) {
         Restaurant restaurant = null;
@@ -49,7 +53,8 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository{
                 restaurant.setNameRestaurant(res.getString("nameres"));
                 restaurant.setAddressRestaurant(res.getString("addressres"));
                 restaurant.setAddressRestaurant(res.getString("phoneres"));
-                
+                restaurant.setIdmenu(res.getString("idmenu"));
+
             }
             pstmt.close();
             this.disconnect();
@@ -58,22 +63,25 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository{
         }
         return restaurant;
     }
+
     /**
      * Metodo que permite crear un restaurante
+     *
      * @param restaurant restaurante
      * @return cadena
      */
     @Override
     public String createRestaurant(Restaurant restaurant) {
-           try {
+        try {
 
             this.connect();
-            String sql = "INSERT INTO Restaurant(idRes, nameres,addressres, phoneres) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO Restaurant(idRes, nameres,addressres, phoneres,idmenu) VALUES (?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, restaurant.getIdRestaurant());
             pstmt.setString(2, restaurant.getNameRestaurant());
             pstmt.setString(3, restaurant.getAddressRestaurant());
-            pstmt.setString(4, restaurant.getPhone());          
+            pstmt.setString(4, restaurant.getPhone());
+            pstmt.setString(5, restaurant.getIdmenu());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -83,19 +91,50 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository{
         }
         return restaurant.getIdRestaurant();
     }
+
     /**
-     *  Metodo encargado de eliminara un restaurante 
+     * Metodo que perimite para actualizar un restaurante
+     *
+     * @param id identificador del restaurante
+     * @param name nombre del restaurante
+     * @param address direcion
+     * @param phone telefono
+     * @param idmenu id del menu
+     * @return
+     */
+    @Override
+    public void updateRestaurant(String id, String name, String address, String phone, String idmenu) {
+
+        this.connect();
+        try {
+            String sql = "UPDATE restaurant SET nameres=" + "?" + ", addressres=" + "?" + ",phoneres=" + "?" + ", idmenu=" + "?" + "where idres=" + "?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, name);
+            pstmt.setString(2, address);
+            pstmt.setString(3, phone);
+            pstmt.setString(4, idmenu);
+            pstmt.executeUpdate();
+            pstmt.close();
+            this.disconnect();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al actualizar Restaurante en la base de datos", ex);
+        }
+    }
+
+    /**
+     * Metodo encargado de eliminara un restaurante
+     *
      * @param id
-     * @return 
+     * @return
      */
     @Override
     public boolean removeRestaurant(String id) {
-          try {
+        try {
 
             this.connect();
             String sql = "DELETE FROM Restaurant WHERE= ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,id);  
+            pstmt.setString(1, id);
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
@@ -105,38 +144,30 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository{
         }
         return false;
     }
+
     /**
-     * Metodo que permite actualizar un restaurante
-     * @param id identificador del resturante
-     * @return una cadena 
-     */
-    @Override
-    public String updateDish(String id) {
-     String Cadena="";
-     return Cadena;
-    }
-    /**
-     *  metodo que perimte listar los restaurantes
+     * metodo que perimte listar los restaurantes
+     *
      * @return list
      */
     @Override
     public List<Restaurant> list() {
-         List<Restaurant> restaurant = new ArrayList<>();
+        List<Restaurant> restaurant = new ArrayList<>();
         try {
 
             String sql = "SELECT * FROM restaurant";
             this.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            ResultSet res = pstmt.executeQuery();            
+            ResultSet res = pstmt.executeQuery();
             while (res.next()) {
                 Restaurant newrestaurant = new Restaurant();
-                
+
                 newrestaurant.setIdRestaurant("idres");
                 newrestaurant.setIdRestaurant("nameres");
                 newrestaurant.setIdRestaurant("addressres");
                 newrestaurant.setIdRestaurant("phoneres");
-                
-                restaurant.add(newrestaurant);               
+
+                restaurant.add(newrestaurant);
             }
             //this.disconnect();
 
@@ -145,7 +176,8 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository{
         }
         return restaurant;
     }
-     /**
+
+    /**
      * Permite hacer la conexion con la base de datos
      *
      * @return
@@ -163,8 +195,9 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository{
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Customer de la base de datos", ex);
         }
         return -1;
-        
+
     }
+
     /**
      * Cierra la conexion con la base de datos
      *
@@ -175,5 +208,6 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository{
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.FINER, "Error al cerrar Connection", ex);
         }
-    }    
+    }
+
 }

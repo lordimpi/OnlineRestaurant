@@ -218,7 +218,7 @@ public class GUICustomer extends javax.swing.JInternalFrame {
         customer.setAddress(txtAddress.getText());
         customer.setEmail(txtEmail.getText());
         customer.setMobile(txtMobile.getText());
-        customer.setGender(txtGender.getText());
+        customer.setRol(txtGender.getText());
 
         try {
             String response = customerService.createCustomer(customer);
@@ -244,7 +244,7 @@ public class GUICustomer extends javax.swing.JInternalFrame {
         txtAddress.setText(customer.getAddress());
         txtMobile.setText(customer.getMobile());
         txtEmail.setText(customer.getEmail());
-        txtGender.setText(customer.getGender());
+        txtGender.setText(customer.getRol());
     }
 
     public void clearControls() {

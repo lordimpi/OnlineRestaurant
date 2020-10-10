@@ -5,6 +5,12 @@
  */
 package co.unicauca.onlinerestaurant.client.presentation;
 
+import co.unicauca.onlinerestaurant.client.access.Factory;
+import co.unicauca.onlinerestaurant.client.access.IMainDishAccess;
+import co.unicauca.onlinerestaurant.client.domain.services.MainDishService;
+import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
+import co.unicauca.onlinerestaurant.commons.domain.MainDish;
+
 /**
  *
  * @author Santiago Acuña
@@ -32,6 +38,7 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
         jBtnMidificar = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
         jPnCentro = new javax.swing.JPanel();
+        id = new javax.swing.JTextField();
 
         setClosable(true);
         setMaximizable(true);
@@ -61,6 +68,11 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
         jPnSur.setPreferredSize(new java.awt.Dimension(450, 50));
 
         jBtnMidificar.setText("Borrar");
+        jBtnMidificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnMidificarActionPerformed(evt);
+            }
+        });
         jPnSur.add(jBtnMidificar);
 
         jBtnCancelar.setText("Cancelar");
@@ -77,11 +89,17 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
         jPnCentro.setLayout(jPnCentroLayout);
         jPnCentroLayout.setHorizontalGroup(
             jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 493, Short.MAX_VALUE)
+            .addGroup(jPnCentroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(378, Short.MAX_VALUE))
         );
         jPnCentroLayout.setVerticalGroup(
             jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 207, Short.MAX_VALUE)
+            .addGroup(jPnCentroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(168, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPnCentro, java.awt.BorderLayout.CENTER);
@@ -94,8 +112,28 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
         this.doDefaultCloseAction();
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
+    private void jBtnMidificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMidificarActionPerformed
+        // TODO add your handling code here:
+        String sid = id.getText().trim();
+
+        IMainDishAccess service = Factory.getInstance().getMainDishService();
+        // Inyecta la dependencia
+        MainDishService mainDishService = new MainDishService(service);
+        if (sid.equals("")) {
+            id.requestFocus();
+            return;
+        }
+        try {
+            mainDishService.deleteMainDish(sid);
+        } catch (Exception ex) {
+            successMessage(ex.getMessage(), "Atención");
+            return;
+        }
+    }//GEN-LAST:event_jBtnMidificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField id;
     private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnMidificar;
     private javax.swing.JPanel jPnCentro;

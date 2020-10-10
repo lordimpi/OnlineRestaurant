@@ -12,14 +12,14 @@ package co.unicauca.onlinerestaurant.commons.domain;
 public class Admin extends User{
     
     
-        public Admin(String id, String firstName, String lastName, String address, String mobile, String email, String gender) {
+        public Admin(String id, String firstName, String lastName, String address, String mobile, String email, String rol) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.mobile = mobile;
         this.email = email;
-        this.gender = gender;
+        this.rol = rol;
     }
     
 
@@ -71,12 +71,12 @@ public class Admin extends User{
         this.email = email;
     }
 
-    public String getGender() {
-        return gender;
+    public String getRol() {
+        return rol;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
 

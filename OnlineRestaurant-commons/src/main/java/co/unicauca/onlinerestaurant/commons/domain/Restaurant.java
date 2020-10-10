@@ -23,18 +23,25 @@ public class Restaurant {
      */
     private String phone;
     /**
-     * Constructor parametrizado
-     * @param idRestaurant  id  
-     * @param NameRestaurant nombre
-     * @param addressRestaurant direccion
-     * @param phone telefono
+     *  id del menu
      */
-    public Restaurant(String idRestaurant, String NameRestaurant, String addressRestaurant, String phone) {
+    private String idmenu;
+    /**
+     * Constructor parametrizado 
+     * @param idRestaurant identificador del restaurante 
+     * @param NameRestaurant nombre del restaurante
+     * @param addressRestaurant direccion 
+     * @param phone telefono
+     * @param idmenu  id  del menu
+     */
+    public Restaurant(String idRestaurant, String NameRestaurant, String addressRestaurant, String phone, String idmenu) {
         this.idRestaurant = idRestaurant;
         this.NameRestaurant = NameRestaurant;
         this.addressRestaurant = addressRestaurant;
         this.phone = phone;
+        this.idmenu = idmenu;
     }
+    
     /**
      * Constructor por defecto
      */
@@ -74,5 +81,14 @@ public class Restaurant {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }      
+    }   
+
+    public String getIdmenu() {
+        return idmenu;
+    }
+
+    public void setIdmenu(String idmenu) {
+        this.idmenu = idmenu;
+    }
+    
 }

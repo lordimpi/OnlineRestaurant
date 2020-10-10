@@ -18,16 +18,16 @@ public class Customer extends User {
      * @param address dirección
      * @param mobile celular
      * @param email email
-     * @param gender sexo
+     * @param rol rol
      */
-    public Customer(String id, String firstName, String lastName, String address, String mobile, String email, String gender) {
+    public Customer(String id, String firstName, String lastName, String address, String mobile, String email, String rol) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.mobile = mobile;
         this.email = email;
-        this.gender = gender;
+        this.rol = rol;
     }
 
     /**

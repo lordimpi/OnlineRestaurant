@@ -165,7 +165,7 @@ public class CustomerAccessImplSockets implements ICustomerAccess {
         protocol.addParameter("lastName", customer.getLastName());
         protocol.addParameter("address", customer.getAddress());
         protocol.addParameter("email", customer.getEmail());
-        protocol.addParameter("gender", customer.getGender());
+        protocol.addParameter("gender", customer.getRol());
         protocol.addParameter("mobile", customer.getMobile());
 
         Gson gson = new Gson();

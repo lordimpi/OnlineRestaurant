@@ -10,6 +10,7 @@ import co.unicauca.onlinerestaurant.commons.domain.MainDish;
 import co.unicauca.onlinerestaurant.client.domain.services.MainDishService;
 import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
 import co.unicauca.onlinerestaurant.client.access.IMainDishAccess;
+import co.unicauca.onlinerestaurant.client.infra.Messages;
 
 /**
  *
@@ -130,6 +131,7 @@ public class GUIFindDishe extends javax.swing.JInternalFrame {
         MainDishService mainDishService = new MainDishService(service);
         if (id.equals("")) {
             jTxfId.requestFocus();
+            Messages.warningMessage("ERROR: El campo Id esta vacio.", "Warning");
             return;
         }
 
@@ -149,7 +151,7 @@ public class GUIFindDishe extends javax.swing.JInternalFrame {
     private void showData(MainDish mainDish) {
         jTxfNombre.setText(mainDish.getNameDishe());
         jTxfPrecio.setText(Double.toString(mainDish.getDishPrice()));
-        
+
     }
 
     public void clearControls() {

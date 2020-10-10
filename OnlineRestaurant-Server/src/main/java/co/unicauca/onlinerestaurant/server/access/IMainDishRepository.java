@@ -11,7 +11,7 @@ public interface IMainDishRepository {
 
     public MainDish findDish(String id);
 
-    public String createDish(MainDish dish);
+    public String createMainDish(String id,String name,String price);
 
     /**
      * Metodo encargado de actualizar plato
@@ -19,6 +19,8 @@ public interface IMainDishRepository {
      * @param id identificador del plato
      * @return cadena confirmando el estado
      */
-    public String updateDish(String id);
+    public void updateDish(String id,String name,String price);
+    
+    public void deleteDish(String id);
 
 }

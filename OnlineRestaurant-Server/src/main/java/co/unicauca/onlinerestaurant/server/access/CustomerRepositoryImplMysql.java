@@ -51,7 +51,7 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
                 customer.setLastName(res.getString("last_name"));
                 customer.setAddress(res.getString("address"));
                 customer.setMobile(res.getString("mobile"));
-                customer.setGender(res.getString("gender"));
+                customer.setRol(res.getString("gender"));
                 customer.setEmail(res.getString("email"));
 
             }
@@ -77,7 +77,7 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
             pstmt.setString(4, customer.getAddress());
             pstmt.setString(5, customer.getMobile());
             pstmt.setString(6, customer.getEmail());
-            pstmt.setString(7, customer.getGender());
+            pstmt.setString(7, customer.getRol());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -137,11 +137,11 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
                 Customer newCustomer = new Customer();
                 newCustomer.setId(res.getString("id"));
                 newCustomer.setFirstName(res.getString("firsName"));
-                newCustomer.setFirstName(res.getString("lastName"));
-                newCustomer.setFirstName(res.getString("address"));
-                newCustomer.setFirstName(res.getString("mobile"));
-                newCustomer.setFirstName(res.getString("email"));
-                newCustomer.setFirstName(res.getString("gender"));
+                newCustomer.setLastName(res.getString("lastName"));
+                newCustomer.setAddress(res.getString("address"));
+                newCustomer.setMobile(res.getString("mobile"));
+                newCustomer.setMobile(res.getString("email"));
+                newCustomer.setRol(res.getString("gender"));
                                
                 Customer.add(newCustomer);
             }

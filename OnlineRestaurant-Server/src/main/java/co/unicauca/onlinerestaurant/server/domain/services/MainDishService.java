@@ -26,11 +26,28 @@ public class MainDishService {
     public MainDishService(IMainDishRepository repo) {
         this.repo = repo;
     }
-
+    /**
+     * Metodo busqueda de plato principal
+     * @param id
+     * @return 
+     */
     public MainDish findMainDish(String id) {
         return repo.findDish(id);
     }
-
+    public void deleteMainDish(String id){
+        repo.deleteDish(id);
+    }
+    
+    /**
+     * Metodo encargado de actualizar un plato 
+     * @param id identificador
+     * @param name nombre
+     * @param price  precio 
+     */
+    public void updateMainDish(String id,String name,String price) {
+        repo.updateDish(id,name,price);
+    }
+    
     /**
      * Crea un nuevo mainDish. Aplica validaciones de negocio
      *
@@ -41,6 +58,7 @@ public class MainDishService {
         List<JsonError> errors = new ArrayList<>();
 
         String id = mainDish.getId_mainDishe();
+        String name = mainDish.getNameDishe();
         String precio = Double.toString(mainDish.getDishPrice());
         // Validaciones y reglas de negocio
         if (id.isEmpty() || mainDish.getNameDishe().isEmpty()
@@ -48,18 +66,12 @@ public class MainDishService {
             errors.add(new JsonError("400", "BAD_REQUEST", "id, nombre y precio son obligatorios. "));
         }
         // Que no esté repetido
-
-        MainDish dishSearched = this.findMainDish(id);
-        if (dishSearched != null) {
-            errors.add(new JsonError("400", "BAD_REQUEST", "El identificado ya existe. "));
-        }
-
         if (!errors.isEmpty()) {
             Gson gson = new Gson();
             String errorsJson = gson.toJson(errors);
             return errorsJson;
         }
-        return repo.createDish(mainDish);
+        return repo.createMainDish(id, name, precio);
     }
 
 }

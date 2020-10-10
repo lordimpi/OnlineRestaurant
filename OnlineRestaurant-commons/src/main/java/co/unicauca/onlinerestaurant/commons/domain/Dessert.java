@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.commons.domain;
 
 /**
  *
- * @author alejo
+ * @author Camilo Otaya Bravo
  */
-public class Dish_Dessert {
-        /**
+public class Dessert {
+    /**
      * Identificacion
      */
     private String id_Dish_Dessert;
@@ -23,6 +18,30 @@ public class Dish_Dessert {
      */
     private int cost_Dish_Dessert;
 
+    /**
+     * Constructor parametrizado id del postre nombre del postre costo del
+     * postre
+     *
+     * @param id_Dish_Dessert
+     * @param name_Dish_Dessert
+     * @param cost_Dish_Dessert
+     */
+    public Dessert(String id_Dish_Dessert, String name_Dish_Dessert, int cost_Dish_Dessert) {
+        this.id_Dish_Dessert = id_Dish_Dessert;
+        this.name_Dish_Dessert = name_Dish_Dessert;
+        this.cost_Dish_Dessert = cost_Dish_Dessert;
+    }
+
+    /**
+     * Constructor por defecto
+     */
+    public Dessert() {
+    }
+
+
+    /*
+    getters y setters
+     */
     public String getId_Dish_Dessert() {
         return id_Dish_Dessert;
     }
@@ -46,5 +65,5 @@ public class Dish_Dessert {
     public void setCost_Dish_Dessert(int cost_Dish_Dessert) {
         this.cost_Dish_Dessert = cost_Dish_Dessert;
     }
-    
+
 }
