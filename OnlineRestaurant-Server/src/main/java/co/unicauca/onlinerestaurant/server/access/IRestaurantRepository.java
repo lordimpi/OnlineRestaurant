@@ -19,10 +19,16 @@ public interface IRestaurantRepository {
     public Restaurant findRestaurant(String id);
     /**
      * metodo encargado de crear un restaurante
-     * @param Restaurant de tipo restaurant 
+     * @param restaurant de tipo restaurant 
      * @return cadena 
      */
     public String createRestaurant(Restaurant restaurant);
+    /**
+     *  Metodo encargado de actualizar un restaurante 
+     * @param id identificador de restaurante
+     * @return 
+     */
+    public String updateDish(String id);
     /**
      * Metodo encargado de remover un restaurante 
      * @param id identificador 
