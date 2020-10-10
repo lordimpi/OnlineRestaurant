@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.client.presentation;
 
 import co.unicauca.onlinerestaurant.client.access.Factory;
@@ -13,6 +8,7 @@ import co.unicauca.onlinerestaurant.client.access.IMainDishAccess;
 import co.unicauca.onlinerestaurant.client.infra.Messages;
 
 /**
+ * Crea un formulario para buscar un plato en la base de datos
  *
  * @author Santiago Acuña
  */
@@ -117,11 +113,21 @@ public class GUIFindDishe extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton para cerrar el formulario buscar plato
+     *
+     * @param evt Evento del boton
+     */
     private void jBtnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCerrarActionPerformed
 
         this.doDefaultCloseAction();
     }//GEN-LAST:event_jBtnCerrarActionPerformed
 
+    /**
+     * Boton encargado de buscar un plato por id en la base de datos
+     *
+     * @param evt Evento del boton
+     */
     private void jBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnBuscarActionPerformed
 
         String id = jTxfId.getText().trim();
@@ -148,12 +154,21 @@ public class GUIFindDishe extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jBtnBuscarActionPerformed
 
+    /**
+     * Metodo encargado de mostrar los datos del plato principal en el
+     * formulario
+     *
+     * @param mainDish Objeto plato principal para mostrar datos
+     */
     private void showData(MainDish mainDish) {
         jTxfNombre.setText(mainDish.getNameDishe());
         jTxfPrecio.setText(Double.toString(mainDish.getDishPrice()));
 
     }
 
+    /**
+     * Metodo encargado de limpiar los controles del formulario
+     */
     public void clearControls() {
 
         jTxfId.setText("");

@@ -34,11 +34,11 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPnNorte = new javax.swing.JPanel();
+        id = new javax.swing.JTextField();
         jPnSur = new javax.swing.JPanel();
         jBtnMidificar = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
         jPnCentro = new javax.swing.JPanel();
-        id = new javax.swing.JTextField();
 
         setClosable(true);
         setMaximizable(true);
@@ -54,11 +54,17 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
         jPnNorte.setLayout(jPnNorteLayout);
         jPnNorteLayout.setHorizontalGroup(
             jPnNorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 491, Short.MAX_VALUE)
+            .addGroup(jPnNorteLayout.createSequentialGroup()
+                .addGap(170, 170, 170)
+                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(230, Short.MAX_VALUE))
         );
         jPnNorteLayout.setVerticalGroup(
             jPnNorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnNorteLayout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         getContentPane().add(jPnNorte, java.awt.BorderLayout.PAGE_START);
@@ -89,17 +95,11 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
         jPnCentro.setLayout(jPnCentroLayout);
         jPnCentroLayout.setHorizontalGroup(
             jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPnCentroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(378, Short.MAX_VALUE))
+            .addGap(0, 493, Short.MAX_VALUE)
         );
         jPnCentroLayout.setVerticalGroup(
             jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPnCentroLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+            .addGap(0, 207, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPnCentro, java.awt.BorderLayout.CENTER);
