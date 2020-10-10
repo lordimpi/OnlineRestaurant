@@ -95,4 +95,27 @@ public class Factory {
 
         return result;
     }
+
+    /**
+     * Método que crea una instancia concreta de la jerarquia IDessertRepository
+     *
+     * @return una clase hija de la abstracción IRepositorioPostres
+     */
+    public IDessertRepository getRepository4() {
+        String type = Utilities.loadProperty("dessert.repository");
+        if (type.isEmpty()) {
+            type = "default";
+        }
+        IDessertRepository result = null;
+
+        switch (type) {
+            case "default":
+                break;
+            case "mysql":
+                result = new DessertRepositoryImplMysql();
+                break;
+        }
+
+        return result;
+    }
 }

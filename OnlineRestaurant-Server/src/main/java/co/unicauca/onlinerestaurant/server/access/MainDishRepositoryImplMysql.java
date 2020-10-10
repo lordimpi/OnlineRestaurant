@@ -22,8 +22,8 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
     private Connection conn;
 
     public MainDishRepositoryImplMysql() {
-    }     
-    
+    }
+
     /**
      * Busca en la bd un plato
      *
@@ -32,7 +32,7 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
      */
     @Override
     public MainDish findDish(String id) {
-            
+
         MainDish mainDish = null;
 
         this.connect();
@@ -53,26 +53,47 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Plato de la base de datos", ex);
         }
         return mainDish;
-        
+
     }
 
     @Override
-    public String createDish(MainDish dish) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String createMainDish(String id, String name, String cost) {
+
+        MainDish mainDish = null;
+
+        Double price = Double.parseDouble(cost);
+
+        this.connect();
+        try {
+            String sql = "INSERT INTO maindish(id_dish, dish_name, dish_price) VALUES (?,?,?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.setString(2, name);
+            pstmt.setDouble(3, price);
+            pstmt.executeUpdate();
+            pstmt.close();
+            this.disconnect();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Plato de la base de datos", ex);
+        }
+
+        return "";
     }
+
     /**
-     * Permite actualizar un plato en la base de datos 
+     * Permite actualizar un plato en la base de datos
+     *
      * @param id identificador del plato
      * @return cadena
      */
     @Override
-    public void updateDish(String id,String name,String price) {
+    public void updateDish(String id, String name, String price) {
         //UPDATE `maindish` SET `id_dish`=[value-1],`dish_name`=[value-2],`dish_price`=[value-3] WHERE 1
-        Double DPrice=Double.parseDouble(price);
+        Double DPrice = Double.parseDouble(price);
         //System.out.println("el id "+id+" el nombre "+name+" el precio "+price+" el precio en entero "+DPrice);
         this.connect();
         try {
-            String sql = "UPDATE maindish SET dish_name="+"?"+", dish_price="+"?"+"where id_dish="+"?";
+            String sql = "UPDATE maindish SET dish_name=" + "?" + ", dish_price=" + "?" + "where id_dish=" + "?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, name);
             pstmt.setDouble(2, DPrice);
@@ -80,11 +101,12 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
-         }  catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al actualizar Plato de la base de datos", ex);
-        }    
+        }
     }
-        /**
+
+    /**
      * Permite hacer la conexion con la base de datos
      *
      * @return
@@ -116,6 +138,4 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
         }
     }
 
-    
-    
 }

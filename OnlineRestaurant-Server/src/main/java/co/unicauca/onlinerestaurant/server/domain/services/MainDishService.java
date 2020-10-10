@@ -40,7 +40,6 @@ public class MainDishService {
         repo.updateDish(id,name,price);
     }
     
-
     /**
      * Crea un nuevo mainDish. Aplica validaciones de negocio
      *
@@ -51,6 +50,7 @@ public class MainDishService {
         List<JsonError> errors = new ArrayList<>();
 
         String id = mainDish.getId_mainDishe();
+        String name = mainDish.getNameDishe();
         String precio = Double.toString(mainDish.getDishPrice());
         // Validaciones y reglas de negocio
         if (id.isEmpty() || mainDish.getNameDishe().isEmpty()
@@ -58,18 +58,12 @@ public class MainDishService {
             errors.add(new JsonError("400", "BAD_REQUEST", "id, nombre y precio son obligatorios. "));
         }
         // Que no esté repetido
-
-        MainDish dishSearched = this.findMainDish(id);
-        if (dishSearched != null) {
-            errors.add(new JsonError("400", "BAD_REQUEST", "El identificado ya existe. "));
-        }
-
         if (!errors.isEmpty()) {
             Gson gson = new Gson();
             String errorsJson = gson.toJson(errors);
             return errorsJson;
         }
-        return repo.createDish(mainDish);
+        return repo.createMainDish(id, name, precio);
     }
 
 }
