@@ -32,6 +32,10 @@ public class MainDishService {
         return service.findMainDish(id);
 
     }
+    public void deleteMainDish(String id) throws Exception {
+        service.deleteMainDish(id);
+
+    }
 
     public String createMainDish(MainDish mainDish) throws Exception {
         return service.createMainDish(mainDish);

@@ -188,6 +188,11 @@ public class OnlineRestaurantServerSocket implements Runnable {
                     // Agregar un customer    
                     processPostMainDish(protocolRequest);
                 }
+                
+                if (protocolRequest.getAction().equals("delete")) {
+                    // Eliminar un customer    
+                    processdeleteMainDish(protocolRequest);
+                }
                 break;
         }
 
@@ -220,6 +225,11 @@ public class OnlineRestaurantServerSocket implements Runnable {
         } else {
             output.println(objectToJSONMD(mainDish));
         }
+    }
+     private void processdeleteMainDish(Protocol protocolRequest) {
+        // Extraer el identificador del primer parámetro
+        String id = protocolRequest.getParameters().get(0).getValue();
+        mdService.deleteMainDish(id);
     }
 
     /**

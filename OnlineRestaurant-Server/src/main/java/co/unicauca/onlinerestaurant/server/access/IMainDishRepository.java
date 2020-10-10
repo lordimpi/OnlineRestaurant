@@ -12,5 +12,7 @@ public interface IMainDishRepository {
     public MainDish findDish(String id);
 
     public String createDish(MainDish dish);
+    
+    public void deleteDish(String id);
 
 }

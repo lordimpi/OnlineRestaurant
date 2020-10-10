@@ -58,6 +58,25 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
         }
 
     }
+    @Override
+    public void deleteMainDish(String id) throws Exception {
+
+        String jsonResponse = null;
+        String requestJson = deleteMainDishRequestJson(id);
+        try {
+            mySocket.connect();
+            jsonResponse = mySocket.sendStream(requestJson);
+            mySocket.closeStream();
+            mySocket.disconnect();
+
+        } catch (IOException ex) {
+            Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
+        }
+        if (jsonResponse == null) {
+            throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
+        } 
+    }
+
 
     @Override
     public String createMainDish(MainDish mainDish) throws Exception {
@@ -137,6 +156,18 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
         return requestJson;
     }
 
+    private String deleteMainDishRequestJson(String idMainDish) {
+
+        Protocol protocol = new Protocol();
+        protocol.setResource("maindish");
+        protocol.setAction("delete");
+        protocol.addParameter("id_dish", idMainDish);
+
+        Gson gson = new Gson();
+        String requestJson = gson.toJson(protocol);
+
+        return requestJson;
+    }
     /**
      * Crea la solicitud json de creación del maindish para ser enviado por el
      * socket

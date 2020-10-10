@@ -16,6 +16,7 @@ public interface IMainDishAccess {
      * @throws Exception error al buscar un plato
      */
     public MainDish findMainDish(String id) throws Exception;
+    public void deleteMainDish(String id) throws Exception;
 
     /**
      * Crea un Customer
@@ -25,5 +26,6 @@ public interface IMainDishAccess {
      * @throws Exception error crear el plato
      */
     public String createMainDish(MainDish mainDish) throws Exception;
+    
     
 }
