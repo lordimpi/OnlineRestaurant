@@ -34,6 +34,9 @@ public class MainDishService {
     public MainDish findMainDish(String id) {
         return repo.findDish(id);
     }
+    public void deleteMainDish(String id){
+        repo.deleteDish(id);
+    }
     
    
     public void updateMainDish(String id,String name,String price) {

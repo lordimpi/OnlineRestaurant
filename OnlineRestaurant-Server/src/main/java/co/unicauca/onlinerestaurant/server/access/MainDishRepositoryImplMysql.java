@@ -79,6 +79,23 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
 
         return "";
     }
+    @Override
+    public void deleteDish(String id) {
+            
+        MainDish mainDish = null;
+
+        this.connect();
+        try {
+            String sql = "DELETE FROM maindish where id_dish=? ";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.executeUpdate();
+            pstmt.close();
+            this.disconnect();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Plato de la base de datos", ex);
+        }
+    }
 
     /**
      * Permite actualizar un plato en la base de datos

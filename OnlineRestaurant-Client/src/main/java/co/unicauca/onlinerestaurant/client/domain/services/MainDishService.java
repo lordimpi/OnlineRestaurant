@@ -19,8 +19,8 @@ public class MainDishService {
     public MainDishService(IMainDishAccess service) {
         this.service = service;
     }
-    
-        /**
+
+    /**
      * Busca un plato en el servidor remoto
      *
      * @param id identificador del plato
@@ -32,10 +32,13 @@ public class MainDishService {
         return service.findMainDish(id);
 
     }
-    
-     public MainDish updateMainDish(String id,String name,String price) throws Exception {
-        return service.updateMainDish(id, name, price);
 
+    public MainDish updateMainDish(String id, String name, String price) throws Exception {
+        return service.updateMainDish(id, name, price);
+    }
+
+    public void deleteMainDish(String id) throws Exception {
+        service.deleteMainDish(id);
     }
 
     public String createMainDish(MainDish mainDish) throws Exception {

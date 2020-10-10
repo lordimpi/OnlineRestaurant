@@ -31,12 +31,14 @@ import co.unicauca.onlinerestaurant.server.access.IDessertRepository;
  * Servidor Socket que está escuchando permanentemente solicitudes de los
  * clientes. Cada solicitud la atiende en un hilo de ejecución
  *
- * <<<<<<< HEAD
- * @a
+ * <<<<<<< HEAD @a
  *
- * uthor Santiago Acuña, Ximena Gallego =======
- * @author Santiago Acuña y Camilo Otaya Bravo >>>>>>>
- * 165f2c911a32ad6e34eb3acf82f31d06fbe809a4
+ *
+ * uthor Santiago Acuña, Ximena Gallego ======= @author Santiago Acuña y Camilo
+ * Otaya Bravo >>>>>>>
+ * 165f
+ *
+ * 2c911a32ad6e34eb3acf82f31d06fbe809a4
  */
 public class OnlineRestaurantServerSocket implements Runnable {
 
@@ -217,7 +219,11 @@ public class OnlineRestaurantServerSocket implements Runnable {
                     // Agregar un customer    
                     processPostMainDish(protocolRequest);
                 }
-                break;            
+                if (protocolRequest.getAction().equals("delete")) {
+                    // Eliminar un customer    
+                    processdeleteMainDish(protocolRequest);
+                }
+                break;
             case "dishentry":
                 if (protocolRequest.getAction().equals("get")) {
                     // Consultar un plato de entrada
@@ -271,6 +277,12 @@ public class OnlineRestaurantServerSocket implements Runnable {
         } else {
             output.println(objectToJSONMD(mainDish));
         }
+    }
+
+    private void processdeleteMainDish(Protocol protocolRequest) {
+        // Extraer el identificador del primer parámetro
+        String id = protocolRequest.getParameters().get(0).getValue();
+        mdService.deleteMainDish(id);
     }
 
     private void processSetMainDish(Protocol protocolRequest) {
@@ -461,8 +473,8 @@ public class OnlineRestaurantServerSocket implements Runnable {
     }
 
     /**
-     * Convierte el objeto DishEntry a json para que el servidor lo
-     * envie como respuesta por el socket
+     * Convierte el objeto DishEntry a json para que el servidor lo envie como
+     * respuesta por el socket
      *
      * @param dishEntry plato de entrada
      * @return DishEntry en formato json
@@ -475,13 +487,12 @@ public class OnlineRestaurantServerSocket implements Runnable {
 
     /**
      * Convierte el objeto Dessert a json para que el servidor lo envie como
-    * respuesta por el socket
-    *
-     * @param
-    Dessert
-    * @
-
-    return
+     * respuesta por el socket
+     *
+     * @param Dessert
+     * @
+     *
+     * return
      */
     private String objectToJSOND(Dessert Dessert) {
         Gson gson = new Gson();

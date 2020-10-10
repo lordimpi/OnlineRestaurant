@@ -7,7 +7,7 @@ import co.unicauca.onlinerestaurant.commons.domain.MainDish;
  * @author Santiago Acuña
  */
 public interface IMainDishAccess {
-    
+
     /**
      * Buscar un cliente utilizando un socket
      *
@@ -16,14 +16,18 @@ public interface IMainDishAccess {
      * @throws Exception error al buscar un plato
      */
     public MainDish findMainDish(String id) throws Exception;
-    
+
     /**
      * Actualiza un MainDish
+     *
      * @param id identificador del plato
      * @return objeto plato
      * @throws Exception error al actualizar el plato
      */
-     public MainDish updateMainDish(String id,String name,String price) throws Exception;
+    public MainDish updateMainDish(String id, String name, String price) throws Exception;
+
+    public void deleteMainDish(String id) throws Exception;
+
     /**
      * Crea un Customer
      *
@@ -32,5 +36,5 @@ public interface IMainDishAccess {
      * @throws Exception error crear el plato
      */
     public String createMainDish(MainDish mainDish) throws Exception;
-    
+
 }
