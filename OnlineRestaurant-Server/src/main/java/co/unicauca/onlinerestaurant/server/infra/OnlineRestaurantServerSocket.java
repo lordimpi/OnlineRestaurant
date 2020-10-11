@@ -210,7 +210,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
                     processGetMainDish(protocolRequest);
                 }
 
-                if (protocolRequest.getAction().equals("set")) {
+                if (protocolRequest.getAction().equals("put")) {
                     // Consultar un customer
                     processSetMainDish(protocolRequest);
                 }
@@ -257,10 +257,12 @@ public class OnlineRestaurantServerSocket implements Runnable {
      */
     private void processGetCustomer(Protocol protocolRequest) {
         // Extraer la cedula del primer parámetro
-        String id = protocolRequest.getParameters().get(0).getValue();
-        Customer customer = service.findCustomer(id);
+        String name = protocolRequest.getParameters().get(0).getValue();
+         String pws = protocolRequest.getParameters().get(1).getValue();
+        
+        Customer customer = service.findCustomer(name,pws);
         if (customer == null) {
-            String errorJson = generateNotFoundErrorJson("Cliente no encontrado. Cédula no existe");
+            String errorJson = generateNotFoundErrorJson("Usuario no registrado");
             output.println(errorJson);
         } else {
             output.println(objectToJSON(customer));

@@ -17,16 +17,28 @@ public interface ICustomerRepository {
      * @return objeto de tipo Customer
      */
     public Customer findCustomer(String id);
+
+    /**
+     * Buscar con nombre y contraseña
+     *
+     * @param name nombre
+     * @param pws contraseña
+     * @return
+     */
+    public Customer findCustomer(String name, String pws);
+
     /**
      * metodo encargado de crear un cliente
+     *
      * @param customer
      * @return una cadena información
      */
     public String createCustomer(Customer customer);
-   
+
     /**
-     * lista de clientes 
-     * @return 
+     * lista de clientes
+     *
+     * @return
      */
     public List<Customer> list();
 

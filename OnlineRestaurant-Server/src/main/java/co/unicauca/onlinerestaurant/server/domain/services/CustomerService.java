@@ -41,6 +41,17 @@ public class CustomerService {
     }
 
     /**
+     * busca cliente
+     *
+     * @param name nombre
+     * @param pws contraseña
+     * @return objeto tipo customer
+     */
+    public Customer findCustomer(String name, String pws) {
+        return repo.findCustomer(name);
+    }
+
+    /**
      * Crea un nuevo customer. Aplica validaciones de negocio
      *
      * @param customer cliente
@@ -70,7 +81,7 @@ public class CustomerService {
         }
         // Que no esté repetido
 
-        Customer customerSearched = this.findCustomer(customer.getId());
+        Customer customerSearched = this.findCustomer(customer.getFirstName());
         if (customerSearched != null) {
             errors.add(new JsonError("400", "BAD_REQUEST", "La cédula ya existe. "));
         }
@@ -82,7 +93,5 @@ public class CustomerService {
         }
         return repo.createCustomer(customer);
     }
-
-    
 
 }

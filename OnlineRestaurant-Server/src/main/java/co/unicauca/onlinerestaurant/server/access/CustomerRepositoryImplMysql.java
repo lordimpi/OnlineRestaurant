@@ -41,20 +41,20 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
 
         this.connect();
         try {
-            String sql = "SELECT * from customers where id=? ";
+            String sql = "SELECT * from users where first_name=? ";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, id);
             ResultSet res = pstmt.executeQuery();
             if (res.next()) {
                 customer = new Customer();
-                customer.setId(res.getString("id"));
+                customer.setId(res.getString("id_user"));
                 customer.setFirstName(res.getString("first_name"));
                 customer.setLastName(res.getString("last_name"));
                 customer.setAddress(res.getString("address"));
                 customer.setMobile(res.getString("mobile"));
-                customer.setRol(res.getString("gender"));
+                customer.setRol(res.getString("rol"));
                 customer.setEmail(res.getString("email"));
-
+                customer.setPws(res.getString("pws"));
             }
             pstmt.close();
             this.disconnect();
@@ -64,9 +64,50 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
         return customer;
     }
 
+    /**
+     * Busca en la bd un customer con nombre y password
+     *
+     * @param name
+     * @param pws
+     * @return
+     */
+    @Override
+    public Customer findCustomer(String name, String pws) {
+        Customer customer = null;
+
+        this.connect();
+        try {
+            String sql = "SELECT * from users where first_name=? ";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, name);
+            ResultSet res = pstmt.executeQuery();
+            if (res.next()) {
+                customer = new Customer();
+                customer.setId(res.getString("id_user"));
+                customer.setFirstName(res.getString("first_name"));
+                customer.setLastName(res.getString("last_name"));
+                customer.setAddress(res.getString("address"));
+                customer.setMobile(res.getString("mobile"));
+                customer.setRol(res.getString("rol"));
+                customer.setEmail(res.getString("email"));
+                customer.setPws(res.getString("pws"));
+            }
+            pstmt.close();
+            this.disconnect();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Customer de la base de datos", ex);
+        }
+
+        if (customer.getPws() == pws) {
+            return customer;
+        } else {
+            return null;
+        }
+    }
+
     @Override
     public String createCustomer(Customer customer) {
-      
+
         try {
 
             this.connect();
@@ -88,7 +129,7 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
         }
         return customer.getId();
 
-    }   
+    }
 
     @Override
     public boolean deleteCustomer(int id) {
@@ -119,8 +160,8 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
         }
         return -1;
     }
-    
-     /**
+
+    /**
      * Metodo publico encargado de lista los Objetos de tipo Customers
      *
      * @return: objetos Customers
@@ -133,7 +174,7 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
             String sql = "SELECT id, firstName,lastName,address, mobile,email,gender FROM customers";
             this.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            ResultSet res = pstmt.executeQuery();            
+            ResultSet res = pstmt.executeQuery();
             while (res.next()) {
                 Customer newCustomer = new Customer();
                 newCustomer.setId(res.getString("id"));
@@ -143,7 +184,7 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
                 newCustomer.setMobile(res.getString("mobile"));
                 newCustomer.setMobile(res.getString("email"));
                 newCustomer.setRol(res.getString("gender"));
-                               
+
                 Customer.add(newCustomer);
             }
             //this.disconnect();
@@ -165,7 +206,5 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.FINER, "Error al cerrar Connection", ex);
         }
     }
-
-    
 
 }

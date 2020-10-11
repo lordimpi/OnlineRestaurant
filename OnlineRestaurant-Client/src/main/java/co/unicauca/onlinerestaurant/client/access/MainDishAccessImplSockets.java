@@ -198,7 +198,7 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
 
         Protocol protocol = new Protocol();
         protocol.setResource("maindish");
-        protocol.setAction("set");
+        protocol.setAction("put");
         protocol.addParameter("id_dish", id);
         protocol.addParameter("name", name);
         protocol.addParameter("price", price);

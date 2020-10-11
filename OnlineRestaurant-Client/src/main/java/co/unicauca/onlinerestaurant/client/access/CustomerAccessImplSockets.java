@@ -61,6 +61,42 @@ public class CustomerAccessImplSockets implements ICustomerAccess {
         }
 
     }
+    /**
+     * Busca un Customer. Utiliza socket para pedir el servicio al servidor
+     * @param name
+     * @param pws
+     * @return
+     * @throws Exception 
+     */
+    
+    @Override
+    public Customer findCustomer(String name,String pws) throws Exception {
+        String jsonResponse = null;
+        String requestJson = findCustomerRequestJson(name,pws);
+        try {
+            mySocket.connect();
+            jsonResponse = mySocket.sendStream(requestJson);
+            mySocket.closeStream();
+            mySocket.disconnect();
+
+        } catch (IOException ex) {
+            Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
+        }
+        if (jsonResponse == null) {
+            throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
+        } else {
+            if (jsonResponse.contains("error")) {
+                //Devolvió algún error
+                Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
+                throw new Exception(extractMessages(jsonResponse));
+            } else {
+                //Encontró el customer
+                Customer customer = jsonToCustomer(jsonResponse);
+                return customer;
+            }
+        }
+
+    }
 
     /**
      * Crea un Customer. Utiliza socket para pedir el servicio al servidor
@@ -139,7 +175,28 @@ public class CustomerAccessImplSockets implements ICustomerAccess {
         Protocol protocol = new Protocol();
         protocol.setResource("customer");
         protocol.setAction("get");
-        protocol.addParameter("id", idCustomer);
+        protocol.addParameter("id_user", idCustomer);
+
+        Gson gson = new Gson();
+        String requestJson = gson.toJson(protocol);
+
+        return requestJson;
+    }
+    /**
+     * Crea una solicitud json para ser enviada por el socket
+     *
+     * @param name nombre
+     * @param pws constraseña
+     * @return 
+     */
+    
+    private String findCustomerRequestJson(String name,String pws) {
+
+        Protocol protocol = new Protocol();
+        protocol.setResource("customer");
+        protocol.setAction("get");
+        protocol.addParameter("first_name", name);
+        protocol.addParameter("pws", pws);
 
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);
