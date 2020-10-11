@@ -1,5 +1,6 @@
 package co.unicauca.onlinerestaurant.server.access;
 
+import co.unicauca.onlinerestaurant.commons.domain.Menu;
 import co.unicauca.onlinerestaurant.commons.domain.Restaurant;
 import co.unicauca.onlinerestaurant.commons.infra.Utilities;
 import java.sql.Connection;
@@ -40,7 +41,7 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
     @Override
     public Restaurant findRestaurant(String id) {
         Restaurant restaurant = null;
-
+        Menu wmenu=null;
         this.connect();
         try {
             String sql = "SELECT * from restaurant where id=? ";
@@ -53,7 +54,7 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
                 restaurant.setNameRestaurant(res.getString("nameres"));
                 restaurant.setAddressRestaurant(res.getString("addressres"));
                 restaurant.setAddressRestaurant(res.getString("phoneres"));
-                restaurant.setIdmenu(res.getString("idmenu"));
+              //  restaurant.setIdmenu(res.getString("idmenu"));
 
             }
             pstmt.close();
@@ -81,7 +82,7 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
             pstmt.setString(2, restaurant.getNameRestaurant());
             pstmt.setString(3, restaurant.getAddressRestaurant());
             pstmt.setString(4, restaurant.getPhone());
-            pstmt.setString(5, restaurant.getIdmenu());
+          //  pstmt.setString(5, restaurant.getIdmenu());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -166,7 +167,7 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
                 newrestaurant.setNameRestaurant(res.getString("nameres"));
                 newrestaurant.setAddressRestaurant(res.getString("addressres"));
                 newrestaurant.setPhone(res.getString("phoneres"));
-                newrestaurant.setIdmenu(res.getString("idmenu"));
+               // newrestaurant.setIdmenu(res.getString("idmenu"));
 
                 restaurants.add(newrestaurant);
             }

@@ -137,4 +137,22 @@ public class Factory {
         return result;
     }
     
+    public IMenuRepository getRepositoryMenu() {
+        String type = Utilities.loadProperty("menu.repository");
+        if (type.isEmpty()) {
+            type = "default";
+        }
+        IMenuRepository result = null;
+
+        switch (type) {
+            case "default":
+                break;
+            case "mysql":
+                result = new MenuRepositoryImplMysql();
+                break;
+        }
+        return result;
+    }
+    
+    
 }
