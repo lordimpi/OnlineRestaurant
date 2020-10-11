@@ -25,6 +25,13 @@ public interface IRestaurantAccess {
      * @return devuelve el del restaurante creado
      * @throws Exception error crear el restaurante
      */
-    public String createCustomer(Restaurant restaurant) throws Exception;
+    public String createRestaurant(Restaurant restaurant) throws Exception;
+
+    /**
+     * Lista todos los restaurantes
+     * @return Lista de restaurantes
+     * @throws java.lang.Exception
+     */
+    public java.util.List<Restaurant> list() throws Exception;
 
 }

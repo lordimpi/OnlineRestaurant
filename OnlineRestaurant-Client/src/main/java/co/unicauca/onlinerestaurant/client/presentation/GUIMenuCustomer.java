@@ -32,6 +32,7 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
 
     public GUIMenuCustomer() {
         initComponents();
+        this.BtnMenus.setVisible(false);
     }
 
     /**
@@ -296,6 +297,7 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         resetColor(BtnHomePage);
         resetColor(BtnRestaurant);
         setColor(BtnMenus);
+        
     }//GEN-LAST:event_BtnMenusMousePressed
 
     private void BtnRestaurantMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRestaurantMousePressed
