@@ -117,5 +117,24 @@ public class Factory {
         }
 
         return result;
+    }    
+
+    public IRestaurantRepository getRepository5() {
+        String type = Utilities.loadProperty("restaurant.repository");
+        if (type.isEmpty()) {
+            type = "default";
+        }
+        IRestaurantRepository result = null;
+
+        switch (type) {
+            case "default":
+                break;
+            case "mysql":
+                result = new RestaurantRepositoryImplMysql();
+                break;
+        }
+
+        return result;
     }
+    
 }

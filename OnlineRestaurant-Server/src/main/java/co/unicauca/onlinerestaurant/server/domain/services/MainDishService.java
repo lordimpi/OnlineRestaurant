@@ -38,7 +38,12 @@ public class MainDishService {
         repo.deleteDish(id);
     }
     
-   
+    /**
+     * Metodo encargado de actualizar un plato 
+     * @param id identificador
+     * @param name nombre
+     * @param price  precio 
+     */
     public void updateMainDish(String id,String name,String price) {
         repo.updateDish(id,name,price);
     }

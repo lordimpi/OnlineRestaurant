@@ -5,7 +5,9 @@ import co.unicauca.onlinerestaurant.commons.infra.Utilities;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,37 +17,71 @@ import java.util.logging.Logger;
  *
  * @author Ximena Gallego
  */
-public class RestaurantRepositoryImplMysql implements IRestaurantRepository{
+public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
+
     /**
      * Conección con Mysql
      */
     private Connection conn;
+
     /**
-     * Constructor por defecto 
+     * Constructor por defecto
      */
     public RestaurantRepositoryImplMysql() {
 
     }
-   
+
+    /**
+     * Metodo encargado de buscar un restaurante
+     *
+     * @param id identificador del restaurante
+     * @return objeto de tipo restaurante
+     */
     @Override
     public Restaurant findRestaurant(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Restaurant restaurant = null;
+
+        this.connect();
+        try {
+            String sql = "SELECT * from restaurant where id=? ";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            ResultSet res = pstmt.executeQuery();
+            if (res.next()) {
+                restaurant = new Restaurant();
+                restaurant.setIdRestaurant(res.getString("idres"));
+                restaurant.setNameRestaurant(res.getString("nameres"));
+                restaurant.setAddressRestaurant(res.getString("addressres"));
+                restaurant.setAddressRestaurant(res.getString("phoneres"));
+                restaurant.setIdmenu(res.getString("idmenu"));
+
+            }
+            pstmt.close();
+            this.disconnect();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Restauran de la base de datos", ex);
+        }
+        return restaurant;
     }
 
+    /**
+     * Metodo que permite crear un restaurante
+     *
+     * @param restaurant restaurante
+     * @return cadena
+     */
     @Override
     public String createRestaurant(Restaurant restaurant) {
-           try {
+        try {
 
             this.connect();
-            String sql = "INSERT INTO Restaurant(idRestaurant, restaurantName, restaurantDirection, phone) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO Restaurant(idRes, nameres,addressres, phoneres,idmenu) VALUES (?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-//            pstmt.setInt(1, restauran.getId());
-//            pstmt.setString(2, customer.getFirstName());
-//            pstmt.setString(3, customer.getLastName());
-//            pstmt.setString(4, customer.getAddress());
-//            pstmt.setString(5, customer.getMobile());
-//            pstmt.setString(6, customer.getEmail());
-//            pstmt.setString(7, customer.getGender());
+            pstmt.setString(1, restaurant.getIdRestaurant());
+            pstmt.setString(2, restaurant.getNameRestaurant());
+            pstmt.setString(3, restaurant.getAddressRestaurant());
+            pstmt.setString(4, restaurant.getPhone());
+            pstmt.setString(5, restaurant.getIdmenu());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -53,19 +89,95 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository{
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al insertar el registro de restaurnat", ex);
         }
-        return restaurant.getId();
+        return restaurant.getIdRestaurant();
     }
 
+    /**
+     * Metodo que perimite para actualizar un restaurante
+     *
+     * @param id identificador del restaurante
+     * @param name nombre del restaurante
+     * @param address direcion
+     * @param phone telefono
+     * @param idmenu id del menu
+     * @return
+     */
+    @Override
+    public void updateRestaurant(String id, String name, String address, String phone, String idmenu) {
+
+        this.connect();
+        try {
+            String sql = "UPDATE restaurant SET nameres=" + "?" + ", addressres=" + "?" + ",phoneres=" + "?" + ", idmenu=" + "?" + "where idres=" + "?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, name);
+            pstmt.setString(2, address);
+            pstmt.setString(3, phone);
+            pstmt.setString(4, idmenu);
+            pstmt.executeUpdate();
+            pstmt.close();
+            this.disconnect();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al actualizar Restaurante en la base de datos", ex);
+        }
+    }
+
+    /**
+     * Metodo encargado de eliminara un restaurante
+     *
+     * @param id
+     * @return
+     */
     @Override
     public boolean removeRestaurant(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+
+            this.connect();
+            String sql = "DELETE FROM Restaurant WHERE= ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.executeUpdate();
+            pstmt.close();
+            this.disconnect();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al Eliminar un registro de restaurnat", ex);
+        }
+        return false;
     }
 
+    /**
+     * metodo que perimte listar los restaurantes
+     *
+     * @return list
+     */
     @Override
     public List<Restaurant> list() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Restaurant> restaurant = new ArrayList<>();
+        try {
+
+            String sql = "SELECT * FROM restaurant";
+            this.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet res = pstmt.executeQuery();
+            while (res.next()) {
+                Restaurant newrestaurant = new Restaurant();
+
+                newrestaurant.setIdRestaurant("idres");
+                newrestaurant.setIdRestaurant("nameres");
+                newrestaurant.setIdRestaurant("addressres");
+                newrestaurant.setIdRestaurant("phoneres");
+
+                restaurant.add(newrestaurant);
+            }
+            //this.disconnect();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al Selecionar los datos de la tabla restaurant de la base de datos", ex);
+        }
+        return restaurant;
     }
-     /**
+
+    /**
      * Permite hacer la conexion con la base de datos
      *
      * @return
@@ -83,8 +195,9 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository{
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Customer de la base de datos", ex);
         }
         return -1;
-        
+
     }
+
     /**
      * Cierra la conexion con la base de datos
      *
@@ -96,4 +209,5 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository{
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.FINER, "Error al cerrar Connection", ex);
         }
     }
+
 }
