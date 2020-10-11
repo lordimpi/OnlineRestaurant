@@ -3,7 +3,7 @@ package co.unicauca.onlinerestaurant.client.access;
 import co.unicauca.onlinerestaurant.commons.domain.Customer;
 
 /**
- * Interface que define los servicios de persistencia de Clientes de la agencia
+ * Interface que define los servicios de persistencia de Clientes del restaurante
  *
  * @author Santiago Acuña
  */
