@@ -5,14 +5,20 @@
  */
 package co.unicauca.onlinerestaurant.client.presentation;
 
-import co.unicauca.onlinerestaurant.client.domain.User;
+import co.unicauca.onlinerestaurant.client.access.Factory;
+import co.unicauca.onlinerestaurant.client.access.ICustomerAccess;
+import co.unicauca.onlinerestaurant.client.domain.services.CustomerService;
+import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
 import static co.unicauca.onlinerestaurant.client.infra.Messages.warningMessage;
+import co.unicauca.onlinerestaurant.commons.domain.Customer;
+import co.unicauca.onlinerestaurant.commons.domain.MainDish;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import static jdk.nashorn.internal.runtime.Debug.id;
 
 /**
  *
@@ -205,10 +211,21 @@ public class GUILogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseDragged
 
     private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
-        co.unicauca.onlinerestaurant.client.infra.Security.usuario = new User(TxbUser.getText(), jPswField.getText(), "");
+        String name = this.TxbUser.getText();
+        String pws=this.jPswField.getText();
+        ICustomerAccess service = Factory.getInstance().getCustomerService();
+        // Inyecta la dependencia
+        CustomerService CustomerService = new CustomerService(service);
+        Customer cus;
+        try {
+            cus = CustomerService.findCustomer(name,pws);
+        } catch (Exception ex) {
+            successMessage(ex.getMessage(), "Atención");
+            return;
+        }
 
         //Aqui vendria el analizar si el usuario existe en el sistema
-        if (true) {
+        if (cus.getRol().equals("admin")) {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     GUIMenuAdmin ins = new GUIMenuAdmin();
@@ -217,8 +234,17 @@ public class GUILogin extends javax.swing.JFrame {
                 }
             });
             this.dispose();
+        } else if (cus.getRol().equals("user")) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    GUIMenuCustomer ins = new GUIMenuCustomer();
+                    ins.setExtendedState(NORMAL);
+                    ins.setVisible(true);
+                }
+            });
+            this.dispose();
         } else {
-            warningMessage("Contraseña incorrecta", "Atención");
+            warningMessage("Usuario o Contraseña incorrectas", "Atención");
         }
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
@@ -232,7 +258,7 @@ public class GUILogin extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jLabel4MouseClicked
 
-     /**
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -273,7 +299,7 @@ public class GUILogin extends javax.swing.JFrame {
             }
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnIngresar;
     private javax.swing.JTextField TxbUser;

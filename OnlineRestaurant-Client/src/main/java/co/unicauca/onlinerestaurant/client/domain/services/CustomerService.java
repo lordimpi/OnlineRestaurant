@@ -33,7 +33,25 @@ public class CustomerService {
         return service.findCustomer(id);
 
     }
+    /**
+     * Busca un cliente en el servidor remoto
+     * @param name
+     * @param pws
+     * @return
+     * @throws java.lang.Exception la excepcio se lanza cuando no logra conexión
+     * con el servidor
+     */
+    public Customer findCustomer(String name,String pws) throws Exception {
+        return service.findCustomer(name,pws);
 
+    }
+
+    /**
+     * Creacion de un Customer
+     * @param customer
+     * @return
+     * @throws Exception 
+     */
     public String createCustomer(Customer customer) throws Exception {
         return service.createCustomer(customer);
 

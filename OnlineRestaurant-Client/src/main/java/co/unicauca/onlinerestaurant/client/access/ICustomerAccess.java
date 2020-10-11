@@ -12,11 +12,20 @@ public interface ICustomerAccess {
     /**
      * Buscar un cliente utilizando un socket
      *
-     * @param id cedula del cliente
+     * @param id nombre del cliente
      * @return objeto cliente
      * @throws Exception error al buscar un cliente
      */
     public Customer findCustomer(String id) throws Exception;
+
+    /**
+     * Buscar cliente utilizando un socket con nombre y clave
+     *
+     * @param name
+     * @return
+     * @throws Exception
+     */
+    public Customer findCustomer(String name, String pws) throws Exception;
 
     /**
      * Crea un Customer
