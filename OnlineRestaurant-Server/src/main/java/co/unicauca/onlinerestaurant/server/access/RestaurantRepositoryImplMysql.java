@@ -152,7 +152,7 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
      */
     @Override
     public List<Restaurant> list() {
-        List<Restaurant> restaurant = new ArrayList<>();
+        List<Restaurant> restaurants = new ArrayList<>();
         try {
 
             String sql = "SELECT * FROM restaurant";
@@ -162,19 +162,20 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
             while (res.next()) {
                 Restaurant newrestaurant = new Restaurant();
 
-                newrestaurant.setIdRestaurant("idres");
-                newrestaurant.setIdRestaurant("nameres");
-                newrestaurant.setIdRestaurant("addressres");
-                newrestaurant.setIdRestaurant("phoneres");
+                newrestaurant.setIdRestaurant(res.getString("idres"));
+                newrestaurant.setNameRestaurant(res.getString("nameres"));
+                newrestaurant.setAddressRestaurant(res.getString("addressres"));
+                newrestaurant.setPhone(res.getString("phoneres"));
+                newrestaurant.setIdmenu(res.getString("idmenu"));
 
-                restaurant.add(newrestaurant);
+                restaurants.add(newrestaurant);
             }
             //this.disconnect();
 
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al Selecionar los datos de la tabla restaurant de la base de datos", ex);
         }
-        return restaurant;
+        return restaurants;
     }
 
     /**

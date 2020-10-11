@@ -37,7 +37,11 @@ public class RestaurantService {
     public Restaurant findRestaurant(String id) {
         return repo.findRestaurant(id);
     }
-
+    
+    public List<Restaurant> listRestaurant(){
+        return repo.list();
+    }
+    
     /**
      * Metodo para crear un restaurante
      *
