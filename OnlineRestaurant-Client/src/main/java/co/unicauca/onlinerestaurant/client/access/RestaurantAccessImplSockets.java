@@ -26,8 +26,8 @@ public class RestaurantAccessImplSockets implements IRestaurantAccess {
      */
     private OnlineRestaurantSocket mySocket;
 
-    public RestaurantAccessImplSockets(OnlineRestaurantSocket mySocket) {
-        this.mySocket = mySocket;
+    public RestaurantAccessImplSockets() {
+        this.mySocket = new OnlineRestaurantSocket();
     }
 
     /**
@@ -194,7 +194,7 @@ public class RestaurantAccessImplSockets implements IRestaurantAccess {
 
         Protocol protocol = new Protocol();
         protocol.setResource("restaurant");
-        protocol.setAction("get");
+        protocol.setAction("gets");
 
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);

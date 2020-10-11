@@ -5,10 +5,18 @@
  */
 package co.unicauca.onlinerestaurant.client.presentation;
 
+import co.unicauca.onlinerestaurant.client.access.Factory;
+import co.unicauca.onlinerestaurant.client.access.IRestaurantAccess;
+import co.unicauca.onlinerestaurant.client.domain.services.RestaurantService;
+import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
+import co.unicauca.onlinerestaurant.commons.domain.Restaurant;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -66,6 +74,7 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         dskEscritorio = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPnlBg.setBackground(new java.awt.Color(255, 255, 255));
         jPnlBg.setLayout(new java.awt.BorderLayout());
@@ -297,13 +306,26 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         resetColor(BtnHomePage);
         resetColor(BtnRestaurant);
         setColor(BtnMenus);
-        
+
     }//GEN-LAST:event_BtnMenusMousePressed
 
     private void BtnRestaurantMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRestaurantMousePressed
         resetColor(BtnHomePage);
         setColor(BtnRestaurant);
         resetColor(BtnMenus);
+
+        IRestaurantAccess service = Factory.getInstance().getRestaurantService();
+        // Inyecta la dependencia
+        RestaurantService restaurant = new RestaurantService(service);
+
+        List<Restaurant> restaurants = new ArrayList<>();
+
+        try {
+            restaurants = restaurant.listRestaurants();
+        } catch (Exception ex) {
+            successMessage(ex.getMessage(), "Atención");
+        }
+
     }//GEN-LAST:event_BtnRestaurantMousePressed
 
     private void jLbMaxMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbMaxMinMouseClicked

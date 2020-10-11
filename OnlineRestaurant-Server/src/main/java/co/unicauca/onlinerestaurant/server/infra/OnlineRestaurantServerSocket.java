@@ -253,6 +253,10 @@ public class OnlineRestaurantServerSocket implements Runnable {
                     // Consultar un restaurant
                     processGetRestaurant(protocolRequest);
                 }
+                if (protocolRequest.getAction().equals("gets")) {
+                    // Consultar un restaurant
+                    processGetRestaurantList();
+                }
                 if (protocolRequest.getAction().equals("post")) {
                     // Agrega un restaurante
                     processPostRestaurant(protocolRequest);

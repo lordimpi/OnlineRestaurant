@@ -48,8 +48,8 @@ public class Factory {
         return result;
 
     }
-    
-        /**
+
+    /**
      * Método que crea una instancia concreta de la jerarquia IMainDishService
      *
      * @return una clase hija de la abstracción IRepositorioPlatoPrincipal
@@ -62,6 +62,26 @@ public class Factory {
         switch (type) {
             case "default":
                 result = new MainDishAccessImplSockets();
+                break;
+        }
+
+        return result;
+
+    }
+
+    /**
+     * Método que crea una instancia concreta de la jerarquia IRestaurantService
+     *
+     * @return una clase hija de la abstracción IRepositorioRestaurante
+     */
+    public IRestaurantAccess getRestaurantService() {
+
+        IRestaurantAccess result = null;
+        String type = Utilities.loadProperty("restaurant.service");
+
+        switch (type) {
+            case "default":
+                result = new RestaurantAccessImplSockets();
                 break;
         }
 
