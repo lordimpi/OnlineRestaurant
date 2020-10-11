@@ -14,8 +14,11 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -43,7 +46,7 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
      */
     private int y = 0;
 
-    public GUIMenuCustomer() {
+    public GUIMenuCustomer() throws PropertyVetoException {
         initComponents();
         cargarLista();
         listRestaurants = new GUIListRestaurants(restaurants);
@@ -314,6 +317,7 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         resetColor(BtnHomePage);
         resetColor(BtnRestaurant);
         setColor(BtnMenus);
+        System.out.println("Nombre restaurante elegido: " + restaurantName);
 
     }//GEN-LAST:event_BtnMenusMousePressed
 
@@ -322,10 +326,13 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         setColor(BtnRestaurant);
         resetColor(BtnMenus);
 
+        cargarLista();
+
         if (!listRestaurants.isVisible()) {
             listRestaurants.setMaximizable(true);
             dskEscritorio.add(listRestaurants);
             listRestaurants.show();
+            this.BtnMenus.setVisible(true);
         }
     }//GEN-LAST:event_BtnRestaurantMousePressed
 
@@ -388,7 +395,11 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIMenuCustomer().setVisible(true);
+                try {
+                    new GUIMenuCustomer().setVisible(true);
+                } catch (PropertyVetoException ex) {
+                    Logger.getLogger(GUIMenuCustomer.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

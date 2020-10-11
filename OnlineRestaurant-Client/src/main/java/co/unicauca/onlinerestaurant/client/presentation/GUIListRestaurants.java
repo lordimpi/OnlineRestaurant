@@ -5,8 +5,19 @@
  */
 package co.unicauca.onlinerestaurant.client.presentation;
 
+import co.unicauca.onlinerestaurant.client.access.Factory;
+import co.unicauca.onlinerestaurant.client.access.IRestaurantAccess;
+import co.unicauca.onlinerestaurant.client.domain.services.RestaurantService;
+import co.unicauca.onlinerestaurant.client.infra.Messages;
+import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
 import co.unicauca.onlinerestaurant.commons.domain.Restaurant;
+import java.awt.Image;
+import java.beans.PropertyVetoException;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -14,15 +25,16 @@ import java.util.List;
  */
 public class GUIListRestaurants extends javax.swing.JInternalFrame {
 
-    List<Restaurant> restaurants;
+    private List<Restaurant> restaurants;
 
     /**
      * Creates new form GUIListRestaurants
      *
      * @param restaurants Lista de restaurante
      */
-    public GUIListRestaurants(List<Restaurant> restaurants) {
+    public GUIListRestaurants(List<Restaurant> restaurants) throws PropertyVetoException {
         initComponents();
+        this.setMaximum(true);
         this.restaurants = restaurants;
         mostrarTabla();
     }
@@ -38,17 +50,21 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
 
         jPnNorte = new javax.swing.JPanel();
         jPnSur = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        jBtnSeleccionarRestaurante = new javax.swing.JButton();
+        jBtnCancelar = new javax.swing.JButton();
         jPnCentro = new javax.swing.JPanel();
         jPnlCentroNorte = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jLblCargarImg = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLblRestaurantNombre = new javax.swing.JLabel();
         jLblRestaurantDireccion = new javax.swing.JLabel();
-        JLblRestaurantTelefono = new javax.swing.JLabel();
+        jLblRestaurantTelefono = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTblRestaurants = new javax.swing.JTable();
+
+        setClosable(true);
+        setResizable(true);
 
         jPnNorte.setBackground(new java.awt.Color(54, 33, 88));
         jPnNorte.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -71,8 +87,22 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
         jPnSur.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPnSur.setPreferredSize(new java.awt.Dimension(450, 50));
 
-        jButton1.setText("Seleccionar Restaurante");
-        jPnSur.add(jButton1);
+        jBtnSeleccionarRestaurante.setText("Seleccionar Restaurante");
+        jBtnSeleccionarRestaurante.setFocusPainted(false);
+        jBtnSeleccionarRestaurante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSeleccionarRestauranteActionPerformed(evt);
+            }
+        });
+        jPnSur.add(jBtnSeleccionarRestaurante);
+
+        jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
+        jPnSur.add(jBtnCancelar);
 
         getContentPane().add(jPnSur, java.awt.BorderLayout.PAGE_END);
 
@@ -86,7 +116,7 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(400, 100));
         jPanel1.setPreferredSize(new java.awt.Dimension(350, 168));
 
-        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jLblCargarImg.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -94,14 +124,14 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLblCargarImg, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(114, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLblCargarImg, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -117,9 +147,9 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
         jLblRestaurantDireccion.setForeground(new java.awt.Color(0, 0, 0));
         jLblRestaurantDireccion.setText("Direccion");
 
-        JLblRestaurantTelefono.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        JLblRestaurantTelefono.setForeground(new java.awt.Color(0, 0, 0));
-        JLblRestaurantTelefono.setText("Telefono");
+        jLblRestaurantTelefono.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLblRestaurantTelefono.setForeground(new java.awt.Color(0, 0, 0));
+        jLblRestaurantTelefono.setText("Telefono");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -129,7 +159,7 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLblRestaurantNombre)
-                    .addComponent(JLblRestaurantTelefono)
+                    .addComponent(jLblRestaurantTelefono)
                     .addComponent(jLblRestaurantDireccion))
                 .addGap(0, 311, Short.MAX_VALUE))
         );
@@ -141,7 +171,7 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
                 .addGap(40, 40, 40)
                 .addComponent(jLblRestaurantDireccion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(JLblRestaurantTelefono)
+                .addComponent(jLblRestaurantTelefono)
                 .addGap(21, 21, 21))
         );
 
@@ -149,6 +179,11 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
 
         jPnCentro.add(jPnlCentroNorte, java.awt.BorderLayout.PAGE_START);
 
+        jTblRestaurants = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         jTblRestaurants.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -175,7 +210,14 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTblRestaurants.setFocusable(false);
         jTblRestaurants.setRowHeight(30);
+        jTblRestaurants.getTableHeader().setReorderingAllowed(false);
+        jTblRestaurants.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTblRestaurantsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTblRestaurants);
 
         jPnCentro.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -185,13 +227,48 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBtnSeleccionarRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSeleccionarRestauranteActionPerformed
+
+        if (jLblRestaurantNombre.getText().equals("Nombre")) {
+            Messages.warningMessage("Debe seleccionar un restaurante", "Warning");
+            return;
+        }
+        try {
+            GUIMenuCustomer.restaurantName = jLblRestaurantNombre.getText();
+            Messages.successMessage("Restaurante " + jLblRestaurantNombre.getText() + " fue seleccionado", "EXITO");
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jBtnSeleccionarRestauranteActionPerformed
+
+    private void jTblRestaurantsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblRestaurantsMouseClicked
+
+        int i = jTblRestaurants.getSelectedRow();
+        TableModel model = jTblRestaurants.getModel();
+        jLblRestaurantNombre.setText(model.getValueAt(i, 0).toString());
+        jLblRestaurantDireccion.setText(model.getValueAt(i, 1).toString());
+        jLblRestaurantTelefono.setText(model.getValueAt(i, 2).toString());
+        addIcon(jLblCargarImg, "src/main/java/resources/RestaurantLogo.png");
+
+    }//GEN-LAST:event_jTblRestaurantsMouseClicked
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+
+        jLblRestaurantNombre.setText("Nombre");
+        jLblRestaurantDireccion.setText("Direccion");
+        jLblRestaurantTelefono.setText("Telefono");
+        addIcon(jLblCargarImg, null);
+        cargarLista();
+        mostrarTabla();
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel JLblRestaurantTelefono;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jBtnCancelar;
+    private javax.swing.JButton jBtnSeleccionarRestaurante;
+    private javax.swing.JLabel jLblCargarImg;
     private javax.swing.JLabel jLblRestaurantDireccion;
     private javax.swing.JLabel jLblRestaurantNombre;
+    private javax.swing.JLabel jLblRestaurantTelefono;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPnCentro;
@@ -213,5 +290,33 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
 
         jTblRestaurants.setModel(new javax.swing.table.DefaultTableModel(
                 dataTable, new String[]{"Nombre", "Direccion", "Telefono"}));
+    }
+
+    /**
+     * Metodo encargado de cargar un icono para una etiquetas
+     *
+     * @param lb Etiqueta que funciona como icono
+     * @param pathIcon Direccion donde se encuentra el icono
+     */
+    private void addIcon(JLabel lb, String pathIcon) {
+        ImageIcon img = new ImageIcon(pathIcon);
+        Icon icono = new ImageIcon(img.getImage().getScaledInstance(
+                lb.getWidth(),
+                lb.getHeight(),
+                Image.SCALE_DEFAULT));
+        lb.setIcon(icono);
+        this.repaint();
+    }
+
+    private void cargarLista() {
+        IRestaurantAccess service = Factory.getInstance().getRestaurantService();
+        // Inyecta la dependencia
+        RestaurantService restaurant = new RestaurantService(service);
+
+        try {
+            restaurants = restaurant.listRestaurants();
+        } catch (Exception ex) {
+            successMessage(ex.getMessage(), "Atención");
+        }
     }
 }
