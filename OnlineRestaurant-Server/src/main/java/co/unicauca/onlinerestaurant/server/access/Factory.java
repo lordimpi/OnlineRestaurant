@@ -136,5 +136,23 @@ public class Factory {
 
         return result;
     }
+
+    public ISaladRepository getRepository6() {
+         String type = Utilities.loadProperty("salad.repository");
+        if (type.isEmpty()) {
+            type = "default";
+        }
+        ISaladRepository result = null;
+
+        switch (type) {
+            case "default":
+                break;
+            case "mysql":
+                result = new SaladRepositoryImplMysql();
+                break;
+        }
+
+        return result;
+    }
     
 }
