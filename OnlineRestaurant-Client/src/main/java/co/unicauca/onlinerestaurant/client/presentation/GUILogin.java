@@ -16,6 +16,9 @@ import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import static jdk.nashorn.internal.runtime.Debug.id;
@@ -237,7 +240,12 @@ public class GUILogin extends javax.swing.JFrame {
         } else if (cus.getRol().equals("user")) {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    GUIMenuCustomer ins = new GUIMenuCustomer();
+                    GUIMenuCustomer ins = null;
+                    try {
+                        ins = new GUIMenuCustomer();
+                    } catch (PropertyVetoException ex) {
+                        Logger.getLogger(GUILogin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     ins.setExtendedState(NORMAL);
                     ins.setVisible(true);
                 }

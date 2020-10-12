@@ -5,10 +5,20 @@
  */
 package co.unicauca.onlinerestaurant.client.presentation;
 
+import co.unicauca.onlinerestaurant.client.access.Factory;
+import co.unicauca.onlinerestaurant.client.access.IRestaurantAccess;
+import co.unicauca.onlinerestaurant.client.domain.services.RestaurantService;
+import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
+import co.unicauca.onlinerestaurant.commons.domain.Restaurant;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.beans.PropertyVetoException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -20,6 +30,12 @@ import javax.swing.JPanel;
  */
 public class GUIMenuCustomer extends javax.swing.JFrame {
 
+    public static String restaurantName;
+
+    private List<Restaurant> restaurants = new ArrayList<>();
+
+    private GUIListRestaurants listRestaurants;
+
     private boolean state = false;
     /**
      * Guarda la coordenada en eje x para poder mover el formulario con el raton
@@ -30,8 +46,12 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
      */
     private int y = 0;
 
-    public GUIMenuCustomer() {
+    public GUIMenuCustomer() throws PropertyVetoException {
         initComponents();
+        cargarLista();
+        listRestaurants = new GUIListRestaurants(restaurants);
+        setLocationRelativeTo(null);
+        this.BtnMenus.setVisible(false);
     }
 
     /**
@@ -65,6 +85,7 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         dskEscritorio = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPnlBg.setBackground(new java.awt.Color(255, 255, 255));
         jPnlBg.setLayout(new java.awt.BorderLayout());
@@ -296,12 +317,23 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         resetColor(BtnHomePage);
         resetColor(BtnRestaurant);
         setColor(BtnMenus);
+        System.out.println("Nombre restaurante elegido: " + restaurantName);
+
     }//GEN-LAST:event_BtnMenusMousePressed
 
     private void BtnRestaurantMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRestaurantMousePressed
         resetColor(BtnHomePage);
         setColor(BtnRestaurant);
         resetColor(BtnMenus);
+
+        cargarLista();
+
+        if (!listRestaurants.isVisible()) {
+            listRestaurants.setMaximizable(true);
+            dskEscritorio.add(listRestaurants);
+            listRestaurants.show();
+            this.BtnMenus.setVisible(true);
+        }
     }//GEN-LAST:event_BtnRestaurantMousePressed
 
     private void jLbMaxMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbMaxMinMouseClicked
@@ -363,7 +395,11 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIMenuCustomer().setVisible(true);
+                try {
+                    new GUIMenuCustomer().setVisible(true);
+                } catch (PropertyVetoException ex) {
+                    Logger.getLogger(GUIMenuCustomer.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -390,6 +426,18 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
     private javax.swing.JPanel jPnlSide;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarLista() {
+        IRestaurantAccess service = Factory.getInstance().getRestaurantService();
+        // Inyecta la dependencia
+        RestaurantService restaurant = new RestaurantService(service);
+
+        try {
+            restaurants = restaurant.listRestaurants();
+        } catch (Exception ex) {
+            successMessage(ex.getMessage(), "Atención");
+        }
+    }
 
     private void setColor(JPanel panel) {
         panel.setBackground(new Color(85, 65, 118));
