@@ -36,18 +36,18 @@ public class RestaurantServiceTest {
         IRestaurantRepository repo = Factory.getInstance().getRepository5();
         RestaurantService instance = new RestaurantService(repo);
         Resperado = instance.listRestaurant();
-        
+
         assertEquals(Resperado.get(0).getIdRestaurant(), Restaurants.get(0).getIdRestaurant());
         assertEquals(Resperado.get(0).getNameRestaurant(), Restaurants.get(0).getNameRestaurant());
         assertEquals(Resperado.get(0).getAddressRestaurant(), Restaurants.get(0).getAddressRestaurant());
         assertEquals(Resperado.get(0).getPhone(), Restaurants.get(0).getPhone());
         assertEquals(Resperado.get(0).getIdmenu(), Restaurants.get(0).getIdmenu());
-        
-        assertEquals(Resperado.get(1).getIdRestaurant(), Restaurants.get(1).getIdRestaurant());
-        assertEquals(Resperado.get(1).getNameRestaurant(), Restaurants.get(1).getNameRestaurant());
-        assertEquals(Resperado.get(1).getAddressRestaurant(), Restaurants.get(1).getAddressRestaurant());
-        assertEquals(Resperado.get(1).getPhone(), Restaurants.get(1).getPhone());
-        assertEquals(Resperado.get(1).getIdmenu(), Restaurants.get(1).getIdmenu());
+
+        assertEquals(Resperado.get(Resperado.size() - 1).getIdRestaurant(), Restaurants.get(1).getIdRestaurant());
+        assertEquals(Resperado.get(Resperado.size() - 1).getNameRestaurant(), Restaurants.get(1).getNameRestaurant());
+        assertEquals(Resperado.get(Resperado.size() - 1).getAddressRestaurant(), Restaurants.get(1).getAddressRestaurant());
+        assertEquals(Resperado.get(Resperado.size() - 1).getPhone(), Restaurants.get(1).getPhone());
+        assertEquals(Resperado.get(Resperado.size() - 1).getIdmenu(), Restaurants.get(1).getIdmenu());
     }
 
 }

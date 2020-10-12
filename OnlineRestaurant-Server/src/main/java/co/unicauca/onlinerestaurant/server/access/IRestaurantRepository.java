@@ -48,7 +48,7 @@ public interface IRestaurantRepository {
     /**
      * Metodo encargado de lista objetos de tipo restaurante
      *
-     * @return
+     * @return Lista de restaurantes
      */
     public List<Restaurant> list();
 

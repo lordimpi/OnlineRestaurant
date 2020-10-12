@@ -53,7 +53,7 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
     public static String resraurantName;
 
-    private List<Restaurant> restaurants = new ArrayList<>();
+    private List<Restaurant> restaurants;
 
     private GUIListRestaurants listRestaurants;
 

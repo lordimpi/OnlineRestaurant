@@ -26,28 +26,36 @@ public class MainDishService {
     public MainDishService(IMainDishRepository repo) {
         this.repo = repo;
     }
+
     /**
      * Metodo busqueda de plato principal
+     *
      * @param id
-     * @return 
+     * @return
      */
     public MainDish findMainDish(String id) {
         return repo.findDish(id);
     }
-    public void deleteMainDish(String id){
+
+    public List<MainDish> listMainDish(){
+        return repo.list();
+    }
+    
+    public void deleteMainDish(String id) {
         repo.deleteDish(id);
     }
-    
+
     /**
-     * Metodo encargado de actualizar un plato 
+     * Metodo encargado de actualizar un plato
+     *
      * @param id identificador
      * @param name nombre
-     * @param price  precio 
+     * @param price precio
      */
-    public void updateMainDish(String id,String name,String price) {
-        repo.updateDish(id,name,price);
+    public void updateMainDish(String id, String name, String price) {
+        repo.updateDish(id, name, price);
     }
-    
+
     /**
      * Crea un nuevo mainDish. Aplica validaciones de negocio
      *

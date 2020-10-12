@@ -185,8 +185,6 @@ public class RestaurantAccessImplSockets implements IRestaurantAccess {
     /**
      * Crea una solicitud json para ser enviada por el socket
      *
-     *
-     * @param idRestaurant identificación del restaurante
      * @return solicitud de consulta del restaurante en formato Json, algo como:
      * {"resource":"restaurant","action":"get","parameters":[{"name":"id","value":"1"}]}
      */
@@ -246,8 +244,8 @@ public class RestaurantAccessImplSockets implements IRestaurantAccess {
     }
 
     /**
-     *Convierte jsonRestaurant, proveniente del server socket, de array json a un
-     * list restaurant
+     * Convierte jsonRestaurant, proveniente del server socket, de array json a
+     * un list restaurant
      *
      * @param jsonRestaurant Cadena json serializado
      * @return Lista deserializada de jsonRestaurant

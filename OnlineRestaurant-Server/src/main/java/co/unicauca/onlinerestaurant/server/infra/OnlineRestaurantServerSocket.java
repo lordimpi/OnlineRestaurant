@@ -212,6 +212,11 @@ public class OnlineRestaurantServerSocket implements Runnable {
                     processGetMainDish(protocolRequest);
                 }
 
+                if (protocolRequest.getAction().equals("gets")) {
+                    // Consultar un plao
+                    processGetMainDishList();
+                }
+
                 if (protocolRequest.getAction().equals("put")) {
                     // modificar un plato
                     processSetMainDish(protocolRequest);
@@ -389,7 +394,22 @@ public class OnlineRestaurantServerSocket implements Runnable {
             String errorJson = generateNotFoundErrorJson("Restaurantes no encontrados.");
             output.println(errorJson);
         } else {
-            output.println(objectToJSONRE(restaurants));
+            output.println(objectToJSONLRE(restaurants));
+        }
+    }
+
+    /**
+     * Procesa la solicitud de listar restaurantes
+     *
+     * @param protocolRequest Protocolo de la solicitud
+     */
+    private void processGetMainDishList() {
+        List<MainDish> platos = mdService.listMainDish();
+        if (platos == null) {
+            String errorJson = generateNotFoundErrorJson("Platos no encontrados.");
+            output.println(errorJson);
+        } else {
+            output.println(objectToJSONLMD(platos));
         }
     }
 
@@ -572,6 +592,19 @@ public class OnlineRestaurantServerSocket implements Runnable {
     }
 
     /**
+     * Convierte el objeto MainDish a json para que el servidor lo envie como
+     * respuesta por el socket
+     *
+     * @param mainDish Lista de platos
+     * @return MainDish en formato json
+     */
+    private String objectToJSONLMD(List<MainDish> mainDish) {
+        Gson gson = new Gson();
+        String strObject = gson.toJson(mainDish);
+        return strObject;
+    }
+
+    /**
      * Convierte el objeto DishEntry a json para que el servidor lo envie como
      * respuesta por el socket
      *
@@ -621,7 +654,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
      * @param restaurant lista de restaurantes
      * @return Restaurant en formato Json
      */
-    private String objectToJSONRE(List<Restaurant> restaurants) {
+    private String objectToJSONLRE(List<Restaurant> restaurants) {
         Gson gson = new Gson();
         String strObject = gson.toJson(restaurants);
         return strObject;

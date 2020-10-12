@@ -55,9 +55,9 @@ public class Factory {
 
     /**
      * Método que crea una instancia concreta de la jerarquia
-     * ICustomerRepository
+     * IMainDishRepository
      *
-     * @return una clase hija de la abstracción IRepositorioClientes
+     * @return una clase hija de la abstracción IMainDishRepository
      */
     public IMainDishRepository getRepository2() {
         String type = Utilities.loadProperty("maindish.repository");
@@ -78,6 +78,12 @@ public class Factory {
 
     }
 
+    /**
+     * Método que crea una instancia concreta de la jerarquia
+     * IDishEntryRepository
+     *
+     * @return una clase hija de la abstracción IDishEntryRepository
+     */
     public IDishEntryRepository getRepository3() {
         String type = Utilities.loadProperty("dishentry.repository");
         if (type.isEmpty()) {
@@ -117,8 +123,14 @@ public class Factory {
         }
 
         return result;
-    }    
+    }
 
+    /**
+     * Método que crea una instancia concreta de la jerarquia
+     * IRestaurantRepository
+     *
+     * @return una clase hija de la abstracción IRepositorioRestaurantes
+     */
     public IRestaurantRepository getRepository5() {
         String type = Utilities.loadProperty("restaurant.repository");
         if (type.isEmpty()) {
@@ -136,5 +148,5 @@ public class Factory {
 
         return result;
     }
-    
+
 }
