@@ -42,6 +42,11 @@ public class MenuService {
     public Menu findMenu(String id) {
         return repo.findMenu(id);
     }
+    
+    
+    public Menu findMenubyRN(String name) {
+        return repo.findMenubyRN(name);
+    }
 
     public boolean deleteMenu(String id) {
         return repo.deleteMenu(id);

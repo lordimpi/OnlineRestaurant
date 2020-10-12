@@ -49,10 +49,10 @@ public class SaladService {
 
         String id = salad.getIdSalad();
         String name = salad.getNameSalad();
-        String cost = salad.getCostSalad();
+        double cost = salad.getCostSalad();
         // Validaciones y reglas de negocio
         if (id.isEmpty() || salad.getIdSalad().isEmpty()
-                || name.isEmpty() || cost.isEmpty()) {
+                || name.isEmpty()) {
             errors.add(new JsonError("400", "BAD_REQUEST", "id, nombre y costo son obligatorios. "));
         }
         // Que no esté repetido
@@ -71,7 +71,7 @@ public class SaladService {
      * @param name nombre
      * @param cost costo
      */
-    public boolean updateSalad(String id, String name, String cost) {
+    public boolean updateSalad(String id, String name, Double cost) {
         return repo.updateSalad(id, name, cost);
     }
 

@@ -22,7 +22,7 @@ public class Salad {
     /**
      * valor
      */
-    private String costSalad;
+    private double costSalad;
 
     public String getIdSalad() {
         return idSalad;
@@ -40,11 +40,11 @@ public class Salad {
         this.nameSalad = nameSalad;
     }
 
-    public String getCostSalad() {
+    public double getCostSalad() {
         return costSalad;
     }
 
-    public void setCostSalad(String costSalad) {
+    public void setCostSalad(double costSalad) {
         this.costSalad = costSalad;
     }
 

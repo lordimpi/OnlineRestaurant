@@ -10,17 +10,40 @@ package co.unicauca.onlinerestaurant.commons.domain;
  * @author soces
  */
 public class Menu {
+
     /**
      * identificador del menu
      */
     private String id_menu;
     /**
-     * identificador del plato principal
+     * entrada
      */
-    private MainDish maindish;
     
-    //getters y setters
+    private DishEntry entry;
+    /**
+     * plato principal
+     */
+    
+    private MainDish maindish;
+    /**
+     * ensalada
+     */
+    
+    private Salad salad;
+    
+    /**
+     * bebida
+     */
+        
+    private Drink drink;
+    
+    /**
+     * postre
+     */
+       
+    private Dessert dessert;
 
+    //getters y setters
     public String getId_menu() {
         return id_menu;
     }
@@ -36,7 +59,39 @@ public class Menu {
     public void setMaindish(MainDish maindish) {
         this.maindish = maindish;
     }
+
+    public DishEntry getEntry() {
+        return entry;
+    }
+
+    public void setEntry(DishEntry entry) {
+        this.entry = entry;
+    }
+
+    public Salad getSalad() {
+        return salad;
+    }
+
+    public void setSalad(Salad salad) {
+        this.salad = salad;
+    }
+
+    public Drink getDrink() {
+        return drink;
+    }
+
+    public void setDrink(Drink drink) {
+        this.drink = drink;
+    }
+
+    public Dessert getDessert() {
+        return dessert;
+    }
+
+    public void setDessert(Dessert desert) {
+        this.dessert = desert;
+    }
     
     
-    
+
 }

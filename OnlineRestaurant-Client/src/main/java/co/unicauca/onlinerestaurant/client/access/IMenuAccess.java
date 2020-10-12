@@ -11,9 +11,11 @@ public interface IMenuAccess {
 
     public Menu findMenu(String id) throws Exception;
 
-    public void updateMenu(String id, String id_dish) throws Exception;
+    public Menu findMenubyRN(String name) throws Exception;
+    
+    public boolean updateMenu(String id, String id_dish) throws Exception;
 
-    public void deleteMenu(String id) throws Exception;
+    public boolean deleteMenu(String id) throws Exception;
 
     public String createMenu(String id) throws Exception;
 

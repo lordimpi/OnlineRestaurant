@@ -47,7 +47,7 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
                 salad = new Salad();
                 salad.setIdhSalad(res.getString("idsalad"));
                 salad.setNameDishSalad(res.getString("namesalad"));
-                salad.setCostSalad(res.getString("pricesalad"));
+                salad.setCostSalad(res.getDouble("pricesalada"));
             }
             pstmt.close();
             this.disconnect();
@@ -66,15 +66,14 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
      * @return
      */
     @Override
-    public String createSalad(String id, String name, String cost) {
-        Salad salad = null;
+    public String createSalad(String id, String name, double cost) {
         this.connect();
         try {
-            String sql = "INSERT INTO salad(idsalad, namesalad, pricesalad) VALUES (?,?,?)";
+            String sql = "INSERT INTO salad(idsalad, namesalad, pricesalada) VALUES (?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, id);
             pstmt.setString(2, name);
-            pstmt.setString(3, cost);
+            pstmt.setDouble(3, cost);
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
@@ -82,7 +81,6 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Ensalada de la base de datos", ex);
         }
-
         return "";
     }
 
@@ -94,13 +92,13 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
      * @param cost costo
      */
     @Override
-    public boolean updateSalad(String id, String name, String cost) {
+    public boolean updateSalad(String id, String name, double cost) {
         this.connect();
         try {
-            String sql = "UPDATE salad SET namesalad=" + "?" + ", pricesalad=" + "?" + "where idsalad=" + "?";
+            String sql = "UPDATE salad SET namesalad=" + "?" + ", pricesalada=" + "?" + "where idsalad=" + "?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, name);
-            pstmt.setString(2, cost);
+            pstmt.setDouble(2, cost);
             pstmt.setString(3, id);
             pstmt.executeUpdate();
             pstmt.close();

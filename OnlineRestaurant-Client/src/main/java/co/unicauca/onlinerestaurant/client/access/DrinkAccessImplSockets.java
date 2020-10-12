@@ -59,7 +59,7 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
 
     }
     @Override
-    public void deleteDrink(String id) throws Exception {
+    public boolean deleteDrink(String id) throws Exception {
 
         String jsonResponse = null;
         String requestJson = deleteDrinkRequestJson(id);
@@ -68,6 +68,7 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
             jsonResponse = mySocket.sendStream(requestJson);
             mySocket.closeStream();
             mySocket.disconnect();
+            return true;
 
         } catch (IOException ex) {
             Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
@@ -75,6 +76,7 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
         if (jsonResponse == null) {
             throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
         } 
+        return false;
     }
 
 

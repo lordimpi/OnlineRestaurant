@@ -69,4 +69,8 @@ public class DishEntryService {
         return repo.createDish(dishentry);
     }
 
+    public List<DishEntry> listDishEntry() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -41,7 +41,7 @@ public class DessertRepositoryImplMysql implements IDessertRepository {
 
         this.connect();
         try {
-            String sql = "SELECT * from desserts where id_dessert=? ";
+            String sql = "SELECT * from dessert where id_dessert=? ";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, id);
             ResultSet res = pstmt.executeQuery();

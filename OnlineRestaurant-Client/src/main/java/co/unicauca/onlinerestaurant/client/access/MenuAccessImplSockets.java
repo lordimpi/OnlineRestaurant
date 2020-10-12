@@ -51,9 +51,40 @@ public class MenuAccessImplSockets implements IMenuAccess{
             }
         }
     }
+    
+    
+    
+    @Override
+    public Menu findMenubyRN(String name) throws Exception {
+        String jsonResponse = null;
+        String requestJson = findMenubyRNRequestJson(name);
+        try {
+            mySocket.connect();
+            jsonResponse = mySocket.sendStream(requestJson);
+            mySocket.closeStream();
+            mySocket.disconnect();
+
+        } catch (IOException ex) {
+            Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
+        }
+        if (jsonResponse == null) {
+            throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
+        } else {
+            if (jsonResponse.contains("error")) {
+                //Devolvió algún error
+                Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
+                throw new Exception(extractMessages(jsonResponse));
+            } else {
+                //Encontró el customer
+                Menu menu = jsonToMenu(jsonResponse);
+                return menu;
+            }
+        }
+    }
+
 
     @Override
-    public void updateMenu(String id, String id_dish) throws Exception {
+    public boolean updateMenu(String id, String id_dish) throws Exception {
           String jsonResponse = null;
         String requestJson = updateMenuRequestJson(id,id_dish);
         try {
@@ -61,6 +92,7 @@ public class MenuAccessImplSockets implements IMenuAccess{
             jsonResponse = mySocket.sendStream(requestJson);
             mySocket.closeStream();
             mySocket.disconnect();
+            return true; 
 
         } catch (IOException ex) {
             Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
@@ -69,10 +101,11 @@ public class MenuAccessImplSockets implements IMenuAccess{
             throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
 
         }
+        return false;
     }
 
     @Override
-    public void deleteMenu(String id) throws Exception {
+    public boolean deleteMenu(String id) throws Exception {
         String jsonResponse = null;
         String requestJson = deleteMenuRequestJson(id);
         try {
@@ -80,7 +113,7 @@ public class MenuAccessImplSockets implements IMenuAccess{
             jsonResponse = mySocket.sendStream(requestJson);
             mySocket.closeStream();
             mySocket.disconnect();
-
+            return true;
         } catch (IOException ex) {
             Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
         }
@@ -88,6 +121,7 @@ public class MenuAccessImplSockets implements IMenuAccess{
             throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
 
         }
+        return false;
     }
 
     @Override
@@ -169,6 +203,19 @@ public class MenuAccessImplSockets implements IMenuAccess{
 
         return requestJson;
     }
+    
+     private String findMenubyRNRequestJson(String name) {
+
+        Protocol protocol = new Protocol();
+        protocol.setResource("menu");
+        protocol.setAction("get2");
+        protocol.addParameter("name", name);
+
+        Gson gson = new Gson();
+        String requestJson = gson.toJson(protocol);
+
+        return requestJson;
+    }
 
     /**
      * crea una solicitud json para ser enviada por el socket
@@ -189,6 +236,8 @@ public class MenuAccessImplSockets implements IMenuAccess{
 
         return requestJson;
     }
+    
+    
 
     private String deleteMenuRequestJson(String id) {
 

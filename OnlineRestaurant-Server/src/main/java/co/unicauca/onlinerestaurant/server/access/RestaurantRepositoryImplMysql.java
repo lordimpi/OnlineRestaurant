@@ -166,14 +166,14 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
                 Restaurant newrestaurant = new Restaurant();
 
                 newrestaurant.setIdRestaurant(res.getString("idres"));
-                newrestaurant.setNameRestaurant(res.getString("nameres"));
-                newrestaurant.setAddressRestaurant(res.getString("addressres"));
-                newrestaurant.setPhone(res.getString("phoneres"));
-               // newrestaurant.setIdmenu(res.getString("idmenu"));
+                newrestaurant.setNameRestaurant(res.getString("name_restaurant"));
+                newrestaurant.setAddressRestaurant(res.getString("address_restaurant"));
+                newrestaurant.setPhone(res.getString("phone"));
+                newrestaurant.setIdmenu(res.getString("id_wmenu"));
 
                 restaurants.add(newrestaurant);
             }
-            //this.disconnect();
+            this.disconnect();
 
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al Selecionar los datos de la tabla restaurant de la base de datos", ex);

@@ -15,7 +15,7 @@ public interface IDrinkAccess {
      * @throws Exception error al buscar un plato
      */
     public Drink findDrink(String id) throws Exception;
-    public void deleteDrink(String id) throws Exception;
+    public boolean deleteDrink(String id) throws Exception;
 
     /**
      * Crea un Customer

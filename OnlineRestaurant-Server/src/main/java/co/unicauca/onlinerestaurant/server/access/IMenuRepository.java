@@ -22,4 +22,6 @@ public interface IMenuRepository {
 
     public String createMenu(String id_menu);
     
+    public Menu findMenubyRN(String rname);
+    
 }

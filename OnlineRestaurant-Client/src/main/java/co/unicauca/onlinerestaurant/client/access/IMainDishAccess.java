@@ -34,7 +34,7 @@ public interface IMainDishAccess {
      * @param id Identificador del plato
      * @throws Exception error al actualizar el plato
      */
-    public void deleteMainDish(String id) throws Exception;
+    public boolean deleteMainDish(String id) throws Exception;
 
     /**
      * Crea un plato utilizando un socket

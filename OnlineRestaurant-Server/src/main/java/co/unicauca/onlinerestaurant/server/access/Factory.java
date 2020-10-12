@@ -5,7 +5,7 @@ import co.unicauca.onlinerestaurant.commons.infra.Utilities;
 /**
  * Fabrica que se encarga de instanciar un repositorio concreto
  *
- * @author Santiago Acuña, Ximena Gallego
+ * @author Santiago Acuña, Ximena Gallego,Alejandro Rodriguez
  */
 public class Factory {
 
@@ -172,5 +172,21 @@ public class Factory {
         return result;
     }
     
-    
+//    public IDrinkRepository getRepositoryDrink() {
+//         String type = Utilities.loadProperty("drink.repository");
+//        if (type.isEmpty()) {
+//            type = "default";
+//        }
+//        ISaladRepository result = null;
+//
+//        switch (type) {
+//            case "default":
+//                break;
+//            case "mysql":
+//                result = new SaladRepositoryImplMysql();
+//                break;
+//        }
+//
+//        return result;
+//    }
 }

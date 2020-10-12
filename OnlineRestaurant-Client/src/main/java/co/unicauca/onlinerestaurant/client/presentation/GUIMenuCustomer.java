@@ -6,7 +6,9 @@
 package co.unicauca.onlinerestaurant.client.presentation;
 
 import co.unicauca.onlinerestaurant.client.access.Factory;
+import co.unicauca.onlinerestaurant.client.access.IMenuAccess;
 import co.unicauca.onlinerestaurant.client.access.IRestaurantAccess;
+import co.unicauca.onlinerestaurant.client.domain.services.MenuService;
 import co.unicauca.onlinerestaurant.client.domain.services.RestaurantService;
 import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
 import co.unicauca.onlinerestaurant.commons.domain.Restaurant;
@@ -35,6 +37,8 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
     private List<Restaurant> restaurants = new ArrayList<>();
 
     private GUIListRestaurants listRestaurants;
+
+    private GUIShowMenu ShowMenu;
 
     private boolean state = false;
     /**
@@ -317,8 +321,19 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         resetColor(BtnHomePage);
         resetColor(BtnRestaurant);
         setColor(BtnMenus);
-        System.out.println("Nombre restaurante elegido: " + restaurantName);
-
+        try {
+            ShowMenu = new GUIShowMenu(restaurantName);
+        } catch (Exception ex) {
+            Logger.getLogger(GUIMenuCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (!ShowMenu.isVisible()) {
+            ShowMenu.setMaximizable(true);
+            dskEscritorio.add(ShowMenu);
+            ShowMenu.show();
+        }
+        
+       
     }//GEN-LAST:event_BtnMenusMousePressed
 
     private void BtnRestaurantMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRestaurantMousePressed

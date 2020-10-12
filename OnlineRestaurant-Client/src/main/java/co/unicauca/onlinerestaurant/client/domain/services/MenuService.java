@@ -34,8 +34,13 @@ public class MenuService {
      * @throws java.lang.Exception la excepcio se lanza cuando no logra conexión
      * con el servidor
      */
-    public Menu findMenuDish(String id) throws Exception {
+    public Menu findMenu(String id) throws Exception {
         return service.findMenu(id);
+
+    }
+    
+    public Menu findbyMenubyRN(String name) throws Exception {
+        return service.findMenubyRN(name);
 
     }
 
