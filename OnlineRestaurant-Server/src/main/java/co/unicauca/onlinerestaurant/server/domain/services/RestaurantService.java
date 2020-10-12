@@ -79,8 +79,8 @@ public class RestaurantService {
      * @param phone telefono
      * @param idmenu id del menu
      */
-    public void updateRestaurant(String id, String name, String address, String phone, String idmenu) {
-        repo.updateRestaurant(id, name, address, phone, idmenu);
+    public boolean updateRestaurant(String id, String name, String address, String phone, String idmenu) {
+        return repo.updateRestaurant(id, name, address, phone, idmenu);
     }
 
     /**
@@ -88,8 +88,8 @@ public class RestaurantService {
      *
      * @param id identificador
      */
-    public void removeRestaurant(String id) {
-        repo.removeRestaurant(id);
+    public boolean removeRestaurant(String id) {
+        return repo.removeRestaurant(id);
     }
 
 }

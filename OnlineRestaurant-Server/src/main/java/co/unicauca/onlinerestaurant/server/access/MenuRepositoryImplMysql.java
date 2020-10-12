@@ -60,7 +60,7 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
     
 
     @Override
-    public void deleteMenu(String id) {
+    public boolean deleteMenu(String id) {
         this.connect();
         try {
             String sql = "DELETE FROM menu where id_menu=? ";
@@ -69,13 +69,15 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Plato de la base de datos", ex);
         }
+        return false;
     }
 
     @Override
-    public void updateMenu(String id, MainDish md) {
+    public boolean updateMenu(String id, MainDish md) {
        String id_dish;
        id_dish=md.getId_mainDishe();
        this.connect();
@@ -87,9 +89,11 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al actualizar Plato de la base de datos", ex);
         }
+        return false;
        
     }
 

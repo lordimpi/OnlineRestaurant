@@ -34,8 +34,8 @@ public class DrinkService {
     public Drink findDrink(String id){
         return repo.findDrink(id);
     }
-    public void deleteDrink(String id){
-        repo.deleteDrink(id);
+    public boolean deleteDrink(String id){
+        return repo.deleteDrink(id);
     }
     
     /**

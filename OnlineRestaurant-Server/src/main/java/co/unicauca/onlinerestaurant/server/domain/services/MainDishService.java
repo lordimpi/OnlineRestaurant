@@ -34,8 +34,8 @@ public class MainDishService {
     public MainDish findMainDish(String id) {
         return repo.findDish(id);
     }
-    public void deleteMainDish(String id){
-        repo.deleteDish(id);
+    public boolean deleteMainDish(String id){
+        return repo.deleteDish(id);
     }
     
     /**
@@ -44,8 +44,8 @@ public class MainDishService {
      * @param name nombre
      * @param price  precio 
      */
-    public void updateMainDish(String id,String name,String price) {
-        repo.updateDish(id,name,price);
+    public boolean updateMainDish(String id,String name,String price) {
+        return repo.updateDish(id,name,price);
     }
     
     /**

@@ -34,13 +34,13 @@ public interface ISaladRepository {
      * @param name nombre
      * @param cost precio
      */
-    public void updateSalad(String id, String name, String cost);
+    public boolean updateSalad(String id, String name, String cost);
 
     /**
      * Metod encargado de eliminar ensalada
      *
      * @param id identificador
      */
-    public void deleteSalad(String id);
+    public boolean deleteSalad(String id);
 
 }

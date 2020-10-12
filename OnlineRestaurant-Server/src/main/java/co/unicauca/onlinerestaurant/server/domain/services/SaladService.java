@@ -71,8 +71,8 @@ public class SaladService {
      * @param name nombre
      * @param cost costo
      */
-    public void updateSalad(String id, String name, String cost) {
-        repo.updateSalad(id, name, cost);
+    public boolean updateSalad(String id, String name, String cost) {
+        return repo.updateSalad(id, name, cost);
     }
 
     /**
@@ -80,8 +80,8 @@ public class SaladService {
      *
      * @param id identificador
      */
-    public void deleteSalad(String id) {
-        repo.deleteSalad(id);
+    public boolean deleteSalad(String id) {
+        return repo.deleteSalad(id);
     }
 
 }

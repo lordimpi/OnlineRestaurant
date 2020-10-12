@@ -43,8 +43,8 @@ public class MenuService {
         return repo.findMenu(id);
     }
 
-    public void deleteMenu(String id) {
-        repo.deleteMenu(id);
+    public boolean deleteMenu(String id) {
+        return repo.deleteMenu(id);
     }
 
     /**
@@ -54,8 +54,8 @@ public class MenuService {
      * @param name nombre
      * @param price precio
      */
-    public void updateMenu(String id, MainDish md) {
-        repo.updateMenu(id, md);
+    public boolean updateMenu(String id, MainDish md) {
+        return repo.updateMenu(id, md);
     }
 
     /**

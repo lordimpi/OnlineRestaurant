@@ -17,7 +17,7 @@ public interface IDrinkRepository {
 
     public String createDrink(Drink drink);
     
-    public void deleteDrink(String id);
+    public boolean deleteDrink(String id);
 
     
 }

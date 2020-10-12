@@ -104,7 +104,7 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
      * @return
      */
     @Override
-    public void updateRestaurant(String id, String name, String address, String phone, String idmenu) {
+    public boolean updateRestaurant(String id, String name, String address, String phone, String idmenu) {
 
         this.connect();
         try {
@@ -117,9 +117,11 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al actualizar Restaurante en la base de datos", ex);
         }
+        return false;
     }
 
     /**

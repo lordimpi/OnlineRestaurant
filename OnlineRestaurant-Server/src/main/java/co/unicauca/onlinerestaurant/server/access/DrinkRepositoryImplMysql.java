@@ -38,7 +38,7 @@ public class DrinkRepositoryImplMysql implements IDrinkRepository{
 
         this.connect();
         try {
-            String sql = "SELECT * from maindish where id_dish=? ";
+            String sql = "SELECT * from drink where id_drink=? ";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, id);
             ResultSet res = pstmt.executeQuery();
@@ -57,26 +57,46 @@ public class DrinkRepositoryImplMysql implements IDrinkRepository{
         
     }
     @Override
-    public void deleteDrink(String id) {
+    public boolean deleteDrink(String id) {
             
         Drink drink = null;
 
         this.connect();
         try {
-            String sql = "DELETE FROM maindish where id_dish=? ";
+            String sql = "DELETE FROM drink where id_drink=? ";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, id);
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Plato de la base de datos", ex);
         }
+        return false;
     }
 
     @Override
     public String createDrink(Drink drink) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+        try {
+
+            this.connect();
+            String sql = "INSERT INTO drink(id_drink, name_drink,drink_price) VALUES (?,?,?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, drink.getId_Drink());
+            pstmt.setString(2,drink.getNameDrink() );
+            pstmt.setDouble(3,drink.getDrinkPrice());          
+            pstmt.executeUpdate();
+            pstmt.close();
+            this.disconnect();
+            return drink.getId_Drink();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al insertar el registro", ex);
+        }
+      return "";
+
+
     }
 
         /**

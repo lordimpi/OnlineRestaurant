@@ -78,6 +78,7 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
+            return id;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Ensalada de la base de datos", ex);
         }
@@ -93,7 +94,7 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
      * @param cost costo
      */
     @Override
-    public void updateSalad(String id, String name, String cost) {
+    public boolean updateSalad(String id, String name, String cost) {
         this.connect();
         try {
             String sql = "UPDATE salad SET namesalad=" + "?" + ", pricesalad=" + "?" + "where idsalad=" + "?";
@@ -104,9 +105,11 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al actualizar Ensalada de la base de datos", ex);
         }
+        return false;
     }
 
     /**
@@ -115,8 +118,7 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
      * @param id identificador
      */
     @Override
-    public void deleteSalad(String id) {
-        Salad salad = null;
+    public boolean deleteSalad(String id) {  
         this.connect();
         try {
             String sql = "DELETE FROM salad where idsalad=? ";
@@ -125,9 +127,11 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al Eliminar ensalada de la base de datos", ex);
         }
+        return false;
     }
 
     /**

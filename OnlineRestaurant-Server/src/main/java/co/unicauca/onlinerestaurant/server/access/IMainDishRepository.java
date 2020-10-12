@@ -19,8 +19,8 @@ public interface IMainDishRepository {
      * @param id identificador del plato
      * @return cadena confirmando el estado
      */
-    public void updateDish(String id,String name,String price);
+    public boolean updateDish(String id,String name,String price);
     
-    public void deleteDish(String id);
+    public boolean deleteDish(String id);
 
 }
