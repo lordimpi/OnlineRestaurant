@@ -171,7 +171,6 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
             } else {
                 //Encontró los restaurantes
                 List<MainDish> platos = jsonToMainDishList(jsonResponse);
-                
                 return platos;
             }
         }
