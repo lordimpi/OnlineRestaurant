@@ -91,5 +91,6 @@ public class Restaurant {
     public void setWmenu(Menu wmenu) {
         this.wmenu = wmenu;
     }
+   
     
 }

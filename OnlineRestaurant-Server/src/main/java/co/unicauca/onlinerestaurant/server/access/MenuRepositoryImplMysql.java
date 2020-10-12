@@ -43,9 +43,12 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
                 md.setId_mainDishe(res.getString("id_dish"));
                 md.setDishPrice(res.getDouble("dish_price"));
                 md.setNameDishe(res.getString("dish_name"));
+                
+                
+                
                 menu.setId_menu(res.getString("id_menu"));
                 menu.setMaindish(md);
-    
+                
             }
             pstmt.close();
             this.disconnect();
