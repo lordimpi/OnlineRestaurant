@@ -4,6 +4,7 @@ import co.unicauca.onlinerestaurant.commons.domain.MainDish;
 
 /**
  * Interfaz donde se declara un crud para platos
+ *
  * @author Santiago Acuña
  */
 public interface IMainDishAccess {
@@ -44,5 +45,13 @@ public interface IMainDishAccess {
      * @throws Exception error crear el plato
      */
     public String createMainDish(MainDish mainDish) throws Exception;
+
+    /**
+     * Lista todos los platos
+     *
+     * @return Lista de platos
+     * @throws java.lang.Exception
+     */
+    public java.util.List<MainDish> list() throws Exception;
 
 }

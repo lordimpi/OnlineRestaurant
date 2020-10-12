@@ -6,6 +6,7 @@
 package co.unicauca.onlinerestaurant.client.presentation;
 
 import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.beans.PropertyVetoException;
 
 /**
  *
@@ -13,14 +14,14 @@ import static java.awt.Frame.MAXIMIZED_BOTH;
  */
 public class GUIMenuFoodDishes extends javax.swing.JInternalFrame {
 
-    private GUICreateDishe CreateDishe = new GUICreateDishe();
-    private GUIFindDishe FindDishe = new GUIFindDishe();
-    private GUIModifyDishe ModifyDishe = new GUIModifyDishe();
-    private GUIDeleteDishe DeleteDishe = new GUIDeleteDishe();
+    private final GUICreateDishe CreateDishe = new GUICreateDishe();
+    private final GUIFindDishe FindDishe = new GUIFindDishe();
+    private final GUIModifyDishe ModifyDishe = new GUIModifyDishe();
+    private final GUIDeleteDishe DeleteDishe = new GUIDeleteDishe();
 
-    public GUIMenuFoodDishes() {
+    public GUIMenuFoodDishes() throws PropertyVetoException {
         initComponents();
-        setMaximizable(true);
+        this.setMaximum(true);
     }
 
     /**
@@ -146,7 +147,7 @@ public class GUIMenuFoodDishes extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jMenuItemDeleteDisheActionPerformed
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PropertyVetoException {
         GUIMenuFoodDishes gui = new GUIMenuFoodDishes();
         gui.setVisible(true);
     }

@@ -248,6 +248,11 @@ public class OnlineRestaurantServerSocket implements Runnable {
                     processGetSalad(protocolRequest);
                 }
 
+                if (protocolRequest.getAction().equals("gets")) {
+                    // Consultar un plao
+                    processGetMainDishList();
+                }
+
                 if (protocolRequest.getAction().equals("put")) {
                     // Agrega un restaurante
 
@@ -314,6 +319,29 @@ public class OnlineRestaurantServerSocket implements Runnable {
                 if (protocolRequest.getAction().equals("delete")) {
                     // Eliminar un resturante    
                     processDeleteRestaurantn(protocolRequest);
+                }
+                break;
+            case "maindish":
+                if (protocolRequest.getAction().equals("get")) {
+                    // Consultar un restaurant
+                    processGetMainDish(protocolRequest);
+                }
+                if (protocolRequest.getAction().equals("gets")) {
+                    // Consultar un restaurant
+                    processGetMainDishList();
+                }
+                if (protocolRequest.getAction().equals("post")) {
+                    // Agrega un restaurante
+                    processPostMainDish(protocolRequest);
+                }
+
+                if (protocolRequest.getAction().equals("put")) {
+                    // actualiza un restaurante  
+                    // processSetRestaurantn(protocolRequest);
+                }
+                if (protocolRequest.getAction().equals("delete")) {
+                    // Eliminar un resturante    
+                    processdeleteMainDish(protocolRequest);
                 }
                 break;
             case "menu":
@@ -444,7 +472,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
             String errorJson = generateNotFoundErrorJson("Menu no encontrado. El Id no existe");
             output.println(errorJson);
         } else {
-            resmenu=meService.findMenu(id_menu);
+            resmenu = meService.findMenu(id_menu);
             output.println(objectToJSONME(resmenu));
         }
     }
@@ -550,7 +578,22 @@ public class OnlineRestaurantServerSocket implements Runnable {
             String errorJson = generateNotFoundErrorJson("Restaurantes no encontrados.");
             output.println(errorJson);
         } else {
-            output.println(objectToJSONRE(restaurants));
+            output.println(objectToJSONLRE(restaurants));
+        }
+    }
+
+    /**
+     * Procesa la solicitud de listar restaurantes
+     *
+     * @param protocolRequest Protocolo de la solicitud
+     */
+    private void processGetMainDishList() {
+        List<MainDish> platos = mdService.listMainDish();
+        if (platos == null) {
+            String errorJson = generateNotFoundErrorJson("Platos no encontrados.");
+            output.println(errorJson);
+        } else {
+            output.println(objectToJSONLMD(platos));
         }
     }
 
@@ -659,28 +702,6 @@ public class OnlineRestaurantServerSocket implements Runnable {
         restaurant.setIdmenu(protocolRequest.getParameters().get(0).getValue());
         String response = rService.createRestaurant(restaurant);
         output.println(response);
-    }
-
-    /**
-     * Procesa la actualizacion de un restaurante
-     *
-     * @param protocolRequest Protocolo de la solicitud
-     */
-    private void processPostRestaurantn(Protocol protocolRequest) {
-        // Extraer el identificador del primer parámetro
-        String id = protocolRequest.getParameters().get(0).getValue();
-        String name = protocolRequest.getParameters().get(1).getValue();
-        String address = protocolRequest.getParameters().get(2).getValue();
-        String phone = protocolRequest.getParameters().get(2).getValue();
-        String idmenu = protocolRequest.getParameters().get(2).getValue();
-        rService.updateRestaurant(id, name, address, phone, idmenu);
-        Restaurant restaurant = rService.findRestaurant(id);
-        if (restaurant == null) {
-            String errorJson = generateNotFoundErrorJson("Restaurant no encontrado. El Id no existe");
-            output.println(errorJson);
-        } else {
-            output.println(objectToJSONMRES(restaurant));
-        }
     }
 
     /**
@@ -801,6 +822,19 @@ public class OnlineRestaurantServerSocket implements Runnable {
     }
 
     /**
+     * Convierte el objeto MainDish a json para que el servidor lo envie como
+     * respuesta por el socket
+     *
+     * @param mainDish Lista de platos
+     * @return MainDish en formato json
+     */
+    private String objectToJSONLMD(List<MainDish> mainDish) {
+        Gson gson = new Gson();
+        String strObject = gson.toJson(mainDish);
+        return strObject;
+    }
+
+    /**
      * Convierte el objeto DishEntry a json para que el servidor lo envie como
      * respuesta por el socket
      *
@@ -853,7 +887,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
      * @param restaurant lista de restaurantes
      * @return Restaurant en formato Json
      */
-    private String objectToJSONRE(List<Restaurant> restaurants) {
+    private String objectToJSONLRE(List<Restaurant> restaurants) {
         Gson gson = new Gson();
         String strObject = gson.toJson(restaurants);
         return strObject;

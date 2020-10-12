@@ -2,6 +2,7 @@ package co.unicauca.onlinerestaurant.client.domain.services;
 
 import co.unicauca.onlinerestaurant.client.access.IMainDishAccess;
 import co.unicauca.onlinerestaurant.commons.domain.MainDish;
+import java.util.List;
 
 /**
  *
@@ -33,6 +34,10 @@ public class MainDishService {
 
     }
 
+    public List<MainDish> listDishes() throws Exception{
+        return service.list();
+    }
+    
     public MainDish updateMainDish(String id, String name, String price) throws Exception {
         return service.updateMainDish(id, name, price);
     }

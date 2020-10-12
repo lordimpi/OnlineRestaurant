@@ -8,20 +8,28 @@ package co.unicauca.onlinerestaurant.client.presentation;
 import co.unicauca.onlinerestaurant.client.access.Factory;
 import co.unicauca.onlinerestaurant.client.access.IMainDishAccess;
 import co.unicauca.onlinerestaurant.client.domain.services.MainDishService;
+import co.unicauca.onlinerestaurant.client.infra.Messages;
 import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
 import co.unicauca.onlinerestaurant.commons.domain.MainDish;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author Santiago Acuña
  */
 public class GUIDeleteDishe extends javax.swing.JInternalFrame {
+    
+    private List<MainDish> platos=  new ArrayList<>();;
 
     /**
      * Creates new form GUIUpdateDishe
      */
     public GUIDeleteDishe() {
         initComponents();
+        cargarLista();
+        mostrarTabla();
     }
 
     /**
@@ -34,11 +42,14 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPnNorte = new javax.swing.JPanel();
-        id = new javax.swing.JTextField();
+        jLblID = new javax.swing.JLabel();
+        jTxfID = new javax.swing.JTextField();
         jPnSur = new javax.swing.JPanel();
-        jBtnMidificar = new javax.swing.JButton();
-        jBtnCancelar = new javax.swing.JButton();
+        jBtnEliminar = new javax.swing.JButton();
+        jBtnRecargarTabla = new javax.swing.JButton();
         jPnCentro = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTblPlatos = new javax.swing.JTable();
 
         setClosable(true);
         setMaximizable(true);
@@ -50,22 +61,13 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
         jPnNorte.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPnNorte.setPreferredSize(new java.awt.Dimension(450, 50));
 
-        javax.swing.GroupLayout jPnNorteLayout = new javax.swing.GroupLayout(jPnNorte);
-        jPnNorte.setLayout(jPnNorteLayout);
-        jPnNorteLayout.setHorizontalGroup(
-            jPnNorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPnNorteLayout.createSequentialGroup()
-                .addGap(170, 170, 170)
-                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(230, Short.MAX_VALUE))
-        );
-        jPnNorteLayout.setVerticalGroup(
-            jPnNorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnNorteLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jLblID.setForeground(new java.awt.Color(255, 255, 255));
+        jLblID.setText("ID");
+        jPnNorte.add(jLblID);
+
+        jTxfID.setMinimumSize(new java.awt.Dimension(100, 24));
+        jTxfID.setPreferredSize(new java.awt.Dimension(200, 24));
+        jPnNorte.add(jTxfID);
 
         getContentPane().add(jPnNorte, java.awt.BorderLayout.PAGE_START);
 
@@ -73,71 +75,147 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
         jPnSur.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPnSur.setPreferredSize(new java.awt.Dimension(450, 50));
 
-        jBtnMidificar.setText("Borrar");
-        jBtnMidificar.addActionListener(new java.awt.event.ActionListener() {
+        jBtnEliminar.setText("Borrar");
+        jBtnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnMidificarActionPerformed(evt);
+                jBtnEliminarActionPerformed(evt);
             }
         });
-        jPnSur.add(jBtnMidificar);
+        jPnSur.add(jBtnEliminar);
 
-        jBtnCancelar.setText("Cancelar");
-        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        jBtnRecargarTabla.setText("Recargar");
+        jBtnRecargarTabla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCancelarActionPerformed(evt);
+                jBtnRecargarTablaActionPerformed(evt);
             }
         });
-        jPnSur.add(jBtnCancelar);
+        jPnSur.add(jBtnRecargarTabla);
 
         getContentPane().add(jPnSur, java.awt.BorderLayout.PAGE_END);
 
-        javax.swing.GroupLayout jPnCentroLayout = new javax.swing.GroupLayout(jPnCentro);
-        jPnCentro.setLayout(jPnCentroLayout);
-        jPnCentroLayout.setHorizontalGroup(
-            jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 493, Short.MAX_VALUE)
-        );
-        jPnCentroLayout.setVerticalGroup(
-            jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 207, Short.MAX_VALUE)
-        );
+        jPnCentro.setLayout(new java.awt.BorderLayout());
+
+        jTblPlatos = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
+        jTblPlatos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Nombre", "Precio"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTblPlatos.setFocusable(false);
+        jTblPlatos.setRowHeight(30);
+        jTblPlatos.getTableHeader().setReorderingAllowed(false);
+        jTblPlatos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTblPlatosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTblPlatos);
+
+        jPnCentro.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPnCentro, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+    private void jBtnRecargarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRecargarTablaActionPerformed
+        cargarLista();
+        mostrarTabla();
+    }//GEN-LAST:event_jBtnRecargarTablaActionPerformed
 
-        this.doDefaultCloseAction();
-    }//GEN-LAST:event_jBtnCancelarActionPerformed
-
-    private void jBtnMidificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnMidificarActionPerformed
-        // TODO add your handling code here:
-        String sid = id.getText().trim();
-
+    private void jBtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEliminarActionPerformed
+        
+        String id = jTxfID.getText().trim();
+        
         IMainDishAccess service = Factory.getInstance().getMainDishService();
         // Inyecta la dependencia
         MainDishService mainDishService = new MainDishService(service);
-        if (sid.equals("")) {
-            id.requestFocus();
+        if (id.equals("")) {
+            jTxfID.requestFocus();
+            Messages.warningMessage("Debe ingresar un ID para poder borrar un registro", "Warning");
             return;
         }
         try {
-            mainDishService.deleteMainDish(sid);
+            if (Messages.confirmMessage("¿ Desea borrar el registro ?", "Confirm") != 1) {
+                mainDishService.deleteMainDish(id);
+                Messages.successMessage("El plato " + id + " fue elimado", "EXITO");
+            }
         } catch (Exception ex) {
             successMessage(ex.getMessage(), "Atención");
-            return;
         }
-    }//GEN-LAST:event_jBtnMidificarActionPerformed
+        cargarLista();
+        mostrarTabla();
+    }//GEN-LAST:event_jBtnEliminarActionPerformed
+
+    private void jTblPlatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblPlatosMouseClicked
+        
+        int i = jTblPlatos.getSelectedRow();
+        TableModel model = jTblPlatos.getModel();
+        this.jTxfID.setText(model.getValueAt(i, 0).toString());
+    }//GEN-LAST:event_jTblPlatosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField id;
-    private javax.swing.JButton jBtnCancelar;
-    private javax.swing.JButton jBtnMidificar;
+    private javax.swing.JButton jBtnEliminar;
+    private javax.swing.JButton jBtnRecargarTabla;
+    private javax.swing.JLabel jLblID;
     private javax.swing.JPanel jPnCentro;
     private javax.swing.JPanel jPnNorte;
     private javax.swing.JPanel jPnSur;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTblPlatos;
+    private javax.swing.JTextField jTxfID;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarLista() {
+        IMainDishAccess service = Factory.getInstance().getMainDishService();
+        // Inyecta la dependencia
+        MainDishService mainDish = new MainDishService(service);
+        
+        try {
+            platos = mainDish.listDishes();
+        } catch (Exception ex) {
+            successMessage(ex.getMessage(), "Atención");
+        }
+    }
+    
+    private void mostrarTabla() {
+        String dataTable[][] = new String[platos.size()][3];
+        
+        for (int i = 0; i < platos.size(); i++) {
+            dataTable[i][0] = platos.get(i).getId_mainDishe();
+            dataTable[i][1] = platos.get(i).getNameDishe();
+            dataTable[i][2] = Double.toString(platos.get(i).getDishPrice());
+        }
+        
+        jTblPlatos.setModel(new javax.swing.table.DefaultTableModel(
+                dataTable, new String[]{"ID", "Nombre", "Precio"}));
+        
+    }
+    
 }

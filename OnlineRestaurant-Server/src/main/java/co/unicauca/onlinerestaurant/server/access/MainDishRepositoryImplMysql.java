@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -78,9 +80,9 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
 
         return "";
     }
-    @Override
+     @Override
     public boolean deleteDish(String id) {
-            
+
         this.connect();
         try {
             String sql = "DELETE FROM maindish where id_dish=? ";
@@ -100,7 +102,8 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
      * Permite actualizar un plato en la base de datos
      *
      * @param id identificador del plato
-     * @return cadena
+     * @param name Nombredel plato
+     * @param price Precio del plato
      */
     @Override
     public boolean updateDish(String id, String name, String price) {
@@ -122,6 +125,39 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al actualizar Plato de la base de datos", ex);
         }
         return false;
+    }
+
+    /**
+     * metodo que perimte listar los restaurantes
+     *
+     * @return list
+     */
+    @Override
+    public List<MainDish> list() {
+        List<MainDish> platos = new ArrayList<>();
+        try {
+
+            String sql = "SELECT * FROM maindish";
+            this.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet res = pstmt.executeQuery();
+            System.out.println("plato es"+platos);
+            while (res.next()) {
+                System.out.println("plato es"+platos);
+                MainDish newmaindish = new MainDish();
+
+                newmaindish.setId_mainDishe(res.getString("id_dish"));
+                newmaindish.setNameDishe(res.getString("dish_name"));
+                newmaindish.setDishPrice(Double.parseDouble(res.getString("dish_price")));
+
+                platos.add(newmaindish);
+            }
+            //this.disconnect();
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al Selecionar los datos de la tabla maindish de la base de datos", ex);
+        }
+       
+        return platos;
     }
 
     /**

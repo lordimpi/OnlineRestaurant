@@ -101,7 +101,6 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
      * @param address direcion
      * @param phone telefono
      * @param idmenu id del menu
-     * @return
      */
     @Override
     public boolean updateRestaurant(String id, String name, String address, String phone, String idmenu) {
@@ -127,8 +126,8 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
     /**
      * Metodo encargado de eliminara un restaurante
      *
-     * @param id
-     * @return
+     * @param id Identificador del restaurante a elimnar
+     * @return Retorna true si pudo borrar el plato, false de lo contrario
      */
     @Override
     public boolean removeRestaurant(String id) {
@@ -137,6 +136,7 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
             this.connect();
             String sql = "DELETE FROM Restaurant WHERE= ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
+            
             pstmt.setString(1, id);
             pstmt.executeUpdate();
             pstmt.close();
