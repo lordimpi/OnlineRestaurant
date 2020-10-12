@@ -5,10 +5,20 @@
  */
 package co.unicauca.onlinerestaurant.client.presentation;
 
+import co.unicauca.onlinerestaurant.client.access.Factory;
+import co.unicauca.onlinerestaurant.client.access.IRestaurantAccess;
+import co.unicauca.onlinerestaurant.client.domain.services.RestaurantService;
+import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
+import co.unicauca.onlinerestaurant.commons.domain.Restaurant;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.beans.PropertyVetoException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -29,7 +39,7 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
      */
     private GUICustomer MenuCustomer = new GUICustomer();
     /**
-     *  Guarda la instancia del formulario Menu platos principales
+     * Guarda la instancia del formulario Menu platos principales
      */
     private GUIMenuFoodDishes MenuFoodDishes = new GUIMenuFoodDishes();
     /**
@@ -41,11 +51,19 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
      */
     private int y = 0;
 
+    public static String resraurantName;
+
+    private List<Restaurant> restaurants = new ArrayList<>();
+
+    private GUIListRestaurants listRestaurants;
+
     /**
      * Constructor que inicializa el formulario Menu admin
      */
-    public GUIMenuAdmin() {
+    public GUIMenuAdmin() throws PropertyVetoException {
         initComponents();
+        cargarLista();
+        listRestaurants = new GUIListRestaurants(restaurants);
         setLocationRelativeTo(null);
         initIcons();
     }
@@ -507,6 +525,7 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
     /**
      * Boton para cerrar el formulario
+     *
      * @param evt Evento del boton cerrar
      */
     private void jLbClose1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbClose1MouseClicked
@@ -515,6 +534,7 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
     /**
      * Boton para Maximizar o Minimizar el formulario
+     *
      * @param evt Evento del boton Max Min form
      */
     private void jLbMaxMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbMaxMinMouseClicked
@@ -530,6 +550,7 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
     /**
      * Boton para ocultar el formulario
+     *
      * @param evt Evento del boton ocultar
      */
     private void jLbHideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbHideMouseClicked
@@ -537,7 +558,9 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jLbHideMouseClicked
 
     /**
-     *  Metodo encargado de capturar las coordenadas del raton para poder mover el formulario
+     * Metodo encargado de capturar las coordenadas del raton para poder mover
+     * el formulario
+     *
      * @param evt Evento del Mouse pressed
      */
     private void jPnlCMHMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPnlCMHMousePressed
@@ -546,7 +569,9 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jPnlCMHMousePressed
 
     /**
-     * Metodo encargado de insertar las coordenada del formulario para ubicar el formulario luego de mover con el raton
+     * Metodo encargado de insertar las coordenada del formulario para ubicar el
+     * formulario luego de mover con el raton
+     *
      * @param evt Evento del mouse dragged
      */
     private void jPnlCMHMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPnlCMHMouseDragged
@@ -556,6 +581,7 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
     /**
      * Boton para regresar a la pagina principal del restaurante
+     *
      * @param evt Evento del boton home
      */
     private void BtnHomePageMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnHomePageMousePressed
@@ -572,6 +598,7 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 
     /**
      * Boton que despliega los restaurantes que estan disponibles
+     *
      * @param evt Evento del boton restaurante disponibles
      */
     private void BtnRestaurantMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRestaurantMousePressed
@@ -584,10 +611,20 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         resetColor(BtnUsers);
         resetColor(BtnAccounting);
 
+        cargarLista();
+
+        if (!listRestaurants.isVisible()) {
+            listRestaurants.setMaximizable(true);
+            dskEscritorio.add(listRestaurants);
+            listRestaurants.show();
+            this.BtnMenus.setVisible(true);
+        }
+
     }//GEN-LAST:event_BtnRestaurantMousePressed
 
     /**
      * Boton que despliega los menus del dia
+     *
      * @param evt Evento del boton menus
      */
     private void BtnMenusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMenusMousePressed
@@ -599,11 +636,13 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         resetColor(BtnCustomers);
         resetColor(BtnUsers);
         resetColor(BtnAccounting);
-
+        
+        System.out.println("Nombre restaurante: " + resraurantName);
     }//GEN-LAST:event_BtnMenusMousePressed
-    
+
     /**
      * Boton que despliega los clientes que hay en la base de datos
+     *
      * @param evt Evento del boton
      */
     private void BtnCustomersMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnCustomersMousePressed
@@ -728,7 +767,11 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIMenuAdmin().setVisible(true);
+                try {
+                    new GUIMenuAdmin().setVisible(true);
+                } catch (PropertyVetoException ex) {
+                    Logger.getLogger(GUIMenuAdmin.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -821,5 +864,17 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
                 Image.SCALE_DEFAULT));
         lb.setIcon(icono);
         this.repaint();
+    }
+
+    private void cargarLista() {
+        IRestaurantAccess service = Factory.getInstance().getRestaurantService();
+        // Inyecta la dependencia
+        RestaurantService restaurant = new RestaurantService(service);
+
+        try {
+            restaurants = restaurant.listRestaurants();
+        } catch (Exception ex) {
+            successMessage(ex.getMessage(), "Atención");
+        }
     }
 }
