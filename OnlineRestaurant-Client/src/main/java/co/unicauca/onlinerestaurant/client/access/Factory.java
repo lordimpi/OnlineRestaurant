@@ -70,6 +70,26 @@ public class Factory {
     }
 
     /**
+     * Método que crea una instancia concreta de la jerarquia IDessertService
+     *
+     * @return una clase hija de la abstracción IRepositorioPostre
+     */
+    public IDessertAccess getDessertService() {
+
+        IDessertAccess result = null;
+        String type = Utilities.loadProperty("dessert.service");
+
+        switch (type) {
+            case "default":
+                result = new DessertAccessImplSockets();
+                break;
+        }
+
+        return result;
+
+    }
+
+    /**
      * Método que crea una instancia concreta de la jerarquia IRestaurantService
      *
      * @return una clase hija de la abstracción IRepositorioRestaurante
@@ -88,9 +108,7 @@ public class Factory {
         return result;
 
     }
-    
-    
-    
+
     /**
      * Método que crea una instancia concreta de la jerarquia IRestaurantService
      *
