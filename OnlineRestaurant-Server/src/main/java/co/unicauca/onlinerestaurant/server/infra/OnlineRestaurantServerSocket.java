@@ -42,10 +42,10 @@ import co.unicauca.onlinerestaurant.server.domain.services.SaladService;
  * Servidor Socket que está escuchando permanentemente solicitudes de los
  * clientes. Cada solicitud la atiende en un hilo de ejecución
  *
-<<<<<<< HEAD
-=======
- * @author Santiago Acuña, Ximena Gallego y Camilo Otaya Bravo
->>>>>>> b4ef7e5a6fc5797a2c931418c6accb26c9177e6c
+ * <<<<<<< HEAD ======= @author Sa
+ *
+ * ntiago Acuña, Ximena Gallego y Camilo Otaya Bravo >>>>>>>
+ * b4ef7e5a6fc5797a2c931418c6accb26c9177e6c
  */
 public class OnlineRestaurantServerSocket implements Runnable {
 
@@ -69,15 +69,13 @@ public class OnlineRestaurantServerSocket implements Runnable {
      * Servicio de platos principales
      */
     private final DessertService dService;
-    
-    /**
-     * servicio de bebidas 
-     */
-    
-    // private final DrinkService drService;
-    
-    /**
 
+    /**
+     * servicio de bebidas
+     */
+    // private final DrinkService drService;
+    /**
+     *
      * Servicio de clientes
      */
     private final MenuService meService;
@@ -118,18 +116,17 @@ public class OnlineRestaurantServerSocket implements Runnable {
         IRestaurantRepository rRepository = Factory.getInstance().getRepository5();
         IMenuRepository meRepository = Factory.getInstance().getRepositoryMenu();
         ISaladRepository saRepository = Factory.getInstance().getRepository6();
-       // IDrinkRepository 
-        
+        // IDrinkRepository 
 
         service = new CustomerService(repository);
         mdService = new MainDishService(mdRespository);
         deService = new DishEntryService(deRespository);
         dService = new DessertService(dRepository);
         rService = new RestaurantService(rRepository);
-        meService= new MenuService(meRepository);
+        meService = new MenuService(meRepository);
         saService = new SaladService(saRepository);
-       // drService=new DrinkService();
-        
+        // drService=new DrinkService();
+
     }
 
     /**
@@ -267,36 +264,14 @@ public class OnlineRestaurantServerSocket implements Runnable {
                     processDeleteSalad(protocolRequest);
                 }
                 break;
-                
+
 //            case "drink":
-////                 if (protocolRequest.getAction().equals("gets")) {
-////                    // Consultar un restaurant
-////                    processGetDrinkList();
-////                }
 //                if (protocolRequest.getAction().equals("get")) {
 //                    // Consultar un plao
 //                    processGetDrink(protocolRequest);
 //                }
-//
-//                if (protocolRequest.getAction().equals("put")) {
-//                    // modificar un plato
-//                    processSetDrink(protocolRequest);
-//                }
-//
-//                if (protocolRequest.getAction().equals("post")) {
-//                    // Agregar un plato    
-//                    processPostDrink(protocolRequest);
-//                }
-//                if (protocolRequest.getAction().equals("delete")) {
-//                    // Eliminar un plato    
-//                    processDeleteDrink(protocolRequest);
-//                }
 //                break;
             case "dishentry":
-//                 if (protocolRequest.getAction().equals("gets")) {
-//                    // Consultar un restaurant
-//                    processGetDishEntryList();
-//                }
                 if (protocolRequest.getAction().equals("get")) {
                     // Consultar un plato de entrada
                     processGetDishEntry(protocolRequest);
@@ -308,11 +283,6 @@ public class OnlineRestaurantServerSocket implements Runnable {
                 }
                 break;
             case "Dessert":
-//                 if (protocolRequest.getAction().equals("gets")) {
-//                    // Consultar un restaurant
-//                    processGetDessertList();
-//                }
-//                
                 if (protocolRequest.getAction().equals("get")) {
                     // Consultar un postre
                     processGetDessert(protocolRequest);
@@ -339,19 +309,19 @@ public class OnlineRestaurantServerSocket implements Runnable {
 
                 if (protocolRequest.getAction().equals("put")) {
                     // actualiza un restaurante  
-                   // processSetRestaurantn(protocolRequest);
+                    // processSetRestaurantn(protocolRequest);
                 }
                 if (protocolRequest.getAction().equals("delete")) {
                     // Eliminar un resturante    
                     processDeleteRestaurantn(protocolRequest);
                 }
                 break;
-                case "menu":
+            case "menu":
                 if (protocolRequest.getAction().equals("get")) {
                     // Consultar un customer
                     processGetMenu(protocolRequest);
                 }
-                
+
                 if (protocolRequest.getAction().equals("get2")) {
                     // Consultar un customer
                     processGetMenubyRN(protocolRequest);
@@ -393,11 +363,11 @@ public class OnlineRestaurantServerSocket implements Runnable {
             output.println(objectToJSON(customer));
         }
     }
-    
+
     private void processGetMenu(Protocol protocolRequest) {
         // Extraer la cedula del primer parámetro
-       String id_menu = protocolRequest.getParameters().get(0).getValue();
-       // String id_drink = protocolRequest.getParameters().get(2).getValue();
+        String id_menu = protocolRequest.getParameters().get(0).getValue();
+        // String id_drink = protocolRequest.getParameters().get(2).getValue();
         Menu menu = meService.findMenu(id_menu);
         if (menu == null) {
             String errorJson = generateNotFoundErrorJson("Menu no encontrado");
@@ -406,11 +376,11 @@ public class OnlineRestaurantServerSocket implements Runnable {
             output.println(objectToJSONME(menu));
         }
     }
-    
+
     private void processGetMenubyRN(Protocol protocolRequest) {
         // Extraer la cedula del primer parámetro
-       String name = protocolRequest.getParameters().get(0).getValue();
-       // String id_drink = protocolRequest.getParameters().get(2).getValue();
+        String name = protocolRequest.getParameters().get(0).getValue();
+        // String id_drink = protocolRequest.getParameters().get(2).getValue();
         Menu menu = meService.findMenubyRN(name);
         if (menu == null) {
             String errorJson = generateNotFoundErrorJson("Menu no encontrado");
@@ -419,8 +389,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
             output.println(objectToJSONME(menu));
         }
     }
-    
-    
+
     private void processGetMainDish(Protocol protocolRequest) {
         // Extraer el identificador del primer parámetro
         String id = protocolRequest.getParameters().get(0).getValue();
@@ -438,11 +407,13 @@ public class OnlineRestaurantServerSocket implements Runnable {
         String id = protocolRequest.getParameters().get(0).getValue();
         mdService.deleteMainDish(id);
     }
-    private void processDeleteMenu (Protocol protocolRequest) {
+
+    private void processDeleteMenu(Protocol protocolRequest) {
         // Extraer el identificador del primer parámetro
         String id = protocolRequest.getParameters().get(0).getValue();
         meService.deleteMenu(id);
     }
+
     private void processSetMainDish(Protocol protocolRequest) {
         // Extraer el identificador del primer parámetro
         String id = protocolRequest.getParameters().get(0).getValue();
@@ -457,24 +428,26 @@ public class OnlineRestaurantServerSocket implements Runnable {
             output.println(objectToJSONMD(mainDish));
         }
     }
-    
-    
+
     private void processSetMenu(Protocol protocolRequest) {
+        boolean menu;
+        Menu resmenu;
         // Extraer el identificador del primer parámetro
         String id_menu = protocolRequest.getParameters().get(0).getValue();
         String id_dish = protocolRequest.getParameters().get(1).getValue();
-        MainDish md= new MainDish();
-        md=mdService.findMainDish(id_dish);
-        meService.updateMenu(id_menu,md);
-        Menu menu = meService.findMenu(id_menu);
-        if (menu == null) {
+        String id_drink = protocolRequest.getParameters().get(2).getValue();
+        String id_entry = protocolRequest.getParameters().get(3).getValue();
+        String id_salad = protocolRequest.getParameters().get(4).getValue();
+        String id_dessert = protocolRequest.getParameters().get(5).getValue();
+        menu = meService.updateMenu(id_menu, id_dish, id_drink, id_entry, id_salad, id_dessert);
+        if (!menu) {
             String errorJson = generateNotFoundErrorJson("Menu no encontrado. El Id no existe");
             output.println(errorJson);
         } else {
-            output.println(objectToJSONME(menu));
+            resmenu=meService.findMenu(id_menu);
+            output.println(objectToJSONME(resmenu));
         }
     }
-    
 
     /**
      * Procesa la solicitud de actualizar ensalada
@@ -486,7 +459,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
         String id = protocolRequest.getParameters().get(0).getValue();
         String name = protocolRequest.getParameters().get(1).getValue();
         String coste = protocolRequest.getParameters().get(2).getValue();
-        double price=Double.parseDouble(coste);
+        double price = Double.parseDouble(coste);
         saService.updateSalad(id, name, price);
         Salad salad = saService.findSalad(id);
         if (salad == null) {
@@ -539,7 +512,6 @@ public class OnlineRestaurantServerSocket implements Runnable {
     private void processGetRestaurant(Protocol protocolRequest) {
 
         // Extraer el identificador del primer parámetro
-
         String id = protocolRequest.getParameters().get(0).getValue();
         Restaurant restaurant = rService.findRestaurant(id);
         if (restaurant == null) {
@@ -551,8 +523,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
     }
 
     /**
-<<<<<<< HEAD
-     * Procesa la solicitud de buscar una ensalada
+     * <<<<<<< HEAD Procesa la solicitud de buscar una ensalada
      *
      * @param protocolRequest Protocolo de la solicitud
      */
@@ -567,9 +538,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
             output.println(objectToJSONRSA(salad));
         }
     }
-    
-    
-    
+
     /**
      * Procesa la solicitud de listar restaurantes
      *
@@ -584,9 +553,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
             output.println(objectToJSONRE(restaurants));
         }
     }
-    
-    
-    
+
 //    private void processGetDishEntryList() {
 //        List<DishEntry> DishEntry = deService.listDishEntry();
 //        if (DishEntry == null) {
@@ -596,8 +563,6 @@ public class OnlineRestaurantServerSocket implements Runnable {
 //            output.println(objectToJSONDE(DishEntry));
 //        }
 //    }
-    
-    
 //    
 //    private void processGetDrinkList() {
 //        List<Drink> restaurants = rService.listRestaurant();
@@ -609,9 +574,6 @@ public class OnlineRestaurantServerSocket implements Runnable {
 //        }
 //    }
 //    
-    
-    
-    
     /**
      * Procesa la solicitud de agregar un customer
      *
@@ -631,16 +593,15 @@ public class OnlineRestaurantServerSocket implements Runnable {
         String response = service.createCustomer(customer);
         output.println(response);
     }
-    
-    
-    
+
     private void processPostMenu(Protocol protocolRequest) {
         String id_menu;
         // Reconstruir el customer a partir de lo que viene en los parámetros
-        id_menu=(protocolRequest.getParameters().get(0).getValue());
+        id_menu = (protocolRequest.getParameters().get(0).getValue());
         String response = meService.createMenu(id_menu);
         output.println(response);
     }
+
     /**
      * Procesa la solicitud de agregar un plato
      *
@@ -667,7 +628,6 @@ public class OnlineRestaurantServerSocket implements Runnable {
         String response = dService.createDessert(dessert);
         output.println(response);
     }
-
 
     /**
      * Proceso la solicitud de agregar un plato de entrada
@@ -701,13 +661,11 @@ public class OnlineRestaurantServerSocket implements Runnable {
         output.println(response);
     }
 
-
     /**
      * Procesa la actualizacion de un restaurante
      *
      * @param protocolRequest Protocolo de la solicitud
      */
-
     private void processPostRestaurantn(Protocol protocolRequest) {
         // Extraer el identificador del primer parámetro
         String id = protocolRequest.getParameters().get(0).getValue();
@@ -724,7 +682,6 @@ public class OnlineRestaurantServerSocket implements Runnable {
             output.println(objectToJSONMRES(restaurant));
         }
     }
-
 
     /**
      * Proceso para agregar una ensalada
@@ -760,7 +717,6 @@ public class OnlineRestaurantServerSocket implements Runnable {
         String id = protocolRequest.getParameters().get(0).getValue();
         saService.deleteSalad(id);
     }
-
 
     /**
      * Genera un ErrorJson de cliente no encontrado
@@ -824,13 +780,13 @@ public class OnlineRestaurantServerSocket implements Runnable {
         String strObject = gson.toJson(customer);
         return strObject;
     }
-    
-    
+
     private String objectToJSONME(Menu me) {
         Gson gson = new Gson();
         String strObject = gson.toJson(me);
         return strObject;
     }
+
     /**
      * Convierte el objeto MainDish a json para que el servidor lo envie como
      * respuesta por el socket
@@ -887,14 +843,11 @@ public class OnlineRestaurantServerSocket implements Runnable {
     }
 
     /**
-<<<<<<< HEAD
-     * Covierte el objeto Restaurante a Json para que el servidor lo envie como
-     * respuesta por el socket
+     * <<<<<<< HEAD Covierte el objeto Restaurante a Json para que el servidor
+     * lo envie como respuesta por el socket
      *
-     * @param restaurant restaurante
-=======
-     * Convierte la lista Restaurante a json para que el servidor lo envie como
-     * respuesta por el socket
+     * @param restaurant restaurante ======= Convierte la lista Restaurante a
+     * json para que el servidor lo envie como respuesta por el socket
      *
      *
      * @param restaurant lista de restaurantes
@@ -910,8 +863,8 @@ public class OnlineRestaurantServerSocket implements Runnable {
      * Covierte el objeto Restaurante a Json para que el servidor lo envie como
      * respuesta por el socket
      *
-     * @param restaurant restaurante modificado
->>>>>>> b4ef7e5a6fc5797a2c931418c6accb26c9177e6c
+     * @param restaurant restaurante modificado >>>>>>>
+     * b4ef7e5a6fc5797a2c931418c6accb26c9177e6c
      * @return restaurante en formato Json
      */
     private String objectToJSONMRES(Restaurant restaurant) {
@@ -919,7 +872,6 @@ public class OnlineRestaurantServerSocket implements Runnable {
         String strObject = gson.toJson(restaurant);
         return strObject;
     }
-
 
     private String objectToJSONRSA(Salad salad) {
         Gson gson = new Gson();

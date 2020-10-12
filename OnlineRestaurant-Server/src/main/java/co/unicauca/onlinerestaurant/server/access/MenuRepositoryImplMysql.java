@@ -166,15 +166,17 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
     }
 
     @Override
-    public boolean updateMenu(String id, MainDish md) {
-       String id_dish;
-       id_dish=md.getId_mainDishe();
+    public boolean updateMenu(String id_menu,String id_dish,String id_drink,String id_entry,String id_salad,String id_dessert) {
        this.connect();
         try {
-            String sql = "UPDATE menu SET id_dish=? where id_dish=?";
+            String sql = "UPDATE menu SET id_maindish=?,id_drink=?, id_entry=?, id_salad=?, id_dessert=? where id_menu=?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1,id_dish );
-            pstmt.setString(2, id);
+            pstmt.setString(2,id_drink );
+            pstmt.setString(3,id_entry );
+            pstmt.setString(4,id_salad );
+            pstmt.setString(5,id_dessert );
+            pstmt.setString(6, id_menu);
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
@@ -196,6 +198,7 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
+            return "ok";
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Plato de la base de datos", ex);
         }

@@ -235,7 +235,7 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
         }
         try {
             GUIMenuCustomer.restaurantName = jLblRestaurantNombre.getText();
-            GUIMenuAdmin.resraurantName = jLblRestaurantNombre.getText();
+            GUIMenuAdmin.restaurantName = jLblRestaurantNombre.getText();
             Messages.successMessage("Restaurante " + jLblRestaurantNombre.getText() + " fue seleccionado", "EXITO");
         } catch (Exception e) {
         }

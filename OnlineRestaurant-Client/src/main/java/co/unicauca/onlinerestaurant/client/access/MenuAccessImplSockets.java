@@ -84,9 +84,9 @@ public class MenuAccessImplSockets implements IMenuAccess{
 
 
     @Override
-    public boolean updateMenu(String id, String id_dish) throws Exception {
-          String jsonResponse = null;
-        String requestJson = updateMenuRequestJson(id,id_dish);
+    public boolean updateMenu(String id, String id_dish,String id_drink,String id_entry,String id_salad,String id_dessert) throws Exception {
+        String jsonResponse = null;
+        String requestJson = updateMenuRequestJson( id,  id_dish, id_drink, id_entry, id_salad, id_dessert);
         try {
             mySocket.connect();
             jsonResponse = mySocket.sendStream(requestJson);
@@ -224,13 +224,18 @@ public class MenuAccessImplSockets implements IMenuAccess{
      * @return
      */
 
-    private String updateMenuRequestJson(String id_menu, String id_dish) {
+    private String updateMenuRequestJson(String id_menu, String id_dish,String id_drink,String id_entry,String id_salad,String id_dessert) {
 
         Protocol protocol = new Protocol();
         protocol.setResource("menu");
         protocol.setAction("put");
         protocol.addParameter("id_menu", id_menu);
         protocol.addParameter("id_dish", id_dish);
+        protocol.addParameter("id_drink", id_drink);
+        protocol.addParameter("id_entry", id_entry);
+        protocol.addParameter("id_salad", id_salad);
+        protocol.addParameter("id_dessert", id_dessert);
+        
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);
 

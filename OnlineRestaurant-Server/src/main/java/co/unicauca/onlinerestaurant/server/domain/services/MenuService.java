@@ -59,8 +59,8 @@ public class MenuService {
      * @param name nombre
      * @param price precio
      */
-    public boolean updateMenu(String id, MainDish md) {
-        return repo.updateMenu(id, md);
+    public boolean updateMenu(String id_menu,String id_dish,String id_drink,String id_entry,String id_salad,String id_dessert) {
+        return repo.updateMenu(id_menu,id_dish,id_drink,id_entry,id_salad,id_dessert);
     }
 
     /**

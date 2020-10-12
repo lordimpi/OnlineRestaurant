@@ -13,7 +13,7 @@ public interface IMenuAccess {
 
     public Menu findMenubyRN(String name) throws Exception;
     
-    public boolean updateMenu(String id, String id_dish) throws Exception;
+    public boolean updateMenu(String id, String id_dish,String id_drink,String id_entry,String id_salad,String id_dessert) throws Exception;
 
     public boolean deleteMenu(String id) throws Exception;
 

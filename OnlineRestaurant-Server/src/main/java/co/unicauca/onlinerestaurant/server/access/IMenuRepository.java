@@ -18,7 +18,7 @@ public interface IMenuRepository {
     
     public boolean deleteMenu(String id);
 
-    public boolean updateMenu(String id, MainDish md);
+    public boolean updateMenu(String id_menu,String id_dish,String id_drink,String id_entry,String id_salad,String id_dessert);
 
     public String createMenu(String id_menu);
     

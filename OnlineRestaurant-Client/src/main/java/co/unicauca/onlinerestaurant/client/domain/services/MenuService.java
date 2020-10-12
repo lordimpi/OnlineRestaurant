@@ -44,12 +44,12 @@ public class MenuService {
 
     }
 
-    public void updateMenu(String id, String id_dish) throws Exception {
-        service.updateMenu(id, id_dish);
+    public boolean updateMenu(String id, String id_dish,String id_drink,String id_entry,String id_salad,String id_dessert) throws Exception {
+        return service.updateMenu(id, id_dish,id_drink,id_entry,id_salad,id_dessert);
     }
 
-    public void deleteMenu(String id) throws Exception {
-        service.deleteMenu(id);
+    public boolean deleteMenu(String id) throws Exception {
+        return service.deleteMenu(id);
     }
 
     public String createMenu(String id) throws Exception {
