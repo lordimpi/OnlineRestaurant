@@ -172,21 +172,21 @@ public class Factory {
         return result;
     }
     
-//    public IDrinkRepository getRepositoryDrink() {
-//         String type = Utilities.loadProperty("drink.repository");
-//        if (type.isEmpty()) {
-//            type = "default";
-//        }
-//        ISaladRepository result = null;
-//
-//        switch (type) {
-//            case "default":
-//                break;
-//            case "mysql":
-//                result = new SaladRepositoryImplMysql();
-//                break;
-//        }
-//
-//        return result;
-//    }
+    public IDrinkRepository getRepositoryDrink() {
+         String type = Utilities.loadProperty("drink.repository");
+        if (type.isEmpty()) {
+            type = "default";
+        }
+        IDrinkRepository result = null;
+
+        switch (type) {
+            case "default":
+                break;
+            case "mysql":
+                result = new DrinkRepositoryImplMysql();
+                break;
+        }
+
+        return result;
+    }
 }

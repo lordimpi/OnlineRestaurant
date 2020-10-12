@@ -192,7 +192,7 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
     public String createMenu(String id_menu) {
         this.connect();
         try {
-            String sql = "INSERT INTO menu(id_menu) VALUES (?,?)";
+            String sql = "INSERT INTO menu(id_menu) VALUES (?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, id_menu);
             pstmt.executeUpdate();

@@ -11,7 +11,6 @@ import co.unicauca.onlinerestaurant.client.domain.services.CustomerService;
 import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
 import static co.unicauca.onlinerestaurant.client.infra.Messages.warningMessage;
 import co.unicauca.onlinerestaurant.commons.domain.Customer;
-import co.unicauca.onlinerestaurant.commons.domain.MainDish;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -21,7 +20,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import static jdk.nashorn.internal.runtime.Debug.id;
 
 /**
  *
