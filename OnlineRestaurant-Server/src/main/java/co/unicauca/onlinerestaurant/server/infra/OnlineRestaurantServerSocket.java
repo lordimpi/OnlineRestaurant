@@ -42,10 +42,7 @@ import co.unicauca.onlinerestaurant.server.domain.services.SaladService;
  * Servidor Socket que está escuchando permanentemente solicitudes de los
  * clientes. Cada solicitud la atiende en un hilo de ejecución
  *
- * <<<<<<< HEAD ======= @author Sa
- *
- * ntiago Acuña, Ximena Gallego y Camilo Otaya Bravo >>>>>>>
- * b4ef7e5a6fc5797a2c931418c6accb26c9177e6c
+ * @author Santiago Acuña, Ximena Gallego y Camilo Otaya Bravo
  */
 public class OnlineRestaurantServerSocket implements Runnable {
 
@@ -236,6 +233,31 @@ public class OnlineRestaurantServerSocket implements Runnable {
                 if (protocolRequest.getAction().equals("post")) {
                     // Agregar un customer    
                     processPostCustomer(protocolRequest);
+                }
+                break;
+            case "maindish":
+                if (protocolRequest.getAction().equals("get")) {
+                    // Consultar un plao
+                    processGetMainDish(protocolRequest);
+                }
+
+                if (protocolRequest.getAction().equals("gets")) {
+                    // Consultar un plao
+                    processGetMainDishList();
+                }
+
+                if (protocolRequest.getAction().equals("put")) {
+                    // modificar un plato
+                    processSetMainDish(protocolRequest);
+                }
+
+                if (protocolRequest.getAction().equals("post")) {
+                    // Agregar un plato    
+                    processPostMainDish(protocolRequest);
+                }
+                if (protocolRequest.getAction().equals("delete")) {
+                    // Eliminar un plato    
+                    processdeleteMainDish(protocolRequest);
                 }
                 break;
             case "salad":
@@ -449,7 +471,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
             String errorJson = generateNotFoundErrorJson("Menu no encontrado. El Id no existe");
             output.println(errorJson);
         } else {
-            resmenu=meService.findMenu(id_menu);
+            resmenu = meService.findMenu(id_menu);
             output.println(objectToJSONME(resmenu));
         }
     }
