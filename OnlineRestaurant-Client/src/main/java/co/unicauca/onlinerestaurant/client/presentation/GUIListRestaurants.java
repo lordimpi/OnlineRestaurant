@@ -235,6 +235,7 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
         }
         try {
             GUIMenuCustomer.restaurantName = jLblRestaurantNombre.getText();
+            GUIMenuAdmin.resraurantName = jLblRestaurantNombre.getText();
             Messages.successMessage("Restaurante " + jLblRestaurantNombre.getText() + " fue seleccionado", "EXITO");
         } catch (Exception e) {
         }
@@ -290,6 +291,7 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
 
         jTblRestaurants.setModel(new javax.swing.table.DefaultTableModel(
                 dataTable, new String[]{"Nombre", "Direccion", "Telefono"}));
+
     }
 
     /**

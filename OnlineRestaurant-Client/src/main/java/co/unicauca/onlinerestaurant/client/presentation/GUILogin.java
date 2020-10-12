@@ -231,7 +231,12 @@ public class GUILogin extends javax.swing.JFrame {
         if (cus.getRol().equals("admin")) {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    GUIMenuAdmin ins = new GUIMenuAdmin();
+                    GUIMenuAdmin ins = null;
+                    try {
+                        ins = new GUIMenuAdmin();
+                    } catch (PropertyVetoException ex) {
+                        Logger.getLogger(GUILogin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     ins.setExtendedState(NORMAL);
                     ins.setVisible(true);
                 }
