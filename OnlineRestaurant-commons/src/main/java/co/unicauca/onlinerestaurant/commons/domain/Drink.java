@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.commons.domain;
 
 /**
@@ -10,39 +5,45 @@ package co.unicauca.onlinerestaurant.commons.domain;
  * @author alejo
  */
 public class Drink {
-    private String id_drink;
-    /**
-     * Nombre
-     */
-    private String name_drink;
-    /**
-     * valor
-     */
-    private int cost_drink;
-
-    public String getId_drink() {
-        return id_drink;
-    }
-
-    public void setId_drink(String id_drink) {
-        this.id_drink = id_drink;
-    }
-
-    public String getName_drink() {
-        return name_drink;
-    }
-
-    public void setName_drink(String name_drink) {
-        this.name_drink = name_drink;
-    }
-
-    public int getCost_drink() {
-        return cost_drink;
-    }
-
-    public void setCost_drink(int cost_drink) {
-        this.cost_drink = cost_drink;
-    }
+   
+    private String id_Drink;
     
+    private String nameDrink;
+    
+    private double drinkPrice;
+
+    public Drink(String id_Drink, String nameDrink, double drinkPrice) {
+        this.id_Drink = id_Drink;
+        this.nameDrink = nameDrink;
+        this.drinkPrice = drinkPrice;
+    }
+
+    public Drink() {
+    }
+
+    public String getId_Drink() {
+        return id_Drink;
+    }
+
+    public void setId_Drink(String id_Drink) {
+        this.id_Drink = id_Drink;
+    }
+
+    public String getNameDrink() {
+        return nameDrink;
+    }
+
+    public void setNameDrink(String nameDrink) {
+        this.nameDrink = nameDrink;
+    }
+
+    public double getDrinkPrice() {
+        return drinkPrice;
+    }
+
+    public void setDrinkPrice(double drinkPrice) {
+        this.drinkPrice = drinkPrice;
+    }
+
     
 }
