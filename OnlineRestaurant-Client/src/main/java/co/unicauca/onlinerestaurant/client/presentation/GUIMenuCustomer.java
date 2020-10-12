@@ -36,6 +36,8 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
 
     private GUIListRestaurants listRestaurants;
 
+    private GUIShowMenu ShowMenu;
+
     private boolean state = false;
     /**
      * Guarda la coordenada en eje x para poder mover el formulario con el raton
@@ -317,8 +319,19 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         resetColor(BtnHomePage);
         resetColor(BtnRestaurant);
         setColor(BtnMenus);
-        System.out.println("Nombre restaurante elegido: " + restaurantName);
-
+        try {
+            ShowMenu = new GUIShowMenu(restaurantName);
+        } catch (Exception ex) {
+            Logger.getLogger(GUIMenuCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (!ShowMenu.isVisible()) {
+            ShowMenu.setMaximizable(true);
+            dskEscritorio.add(ShowMenu);
+            ShowMenu.show();
+        }
+        
+       
     }//GEN-LAST:event_BtnMenusMousePressed
 
     private void BtnRestaurantMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRestaurantMousePressed

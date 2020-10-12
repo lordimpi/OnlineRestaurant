@@ -35,7 +35,7 @@ public interface IRestaurantRepository {
      * @param phone telefono
      * @param idmenu id del menu    
      */
-    public void updateRestaurant(String id, String name, String address, String phone, String idmenu);
+    public boolean updateRestaurant(String id, String name, String address, String phone, String idmenu);
 
     /**
      * Metodo encargado de remover un restaurante

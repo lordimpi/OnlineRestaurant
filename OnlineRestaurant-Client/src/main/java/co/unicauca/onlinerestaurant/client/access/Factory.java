@@ -88,4 +88,25 @@ public class Factory {
         return result;
 
     }
+    
+    
+    
+    /**
+     * Método que crea una instancia concreta de la jerarquia IRestaurantService
+     *
+     * @return una clase hija de la abstracción IRepositorioRestaurante
+     */
+    public IMenuAccess getMenuService() {
+
+        IMenuAccess result = null;
+        String type = Utilities.loadProperty("restaurant.service");
+
+        switch (type) {
+            case "default":
+                result = new MenuAccessImplSockets();
+                break;
+        }
+
+        return result;
+    }
 }

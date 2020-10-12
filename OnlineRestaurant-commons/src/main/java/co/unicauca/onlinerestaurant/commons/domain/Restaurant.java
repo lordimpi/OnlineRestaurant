@@ -32,14 +32,14 @@ public class Restaurant {
      * @param NameRestaurant nombre del restaurante
      * @param addressRestaurant direccion 
      * @param phone telefono
-     * @param idmenu  id  del menu
+     * @param idmenu menu de la semana
      */
-    public Restaurant(String idRestaurant, String NameRestaurant, String addressRestaurant, String phone, String idmenu) {
+    public Restaurant(String idRestaurant, String NameRestaurant, String addressRestaurant, String phone,String idmenu) {
         this.idRestaurant = idRestaurant;
         this.NameRestaurant = NameRestaurant;
         this.addressRestaurant = addressRestaurant;
         this.phone = phone;
-        this.idmenu = idmenu;
+        this.idmenu=idmenu;
     }
     
     /**
@@ -90,5 +90,7 @@ public class Restaurant {
     public void setIdmenu(String idmenu) {
         this.idmenu = idmenu;
     }
+
+  
     
 }

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package co.unicauca.onlinerestaurant.client.presentation;
-
 import co.unicauca.onlinerestaurant.client.access.Factory;
 import co.unicauca.onlinerestaurant.client.access.IRestaurantAccess;
 import co.unicauca.onlinerestaurant.client.domain.services.RestaurantService;
@@ -42,6 +41,10 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
      * Guarda la instancia del formulario Menu platos principales
      */
     private GUIMenuFoodDishes MenuFoodDishes = new GUIMenuFoodDishes();
+    
+    
+    private GUIShowMenuAdmin ShowMenu;
+    
     /**
      * Guarda la coordenada en eje x para poder mover el formulario con el raton
      */
@@ -51,7 +54,7 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
      */
     private int y = 0;
 
-    public static String resraurantName;
+    public static String restaurantName;
 
     private List<Restaurant> restaurants;
 
@@ -637,7 +640,20 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         resetColor(BtnUsers);
         resetColor(BtnAccounting);
         
-        System.out.println("Nombre restaurante: " + resraurantName);
+       
+        try {
+            ShowMenu = new GUIShowMenuAdmin(restaurantName);
+        } catch (Exception ex) {
+            Logger.getLogger(GUIMenuCustomer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (!ShowMenu.isVisible()) {
+            ShowMenu.setMaximizable(true);
+            dskEscritorio.add(ShowMenu);
+            ShowMenu.show();
+        }
+        
+       
     }//GEN-LAST:event_BtnMenusMousePressed
 
     /**

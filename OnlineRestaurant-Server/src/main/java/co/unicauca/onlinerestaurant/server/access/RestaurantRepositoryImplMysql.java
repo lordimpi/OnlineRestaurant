@@ -1,5 +1,6 @@
 package co.unicauca.onlinerestaurant.server.access;
 
+import co.unicauca.onlinerestaurant.commons.domain.Menu;
 import co.unicauca.onlinerestaurant.commons.domain.Restaurant;
 import co.unicauca.onlinerestaurant.commons.infra.Utilities;
 import java.sql.Connection;
@@ -40,7 +41,7 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
     @Override
     public Restaurant findRestaurant(String id) {
         Restaurant restaurant = null;
-
+        Menu wmenu=null;
         this.connect();
         try {
             String sql = "SELECT * from restaurant where id=? ";
@@ -53,7 +54,7 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
                 restaurant.setNameRestaurant(res.getString("nameres"));
                 restaurant.setAddressRestaurant(res.getString("addressres"));
                 restaurant.setAddressRestaurant(res.getString("phoneres"));
-                restaurant.setIdmenu(res.getString("idmenu"));
+              //  restaurant.setIdmenu(res.getString("idmenu"));
 
             }
             pstmt.close();
@@ -81,7 +82,7 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
             pstmt.setString(2, restaurant.getNameRestaurant());
             pstmt.setString(3, restaurant.getAddressRestaurant());
             pstmt.setString(4, restaurant.getPhone());
-            pstmt.setString(5, restaurant.getIdmenu());
+          //  pstmt.setString(5, restaurant.getIdmenu());
 
             pstmt.executeUpdate();
             pstmt.close();
@@ -102,7 +103,7 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
      * @param idmenu id del menu
      */
     @Override
-    public void updateRestaurant(String id, String name, String address, String phone, String idmenu) {
+    public boolean updateRestaurant(String id, String name, String address, String phone, String idmenu) {
 
         this.connect();
         try {
@@ -115,9 +116,11 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al actualizar Restaurante en la base de datos", ex);
         }
+        return false;
     }
 
     /**
@@ -170,7 +173,7 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
 
                 restaurants.add(newrestaurant);
             }
-            //this.disconnect();
+            this.disconnect();
 
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al Selecionar los datos de la tabla restaurant de la base de datos", ex);

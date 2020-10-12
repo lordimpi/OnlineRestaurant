@@ -41,8 +41,18 @@ public interface ICustomerRepository {
      * @return
      */
     public List<Customer> list();
+    /**
+     * metodo para borrar customer
+     * @param id
+     * @return 
+     */
 
     public boolean deleteCustomer(int id);
+    
+    /**
+     * metodo Lista de customers
+     * @return 
+     */
 
     public List<Customer> Costomers();
 

@@ -1,29 +1,35 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package co.unicauca.onlinerestaurant.server.domain.services;
 
 import co.unicauca.onlinerestaurant.commons.domain.MainDish;
+import co.unicauca.onlinerestaurant.commons.domain.Menu;
 import co.unicauca.onlinerestaurant.commons.infra.JsonError;
-import co.unicauca.onlinerestaurant.server.access.IMainDishRepository;
+import co.unicauca.onlinerestaurant.server.access.IMenuRepository;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author Santiago Acuña
+ * @author soces
  */
-public class MainDishService {
+public class MenuService {
 
     /**
      * Repositorio de platos
      */
-    IMainDishRepository repo;
+    IMenuRepository repo;
 
     /**
      * Constructor parametrizado. Hace inyeccion de dependencias
      *
      * @param repo repositorio de tipo IMainDishRepository
      */
-    public MainDishService(IMainDishRepository repo) {
+    public MenuService(IMenuRepository repo) {
         this.repo = repo;
     }
 
@@ -33,27 +39,28 @@ public class MainDishService {
      * @param id
      * @return
      */
-    public MainDish findMainDish(String id) {
-        return repo.findDish(id);
+    public Menu findMenu(String id) {
+        return repo.findMenu(id);
+    }
+    
+    
+    public Menu findMenubyRN(String name) {
+        return repo.findMenubyRN(name);
     }
 
-    public List<MainDish> listMainDish() {
-        return repo.list();
-    }
-
-    public boolean deleteMainDish(String id) {
-        return repo.deleteDish(id);
+    public boolean deleteMenu(String id) {
+        return repo.deleteMenu(id);
     }
 
     /**
      * Metodo encargado de actualizar un plato
      *
-     * @param id identificador
+    * @param id identificador
      * @param name nombre
      * @param price precio
      */
-    public boolean updateMainDish(String id, String name, String price) {
-        return repo.updateDish(id, name, price);
+    public boolean updateMenu(String id_menu,String id_dish,String id_drink,String id_entry,String id_salad,String id_dessert) {
+        return repo.updateMenu(id_menu,id_dish,id_drink,id_entry,id_salad,id_dessert);
     }
 
     /**
@@ -62,15 +69,10 @@ public class MainDishService {
      * @param mainDish plato
      * @return devuelve el id del plato creado
      */
-    public String createMainDish(MainDish mainDish) {
+    public String createMenu(String id_menu) {
         List<JsonError> errors = new ArrayList<>();
-
-        String id = mainDish.getId_mainDishe();
-        String name = mainDish.getNameDishe();
-        String precio = Double.toString(mainDish.getDishPrice());
         // Validaciones y reglas de negocio
-        if (id.isEmpty() || mainDish.getNameDishe().isEmpty()
-                || precio.isEmpty()) {
+        if (id_menu.isEmpty()) {
             errors.add(new JsonError("400", "BAD_REQUEST", "id, nombre y precio son obligatorios. "));
         }
         // Que no esté repetido
@@ -79,7 +81,6 @@ public class MainDishService {
             String errorsJson = gson.toJson(errors);
             return errorsJson;
         }
-        return repo.createMainDish(id, name, precio);
+        return repo.createMenu(id_menu);
     }
-
 }

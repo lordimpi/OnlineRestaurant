@@ -10,42 +10,42 @@ package co.unicauca.onlinerestaurant.commons.domain;
  * @author alejo
  */
 public class Salad {
+
     /**
      * Identificador
      */
-     private String id_Dish_Salad;
+    private String idSalad;
     /**
      * Nombre
      */
-    private String name_Dish_Salad;
+    private String nameSalad;
     /**
      * valor
      */
-    private int cost_Dish_Salad;
+    private double costSalad;
 
-    public String getId_Dish_Salad() {
-        return id_Dish_Salad;
+    public String getIdSalad() {
+        return idSalad;
     }
 
-    public void setId_Dish_Salad(String id_Dish_Salad) {
-        this.id_Dish_Salad = id_Dish_Salad;
+    public void setIdhSalad(String idSalad) {
+        this.idSalad = idSalad;
     }
 
-    public String getName_Dish_Salad() {
-        return name_Dish_Salad;
+    public String getNameSalad() {
+        return nameSalad;
     }
 
-    public void setName_Dish_Salad(String name_Dish_Salad) {
-        this.name_Dish_Salad = name_Dish_Salad;
+    public void setNameDishSalad(String nameSalad) {
+        this.nameSalad = nameSalad;
     }
 
-    public int getCost_Dish_Salad() {
-        return cost_Dish_Salad;
+    public double getCostSalad() {
+        return costSalad;
     }
 
-    public void setCost_Dish_Salad(int cost_Dish_Salad) {
-        this.cost_Dish_Salad = cost_Dish_Salad;
+    public void setCostSalad(double costSalad) {
+        this.costSalad = costSalad;
     }
-    
 
 }
