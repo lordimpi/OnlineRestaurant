@@ -37,15 +37,15 @@ public class MainDishService {
         return repo.findDish(id);
     }
 
-    public boolean deleteMainDish(String id){
-        return repo.deleteDish(id);
-    }
+   
     public List<MainDish> listMainDish(){
         return repo.list();
     }
   
-   
-    
+
+    public boolean deleteMainDish(String id) {
+        return repo.deleteDish(id);
+    }
 
     /**
      * Metodo encargado de actualizar un plato
@@ -54,8 +54,9 @@ public class MainDishService {
      * @param name nombre
      * @param price precio
      */
-    public boolean updateMainDish(String id,String name,String price) {
-        return repo.updateDish(id,name,price);
+
+    public boolean updateMainDish(String id, String name, String price) {
+        return repo.updateDish(id, name, price);
     }
 
     /**

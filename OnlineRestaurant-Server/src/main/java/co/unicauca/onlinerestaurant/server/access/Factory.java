@@ -148,7 +148,7 @@ public class Factory {
 
         return result;
     }
-
+    
     public ISaladRepository getRepository6() {
          String type = Utilities.loadProperty("salad.repository");
         if (type.isEmpty()) {

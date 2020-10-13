@@ -35,12 +35,8 @@ public interface IMainDishRepository {
      * @param name Nombre del plato
      * @param price Precio del plato
      */
-    public boolean updateDish(String id, String name, String price);
 
-    /**
-     * Metodo encargado de borrar un plato principal
-     * @param id Identificado del plato principal a borrar
-     */
+    public boolean updateDish(String id,String name,String price);
     
   
     public boolean deleteDish(String id);

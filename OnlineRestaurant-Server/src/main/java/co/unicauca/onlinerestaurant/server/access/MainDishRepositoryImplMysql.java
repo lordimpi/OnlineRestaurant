@@ -80,9 +80,9 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
 
         return "";
     }
-     @Override
-    public boolean deleteDish(String id) {
 
+    @Override
+    public boolean deleteDish(String id) {
         this.connect();
         try {
             String sql = "DELETE FROM maindish where id_dish=? ";
@@ -141,9 +141,9 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
             this.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet res = pstmt.executeQuery();
-            System.out.println("plato es"+platos);
+            System.out.println("plato es" + platos);
             while (res.next()) {
-                System.out.println("plato es"+platos);
+                System.out.println("plato es" + platos);
                 MainDish newmaindish = new MainDish();
 
                 newmaindish.setId_mainDishe(res.getString("id_dish"));
@@ -156,7 +156,7 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al Selecionar los datos de la tabla maindish de la base de datos", ex);
         }
-       
+
         return platos;
     }
 
