@@ -34,5 +34,5 @@ public interface ICustomerAccess {
      * @return devuelve la cedula del cliente creado
      * @throws Exception error crear el cliente
      */
-    public String createCustomer(Customer customer) throws Exception;
+    public boolean createCustomer(Customer customer) throws Exception;
 }

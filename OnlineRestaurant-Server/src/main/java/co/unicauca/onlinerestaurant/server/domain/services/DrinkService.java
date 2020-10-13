@@ -44,7 +44,7 @@ public class DrinkService {
      * @param Drink bebida
      * @return devuelve el id de la bebida creada
      */
-    public String createDrink(Drink drink) {
+    public boolean createDrink(Drink drink) {
         List<JsonError> errors = new ArrayList<>();
         
         String id = drink.getId_Drink();
@@ -62,9 +62,8 @@ public class DrinkService {
         }
 
         if (!errors.isEmpty()) {
-            Gson gson = new Gson();
-            String errorsJson = gson.toJson(errors);
-            return errorsJson;
+            
+            return false;
         }
         return repo.createDrink(drink);
     }

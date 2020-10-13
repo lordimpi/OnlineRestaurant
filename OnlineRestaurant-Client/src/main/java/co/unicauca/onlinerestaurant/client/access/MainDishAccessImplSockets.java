@@ -125,7 +125,7 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
     }
 
     @Override
-    public String createMainDish(MainDish mainDish) throws Exception {
+    public boolean createMainDish(MainDish mainDish) throws Exception {
 
         String jsonResponse = null;
         String requestJson = createMainDishRequestJson(mainDish);
@@ -140,17 +140,11 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
         }
         if (jsonResponse == null) {
             throw new Exception("No se pudo conectar con el servidor");
-        } else {
-
-            if (jsonResponse.contains("error")) {
-                //Devolvió algún error                
-                Logger.getLogger(MainDishAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
-                throw new Exception(extractMessages(jsonResponse));
-            } else {
-                //Agregó correctamente, devuelve la cedula del customer 
-                return mainDish.getId_mainDishe();
-            }
-
+        } 
+        if (jsonResponse.contains("false")){
+            return false; //Agregó correctamente, devuelve la cedula del customer
+        }else{
+            return true;
         }
 
     }

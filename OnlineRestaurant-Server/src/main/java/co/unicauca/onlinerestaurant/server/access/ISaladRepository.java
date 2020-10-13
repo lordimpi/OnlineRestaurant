@@ -25,7 +25,7 @@ public interface ISaladRepository {
      * @param cost costo
      * @return
      */
-    public String createSalad(String id, String name, double cost);
+    public boolean createSalad(String id, String name, double cost);
 
     /**
      * Metodo encargado de actualizar ensalada

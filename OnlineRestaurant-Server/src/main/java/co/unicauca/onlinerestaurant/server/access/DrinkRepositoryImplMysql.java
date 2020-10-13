@@ -58,9 +58,7 @@ public class DrinkRepositoryImplMysql implements IDrinkRepository{
     }
     @Override
     public boolean deleteDrink(String id) {
-            
-        Drink drink = null;
-
+           
         this.connect();
         try {
             String sql = "DELETE FROM drink where id_drink=? ";
@@ -77,7 +75,7 @@ public class DrinkRepositoryImplMysql implements IDrinkRepository{
     }
 
     @Override
-    public String createDrink(Drink drink) {
+    public boolean createDrink(Drink drink) {
     
         try {
 
@@ -90,11 +88,11 @@ public class DrinkRepositoryImplMysql implements IDrinkRepository{
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
-            return drink.getId_Drink();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al insertar el registro", ex);
         }
-      return "";
+      return false;
 
 
     }

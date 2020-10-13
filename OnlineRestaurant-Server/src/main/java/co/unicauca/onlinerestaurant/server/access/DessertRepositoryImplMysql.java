@@ -59,19 +59,7 @@ public class DessertRepositoryImplMysql implements IDessertRepository {
         }
         return dishdessert;
     }
-    /**
-     * crea en la base de datos un postre
-     * 
-     * @param dish
-     * @return 
-     */
-
-    
-    @Override
-    public String  createDessert(Dessert dish) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+  
     
     /**
      * Permite hacer la conexion con la base de datos

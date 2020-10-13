@@ -66,7 +66,7 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
      * @return
      */
     @Override
-    public String createSalad(String id, String name, double cost) {
+    public boolean createSalad(String id, String name, double cost) {
         this.connect();
         try {
             String sql = "INSERT INTO salad(idsalad, namesalad, pricesalada) VALUES (?,?,?)";
@@ -77,11 +77,11 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
-            return id;
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Ensalada de la base de datos", ex);
         }
-        return "";
+        return false;
     }
 
     /**

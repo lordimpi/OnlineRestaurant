@@ -26,7 +26,7 @@ public interface IMainDishRepository {
      * @param price Precio del plato principal
      * @return Retorna el identificador del plato principal creado
      */
-    public String createMainDish(String id, String name, String price);
+    public boolean createMainDish(String id, String name, String price);
 
     /**
      * Metodo encargado de actualizar plato

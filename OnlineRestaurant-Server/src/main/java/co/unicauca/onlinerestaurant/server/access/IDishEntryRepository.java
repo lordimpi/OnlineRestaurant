@@ -24,7 +24,7 @@ public interface IDishEntryRepository {
      * @param entry entrada
      * @return una cadena información
      */
-    public String createDish(DishEntry entry);
+    public boolean createDish(DishEntry entry);
 
     /**
      * Metodo encargado de eliminar un plato de entrada

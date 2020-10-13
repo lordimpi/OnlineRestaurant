@@ -5,6 +5,7 @@ import co.unicauca.onlinerestaurant.commons.domain.Customer;
 import co.unicauca.onlinerestaurant.client.domain.services.CustomerService;
 import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
 import co.unicauca.onlinerestaurant.client.access.ICustomerAccess;
+import co.unicauca.onlinerestaurant.client.infra.Messages;
 
 /**
  * Interfaz gráfica de Consultar clientes
@@ -221,9 +222,11 @@ public class GUICustomer extends javax.swing.JInternalFrame {
         customer.setRol(txtGender.getText());
 
         try {
-            String response = customerService.createCustomer(customer);
-            successMessage("Cliente "+ response + " agregado con éxito.", "Atención");
-            clearControls();
+            boolean response = customerService.createCustomer(customer);
+            if(response){successMessage("Cliente agregado con éxito.", "Atención");
+            }else{
+            Messages.warningMessage("No se pudo agregar Cliente","Error");    
+            }clearControls();
             txtId.setText("");
             btnAgregar.setVisible(false);
 

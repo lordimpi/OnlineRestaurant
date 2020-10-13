@@ -632,7 +632,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
         customer.setRol(protocolRequest.getParameters().get(5).getValue());
         customer.setMobile(protocolRequest.getParameters().get(6).getValue());
 
-        String response = service.createCustomer(customer);
+        boolean response = service.createCustomer(customer);
         output.println(response);
     }
 
@@ -640,7 +640,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
         String id_menu;
         // Reconstruir el customer a partir de lo que viene en los parámetros
         id_menu = (protocolRequest.getParameters().get(0).getValue());
-        String response = meService.createMenu(id_menu);
+        boolean response = meService.createMenu(id_menu);
         output.println(response);
     }
 
@@ -656,20 +656,10 @@ public class OnlineRestaurantServerSocket implements Runnable {
         mainDish.setNameDishe(protocolRequest.getParameters().get(1).getValue());
         mainDish.setDishPrice(Double.parseDouble(protocolRequest.getParameters().get(2).getValue()));
 
-        String response = mdService.createMainDish(mainDish);
+        boolean response = mdService.createMainDish(mainDish);
         output.println(response);
     }
 
-    private void processPostDessert(Protocol protocolRequest) {
-        Dessert dessert = new Dessert();
-        // Reconstruir el customer a partid de lo que viene en los parámetros
-        dessert.setId_Dish_Dessert(protocolRequest.getParameters().get(0).getValue());
-        dessert.setName_Dish_Dessert(protocolRequest.getParameters().get(1).getValue());
-        dessert.setCost_Dish_Dessert(Integer.parseInt(protocolRequest.getParameters().get(2).getValue()));
-
-        String response = dService.createDessert(dessert);
-        output.println(response);
-    }
 
     /**
      * Proceso la solicitud de agregar un plato de entrada
@@ -682,7 +672,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
         dishEntry.setIdDishEntry(protocolRequest.getParameters().get(0).getValue());
         dishEntry.setNameDishEntry(protocolRequest.getParameters().get(1).getValue());
         dishEntry.setCostDishEntry(Double.parseDouble(protocolRequest.getParameters().get(2).getValue()));
-        String response = deService.createDishEntry(dishEntry);
+        boolean response = deService.createDishEntry(dishEntry);
         output.println(response);
     }
 
@@ -699,7 +689,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
         restaurant.setAddressRestaurant(protocolRequest.getParameters().get(0).getValue());
         restaurant.setPhone(protocolRequest.getParameters().get(0).getValue());
         restaurant.setIdmenu(protocolRequest.getParameters().get(0).getValue());
-        String response = rService.createRestaurant(restaurant);
+        boolean response = rService.createRestaurant(restaurant);
         output.println(response);
     }
 
@@ -714,7 +704,7 @@ public class OnlineRestaurantServerSocket implements Runnable {
         salad.setIdhSalad(protocolRequest.getParameters().get(0).getValue());
         salad.setNameDishSalad(protocolRequest.getParameters().get(0).getValue());
         salad.setCostSalad(Double.parseDouble(protocolRequest.getParameters().get(0).getValue()));
-        String response = saService.createSalad(salad);
+        boolean response = saService.createSalad(salad);
         output.println(response);
     }
 

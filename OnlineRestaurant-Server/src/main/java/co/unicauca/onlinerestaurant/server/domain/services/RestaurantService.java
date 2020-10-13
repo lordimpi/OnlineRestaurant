@@ -37,18 +37,18 @@ public class RestaurantService {
     public Restaurant findRestaurant(String id) {
         return repo.findRestaurant(id);
     }
-    
-    public List<Restaurant> listRestaurant(){
+
+    public List<Restaurant> listRestaurant() {
         return repo.list();
     }
-    
+
     /**
      * Metodo para crear un restaurante
      *
      * @param restaurant tipo restaurante
      * @return cadena
      */
-    public String createRestaurant(Restaurant restaurant) {
+    public boolean createRestaurant(Restaurant restaurant) {
         List<JsonError> errors = new ArrayList<>();
 
         String id = restaurant.getIdRestaurant();
@@ -63,9 +63,8 @@ public class RestaurantService {
         }
         // Que no esté repetido
         if (!errors.isEmpty()) {
-            Gson gson = new Gson();
-            String errorsJson = gson.toJson(errors);
-            return errorsJson;
+
+            return false;
         }
         return repo.createRestaurant(restaurant);
     }

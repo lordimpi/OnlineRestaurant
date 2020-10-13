@@ -44,7 +44,7 @@ public class DishEntryService {
      * @param dishentry plato de
      * @return devuelve el id del plato creado
      */
-    public String createDishEntry(DishEntry dishentry) {
+    public boolean createDishEntry(DishEntry dishentry) {
         List<JsonError> errors = new ArrayList<>();
 
         String id = dishentry.getIdDishEntry();
@@ -62,9 +62,7 @@ public class DishEntryService {
         }
 
         if (!errors.isEmpty()) {
-            Gson gson = new Gson();
-            String errorsJson = gson.toJson(errors);
-            return errorsJson;
+            return false;
         }
         return repo.createDish(dishentry);
     }

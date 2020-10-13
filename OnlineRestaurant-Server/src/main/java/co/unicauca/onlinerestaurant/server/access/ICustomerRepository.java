@@ -33,7 +33,7 @@ public interface ICustomerRepository {
      * @param customer
      * @return una cadena información
      */
-    public String createCustomer(Customer customer);
+    public boolean createCustomer(Customer customer);
 
     /**
      * lista de clientes
@@ -49,11 +49,4 @@ public interface ICustomerRepository {
 
     public boolean deleteCustomer(int id);
     
-    /**
-     * metodo Lista de customers
-     * @return 
-     */
-
-    public List<Customer> Costomers();
-
 }

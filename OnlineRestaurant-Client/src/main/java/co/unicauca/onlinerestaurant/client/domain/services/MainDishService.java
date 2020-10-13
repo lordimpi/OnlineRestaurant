@@ -46,7 +46,7 @@ public class MainDishService {
         return service.deleteMainDish(id);
     }
 
-    public String createMainDish(MainDish mainDish) throws Exception {
+    public boolean createMainDish(MainDish mainDish) throws Exception {
         return service.createMainDish(mainDish);
 
     }

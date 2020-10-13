@@ -74,7 +74,7 @@ public class RestaurantAccessImplSockets implements IRestaurantAccess {
      * @throws Exception error crear el restaurante
      */
     @Override
-    public String createRestaurant(Restaurant restaurant) throws Exception {
+    public boolean createRestaurant(Restaurant restaurant) throws Exception {
         String jsonResponse = null;
         String requestJson = createRestaurantRequestJson(restaurant);
         try {
@@ -94,10 +94,9 @@ public class RestaurantAccessImplSockets implements IRestaurantAccess {
                 //Devolvió algún error                
                 Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 throw new Exception(extractMessages(jsonResponse));
-            } else {
-                //Agregó correctamente, devuelve la cedula del customer 
-                return restaurant.getIdRestaurant();
-            }
+            } 
+            
+            return jsonResponse.contains("true");
 
         }
 

@@ -105,7 +105,7 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
     }
 
     @Override
-    public String createCustomer(Customer customer) {
+    public boolean createCustomer(Customer customer) {
 
         try {
 
@@ -123,20 +123,16 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al insertar el registro", ex);
         }
-        return customer.getId();
+        return false;
 
     }
 
     @Override
     public boolean deleteCustomer(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Customer> Costomers() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

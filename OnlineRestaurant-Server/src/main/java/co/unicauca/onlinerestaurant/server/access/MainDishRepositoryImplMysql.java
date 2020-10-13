@@ -59,7 +59,7 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
     }
 
     @Override
-    public String createMainDish(String id, String name, String cost) {
+    public boolean createMainDish(String id, String name, String cost) {
 
         Double price = Double.parseDouble(cost);
 
@@ -73,12 +73,12 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
-            return id;
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Plato de la base de datos", ex);
         }
 
-        return "";
+        return false;
     }
 
     @Override

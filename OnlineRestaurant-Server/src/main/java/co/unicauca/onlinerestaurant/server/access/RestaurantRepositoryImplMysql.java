@@ -72,7 +72,7 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
      * @return cadena
      */
     @Override
-    public String createRestaurant(Restaurant restaurant) {
+    public boolean createRestaurant(Restaurant restaurant) {
         try {
 
             this.connect();
@@ -87,10 +87,11 @@ public class RestaurantRepositoryImplMysql implements IRestaurantRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al insertar el registro de restaurnat", ex);
         }
-        return restaurant.getIdRestaurant();
+        return false;
     }
 
     /**

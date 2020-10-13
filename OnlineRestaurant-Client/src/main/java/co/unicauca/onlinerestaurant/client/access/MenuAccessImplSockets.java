@@ -101,7 +101,7 @@ public class MenuAccessImplSockets implements IMenuAccess{
             throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
 
         }
-        return false;
+        return jsonResponse.contains("true");
     }
 
     @Override
@@ -113,7 +113,6 @@ public class MenuAccessImplSockets implements IMenuAccess{
             jsonResponse = mySocket.sendStream(requestJson);
             mySocket.closeStream();
             mySocket.disconnect();
-            return true;
         } catch (IOException ex) {
             Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
         }
@@ -121,11 +120,11 @@ public class MenuAccessImplSockets implements IMenuAccess{
             throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
 
         }
-        return false;
+        return jsonResponse.contains("true");
     }
 
     @Override
-    public String createMenu(String id)  throws Exception{
+    public boolean createMenu(String id)  throws Exception{
     
        
         String jsonResponse = null;
@@ -147,11 +146,8 @@ public class MenuAccessImplSockets implements IMenuAccess{
                 //Devolvió algún error                
                 Logger.getLogger(MainDishAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 throw new Exception(extractMessages(jsonResponse));
-            } else {
-                //Agregó correctamente, devuelve la cedula del customer 
-                return id;
-            }
-
+            } 
+            return jsonResponse.contains("true");
         }
     
     }

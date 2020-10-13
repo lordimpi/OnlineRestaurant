@@ -44,7 +44,7 @@ public interface IMainDishAccess {
      * @return Devuelve el id del plato creado
      * @throws Exception error crear el plato
      */
-    public String createMainDish(MainDish mainDish) throws Exception;
+    public boolean createMainDish(MainDish mainDish) throws Exception;
 
     /**
      * Lista todos los platos

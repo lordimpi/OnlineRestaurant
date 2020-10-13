@@ -17,6 +17,6 @@ public interface IMenuAccess {
 
     public boolean deleteMenu(String id) throws Exception;
 
-    public String createMenu(String id) throws Exception;
+    public boolean createMenu(String id) throws Exception;
 
 }

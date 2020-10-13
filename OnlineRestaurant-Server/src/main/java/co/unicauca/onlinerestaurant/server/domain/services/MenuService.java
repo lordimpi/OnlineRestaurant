@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package co.unicauca.onlinerestaurant.server.domain.services;
-
-import co.unicauca.onlinerestaurant.commons.domain.MainDish;
 import co.unicauca.onlinerestaurant.commons.domain.Menu;
 import co.unicauca.onlinerestaurant.commons.infra.JsonError;
 import co.unicauca.onlinerestaurant.server.access.IMenuRepository;
@@ -69,7 +67,7 @@ public class MenuService {
      * @param mainDish plato
      * @return devuelve el id del plato creado
      */
-    public String createMenu(String id_menu) {
+    public boolean createMenu(String id_menu) {
         List<JsonError> errors = new ArrayList<>();
         // Validaciones y reglas de negocio
         if (id_menu.isEmpty()) {
@@ -77,9 +75,7 @@ public class MenuService {
         }
         // Que no esté repetido
         if (!errors.isEmpty()) {
-            Gson gson = new Gson();
-            String errorsJson = gson.toJson(errors);
-            return errorsJson;
+            return false;
         }
         return repo.createMenu(id_menu);
     }

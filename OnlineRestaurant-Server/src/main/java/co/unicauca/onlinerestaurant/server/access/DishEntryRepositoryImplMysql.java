@@ -59,7 +59,7 @@ public class DishEntryRepositoryImplMysql implements IDishEntryRepository {
     }
 
     @Override
-    public String createDish(DishEntry entry) {
+    public boolean createDish(DishEntry entry) {
         try {
 
             this.connect();
@@ -67,15 +67,15 @@ public class DishEntryRepositoryImplMysql implements IDishEntryRepository {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, entry.getIdDishEntry());
             pstmt.setString(2, entry.getNameDishEntry());
-            pstmt.setDouble(3, entry.getCostDishEntry());          
-
+            pstmt.setDouble(3, entry.getCostDishEntry());         
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al insertar el registro", ex);
         }
-        return entry.getIdDishEntry();
+        return false;
     }
 
     @Override

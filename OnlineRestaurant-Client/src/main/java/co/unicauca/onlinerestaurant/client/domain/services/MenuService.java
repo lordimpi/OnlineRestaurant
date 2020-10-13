@@ -52,7 +52,7 @@ public class MenuService {
         return service.deleteMenu(id);
     }
 
-    public String createMenu(String id) throws Exception {
+    public boolean createMenu(String id) throws Exception {
         return service.createMenu(id);
     }
 

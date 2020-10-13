@@ -65,7 +65,7 @@ public class MainDishService {
      * @param mainDish plato
      * @return devuelve el id del plato creado
      */
-    public String createMainDish(MainDish mainDish) {
+    public boolean createMainDish(MainDish mainDish) {
         List<JsonError> errors = new ArrayList<>();
 
         String id = mainDish.getId_mainDishe();
@@ -78,9 +78,7 @@ public class MainDishService {
         }
         // Que no esté repetido
         if (!errors.isEmpty()) {
-            Gson gson = new Gson();
-            String errorsJson = gson.toJson(errors);
-            return errorsJson;
+            return false;
         }
         return repo.createMainDish(id, name, precio);
     }

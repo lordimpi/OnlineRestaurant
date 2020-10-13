@@ -20,7 +20,7 @@ public interface IMenuRepository {
 
     public boolean updateMenu(String id_menu,String id_dish,String id_drink,String id_entry,String id_salad,String id_dessert);
 
-    public String createMenu(String id_menu);
+    public boolean createMenu(String id_menu);
     
     public Menu findMenubyRN(String rname);
     

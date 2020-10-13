@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * @author Mariat Trujillo
  */
 public class DrinkAccessImplSockets implements IDrinkAccess {
-    
+
     private OnlineRestaurantSocket mySocket;
 
     public DrinkAccessImplSockets() {
@@ -58,6 +58,7 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
         }
 
     }
+
     @Override
     public boolean deleteDrink(String id) throws Exception {
 
@@ -68,20 +69,21 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
             jsonResponse = mySocket.sendStream(requestJson);
             mySocket.closeStream();
             mySocket.disconnect();
-            return true;
 
         } catch (IOException ex) {
             Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
         }
         if (jsonResponse == null) {
             throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
-        } 
+        }
+        if (jsonResponse.contains("true")) {
+            return true;
+        }
         return false;
     }
 
-
     @Override
-    public String createDrink(Drink drink) throws Exception {
+    public boolean createDrink(Drink drink) throws Exception {
 
         String jsonResponse = null;
         String requestJson = createDrinkRequestJson(drink);
@@ -102,10 +104,12 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
                 //Devolvió algún error                
                 Logger.getLogger(MainDishAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 throw new Exception(extractMessages(jsonResponse));
-            } else {
-                //Agregó correctamente, devuelve la cedula del customer 
-                return drink.getId_Drink();
             }
+            if (jsonResponse.contains("true")) {
+
+                return true;
+            }
+            return false;
 
         }
 
@@ -170,6 +174,7 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
 
         return requestJson;
     }
+
     /**
      * Crea la solicitud json de creación del drink para ser enviado por el
      * socket
@@ -209,5 +214,4 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
 
     }
 
-    
 }

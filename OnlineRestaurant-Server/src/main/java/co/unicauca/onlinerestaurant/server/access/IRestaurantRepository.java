@@ -24,7 +24,7 @@ public interface IRestaurantRepository {
      * @param restaurant de tipo restaurant
      * @return cadena
      */
-    public String createRestaurant(Restaurant restaurant);
+    public boolean createRestaurant(Restaurant restaurant);
 
     /**
      * Metodo encargado de actualizar un restaurante

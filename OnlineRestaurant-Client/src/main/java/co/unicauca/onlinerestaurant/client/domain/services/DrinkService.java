@@ -41,7 +41,7 @@ public class DrinkService {
 
     }
 
-    public String createDrink(Drink drink) throws Exception {
+    public boolean createDrink(Drink drink) throws Exception {
         return service.createDrink(drink);
 
     }

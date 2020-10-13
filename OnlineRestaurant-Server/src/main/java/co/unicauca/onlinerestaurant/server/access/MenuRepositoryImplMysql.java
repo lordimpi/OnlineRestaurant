@@ -189,7 +189,7 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
     }
 
     @Override
-    public String createMenu(String id_menu) {
+    public boolean createMenu(String id_menu) {
         this.connect();
         try {
             String sql = "INSERT INTO menu(id_menu) VALUES (?,?)";
@@ -198,12 +198,12 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
-            return "ok";
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Plato de la base de datos", ex);
         }
 
-        return "";
+        return false;
     
     
     }

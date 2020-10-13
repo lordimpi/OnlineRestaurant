@@ -17,10 +17,4 @@ public interface IDessertRepository {
      */
     public Dessert findDessert(String id);
 
-    /**
-     * metodo para crear un postre
-     * @param dish
-     * @return 
-     */
-    public String createDessert(Dessert dish);
 }

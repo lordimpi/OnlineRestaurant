@@ -44,7 +44,7 @@ public class SaladService {
      * @param salad tipo ensalada
      * @return cadena
      */
-    public String createSalad(Salad salad) {
+    public boolean createSalad(Salad salad) {
         List<JsonError> errors = new ArrayList<>();
 
         String id = salad.getIdSalad();
@@ -57,9 +57,7 @@ public class SaladService {
         }
         // Que no esté repetido
         if (!errors.isEmpty()) {
-            Gson gson = new Gson();
-            String errorsJson = gson.toJson(errors);
-            return errorsJson;
+            return false;
         }
         return repo.createSalad(id, name, cost);
     }
