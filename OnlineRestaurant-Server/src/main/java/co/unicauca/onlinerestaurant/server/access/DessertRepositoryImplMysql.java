@@ -49,7 +49,7 @@ public class DessertRepositoryImplMysql implements IDessertRepository {
                 dishdessert = new Dessert();
                 dishdessert.setId_Dish_Dessert(res.getString("id_dessert"));
                 dishdessert.setName_Dish_Dessert(res.getString("dessert_name"));
-                dishdessert.setCost_Dish_Dessert(res.getInt("dessert_cost"));
+                dishdessert.setCost_Dish_Dessert(res.getInt("dessert_price"));
 
             }
             pstmt.close();

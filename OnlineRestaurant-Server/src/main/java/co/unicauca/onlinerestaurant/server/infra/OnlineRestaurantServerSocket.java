@@ -309,15 +309,10 @@ public class OnlineRestaurantServerSocket implements Runnable {
                     processPostDishEntry(protocolRequest);
                 }
                 break;
-            case "Dessert":
+            case "dessert":
                 if (protocolRequest.getAction().equals("get")) {
                     // Consultar un postre
                     processGetDessert(protocolRequest);
-                }
-
-                if (protocolRequest.getAction().equals("post")) {
-                    // Agregar un postre    
-                    processPostDessert(protocolRequest);
                 }
                 break;
             case "restaurant":
