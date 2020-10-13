@@ -7,16 +7,25 @@ package co.unicauca.onlinerestaurant.client.presentation;
 
 import co.unicauca.onlinerestaurant.client.access.Factory;
 import co.unicauca.onlinerestaurant.client.access.IDessertAccess;
+import co.unicauca.onlinerestaurant.client.access.IDrinkAccess;
+import co.unicauca.onlinerestaurant.client.access.IEntryAccess;
 import co.unicauca.onlinerestaurant.client.access.IMainDishAccess;
 import co.unicauca.onlinerestaurant.client.access.IMenuAccess;
+import co.unicauca.onlinerestaurant.client.access.ISaladAccess;
 import co.unicauca.onlinerestaurant.client.domain.services.DessertService;
+import co.unicauca.onlinerestaurant.client.domain.services.DrinkService;
+import co.unicauca.onlinerestaurant.client.domain.services.EntryService;
 import co.unicauca.onlinerestaurant.client.domain.services.MainDishService;
 import co.unicauca.onlinerestaurant.client.domain.services.MenuService;
+import co.unicauca.onlinerestaurant.client.domain.services.SaladService;
 import co.unicauca.onlinerestaurant.client.infra.Messages;
 import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
 import co.unicauca.onlinerestaurant.commons.domain.Dessert;
+import co.unicauca.onlinerestaurant.commons.domain.DishEntry;
+import co.unicauca.onlinerestaurant.commons.domain.Drink;
 import co.unicauca.onlinerestaurant.commons.domain.MainDish;
 import co.unicauca.onlinerestaurant.commons.domain.Menu;
+import co.unicauca.onlinerestaurant.commons.domain.Salad;
 
 /**
  *
@@ -156,8 +165,18 @@ public class GUIShowMenuAdmin extends javax.swing.JInternalFrame {
         });
 
         BtnBuscarEntry.setText("Buscar");
+        BtnBuscarEntry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarEntryActionPerformed(evt);
+            }
+        });
 
         BtnBuscarDrink.setText("Buscar");
+        BtnBuscarDrink.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarDrinkActionPerformed(evt);
+            }
+        });
 
         BtnBuscarMainDish.setText("Buscar");
         BtnBuscarMainDish.addActionListener(new java.awt.event.ActionListener() {
@@ -167,6 +186,11 @@ public class GUIShowMenuAdmin extends javax.swing.JInternalFrame {
         });
 
         BtnBuscarSalad.setText("Buscar");
+        BtnBuscarSalad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarSaladActionPerformed(evt);
+            }
+        });
 
         BtnBuscarDessert.setText("Buscar");
         BtnBuscarDessert.addActionListener(new java.awt.event.ActionListener() {
@@ -310,12 +334,36 @@ public class GUIShowMenuAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BntModificarActionPerformed
 
     private void BtnBuscarMainDishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarMainDishActionPerformed
+        String id = jTxIDMainDish.getText().trim();
+
+        IMainDishAccess service = Factory.getInstance().getMainDishService();
+        // Inyecta la dependencia
+        MainDishService dishService = new MainDishService(service);
+
+        if (id.equals("")) {
+            jTxIDMainDish.requestFocus();
+            Messages.warningMessage("ERROR: El campo Id esta vacio.", "Warning");
+            return;
+        }
+
+        MainDish dish;
+        try {
+            dish = dishService.findMainDish(id);
+        } catch (Exception ex) {
+
+            successMessage(ex.getMessage(), "Atención");
+            return;
+        }
+
+        jTxIDMainDish.setText(dish.getId_mainDishe());
+        maindish.setText(dish.getNameDishe());
+
 
     }//GEN-LAST:event_BtnBuscarMainDishActionPerformed
 
     private void BtnBuscarDessertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarDessertActionPerformed
         String id = jTxIDDessert.getText().trim();
-        
+
         System.out.println(id);
 
         IDessertAccess service = Factory.getInstance().getDessertService();
@@ -331,13 +379,94 @@ public class GUIShowMenuAdmin extends javax.swing.JInternalFrame {
         try {
             dessert = dessertService.findDessert(id);
         } catch (Exception ex) {
-            
+
             successMessage(ex.getMessage(), "Atención");
             return;
         }
-        
-        showData(dessert);
+
+        jTxIDDessert.setText(dessert.getId_Dish_Dessert());
+        txtnamedessert.setText(dessert.getName_Dish_Dessert());
     }//GEN-LAST:event_BtnBuscarDessertActionPerformed
+
+    private void BtnBuscarSaladActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarSaladActionPerformed
+        String id = jTxIDSalad.getText().trim();
+
+        ISaladAccess service = Factory.getInstance().getSaladService();
+        // Inyecta la dependencia
+        SaladService saladService = new SaladService(service);
+
+        if (id.equals("")) {
+            jTxIDSalad.requestFocus();
+            Messages.warningMessage("ERROR: El campo Id esta vacio.", "Warning");
+            return;
+        }
+
+        Salad dish;
+        try {
+            dish = saladService.findSalad(id);
+        } catch (Exception ex) {
+
+            successMessage(ex.getMessage(), "Atención");
+            return;
+        }
+
+        jTxIDSalad.setText(dish.getIdSalad());
+        salad.setText(dish.getNameSalad());
+    }//GEN-LAST:event_BtnBuscarSaladActionPerformed
+
+    private void BtnBuscarDrinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarDrinkActionPerformed
+        String id = jTxIDDrink.getText().trim();
+
+        System.out.println(id);
+
+        IDrinkAccess service = Factory.getInstance().getDrinkService();
+        // Inyecta la dependencia
+        DrinkService drinkService = new DrinkService(service);
+        if (id.equals("")) {
+            jTxIDDrink.requestFocus();
+            Messages.warningMessage("ERROR: El campo Id esta vacio.", "Warning");
+            return;
+        }
+
+        Drink drink;
+        try {
+            drink = drinkService.findDrink(id);
+        } catch (Exception ex) {
+
+            successMessage(ex.getMessage(), "Atención");
+            return;
+        }
+
+        jTxIDDrink.setText(drink.getId_Drink());
+        this.drink.setText(drink.getNameDrink());
+    }//GEN-LAST:event_BtnBuscarDrinkActionPerformed
+
+    private void BtnBuscarEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarEntryActionPerformed
+       
+         String id = jTxIDEntry.getText().trim();
+
+        IEntryAccess service = Factory.getInstance().getEntryService();
+        // Inyecta la dependencia
+        EntryService entryService = new EntryService(service);
+        if (id.equals("")) {
+            jTxIDEntry.requestFocus();
+            Messages.warningMessage("ERROR: El campo Id esta vacio.", "Warning");
+            return;
+        }
+
+        DishEntry entry;
+        try {
+            entry = entryService.findEntry(id);
+        } catch (Exception ex) {
+
+            successMessage(ex.getMessage(), "Atención");
+            return;
+        }
+
+        jTxIDEntry.setText(entry.getIdDishEntry());
+        this.entry.setText(entry.getNameDishEntry());
+        
+    }//GEN-LAST:event_BtnBuscarEntryActionPerformed
 
     private void imprimirMenu() {
         IMenuAccess service = Factory.getInstance().getMenuService();
@@ -363,18 +492,6 @@ public class GUIShowMenuAdmin extends javax.swing.JInternalFrame {
         jTxIDMainDish.setText(menu.getMaindish().getId_mainDishe());
 
         jtxtnamerestaurant.setText(restaurantname);
-
-    }
-    
-    /**
-     * Metodo encargado de mostrar los datos del postre en el
-     * formulario
-     *
-     * @param mainDish Objeto plato principal para mostrar datos
-     */
-    private void showData(Dessert dessert) {
-        jTxIDDessert.setText(dessert.getId_Dish_Dessert());
-        txtnamedessert.setText(dessert.getName_Dish_Dessert());
 
     }
 

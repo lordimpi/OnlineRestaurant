@@ -95,7 +95,7 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
 
     @Override
     public boolean deleteMainDish(String id) throws Exception {
-
+        boolean res= false;
         String jsonResponse = null;
         String requestJson = deleteMainDishRequestJson(id);
         try {
@@ -103,16 +103,25 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
             jsonResponse = mySocket.sendStream(requestJson);
             mySocket.closeStream();
             mySocket.disconnect();
-            return true;
-
+            
         } catch (IOException ex) {
             Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
         }
-        if (jsonResponse == null) {
+        if (jsonResponse==null) {
             throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
            
         }
-        return false;
+        if(jsonResponse.contains("true")){
+            res=true;
+        }
+        
+        if (jsonResponse.contains("error")) {
+                //Devolvió algún error
+                Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
+                throw new Exception(extractMessages(jsonResponse));
+            } 
+        
+        return res;
     }
 
     @Override

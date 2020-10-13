@@ -278,11 +278,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBuscarEntryActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BtnBuscarDrink">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBuscarDrinkActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BtnBuscarMainDish">
           <Properties>
@@ -296,6 +302,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBuscarSaladActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="BtnBuscarDessert">
           <Properties>

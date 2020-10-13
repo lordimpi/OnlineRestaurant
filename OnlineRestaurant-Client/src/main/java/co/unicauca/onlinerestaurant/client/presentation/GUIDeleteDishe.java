@@ -20,8 +20,10 @@ import javax.swing.table.TableModel;
  * @author Santiago Acuña
  */
 public class GUIDeleteDishe extends javax.swing.JInternalFrame {
-    
-    private List<MainDish> platos=  new ArrayList<>();;
+
+    private List<MainDish> platos = new ArrayList<>();
+
+    ;
 
     /**
      * Creates new form GUIUpdateDishe
@@ -149,9 +151,9 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtnRecargarTablaActionPerformed
 
     private void jBtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEliminarActionPerformed
-        
+
         String id = jTxfID.getText().trim();
-        
+
         IMainDishAccess service = Factory.getInstance().getMainDishService();
         // Inyecta la dependencia
         MainDishService mainDishService = new MainDishService(service);
@@ -162,8 +164,11 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
         }
         try {
             if (Messages.confirmMessage("¿ Desea borrar el registro ?", "Confirm") != 1) {
-                mainDishService.deleteMainDish(id);
-                Messages.successMessage("El plato " + id + " fue elimado", "EXITO");
+                boolean a = mainDishService.deleteMainDish(id);
+                if (a) {
+                    Messages.successMessage("El plato " + id + " fue elimado", "EXITO");
+                }
+
             }
         } catch (Exception ex) {
             successMessage(ex.getMessage(), "Atención");
@@ -173,7 +178,7 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtnEliminarActionPerformed
 
     private void jTblPlatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblPlatosMouseClicked
-        
+
         int i = jTblPlatos.getSelectedRow();
         TableModel model = jTblPlatos.getModel();
         this.jTxfID.setText(model.getValueAt(i, 0).toString());
@@ -196,26 +201,26 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
         IMainDishAccess service = Factory.getInstance().getMainDishService();
         // Inyecta la dependencia
         MainDishService mainDish = new MainDishService(service);
-        
+
         try {
             platos = mainDish.listDishes();
         } catch (Exception ex) {
             successMessage(ex.getMessage(), "Atención");
         }
     }
-    
+
     private void mostrarTabla() {
         String dataTable[][] = new String[platos.size()][3];
-        
+
         for (int i = 0; i < platos.size(); i++) {
             dataTable[i][0] = platos.get(i).getId_mainDishe();
             dataTable[i][1] = platos.get(i).getNameDishe();
             dataTable[i][2] = Double.toString(platos.get(i).getDishPrice());
         }
-        
+
         jTblPlatos.setModel(new javax.swing.table.DefaultTableModel(
                 dataTable, new String[]{"ID", "Nombre", "Precio"}));
-        
+
     }
-    
+
 }

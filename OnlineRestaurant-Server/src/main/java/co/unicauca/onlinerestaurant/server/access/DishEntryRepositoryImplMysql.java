@@ -39,7 +39,7 @@ public class DishEntryRepositoryImplMysql implements IDishEntryRepository {
 
         this.connect();
         try {
-            String sql = "SELECT * from dishentry where id=? ";
+            String sql = "SELECT * from dishentry where idDishEntry=? ";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, id);
             ResultSet res = pstmt.executeQuery();

@@ -42,8 +42,8 @@ public class MainDishService {
         return service.updateMainDish(id, name, price);
     }
 
-    public void deleteMainDish(String id) throws Exception {
-        service.deleteMainDish(id);
+    public boolean deleteMainDish(String id) throws Exception {
+        return service.deleteMainDish(id);
     }
 
     public String createMainDish(MainDish mainDish) throws Exception {

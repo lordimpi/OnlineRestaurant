@@ -88,7 +88,7 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
             String sql = "DELETE FROM maindish where id_dish=? ";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, id);
-            pstmt.executeUpdate();
+             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
             return true;
@@ -141,9 +141,9 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
             this.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet res = pstmt.executeQuery();
-            System.out.println("plato es" + platos);
+            
             while (res.next()) {
-                System.out.println("plato es" + platos);
+                
                 MainDish newmaindish = new MainDish();
 
                 newmaindish.setId_mainDishe(res.getString("id_dish"));

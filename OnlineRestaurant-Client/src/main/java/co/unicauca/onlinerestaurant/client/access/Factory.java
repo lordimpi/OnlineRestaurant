@@ -127,4 +127,43 @@ public class Factory {
 
         return result;
     }
+
+    public ISaladAccess getSaladService() {
+        ISaladAccess result = null;
+        String type = Utilities.loadProperty("salad.service");
+
+        switch (type) {
+            case "default":
+                result = new SaladAccessImplSockets();
+                break;
+        }
+
+        return result;
+    }
+
+    public IDrinkAccess getDrinkService() {
+        IDrinkAccess result = null;
+        String type = Utilities.loadProperty("salad.service");
+
+        switch (type) {
+            case "default":
+                result = new DrinkAccessImplSockets();
+                break;
+        }
+
+        return result;
+    }
+    
+    public IEntryAccess getEntryService() {
+        IEntryAccess result = null;
+        String type = Utilities.loadProperty("entry.service");
+
+        switch (type) {
+            case "default":
+                result = new EntryAccessImplSocket();
+                break;
+        }
+
+        return result;
+    }
 }
