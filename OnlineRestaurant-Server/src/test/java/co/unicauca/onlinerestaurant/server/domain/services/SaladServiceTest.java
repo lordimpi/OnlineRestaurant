@@ -13,26 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SaladServiceTest {
     
     public SaladServiceTest() {
-    }
-
-//    /**
-//     * Test of findSalad method, of class SaladService.
-//     */
-//    @Test
-//    public void testFindSalad() {
-//        System.out.println("findSalad");
-//        String id = "2";
-//        ISaladRepository repo = Factory.getInstance().getRepository6();
-//        SaladService instance = new SaladService(repo);
-//        Salad expResult=new Salad();
-//        
-//        expResult.setIdhSalad("2");
-//        expResult.setCostSalad(2000);
-//        expResult.setNameDishSalad("ensalada dulce");
-//        Salad result = instance.findSalad(id);
-//        assertEquals(expResult.getIdSalad(), result.getIdSalad());
-//    }
-//
+//    }  
 //    /**
 //     * Test of createSalad method, of class SaladService.
 //     */
@@ -51,7 +32,23 @@ public class SaladServiceTest {
 //        boolean result = instance.createSalad(salad);
 //        assertEquals(expResult, result);
 //    }
-//
+//    /**
+//     * Test of findSalad method, of class SaladService.
+//     */
+//    @Test
+//    public void testFindSalad() {
+//        System.out.println("findSalad");
+//        String id = "2";
+//        ISaladRepository repo = Factory.getInstance().getRepository6();
+//        SaladService instance = new SaladService(repo);
+//        Salad expResult=new Salad();
+//        
+//        expResult.setIdhSalad("2");
+//        expResult.setCostSalad(2000);
+//        expResult.setNameDishSalad("ensalada dulce");
+//        Salad result = instance.findSalad(id);
+//        assertEquals(expResult.getIdSalad(), result.getIdSalad());
+//    }
 //    /**
 //     * Test of updateSalad method, of class SaladService.
 //     */
@@ -67,7 +64,6 @@ public class SaladServiceTest {
 //        boolean result = instance.updateSalad(id, name, cost);
 //        assertEquals(expResult, result);
 //    }
-//
 //    /**
 //     * Test of deleteSalad method, of class SaladService.
 //     */
@@ -80,6 +76,6 @@ public class SaladServiceTest {
 //        boolean expResult = true;
 //        boolean result = instance.deleteSalad(id);
 //        assertEquals(expResult, result);
-//    }
-//    
+//    }   
+   }
 }

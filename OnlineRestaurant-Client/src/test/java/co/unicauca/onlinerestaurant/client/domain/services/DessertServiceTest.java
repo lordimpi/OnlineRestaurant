@@ -12,9 +12,9 @@ import static org.junit.Assert.*;
  */
 public class DessertServiceTest {
 
-    /**
-     * Test of findDessert method, of class DessertService.
-     */
+//    /**
+//     * Test of findDessert method, of class DessertService.
+//     */
 //    @Test
 //    public void testFindDessert() throws Exception {
 //        System.out.println("findDessert");
@@ -33,6 +33,4 @@ public class DessertServiceTest {
 //        assertEquals(expResult.getName_Dish_Dessert(), result.getName_Dish_Dessert());
 //        assertEquals(expResult.getCost_Dish_Dessert(), result.getCost_Dish_Dessert());
 //        
-//    }
-
-}
+    }

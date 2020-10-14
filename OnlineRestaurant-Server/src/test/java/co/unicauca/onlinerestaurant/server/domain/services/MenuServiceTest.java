@@ -13,7 +13,20 @@ import static org.junit.jupiter.api.Assertions.*;
 public class MenuServiceTest {
     
     public MenuServiceTest() {
-    }
+//    }
+//    /**
+//     * Test of createMenu method, of class MenuService.
+//    */
+//    @Test
+//    public void testCreateMenu() {
+//        System.out.println("createMenu");
+//        String id_menu = "17";
+//        IMenuRepository repo = Factory.getInstance().getRepositoryMenu();
+//        MenuService instance = new MenuService(repo);
+//        boolean expResult = true;
+//        boolean result = instance.createMenu(id_menu);
+//        assertEquals(expResult, result);
+//    }
 //    /**
 //     * Test of findMenu method, of class MenuService.
 //     */
@@ -32,11 +45,8 @@ public class MenuServiceTest {
 //       
 //        //Buscando uno ya creado
 //        result = instance.findMenu("10");
-//        assertEquals(null, result);
-//        
-//        
+//        assertEquals(null, result);        
 //    }
-//
 //    /**
 //     * Test of findMenubyRN method, of class MenuService.
 //     */
@@ -74,22 +84,7 @@ public class MenuServiceTest {
 //        boolean result = instance.updateMenu(id_menu, id_dish, id_drink, id_entry, id_salad, id_dessert);
 //        assertEquals(expResult, result);
 //    }
-//
 //    /**
-//     * Test of createMenu method, of class MenuService.
-//     */
-//    @Test
-//    public void testCreateMenu() {
-//        System.out.println("createMenu");
-//        String id_menu = "17";
-//        IMenuRepository repo = Factory.getInstance().getRepositoryMenu();
-//        MenuService instance = new MenuService(repo);
-//        boolean expResult = true;
-//        boolean result = instance.createMenu(id_menu);
-//        assertEquals(expResult, result);
-//    }
-//    
-//     /**
 //     * Test of deleteMenu method, of class MenuService.
 //     */
 //    @Test
@@ -102,4 +97,5 @@ public class MenuServiceTest {
 //        boolean result = instance.deleteMenu(id);
 //        assertEquals(expResult, result);
 //    }
-}
+   }
+}    

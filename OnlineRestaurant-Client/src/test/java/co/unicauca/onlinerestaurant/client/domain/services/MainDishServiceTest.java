@@ -15,6 +15,25 @@ public class MainDishServiceTest {
     public MainDishServiceTest() {
     }
 //    /**
+//     * Test of createMainDish method, of class MainDishService.
+//     */
+//    @Test
+//    public void testCreateMainDish() throws Exception {
+//        System.out.println("createMainDish");
+//        MainDish mainDish = new MainDish();
+//        
+//        mainDish.setId_mainDishe("10");
+//        mainDish.setDishPrice(2000);
+//        mainDish.setNameDishe("pruebas");
+//        
+//        IMainDishAccess instance = new MainDishAccessImplSockets();
+//        
+//        boolean expResult = true;
+//        boolean result = instance.createMainDish(mainDish);
+//        assertEquals(expResult, result);
+//   
+//    }
+//    /**
 //     * Test of findMainDish method, of class MainDishService.
 //     */
 //    @Test
@@ -33,21 +52,7 @@ public class MainDishServiceTest {
 //        assertEquals(expResult.getId_mainDishe(), result.getId_mainDishe());
 //  
 //    }
-//    /**
-//     * Test of deleteMainDish method, of class MainDishService.
-//     */
-//    @Test
-//    public void testDeleteMainDish() throws Exception {
-//        System.out.println("deleteMainDish");
-//        String id = "10";
-//        IMainDishAccess instance = new MainDishAccessImplSockets();
-//        boolean expResult = true;
-//        boolean result = instance.deleteMainDish(id);
-//        assertEquals(expResult, result);
-//    }
-//    
-//    
-//    /**
+//     /**
 //     * Test of updateMainDish method, of class MainDishService.
 //     */
 //    @Test
@@ -68,25 +73,16 @@ public class MainDishServiceTest {
 //        expResult.setNameDishe(name);
 //        assertEquals(expResult.getId_mainDishe(), result.getId_mainDishe());
 //    }
-//
 //    /**
-//     * Test of createMainDish method, of class MainDishService.
+//     * Test of deleteMainDish method, of class MainDishService.
 //     */
 //    @Test
-//    public void testCreateMainDish() throws Exception {
-//        System.out.println("createMainDish");
-//        MainDish mainDish = new MainDish();
-//        
-//        mainDish.setId_mainDishe("10");
-//        mainDish.setDishPrice(2000);
-//        mainDish.setNameDishe("pruebas");
-//        
+//    public void testDeleteMainDish() throws Exception {
+//        System.out.println("deleteMainDish");
+//        String id = "10";
 //        IMainDishAccess instance = new MainDishAccessImplSockets();
-//        
 //        boolean expResult = true;
-//        String result = instance.createMainDish(mainDish);
+//        boolean result = instance.deleteMainDish(id);
 //        assertEquals(expResult, result);
-//   
-//    }
-//    
+//    } 
 }
