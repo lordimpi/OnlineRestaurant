@@ -6,14 +6,26 @@
 package co.unicauca.onlinerestaurant.client.presentation;
 
 import co.unicauca.onlinerestaurant.client.access.Factory;
+import co.unicauca.onlinerestaurant.client.access.IDessertAccess;
+import co.unicauca.onlinerestaurant.client.access.IDrinkAccess;
+import co.unicauca.onlinerestaurant.client.access.IEntryAccess;
 import co.unicauca.onlinerestaurant.client.access.IMainDishAccess;
 import co.unicauca.onlinerestaurant.client.access.IMenuAccess;
+import co.unicauca.onlinerestaurant.client.access.ISaladAccess;
+import co.unicauca.onlinerestaurant.client.domain.services.DessertService;
+import co.unicauca.onlinerestaurant.client.domain.services.DrinkService;
+import co.unicauca.onlinerestaurant.client.domain.services.EntryService;
 import co.unicauca.onlinerestaurant.client.domain.services.MainDishService;
 import co.unicauca.onlinerestaurant.client.domain.services.MenuService;
+import co.unicauca.onlinerestaurant.client.domain.services.SaladService;
 import co.unicauca.onlinerestaurant.client.infra.Messages;
 import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
+import co.unicauca.onlinerestaurant.commons.domain.Dessert;
+import co.unicauca.onlinerestaurant.commons.domain.DishEntry;
+import co.unicauca.onlinerestaurant.commons.domain.Drink;
 import co.unicauca.onlinerestaurant.commons.domain.MainDish;
 import co.unicauca.onlinerestaurant.commons.domain.Menu;
+import co.unicauca.onlinerestaurant.commons.domain.Salad;
 
 /**
  *
@@ -59,7 +71,7 @@ public class GUIShowMenuAdmin extends javax.swing.JInternalFrame {
         drink = new javax.swing.JTextField();
         maindish = new javax.swing.JTextField();
         salad = new javax.swing.JTextField();
-        dessert = new javax.swing.JTextField();
+        txtnamedessert = new javax.swing.JTextField();
         BtnBuscarEntry = new javax.swing.JButton();
         BtnBuscarDrink = new javax.swing.JButton();
         BtnBuscarMainDish = new javax.swing.JButton();
@@ -100,7 +112,7 @@ public class GUIShowMenuAdmin extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(27, 27, 27)
                 .addComponent(jtxtnamerestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
         jPnNorteLayout.setVerticalGroup(
             jPnNorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,8 +165,18 @@ public class GUIShowMenuAdmin extends javax.swing.JInternalFrame {
         });
 
         BtnBuscarEntry.setText("Buscar");
+        BtnBuscarEntry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarEntryActionPerformed(evt);
+            }
+        });
 
         BtnBuscarDrink.setText("Buscar");
+        BtnBuscarDrink.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarDrinkActionPerformed(evt);
+            }
+        });
 
         BtnBuscarMainDish.setText("Buscar");
         BtnBuscarMainDish.addActionListener(new java.awt.event.ActionListener() {
@@ -164,8 +186,18 @@ public class GUIShowMenuAdmin extends javax.swing.JInternalFrame {
         });
 
         BtnBuscarSalad.setText("Buscar");
+        BtnBuscarSalad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarSaladActionPerformed(evt);
+            }
+        });
 
         BtnBuscarDessert.setText("Buscar");
+        BtnBuscarDessert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarDessertActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("ID");
 
@@ -199,8 +231,8 @@ public class GUIShowMenuAdmin extends javax.swing.JInternalFrame {
                             .addComponent(drink, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(maindish)
                             .addComponent(salad)
-                            .addComponent(dessert))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                            .addComponent(txtnamedessert))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                         .addGroup(jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(BtnBuscarEntry, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -244,7 +276,7 @@ public class GUIShowMenuAdmin extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(dessert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtnamedessert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnBuscarDessert)
                     .addComponent(jTxIDDessert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
@@ -302,8 +334,139 @@ public class GUIShowMenuAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BntModificarActionPerformed
 
     private void BtnBuscarMainDishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarMainDishActionPerformed
+        String id = jTxIDMainDish.getText().trim();
+
+        IMainDishAccess service = Factory.getInstance().getMainDishService();
+        // Inyecta la dependencia
+        MainDishService dishService = new MainDishService(service);
+
+        if (id.equals("")) {
+            jTxIDMainDish.requestFocus();
+            Messages.warningMessage("ERROR: El campo Id esta vacio.", "Warning");
+            return;
+        }
+
+        MainDish dish;
+        try {
+            dish = dishService.findMainDish(id);
+        } catch (Exception ex) {
+
+            successMessage(ex.getMessage(), "Atención");
+            return;
+        }
+
+        jTxIDMainDish.setText(dish.getId_mainDishe());
+        maindish.setText(dish.getNameDishe());
+
 
     }//GEN-LAST:event_BtnBuscarMainDishActionPerformed
+
+    private void BtnBuscarDessertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarDessertActionPerformed
+        String id = jTxIDDessert.getText().trim();
+
+        System.out.println(id);
+
+        IDessertAccess service = Factory.getInstance().getDessertService();
+        // Inyecta la dependencia
+        DessertService dessertService = new DessertService(service);
+        if (id.equals("")) {
+            jTxIDDessert.requestFocus();
+            Messages.warningMessage("ERROR: El campo Id esta vacio.", "Warning");
+            return;
+        }
+
+        Dessert dessert;
+        try {
+            dessert = dessertService.findDessert(id);
+        } catch (Exception ex) {
+
+            successMessage(ex.getMessage(), "Atención");
+            return;
+        }
+
+        jTxIDDessert.setText(dessert.getId_Dish_Dessert());
+        txtnamedessert.setText(dessert.getName_Dish_Dessert());
+    }//GEN-LAST:event_BtnBuscarDessertActionPerformed
+
+    private void BtnBuscarSaladActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarSaladActionPerformed
+        String id = jTxIDSalad.getText().trim();
+
+        ISaladAccess service = Factory.getInstance().getSaladService();
+        // Inyecta la dependencia
+        SaladService saladService = new SaladService(service);
+
+        if (id.equals("")) {
+            jTxIDSalad.requestFocus();
+            Messages.warningMessage("ERROR: El campo Id esta vacio.", "Warning");
+            return;
+        }
+
+        Salad dish;
+        try {
+            dish = saladService.findSalad(id);
+        } catch (Exception ex) {
+
+            successMessage(ex.getMessage(), "Atención");
+            return;
+        }
+
+        jTxIDSalad.setText(dish.getIdSalad());
+        salad.setText(dish.getNameSalad());
+    }//GEN-LAST:event_BtnBuscarSaladActionPerformed
+
+    private void BtnBuscarDrinkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarDrinkActionPerformed
+        String id = jTxIDDrink.getText().trim();
+
+        System.out.println(id);
+
+        IDrinkAccess service = Factory.getInstance().getDrinkService();
+        // Inyecta la dependencia
+        DrinkService drinkService = new DrinkService(service);
+        if (id.equals("")) {
+            jTxIDDrink.requestFocus();
+            Messages.warningMessage("ERROR: El campo Id esta vacio.", "Warning");
+            return;
+        }
+
+        Drink drink;
+        try {
+            drink = drinkService.findDrink(id);
+        } catch (Exception ex) {
+
+            successMessage(ex.getMessage(), "Atención");
+            return;
+        }
+
+        jTxIDDrink.setText(drink.getId_Drink());
+        this.drink.setText(drink.getNameDrink());
+    }//GEN-LAST:event_BtnBuscarDrinkActionPerformed
+
+    private void BtnBuscarEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarEntryActionPerformed
+       
+         String id = jTxIDEntry.getText().trim();
+
+        IEntryAccess service = Factory.getInstance().getEntryService();
+        // Inyecta la dependencia
+        EntryService entryService = new EntryService(service);
+        if (id.equals("")) {
+            jTxIDEntry.requestFocus();
+            Messages.warningMessage("ERROR: El campo Id esta vacio.", "Warning");
+            return;
+        }
+
+        DishEntry entry;
+        try {
+            entry = entryService.findEntry(id);
+        } catch (Exception ex) {
+
+            successMessage(ex.getMessage(), "Atención");
+            return;
+        }
+
+        jTxIDEntry.setText(entry.getIdDishEntry());
+        this.entry.setText(entry.getNameDishEntry());
+        
+    }//GEN-LAST:event_BtnBuscarEntryActionPerformed
 
     private void imprimirMenu() {
         IMenuAccess service = Factory.getInstance().getMenuService();
@@ -317,7 +480,7 @@ public class GUIShowMenuAdmin extends javax.swing.JInternalFrame {
         }
 
         maindish.setText(menu.getMaindish().getNameDishe());
-        dessert.setText(menu.getDessert().getName_Dish_Dessert());
+        txtnamedessert.setText(menu.getDessert().getName_Dish_Dessert());
         entry.setText(menu.getEntry().getNameDishEntry());
         salad.setText(menu.getSalad().getNameSalad());
         drink.setText(menu.getDrink().getNameDrink());
@@ -339,7 +502,6 @@ public class GUIShowMenuAdmin extends javax.swing.JInternalFrame {
     private javax.swing.JButton BtnBuscarEntry;
     private javax.swing.JButton BtnBuscarMainDish;
     private javax.swing.JButton BtnBuscarSalad;
-    private javax.swing.JTextField dessert;
     private javax.swing.JTextField drink;
     private javax.swing.JTextField entry;
     private javax.swing.JButton jBtnCancelar;
@@ -361,5 +523,6 @@ public class GUIShowMenuAdmin extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtxtnamerestaurant;
     private javax.swing.JTextField maindish;
     private javax.swing.JTextField salad;
+    private javax.swing.JTextField txtnamedessert;
     // End of variables declaration//GEN-END:variables
 }

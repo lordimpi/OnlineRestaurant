@@ -22,9 +22,9 @@ public interface IRestaurantRepository {
      * metodo encargado de crear un restaurante
      *
      * @param restaurant de tipo restaurant
-     * @return cadena
+     * @return true si pudo crear
      */
-    public String createRestaurant(Restaurant restaurant);
+    public boolean createRestaurant(Restaurant restaurant);
 
     /**
      * Metodo encargado de actualizar un restaurante
@@ -33,7 +33,8 @@ public interface IRestaurantRepository {
      * @param name nombre restaurante
      * @param address direccion
      * @param phone telefono
-     * @param idmenu id del menu    
+     * @param idmenu id del menu
+     * @return true si pudo actualizar, false de lo contrario
      */
     public boolean updateRestaurant(String id, String name, String address, String phone, String idmenu);
 
@@ -41,14 +42,14 @@ public interface IRestaurantRepository {
      * Metodo encargado de remover un restaurante
      *
      * @param id identificador
-     * @return true o false
+     * @return true si pudo remover, false de lo contrario
      */
     public boolean removeRestaurant(String id);
 
     /**
      * Metodo encargado de lista objetos de tipo restaurante
      *
-     * @return
+     * @return Lista de restaurantes
      */
     public List<Restaurant> list();
 

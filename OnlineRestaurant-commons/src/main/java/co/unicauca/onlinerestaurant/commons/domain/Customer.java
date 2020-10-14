@@ -7,7 +7,7 @@ import java.util.Date;
  *
  * @author Santiago Acuña
  */
-public class Customer  {
+public class Customer {
 
     /**
      * Password
@@ -41,12 +41,8 @@ public class Customer  {
      * Rol
      */
     protected String rol;
-    
-    /*
-     * Getters and Setters
-     *
-     * @return
-     */
+
+    //Getters and Setters
     public String getId() {
         return id;
     }
@@ -110,8 +106,7 @@ public class Customer  {
     public void setPws(String pws) {
         this.pws = pws;
     }
-    
-    
+
     /**
      * Constructor parametrizado
      *
@@ -123,7 +118,7 @@ public class Customer  {
      * @param email email
      * @param rol rol
      */
-    public Customer(String id, String firstName, String lastName, String address, String mobile, String email, String rol,String pws) {
+    public Customer(String id, String firstName, String lastName, String address, String mobile, String email, String rol, String pws) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -131,7 +126,7 @@ public class Customer  {
         this.mobile = mobile;
         this.email = email;
         this.rol = rol;
-        this.pws=pws;
+        this.pws = pws;
     }
 
     /**

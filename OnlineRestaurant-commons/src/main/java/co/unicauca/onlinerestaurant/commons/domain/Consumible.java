@@ -1,18 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.commons.domain;
 
 /**
+ * Clase abatracta
  *
  * @author soces
  */
 public abstract class Consumible {
-    
-     private String id;
-    
+
+    private String id;
+
     private String name;
     private double Price;
 
@@ -22,9 +18,13 @@ public abstract class Consumible {
         this.Price = price;
     }
 
+    /**
+     * Constructor por defecto
+     */
     public Consumible() {
     }
 
+    //GETER AND SETTER
     public String getId() {
         return id;
     }
@@ -48,7 +48,5 @@ public abstract class Consumible {
     public void setPrice(double Price) {
         this.Price = Price;
     }
-    
 
-    
 }

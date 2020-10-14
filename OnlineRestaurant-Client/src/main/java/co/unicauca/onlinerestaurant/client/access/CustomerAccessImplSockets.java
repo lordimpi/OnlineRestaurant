@@ -61,18 +61,20 @@ public class CustomerAccessImplSockets implements ICustomerAccess {
         }
 
     }
+
     /**
      * Busca un Customer. Utiliza socket para pedir el servicio al servidor
+     *
      * @param name
      * @param pws
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
-    
+
     @Override
-    public Customer findCustomer(String name,String pws) throws Exception {
+    public Customer findCustomer(String name, String pws) throws Exception {
         String jsonResponse = null;
-        String requestJson = findCustomerRequestJson(name,pws);
+        String requestJson = findCustomerRequestJson(name, pws);
         try {
             mySocket.connect();
             jsonResponse = mySocket.sendStream(requestJson);
@@ -106,7 +108,7 @@ public class CustomerAccessImplSockets implements ICustomerAccess {
      * @throws Exception error crear el cliente
      */
     @Override
-    public String createCustomer(Customer customer) throws Exception {
+    public boolean createCustomer(Customer customer) throws Exception {
         String jsonResponse = null;
         String requestJson = createCustomerRequestJson(customer);
         try {
@@ -126,9 +128,12 @@ public class CustomerAccessImplSockets implements ICustomerAccess {
                 //Devolvió algún error                
                 Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 throw new Exception(extractMessages(jsonResponse));
+            }
+
+            if (jsonResponse.contains("false")) {
+                return false; //Agregó correctamente, devuelve la cedula del customer
             } else {
-                //Agregó correctamente, devuelve la cedula del customer 
-                return customer.getId();
+                return true;
             }
 
         }
@@ -182,15 +187,16 @@ public class CustomerAccessImplSockets implements ICustomerAccess {
 
         return requestJson;
     }
+
     /**
      * Crea una solicitud json para ser enviada por el socket
      *
      * @param name nombre
      * @param pws constraseña
-     * @return 
+     * @return
      */
-    
-    private String findCustomerRequestJson(String name,String pws) {
+
+    private String findCustomerRequestJson(String name, String pws) {
 
         Protocol protocol = new Protocol();
         protocol.setResource("customer");

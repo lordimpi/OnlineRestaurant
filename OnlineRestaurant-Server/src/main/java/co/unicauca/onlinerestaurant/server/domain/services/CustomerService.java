@@ -1,7 +1,6 @@
 package co.unicauca.onlinerestaurant.server.domain.services;
 
 import co.unicauca.onlinerestaurant.commons.domain.Customer;
-import co.unicauca.onlinerestaurant.commons.domain.DishEntry;
 import co.unicauca.onlinerestaurant.commons.infra.JsonError;
 import co.unicauca.onlinerestaurant.commons.infra.Utilities;
 import co.unicauca.onlinerestaurant.server.access.ICustomerRepository;
@@ -55,9 +54,9 @@ public class CustomerService {
      * Crea un nuevo customer. Aplica validaciones de negocio
      *
      * @param customer cliente
-     * @return devuelve la cedula del customer creado
+     * @return true si pudo crear, false de lo contrario
      */
-    public String createCustomer(Customer customer) {
+    public boolean createCustomer(Customer customer) {
         List<JsonError> errors = new ArrayList<>();
 
         // Validaciones y reglas de negocio
@@ -87,9 +86,7 @@ public class CustomerService {
         }
 
         if (!errors.isEmpty()) {
-            Gson gson = new Gson();
-            String errorsJson = gson.toJson(errors);
-            return errorsJson;
+            return false;
         }
         return repo.createCustomer(customer);
     }

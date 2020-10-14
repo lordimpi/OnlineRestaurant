@@ -14,7 +14,8 @@ import java.util.logging.Logger;
  *
  * @author Mariat Trujillo
  */
-public class DrinkRepositoryImplMysql implements IDrinkRepository{
+public class DrinkRepositoryImplMysql implements IDrinkRepository {
+
     /**
      * Conección con Mysql
      */
@@ -22,9 +23,7 @@ public class DrinkRepositoryImplMysql implements IDrinkRepository{
 
     public DrinkRepositoryImplMysql() {
     }
-    
-    
-    
+
     /**
      * Busca en la bd una bebida
      *
@@ -33,7 +32,7 @@ public class DrinkRepositoryImplMysql implements IDrinkRepository{
      */
     @Override
     public Drink findDrink(String id) {
-            
+
         Drink drink = null;
 
         this.connect();
@@ -54,12 +53,17 @@ public class DrinkRepositoryImplMysql implements IDrinkRepository{
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Plato de la base de datos", ex);
         }
         return drink;
-        
+
     }
+
+    /**
+     * Borra una bebida en la base de datos
+     *
+     * @param id Identificador de la base de datos
+     * @return Retorna true si pudo borrar la bebida, false de lo contrario
+     */
     @Override
     public boolean deleteDrink(String id) {
-            
-        Drink drink = null;
 
         this.connect();
         try {
@@ -76,30 +80,35 @@ public class DrinkRepositoryImplMysql implements IDrinkRepository{
         return false;
     }
 
+    /**
+     * Crea una bebida y la guarda en la base de datos
+     *
+     * @param drink Objeto bebida a guardar
+     * @return Retorna true si puedo guardar la bebida, false de lo contrario
+     */
     @Override
-    public String createDrink(Drink drink) {
-    
+    public boolean createDrink(Drink drink) {
+
         try {
 
             this.connect();
             String sql = "INSERT INTO drink(id_drink, name_drink,drink_price) VALUES (?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, drink.getId_Drink());
-            pstmt.setString(2,drink.getNameDrink() );
-            pstmt.setDouble(3,drink.getDrinkPrice());          
+            pstmt.setString(2, drink.getNameDrink());
+            pstmt.setDouble(3, drink.getDrinkPrice());
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
-            return drink.getId_Drink();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al insertar el registro", ex);
         }
-      return "";
-
+        return false;
 
     }
 
-        /**
+    /**
      * Permite hacer la conexion con la base de datos
      *
      * @return
@@ -131,6 +140,4 @@ public class DrinkRepositoryImplMysql implements IDrinkRepository{
         }
     }
 
-  
-    
 }

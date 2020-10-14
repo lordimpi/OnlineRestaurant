@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.server.domain.services;
 
 import co.unicauca.onlinerestaurant.commons.domain.Drink;
@@ -17,6 +12,7 @@ import java.util.List;
  * @author Mariat Trujillo
  */
 public class DrinkService {
+
     /**
      * Repositorio de bebidas
      */
@@ -31,27 +27,40 @@ public class DrinkService {
         this.repo = repo;
     }
 
-    public Drink findDrink(String id){
+    /**
+     * Busca una bebida
+     *
+     * @param id identificador de la bebida
+     * @return true si pudo encontrar, false de lo contrario
+     */
+    public Drink findDrink(String id) {
         return repo.findDrink(id);
     }
-    public boolean deleteDrink(String id){
+
+    /**
+     * Borra una bebida
+     *
+     * @param id identificador de la bebida a borrar
+     * @return true si pudo borrar, false de lo contrario
+     */
+    public boolean deleteDrink(String id) {
         return repo.deleteDrink(id);
     }
-    
+
     /**
      * Crea un nuevo Drink. Aplica validaciones de negocio
      *
-     * @param Drink bebida
-     * @return devuelve el id de la bebida creada
+     * @param drink bebida
+     * @return true si pudo crear, false de lo contrario
      */
-    public String createDrink(Drink drink) {
+    public boolean createDrink(Drink drink) {
         List<JsonError> errors = new ArrayList<>();
-        
+
         String id = drink.getId_Drink();
         String precio = Double.toString(drink.getDrinkPrice());
         // Validaciones y reglas de negocio
         if (id.isEmpty() || drink.getNameDrink().isEmpty()
-                || precio.isEmpty() ) {
+                || precio.isEmpty()) {
             errors.add(new JsonError("400", "BAD_REQUEST", "id, nombre y precio son obligatorios. "));
         }
         // Que no esté repetido
@@ -62,12 +71,10 @@ public class DrinkService {
         }
 
         if (!errors.isEmpty()) {
-            Gson gson = new Gson();
-            String errorsJson = gson.toJson(errors);
-            return errorsJson;
+
+            return false;
         }
         return repo.createDrink(drink);
     }
-    
-    
+
 }

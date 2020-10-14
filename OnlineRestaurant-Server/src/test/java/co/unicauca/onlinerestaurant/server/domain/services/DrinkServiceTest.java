@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.server.domain.services;
 
 import co.unicauca.onlinerestaurant.commons.domain.Drink;
@@ -23,46 +18,37 @@ public class DrinkServiceTest {
     
     public DrinkServiceTest() {
     }
-    /**
-     * Test of findDrink method, of class DrinkService.
-     */
-    @Test
-    public void testFindDrink() {
-        System.out.println("findDrink");
-        String id = "";
-        IDrinkRepository repo = Factory.getInstance().getRepositoryDrink();
-        DrinkService instance = new DrinkService(repo);
-        String expResult = "ok";
-        Drink result = instance.findDrink(id);
-        assertEquals(expResult, result.getId_Drink());
-    }
-
-    /**
-     * Test of deleteDrink method, of class DrinkService.
-     */
-    @Test
-    public void testDeleteDrink() {
-        System.out.println("deleteDrink");
-        String id = "2";
-        IDrinkRepository repo = Factory.getInstance().getRepositoryDrink();
-        DrinkService instance = new DrinkService(repo);
-        boolean expResult = true;
-        boolean result = instance.deleteDrink(id);
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of createDrink method, of class DrinkService.
-     */
-    @Test
-    public void testCreateDrink() {
-        System.out.println("createDrink");
-        Drink drink = null;
-        IDrinkRepository repo = Factory.getInstance().getRepositoryDrink();
-        DrinkService instance = new DrinkService(repo);
-        String expResult = "ok";
-        String result = instance.createDrink(drink);
-        assertEquals(expResult, result);
-    }
-    
+//    /**
+//     * Test of findDrink method, of class DrinkService.
+//     */
+//    @Test
+//    public void testFindDrink() {
+//        System.out.println("findDrink");
+//        String id = "1";
+//        IDrinkRepository repo = Factory.getInstance().getRepositoryDrink();
+//        DrinkService instance = new DrinkService(repo);
+//        Drink expResult = new Drink();
+//        
+//        expResult.setDrinkPrice(2000);
+//        expResult.setId_Drink("1");
+//        expResult.setNameDrink("cerveza poker");
+//        
+//        Drink result = instance.findDrink(id);
+//        assertEquals(expResult.getNameDrink(), result.getNameDrink());
+//        assertEquals(expResult.getId_Drink(),result.getId_Drink());
+//    }
+//
+//    /**
+//     * Test of deleteDrink method, of class DrinkService.
+//     */
+//    @Test
+//    public void testDeleteDrink() {
+//        System.out.println("deleteDrink");
+//        String id = "12";
+//        IDrinkRepository repo = Factory.getInstance().getRepositoryDrink();
+//        DrinkService instance = new DrinkService(repo);
+//        boolean expResult = true;
+//        boolean result = instance.deleteDrink(id);
+//        assertEquals(expResult, result);
+//    }
 }

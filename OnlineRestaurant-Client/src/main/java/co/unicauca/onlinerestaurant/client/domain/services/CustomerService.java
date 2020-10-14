@@ -52,7 +52,7 @@ public class CustomerService {
      * @return
      * @throws Exception 
      */
-    public String createCustomer(Customer customer) throws Exception {
+    public boolean createCustomer(Customer customer) throws Exception {
         return service.createCustomer(customer);
 
     }

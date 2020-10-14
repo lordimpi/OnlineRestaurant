@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.commons.domain;
 
 /**
+ * Clase menu
  *
  * @author soces
  */
@@ -18,29 +14,27 @@ public class Menu {
     /**
      * entrada
      */
-    
+
     private DishEntry entry;
     /**
      * plato principal
      */
-    
+
     private MainDish maindish;
     /**
      * ensalada
      */
-    
+
     private Salad salad;
-    
+
     /**
      * bebida
      */
-        
     private Drink drink;
-    
+
     /**
      * postre
      */
-       
     private Dessert dessert;
 
     public Menu(String string) {
@@ -99,7 +93,5 @@ public class Menu {
     public void setDessert(Dessert desert) {
         this.dessert = desert;
     }
-    
-    
 
 }

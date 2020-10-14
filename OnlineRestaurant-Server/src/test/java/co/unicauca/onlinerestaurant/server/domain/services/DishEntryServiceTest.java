@@ -20,28 +20,27 @@ public class DishEntryServiceTest {
     public DishEntryServiceTest() {
     }
 
-    /**
-     * Test of findDishEntry method, of class DishEntryService.
-     */
-    @Test
-    public void testFindDishEntry() {
-        System.out.println("findDishEntry");
-        String id = "1";
-        IDishEntryRepository repo = Factory.getInstance().getRepository3();
-        DishEntryService instance = new DishEntryService(repo);
-        DishEntry expResult = new DishEntry();
-
-        expResult.setIdDishEntry("1");
-        expResult.setNameDishEntry("salchichitas");
-
-        DishEntry result = instance.findDishEntry(id);
-        assertEquals(expResult.getIdDishEntry(), result.getIdDishEntry());
-        assertEquals(expResult.getNameDishEntry(), result.getNameDishEntry());
-
-        //Buscando uno ya creado
-        result = instance.findDishEntry("90");
-        assertEquals(null, result);
-
-    }
-
+//    /**
+//     * Test of findDishEntry method, of class DishEntryService.
+//     */
+//    @Test
+//    public void testFindDishEntry() {
+//        System.out.println("findDishEntry");
+//        String id = "1";
+//        IDishEntryRepository repo = Factory.getInstance().getRepository3();
+//        DishEntryService instance = new DishEntryService(repo);
+//        DishEntry expResult = new DishEntry();
+//
+//        expResult.setIdDishEntry("1");
+//        expResult.setNameDishEntry("salchichitas");
+//
+//        DishEntry result = instance.findDishEntry(id);
+//        assertEquals(expResult.getIdDishEntry(), result.getIdDishEntry());
+//        assertEquals(expResult.getNameDishEntry(), result.getNameDishEntry());
+//
+//        //Buscando uno ya creado
+//        result = instance.findDishEntry("90");
+//        assertEquals(null, result);
+//
+//    }
 }

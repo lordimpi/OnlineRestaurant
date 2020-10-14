@@ -25,7 +25,7 @@ public interface IRestaurantAccess {
      * @return devuelve el del restaurante creado
      * @throws Exception error crear el restaurante
      */
-    public String createRestaurant(Restaurant restaurant) throws Exception;
+    public boolean createRestaurant(Restaurant restaurant) throws Exception;
 
     /**
      * Lista todos los restaurantes

@@ -70,6 +70,26 @@ public class Factory {
     }
 
     /**
+     * Método que crea una instancia concreta de la jerarquia IDessertService
+     *
+     * @return una clase hija de la abstracción IRepositorioPostre
+     */
+    public IDessertAccess getDessertService() {
+
+        IDessertAccess result = null;
+        String type = Utilities.loadProperty("dessert.service");
+
+        switch (type) {
+            case "default":
+                result = new DessertAccessImplSockets();
+                break;
+        }
+
+        return result;
+
+    }
+
+    /**
      * Método que crea una instancia concreta de la jerarquia IRestaurantService
      *
      * @return una clase hija de la abstracción IRepositorioRestaurante
@@ -88,9 +108,7 @@ public class Factory {
         return result;
 
     }
-    
-    
-    
+
     /**
      * Método que crea una instancia concreta de la jerarquia IRestaurantService
      *
@@ -104,6 +122,45 @@ public class Factory {
         switch (type) {
             case "default":
                 result = new MenuAccessImplSockets();
+                break;
+        }
+
+        return result;
+    }
+
+    public ISaladAccess getSaladService() {
+        ISaladAccess result = null;
+        String type = Utilities.loadProperty("salad.service");
+
+        switch (type) {
+            case "default":
+                result = new SaladAccessImplSockets();
+                break;
+        }
+
+        return result;
+    }
+
+    public IDrinkAccess getDrinkService() {
+        IDrinkAccess result = null;
+        String type = Utilities.loadProperty("salad.service");
+
+        switch (type) {
+            case "default":
+                result = new DrinkAccessImplSockets();
+                break;
+        }
+
+        return result;
+    }
+    
+    public IEntryAccess getEntryService() {
+        IEntryAccess result = null;
+        String type = Utilities.loadProperty("entry.service");
+
+        switch (type) {
+            case "default":
+                result = new EntryAccessImplSocket();
                 break;
         }
 

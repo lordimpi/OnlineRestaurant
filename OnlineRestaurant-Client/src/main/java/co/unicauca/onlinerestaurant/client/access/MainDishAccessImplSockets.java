@@ -5,7 +5,11 @@ import co.unicauca.onlinerestaurant.commons.domain.MainDish;
 import co.unicauca.onlinerestaurant.commons.infra.JsonError;
 import co.unicauca.onlinerestaurant.commons.infra.Protocol;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -91,7 +95,7 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
 
     @Override
     public boolean deleteMainDish(String id) throws Exception {
-
+        boolean res= false;
         String jsonResponse = null;
         String requestJson = deleteMainDishRequestJson(id);
         try {
@@ -99,20 +103,29 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
             jsonResponse = mySocket.sendStream(requestJson);
             mySocket.closeStream();
             mySocket.disconnect();
-            return true;
-
+            
         } catch (IOException ex) {
             Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
         }
-        if (jsonResponse == null) {
+        if (jsonResponse==null) {
             throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
            
         }
-        return false;
+        if(jsonResponse.contains("true")){
+            res=true;
+        }
+        
+        if (jsonResponse.contains("error")) {
+                //Devolvió algún error
+                Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
+                throw new Exception(extractMessages(jsonResponse));
+            } 
+        
+        return res;
     }
 
     @Override
-    public String createMainDish(MainDish mainDish) throws Exception {
+    public boolean createMainDish(MainDish mainDish) throws Exception {
 
         String jsonResponse = null;
         String requestJson = createMainDishRequestJson(mainDish);
@@ -127,17 +140,42 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
         }
         if (jsonResponse == null) {
             throw new Exception("No se pudo conectar con el servidor");
-        } else {
+        } 
+        if (jsonResponse.contains("false")){
+            return false; //Agregó correctamente, devuelve la cedula del customer
+        }else{
+            return true;
+        }
 
+    }
+
+    @Override
+    public List<MainDish> list() throws Exception {
+
+        String jsonResponse = null;
+        String requestJson = listMainDishestRequestJson();
+
+        try {
+            mySocket.connect();
+            jsonResponse = mySocket.sendStream(requestJson);
+            mySocket.closeStream();
+            mySocket.disconnect();
+
+        } catch (IOException ex) {
+            Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
+        }
+        if (jsonResponse == null) {
+            throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
+        } else {
             if (jsonResponse.contains("error")) {
-                //Devolvió algún error                
-                Logger.getLogger(MainDishAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
+                //Devolvió algún error
+                Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 throw new Exception(extractMessages(jsonResponse));
             } else {
-                //Agregó correctamente, devuelve la cedula del customer 
-                return mainDish.getId_mainDishe();
+                //Encontró los restaurantes
+                List<MainDish> platos = jsonToMainDishList(jsonResponse);
+                return platos;
             }
-
         }
 
     }
@@ -195,7 +233,6 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
      * @param idMainDish
      * @return
      */
-
     private String updateMainDishRequestJson(String id, String name, String price) {
 
         Protocol protocol = new Protocol();
@@ -248,6 +285,25 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
     }
 
     /**
+     * Crea una solicitud json para ser enviada por el socket
+     *
+     * @return solicitud de consulta del plato en formato Json, algo como:
+     * {"resource":"maindish","action":"gets","parameters":[{"name":"id","value":"1"}]}
+     */
+    private String listMainDishestRequestJson() {
+
+        Protocol protocol = new Protocol();
+        protocol.setResource("maindish");
+        protocol.setAction("gets");
+
+        Gson gson = new Gson();
+        String requestJson = gson.toJson(protocol);
+        System.out.println("json: " + requestJson);
+
+        return requestJson;
+    }
+
+    /**
      * Convierte jsonMainDish, proveniente del server socket, de json a un
      * objeto MainDish
      *
@@ -259,6 +315,25 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
         MainDish mainDish = gson.fromJson(jsonMainDish, MainDish.class);
 
         return mainDish;
+
+    }
+
+    /**
+     * Convierte jsonMaind, proveniente del server socket, de array json a un
+     * list maindish
+     *
+     * @param jsonMainDish Cadena json serializado
+     * @return Lista deserializada de jsonRestaurant
+     */
+    private List<MainDish> jsonToMainDishList(String jsonMainDish) {
+
+        Gson gson = new Gson();
+
+        Type foundListType = new TypeToken<ArrayList<MainDish>>() {
+        }.getType();
+        List<MainDish> platos = gson.fromJson(jsonMainDish, foundListType);
+
+        return platos;
 
     }
 

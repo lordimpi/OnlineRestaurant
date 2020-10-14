@@ -9,6 +9,9 @@ import co.unicauca.onlinerestaurant.commons.infra.Utilities;
  */
 public class Factory {
 
+    /**
+     * Fabrica que se encarga de obtener las instancias de sus repositorios
+     */
     private static Factory instance;
 
     private Factory() {
@@ -55,9 +58,9 @@ public class Factory {
 
     /**
      * Método que crea una instancia concreta de la jerarquia
-     * ICustomerRepository
+     * IMainDishRepository
      *
-     * @return una clase hija de la abstracción IRepositorioClientes
+     * @return una clase hija de la abstracción IMainDishRepository
      */
     public IMainDishRepository getRepository2() {
         String type = Utilities.loadProperty("maindish.repository");
@@ -78,6 +81,12 @@ public class Factory {
 
     }
 
+    /**
+     * Método que crea una instancia concreta de la jerarquia
+     * IDishEntryRepository
+     *
+     * @return una clase hija de la abstracción IDishEntryRepository
+     */
     public IDishEntryRepository getRepository3() {
         String type = Utilities.loadProperty("dishentry.repository");
         if (type.isEmpty()) {
@@ -117,8 +126,14 @@ public class Factory {
         }
 
         return result;
-    }    
+    }
 
+    /**
+     * Método que crea una instancia concreta de la jerarquia
+     * IRestaurantRepository
+     *
+     * @return una clase hija de la abstracción IRepositorioRestaurantes
+     */
     public IRestaurantRepository getRepository5() {
         String type = Utilities.loadProperty("restaurant.repository");
         if (type.isEmpty()) {
@@ -137,8 +152,13 @@ public class Factory {
         return result;
     }
 
+    /**
+     * Crea una instancia concreta de la jerarquia ISaladRepository
+     *
+     * @return Una clase hija de la abstracción IRepositorioEnsalada
+     */
     public ISaladRepository getRepository6() {
-         String type = Utilities.loadProperty("salad.repository");
+        String type = Utilities.loadProperty("salad.repository");
         if (type.isEmpty()) {
             type = "default";
         }
@@ -151,10 +171,37 @@ public class Factory {
                 result = new SaladRepositoryImplMysql();
                 break;
         }
+        return result;
+    }
+
+    /**
+     * Crea una instancia concreta de la jerarquia IDrinkRepository
+     *
+     * @return Una clase hija de la abstracción IRepositorioBebida
+     */
+    public IDrinkRepository getRepositoryDrink() {
+        String type = Utilities.loadProperty("drink.repository");
+        if (type.isEmpty()) {
+            type = "default";
+        }
+        IDrinkRepository result = null;
+
+        switch (type) {
+            case "default":
+                break;
+            case "mysql":
+                result = new DrinkRepositoryImplMysql();
+                break;
+        }
 
         return result;
     }
-    
+
+    /**
+     * Crea una instancia concreta de la jerarquia IMenuRepository
+     *
+     * @return Una clase hija de la abstracción IRepositorioMenu
+     */
     public IMenuRepository getRepositoryMenu() {
         String type = Utilities.loadProperty("menu.repository");
         if (type.isEmpty()) {
@@ -169,24 +216,6 @@ public class Factory {
                 result = new MenuRepositoryImplMysql();
                 break;
         }
-        return result;
-    }
-    
-    public IDrinkRepository getRepositoryDrink() {
-         String type = Utilities.loadProperty("drink.repository");
-        if (type.isEmpty()) {
-            type = "default";
-        }
-        IDrinkRepository result = null;
-
-        switch (type) {
-            case "default":
-                break;
-            case "mysql":
-                result = new DrinkRepositoryImplMysql();
-                break;
-        }
-
         return result;
     }
 }

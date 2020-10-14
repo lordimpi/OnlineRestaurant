@@ -24,7 +24,7 @@ public interface IDrinkAccess {
      * @return devuelve el id de la bebida creada
      * @throws Exception error crear el plato
      */
-    public String createDrink(Drink drink) throws Exception;
+    public boolean createDrink(Drink drink) throws Exception;
     
     
     
