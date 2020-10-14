@@ -3,10 +3,6 @@ package co.unicauca.onlinerestaurant.server.domain.services;
 import co.unicauca.onlinerestaurant.commons.domain.Menu;
 import co.unicauca.onlinerestaurant.server.access.Factory;
 import co.unicauca.onlinerestaurant.server.access.IMenuRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,13 +23,16 @@ public class MenuServiceTest {
         String id = "1";
         IMenuRepository repo = Factory.getInstance().getRepositoryMenu();
         MenuService instance = new MenuService(repo);
-        String expResult = "ok";
+        Menu expResult = new Menu();
+        
+        expResult.setId_menu("1");
+        
         Menu result = instance.findMenu(id);
-        assertEquals(expResult, result.getId_menu());
+        assertEquals(expResult.getId_menu(), result.getId_menu());
        
         //Buscando uno ya creado
-        result = instance.findMenu("1");
-        assertEquals("", result);
+        result = instance.findMenu("10");
+        assertEquals(null, result);
         
         
     }
@@ -44,16 +43,18 @@ public class MenuServiceTest {
     @Test
     public void testFindMenubyRN() {
         System.out.println("findMenubyRN");
-        String name = "Mr. Pollo";
+        String name = "mister pollo";
         IMenuRepository repo = Factory.getInstance().getRepositoryMenu();
         MenuService instance = new MenuService(repo);
-        String expResult = "ok";
+       
+        Menu expResult =new Menu();
+        expResult.setId_menu("1");
         Menu result = instance.findMenubyRN(name);
-        assertEquals(expResult, result.getId_menu());
+        assertEquals(expResult.getId_menu(), result.getId_menu());
         
-        //Buscando uno ya creado
+        //Buscando uno no existente
         result = instance.findMenubyRN("1");
-        assertEquals("", result);
+        assertEquals(null, result);
     }
     /**
      * Test of updateMenu method, of class MenuService.
@@ -61,12 +62,12 @@ public class MenuServiceTest {
     @Test
     public void testUpdateMenu() {
         System.out.println("updateMenu");
-        String id_menu = "";
-        String id_dish = "";
-        String id_drink = "";
-        String id_entry = "";
-        String id_salad = "";
-        String id_dessert = "";
+        String id_menu = "1";
+        String id_dish = "1";
+        String id_drink = "1";
+        String id_entry = "1";
+        String id_salad = "1";
+        String id_dessert = "1";
         IMenuRepository repo = Factory.getInstance().getRepositoryMenu();
         MenuService instance = new MenuService(repo);
         boolean expResult = true;
@@ -80,16 +81,12 @@ public class MenuServiceTest {
     @Test
     public void testCreateMenu() {
         System.out.println("createMenu");
-        String id_menu = "10";
+        String id_menu = "17";
         IMenuRepository repo = Factory.getInstance().getRepositoryMenu();
         MenuService instance = new MenuService(repo);
-        String expResult = "ok";
+        boolean expResult = true;
         String result = instance.createMenu(id_menu);
         assertEquals(expResult, result);
-        
-        //Creando uno ya creado
-        result = instance.createMenu("1");
-        assertEquals("", result);
     }
     
      /**
@@ -98,7 +95,7 @@ public class MenuServiceTest {
     @Test
     public void testDeleteMenu() {
         System.out.println("deleteMenu");
-        String id = "10";
+        String id = "15";
         IMenuRepository repo = Factory.getInstance().getRepositoryMenu();
         MenuService instance = new MenuService(repo);
         boolean expResult = true;

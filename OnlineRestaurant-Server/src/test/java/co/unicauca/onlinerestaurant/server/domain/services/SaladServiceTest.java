@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.server.domain.services;
 
 import co.unicauca.onlinerestaurant.commons.domain.Salad;
 import co.unicauca.onlinerestaurant.server.access.Factory;
 import co.unicauca.onlinerestaurant.server.access.ISaladRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,9 +24,13 @@ public class SaladServiceTest {
         String id = "2";
         ISaladRepository repo = Factory.getInstance().getRepository6();
         SaladService instance = new SaladService(repo);
-        String expResult = "ok";
+        Salad expResult=new Salad();
+        
+        expResult.setIdhSalad("2");
+        expResult.setCostSalad(2000);
+        expResult.setNameDishSalad("ensalada dulce");
         Salad result = instance.findSalad(id);
-        assertEquals(expResult, result.getIdSalad());
+        assertEquals(expResult.getIdSalad(), result.getIdSalad());
     }
 
     /**
@@ -44,10 +39,15 @@ public class SaladServiceTest {
     @Test
     public void testCreateSalad() {
         System.out.println("createSalad");
-        Salad salad = null;
+        Salad salad = new Salad();
+        
+        salad.setCostSalad(12222);
+        salad.setIdhSalad("100");
+        salad.setNameDishSalad("prueba salad");
+        
         ISaladRepository repo = Factory.getInstance().getRepository6();
         SaladService instance = new SaladService(repo);
-        String expResult = "ok";
+        boolean expResult = true;
         String result = instance.createSalad(salad);
         assertEquals(expResult, result);
     }
@@ -59,8 +59,8 @@ public class SaladServiceTest {
     public void testUpdateSalad() {
         System.out.println("updateSalad");
         String id = "2";
-        String name = "ensalada cesar";
-        Double cost = null;
+        String name = "ensalada dulce";
+        double cost = 2000;
         ISaladRepository repo = Factory.getInstance().getRepository6();
         SaladService instance = new SaladService(repo);
         boolean expResult = true;
@@ -74,7 +74,7 @@ public class SaladServiceTest {
     @Test
     public void testDeleteSalad() {
         System.out.println("deleteSalad");
-        String id = "1";
+        String id = "12";
         ISaladRepository repo = Factory.getInstance().getRepository6();
         SaladService instance = new SaladService(repo);
         boolean expResult = true;
