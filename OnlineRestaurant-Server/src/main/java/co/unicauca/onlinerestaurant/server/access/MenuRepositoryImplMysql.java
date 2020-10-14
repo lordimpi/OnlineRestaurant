@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.unicauca.onlinerestaurant.server.access;
+
 import co.unicauca.onlinerestaurant.commons.domain.Dessert;
 import co.unicauca.onlinerestaurant.commons.domain.DishEntry;
 import co.unicauca.onlinerestaurant.commons.domain.Drink;
@@ -23,23 +24,32 @@ import co.unicauca.onlinerestaurant.commons.domain.Salad;
 import co.unicauca.onlinerestaurant.server.domain.services.MainDishService;
 
 /**
+ * Repositorio de Menu en MySQL
  *
  * @author soces
  */
 public class MenuRepositoryImplMysql implements IMenuRepository {
 
+    /**
+     * Conección con Mysql
+     */
     private Connection conn;
-    
-    
+
+    /**
+     * Busca en la bd un menu
+     *
+     * @param id cedula
+     * @return objeto menu, null si no lo encuentra
+     */
     @Override
     public Menu findMenu(String id) {
-      Menu menu = null;
-      MainDish md=null;
-      Drink d=null;
-      DishEntry de=null;
-      Salad s=null;
-      Dessert des=null;
-      
+        Menu menu = null;
+        MainDish md = null;
+        Drink d = null;
+        DishEntry de = null;
+        Salad s = null;
+        Dessert des = null;
+
         this.connect();
         try {
             String sql = "SELECT * from menu join maindish on menu.id_maindish=maindish.id_dish  join salad on menu.id_salad=salad.idsalad join dishentry on menu.id_entry=dishentry.idDishEntry  join dessert on menu.id_dessert=dessert.id_dessert   join drink on menu.id_drink=drink.id_drink  where id_menu=? ";
@@ -48,32 +58,32 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
             ResultSet res = pstmt.executeQuery();
             if (res.next()) {
                 menu = new Menu();
-                md=new MainDish();
-                d=new Drink();
-                de=new DishEntry();
-                s=new Salad();
-                des=new Dessert();
-                
+                md = new MainDish();
+                d = new Drink();
+                de = new DishEntry();
+                s = new Salad();
+                des = new Dessert();
+
                 md.setId_mainDishe(res.getString("id_dish"));
                 md.setDishPrice(res.getDouble("dish_price"));
                 md.setNameDishe(res.getString("dish_name"));
-                
+
                 d.setDrinkPrice(res.getDouble("drink_price"));
                 d.setId_Drink(res.getString("id_drink"));
                 d.setNameDrink(res.getString("drink_name"));
-                        	
+
                 de.setCostDishEntry(res.getDouble("costDishEntry"));
                 de.setIdDishEntry(res.getString("idDishEntry"));
                 de.setNameDishEntry(res.getString("nameDishEntry"));
-                        
+
                 s.setCostSalad(res.getDouble("pricesalada"));
                 s.setIdhSalad(res.getString("idsalad"));
                 s.setNameDishSalad(res.getString("namesalad"));
-                
+
                 des.setCost_Dish_Dessert(res.getInt("dessert_price"));
                 des.setId_Dish_Dessert(res.getString("id_dessert"));
                 des.setName_Dish_Dessert(res.getString("dessert_name"));
-                             
+
                 menu.setId_menu(res.getString("id_menu"));
                 menu.setMaindish(md);
                 menu.setEntry(de);
@@ -88,16 +98,23 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
         }
         return menu;
     }
-    
-     @Override
+
+    /**
+     * Busca en la bd un menu con nombre
+     *
+     *
+     * @param name nombre del menu
+     * @return objeto menu
+     */
+    @Override
     public Menu findMenubyRN(String name) {
-      Menu menu = null;
-      MainDish md=null;
-      Drink d=null;
-      DishEntry de=null;
-      Salad s=null;
-      Dessert des=null;
-      
+        Menu menu = null;
+        MainDish md = null;
+        Drink d = null;
+        DishEntry de = null;
+        Salad s = null;
+        Dessert des = null;
+
         this.connect();
         try {
             String sql = "SELECT * from restaurant join menu on restaurant.id_wmenu=menu.id_menu join maindish on menu.id_maindish=maindish.id_dish  join salad on menu.id_salad=salad.idsalad join dishentry on menu.id_entry=dishentry.idDishEntry  join dessert on menu.id_dessert=dessert.id_dessert join drink on menu.id_drink=drink.id_drink  where name_restaurant=?";
@@ -106,32 +123,32 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
             ResultSet res = pstmt.executeQuery();
             if (res.next()) {
                 menu = new Menu();
-                md=new MainDish();
-                d=new Drink();
-                de=new DishEntry();
-                s=new Salad();
-                des=new Dessert();
-                
+                md = new MainDish();
+                d = new Drink();
+                de = new DishEntry();
+                s = new Salad();
+                des = new Dessert();
+
                 md.setId_mainDishe(res.getString("id_dish"));
                 md.setDishPrice(res.getDouble("dish_price"));
                 md.setNameDishe(res.getString("dish_name"));
-                
+
                 d.setDrinkPrice(res.getDouble("drink_price"));
                 d.setId_Drink(res.getString("id_drink"));
                 d.setNameDrink(res.getString("drink_name"));
-                        	
+
                 de.setCostDishEntry(res.getDouble("costDishEntry"));
                 de.setIdDishEntry(res.getString("idDishEntry"));
                 de.setNameDishEntry(res.getString("nameDishEntry"));
-                        
+
                 s.setCostSalad(res.getDouble("pricesalada"));
                 s.setIdhSalad(res.getString("idsalad"));
                 s.setNameDishSalad(res.getString("namesalad"));
-                
+
                 des.setCost_Dish_Dessert(res.getInt("dessert_price"));
                 des.setId_Dish_Dessert(res.getString("id_dessert"));
                 des.setName_Dish_Dessert(res.getString("dessert_name"));
-                             
+
                 menu.setId_menu(res.getString("id_menu"));
                 menu.setMaindish(md);
                 menu.setEntry(de);
@@ -146,8 +163,13 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
         }
         return menu;
     }
-    
 
+    /**
+     * Elimina un menu
+     *
+     * @param id identificador del munu
+     * @return true o false
+     */
     @Override
     public boolean deleteMenu(String id) {
         this.connect();
@@ -165,17 +187,28 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
         return false;
     }
 
+    /**
+     * Actualiza un menu
+     *
+     * @param id_menu id menu
+     * @param id_dish id plato
+     * @param id_drink id bebida
+     * @param id_entry id entrada
+     * @param id_salad id ensalada
+     * @param id_dessert iid postres
+     * @return true ofalse
+     */
     @Override
-    public boolean updateMenu(String id_menu,String id_dish,String id_drink,String id_entry,String id_salad,String id_dessert) {
-       this.connect();
+    public boolean updateMenu(String id_menu, String id_dish, String id_drink, String id_entry, String id_salad, String id_dessert) {
+        this.connect();
         try {
             String sql = "UPDATE menu SET id_maindish=?,id_drink=?, id_entry=?, id_salad=?, id_dessert=? where id_menu=?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1,id_dish );
-            pstmt.setString(2,id_drink );
-            pstmt.setString(3,id_entry );
-            pstmt.setString(4,id_salad );
-            pstmt.setString(5,id_dessert );
+            pstmt.setString(1, id_dish);
+            pstmt.setString(2, id_drink);
+            pstmt.setString(3, id_entry);
+            pstmt.setString(4, id_salad);
+            pstmt.setString(5, id_dessert);
             pstmt.setString(6, id_menu);
             pstmt.executeUpdate();
             pstmt.close();
@@ -185,9 +218,15 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al actualizar Plato de la base de datos", ex);
         }
         return false;
-       
+
     }
 
+    /**
+     * Metodo que permite crear un menu
+     *
+     * @param id_menu identificador menu
+     * @return cadena
+     */
     @Override
     public String createMenu(String id_menu) {
         this.connect();
@@ -204,9 +243,14 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
         }
 
         return "";
-    
-    
+
     }
+
+    /**
+     * coneccion de la baase de datos
+     *
+     * @return
+     */
     public int connect() {
         try {
             Class.forName(Utilities.loadProperty("server.db.driver"));
