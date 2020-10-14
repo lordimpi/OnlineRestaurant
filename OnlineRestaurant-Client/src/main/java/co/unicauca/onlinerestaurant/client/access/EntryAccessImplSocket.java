@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.client.access;
 
 import co.unicauca.onlinerestaurant.client.infra.OnlineRestaurantSocket;
@@ -14,8 +9,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
+ * Servicio de Platos de Entrada. Permite hacer el CRUD de platos de enctrada
+ * solicitando los servicios con la aplicación server. Maneja los errores
+ * devueltos
  *
  * @author soces
  */
@@ -31,10 +28,11 @@ public class EntryAccessImplSocket implements IEntryAccess {
     }
 
     /**
-     * Busca un Customer. Utiliza socket para pedir el servicio al servidor
+     * Busca un plato de entrada. Utiliza socket para pedir el servicio al
+     * servidor
      *
-     * @param id del postre para el menú
-     * @return Objeto Postre
+     * @param id de plato de entrada para el menú
+     * @return Objeto plato de entrada
      * @throws Exception cuando no pueda conectarse con el servidor
      */
     @Override
@@ -97,9 +95,10 @@ public class EntryAccessImplSocket implements IEntryAccess {
      * Crea una solicitud json para ser enviada por el socket
      *
      *
-     * @param idCustomer identificación del cliente
-     * @return solicitud de consulta del cliente en formato Json, algo como:
-     * {"resource":"customer","action":"get","parameters":[{"name":"id","value":"98000001"}]}
+     * @param idDessert identificación de plato de entrada
+     * @return solicitud de consulta un plato de entrada en formato Json, algo
+     * como:
+     * {"resource":"dishEntry","action":"get","parameters":[{"name":"id","value":"98000001"}]}
      */
     private String findEntryRequestJson(String idDessert) {
 
@@ -116,9 +115,9 @@ public class EntryAccessImplSocket implements IEntryAccess {
 
     /**
      * Convierte jsonCustomer, proveniente del server socket, de json a un
-     * objeto Customer
+     * objeto DishEntry
      *
-     * @param jsonDessert objeto cliente en formato json
+     * @param jsonDessert objeto DishEntry en formato json
      */
     private DishEntry jsonToEntry(String jsonDessert) {
 

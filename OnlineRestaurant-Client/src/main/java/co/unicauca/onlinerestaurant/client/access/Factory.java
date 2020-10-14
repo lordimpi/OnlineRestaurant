@@ -110,9 +110,9 @@ public class Factory {
     }
 
     /**
-     * Método que crea una instancia concreta de la jerarquia IRestaurantService
+     * Método que crea una instancia concreta de la jerarquia IMenuService
      *
-     * @return una clase hija de la abstracción IRepositorioRestaurante
+     * @return una clase hija de la abstracción IRepositorioMenu
      */
     public IMenuAccess getMenuService() {
 
@@ -128,6 +128,11 @@ public class Factory {
         return result;
     }
 
+    /**
+     * Método que crea una instancia concreta de la jerarquia ISaladService
+     *
+     * @return una clase hija de la abstracción IRepositorioSalad
+     */
     public ISaladAccess getSaladService() {
         ISaladAccess result = null;
         String type = Utilities.loadProperty("salad.service");
@@ -141,6 +146,11 @@ public class Factory {
         return result;
     }
 
+    /**
+     * Método que crea una instancia concreta de la jerarquia IDrinkService
+     *
+     * @return una clase hija de la abstracción IRepositorioDrink
+     */
     public IDrinkAccess getDrinkService() {
         IDrinkAccess result = null;
         String type = Utilities.loadProperty("salad.service");
@@ -153,7 +163,12 @@ public class Factory {
 
         return result;
     }
-    
+
+    /**
+     * Método que crea una instancia concreta de la jerarquia IEntryService
+     *
+     * @return una clase hija de la abstracción IRepositorioEntry
+     */
     public IEntryAccess getEntryService() {
         IEntryAccess result = null;
         String type = Utilities.loadProperty("entry.service");

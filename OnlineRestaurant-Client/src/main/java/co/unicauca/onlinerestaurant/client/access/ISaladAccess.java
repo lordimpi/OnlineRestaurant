@@ -8,11 +8,20 @@ package co.unicauca.onlinerestaurant.client.access;
 import co.unicauca.onlinerestaurant.commons.domain.Salad;
 
 /**
+ * Interface que define los servicios de persistencia de Ensalada del
+ * restaurante
  *
  * @author soces
  */
 public interface ISaladAccess {
 
-    public Salad findSalad(String id)throws Exception;
-    
+    /**
+     * Metodo encargado de Buscar una Ensalada
+     *
+     * @param id identificador de Ensalada
+     * @return objeto de tipo Ensalada
+     * @throws Exception error al buscar Ensalada
+     */
+    public Salad findSalad(String id) throws Exception;
+
 }

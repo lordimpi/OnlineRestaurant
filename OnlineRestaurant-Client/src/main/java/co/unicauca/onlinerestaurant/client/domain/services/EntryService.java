@@ -8,28 +8,29 @@ package co.unicauca.onlinerestaurant.client.domain.services;
 import co.unicauca.onlinerestaurant.client.access.IEntryAccess;
 import co.unicauca.onlinerestaurant.commons.domain.DishEntry;
 
-
 /**
+ * Es una fachada para comunicar la presentación con el dominio
  *
  * @author soces
  */
 public class EntryService {
-        private final IEntryAccess service;
+
+    private final IEntryAccess service;
 
     /**
-     * Constructor privado que evita que otros objetos instancien
+     * Constructor que evita que otros objetos instancien
      *
-     * @param service implementacion de tipo IDessertService
+     * @param service implementacion de tipo IEntryService
      */
     public EntryService(IEntryAccess service) {
         this.service = service;
     }
 
     /**
-     * Busca una bebida en el servidor remoto
+     * Busca una Entry en el servidor remoto
      *
-     * @param id identificador del postre
-     * @return Objeto tipo Postre, null si no lo encuentra
+     * @param id identificador de la entrada
+     * @return Objeto tipo Entrada, null si no lo encuentra
      * @throws java.lang.Exception la excepcio se lanza cuando no logra conexión
      * con el servidor
      */
@@ -37,5 +38,5 @@ public class EntryService {
         return service.findEntry(id);
 
     }
-    
+
 }

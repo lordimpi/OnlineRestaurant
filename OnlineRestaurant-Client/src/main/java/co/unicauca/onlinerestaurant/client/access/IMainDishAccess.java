@@ -33,6 +33,8 @@ public interface IMainDishAccess {
      * Elimina un plato utilizando un socket
      *
      * @param id Identificador del plato
+     * @return true si se elimino correctamente el plato o false en caso
+     * contrario
      * @throws Exception error al actualizar el plato
      */
     public boolean deleteMainDish(String id) throws Exception;

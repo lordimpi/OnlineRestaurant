@@ -10,8 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
-  * Servicio de Ensalada. Permite hacer el CRUD de ensaldas solicitando los
+ * Servicio de Ensalada. Permite hacer el CRUD de ensaladas solicitando los
  * servicios con la aplicación server. Maneja los errores devueltos
+ *
  * @author soces
  */
 public class SaladAccessImplSockets implements ISaladAccess {
@@ -21,19 +22,22 @@ public class SaladAccessImplSockets implements ISaladAccess {
      */
     private OnlineRestaurantSocket mySocket;
 
+    /**
+     * Constructor por defecto
+     */
     public SaladAccessImplSockets() {
         mySocket = new OnlineRestaurantSocket();
     }
 
     /**
-     * Busca un Customer. Utiliza socket para pedir el servicio al servidor
+     * Busca una Ensalada. Utiliza socket para pedir el servicio al servidor
      *
-     * @param id del postre para el menú
-     * @return Objeto Postre
+     * @param id de la Ensalada para el menú
+     * @return Objeto Salad
      * @throws Exception cuando no pueda conectarse con el servidor
      */
     @Override
-    public Salad findSalad (String id) throws Exception {
+    public Salad findSalad(String id) throws Exception {
         String jsonResponse = null;
         String requestJson = findSaladRequestJson(id);
         try {
@@ -92,9 +96,8 @@ public class SaladAccessImplSockets implements ISaladAccess {
      * Crea una solicitud json para ser enviada por el socket
      *
      *
-     * @param idCustomer identificación del cliente
-     * @return solicitud de consulta del cliente en formato Json, algo como:
-     * {"resource":"customer","action":"get","parameters":[{"name":"id","value":"98000001"}]}
+     * @param idDessert identificación del salad
+     * @return solicitud de consulta del cliente en formato Json
      */
     private String findSaladRequestJson(String idDessert) {
 
@@ -111,9 +114,9 @@ public class SaladAccessImplSockets implements ISaladAccess {
 
     /**
      * Convierte jsonCustomer, proveniente del server socket, de json a un
-     * objeto Customer
+     * objeto Salad
      *
-     * @param jsonDessert objeto cliente en formato json
+     * @param jsonSalad objeto Ensalada en formato json
      */
     private Salad jsonToSalad(String jsonSalad) {
 
@@ -123,6 +126,5 @@ public class SaladAccessImplSockets implements ISaladAccess {
         return salad;
 
     }
-
 
 }

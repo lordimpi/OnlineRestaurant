@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Servicio de Postre. Permite hacer el CRUD de postre solicitando los servicios
+ * con la aplicación server. Maneja los errores devueltos
  *
  * @author Camilo Otaya
  */
@@ -25,7 +27,7 @@ public class DessertAccessImplSockets implements IDessertAccess {
     }
 
     /**
-     * Busca un Customer. Utiliza socket para pedir el servicio al servidor
+     * Busca un postre. Utiliza socket para pedir el servicio al servidor
      *
      * @param id del postre para el menú
      * @return Objeto Postre
@@ -91,7 +93,7 @@ public class DessertAccessImplSockets implements IDessertAccess {
      * Crea una solicitud json para ser enviada por el socket
      *
      *
-     * @param idCustomer identificación del cliente
+     * @param idDessert identificación de postre
      * @return solicitud de consulta del cliente en formato Json, algo como:
      * {"resource":"customer","action":"get","parameters":[{"name":"id","value":"98000001"}]}
      */
@@ -110,7 +112,7 @@ public class DessertAccessImplSockets implements IDessertAccess {
 
     /**
      * Convierte jsonCustomer, proveniente del server socket, de json a un
-     * objeto Customer
+     * objeto Dessert
      *
      * @param jsonDessert objeto cliente en formato json
      */

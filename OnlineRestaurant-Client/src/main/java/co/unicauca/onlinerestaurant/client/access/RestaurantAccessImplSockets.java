@@ -25,7 +25,9 @@ public class RestaurantAccessImplSockets implements IRestaurantAccess {
      * El servicio utiliza un socket para comunicarse con la aplicación server
      */
     private OnlineRestaurantSocket mySocket;
-
+    /**
+     * Constructor por defecto
+     */
     public RestaurantAccessImplSockets() {
         this.mySocket = new OnlineRestaurantSocket();
     }

@@ -3,6 +3,7 @@ package co.unicauca.onlinerestaurant.client.access;
 import co.unicauca.onlinerestaurant.commons.domain.Dessert;
 
 /**
+ * Interface que define los servicios de persistencia de Dessert del restaurante
  *
  * @author Camilo Otaya
  */

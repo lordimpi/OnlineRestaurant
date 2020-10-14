@@ -8,7 +8,7 @@ package co.unicauca.onlinerestaurant.server.access;
 import co.unicauca.onlinerestaurant.commons.domain.MainDish;
 import co.unicauca.onlinerestaurant.commons.domain.Menu;
 
-/**
+ /**
  * Interfaz de repositorios de Menus
  *
  * @author soces
@@ -58,6 +58,7 @@ public interface IMenuRepository {
      * @param rname Nombre del restaurante
      * @return objeto tipo menu
      */
+
     public Menu findMenubyRN(String rname);
 
 }

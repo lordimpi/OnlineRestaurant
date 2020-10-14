@@ -4,6 +4,7 @@ import co.unicauca.onlinerestaurant.client.access.IDessertAccess;
 import co.unicauca.onlinerestaurant.commons.domain.Dessert;
 
 /**
+ * Es una fachada para comunicar la presentación con el dominio
  *
  * @author Camilo Otaya
  */

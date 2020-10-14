@@ -24,21 +24,23 @@ import co.unicauca.onlinerestaurant.commons.domain.Salad;
 import co.unicauca.onlinerestaurant.server.domain.services.MainDishService;
 
 /**
+ * Repositorio de Menu en MySQL
  *
  * @author soces
  */
 public class MenuRepositoryImplMysql implements IMenuRepository {
 
     /**
-     * Variable para realizar la conexion
+     *
+     * Conección con Mysql
+     * 
      */
     private Connection conn;
 
     /**
-     * Busca un menu de la base de datos
+     * @param id cedula
+     * @return objeto menu, null si no lo encuentra
      *
-     * @param id identificador del menu
-     * @return objeto tipo menu
      */
     @Override
     public Menu findMenu(String id) {
@@ -98,11 +100,10 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
         return menu;
     }
 
-    /**
+    /**     
      * Busca un menu por medio del nombre
-     *
-     * @param name Nombre del menu
-     * @return Objeto tipo menu
+     * @param name nombre del menu
+     * @return objeto menu 
      */
     @Override
     public Menu findMenubyRN(String name) {
@@ -166,7 +167,7 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
      * Borra un menu de la base de datos
      *
      * @param id Identificador del menu a borrar
-     * @return True si pudo borrar el menu, false de lo contrario
+     * @return True si pudo borrar el menu, false de lo contrario 
      */
     @Override
     public boolean deleteMenu(String id) {
@@ -186,15 +187,15 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
     }
 
     /**
-     * Actuliza un menu de la base de datos.
-     *
+     * 
      * @param id_menu identificador del menu
      * @param id_dish identificador del plato
      * @param id_drink identificador de la bebida
      * @param id_entry identificador del plato de entrada
      * @param id_salad identificador de la ensalada
      * @param id_dessert identificador del postre
-     * @return true si pudo modificar el menu, false de lo contrario
+     * @return true si pudo modificar el menu, false de lo contrario >>>>>>>
+     * 9f2f38a3abd06fb65268fbe1422d9e65c83b9ee9
      */
     @Override
     public boolean updateMenu(String id_menu, String id_dish, String id_drink, String id_entry, String id_salad, String id_dessert) {
@@ -224,6 +225,7 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
      *
      * @param id_menu Identificador del menu
      * @return true si pudo crear el menu, false de lo contrario
+     *
      */
     @Override
     public boolean createMenu(String id_menu) {
@@ -245,6 +247,7 @@ public class MenuRepositoryImplMysql implements IMenuRepository {
     }
 
     /**
+     * 
      * Permite hacer la conexion con la base de datos
      *
      * @return 1 si pudo conectarse, -1 de lo contrario

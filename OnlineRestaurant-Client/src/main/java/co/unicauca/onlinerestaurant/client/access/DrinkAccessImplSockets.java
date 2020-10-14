@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Servicio de Bebida. Permite hacer el CRUD de Bebidas solicitando los
+ * servicios con la aplicación server. Maneja los errores devueltos
  *
  * @author Mariat Trujillo
  */
@@ -59,6 +61,13 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
 
     }
 
+    /**
+     * Elimina una Bebida. Utiliza socket para pedir el servicio al servidor
+     *
+     * @param id identificador
+     * @return true o false segunsea el caso
+     * @throws Exception cuando no pueda conectarse con el servidor
+     */
     @Override
     public boolean deleteDrink(String id) throws Exception {
 
@@ -82,6 +91,13 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
         return false;
     }
 
+    /**
+     * Crea una bebida. Utiliza socket para pedir el servicio al servidor
+     *
+     * @param drink objeto de tipo bebida
+     * @return true o false
+     * @throws Exception cuando no pueda conectarse con el servidor
+     */
     @Override
     public boolean createDrink(Drink drink) throws Exception {
 
@@ -162,6 +178,12 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
         return requestJson;
     }
 
+    /**
+     * Elimina una solicitud json para ser enviada por el socket
+     *
+     * @param idDrink identificación de la bebida
+     * @return solicitud de eliminacion de administrador en formato Json
+     */
     private String deleteDrinkRequestJson(String idDrink) {
 
         Protocol protocol = new Protocol();
