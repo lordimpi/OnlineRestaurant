@@ -1,24 +1,25 @@
-package co.unicauca.onlinerestaurant.client.domain.services;
-
-import co.unicauca.onlinerestaurant.client.access.CustomerAccessImplSockets;
-import co.unicauca.onlinerestaurant.client.access.ICustomerAccess;
-import co.unicauca.onlinerestaurant.commons.domain.Customer;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-
-/**
- *
- * @author Mariat Trujillo
- */
-public class CustomerServiceTest {
-
-    public CustomerServiceTest() {
-    }
-//      /**
+//package co.unicauca.onlinerestaurant.client.domain.services;
+//
+//import co.unicauca.onlinerestaurant.client.access.CustomerAccessImplSockets;
+//import co.unicauca.onlinerestaurant.client.access.ICustomerAccess;
+//import co.unicauca.onlinerestaurant.commons.domain.Customer;
+//import org.junit.After;
+//import org.junit.AfterClass;
+//import org.junit.Before;
+//import org.junit.BeforeClass;
+//import org.junit.Test;
+//import static org.junit.Assert.*;
+//
+///**
+// *
+// * @author Mariat Trujillo
+// */
+//public class CustomerServiceTest {
+//
+//    public CustomerServiceTest() {
+//    }
+//
+//    /**
 //     * Test of createCustomer method, of class CustomerService.
 //     */
 //    @Test
@@ -33,7 +34,7 @@ public class CustomerServiceTest {
 //        customer.setLastName("polo");
 //        customer.setEmail("aja@ja");
 //        customer.setAddress("direction");
-//        
+//
 //        ICustomerAccess instance = new CustomerAccessImplSockets();
 //        boolean expResult = true;
 //        boolean result = instance.createCustomer(customer);
@@ -84,4 +85,4 @@ public class CustomerServiceTest {
 //        assertEquals(expResult.getPws(), result.getPws());
 //        assertEquals(expResult.getId(), result.getId());
 //    }
-}
+//}
