@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.client.presentation;
 
 import co.unicauca.onlinerestaurant.client.access.Factory;
@@ -13,7 +8,7 @@ import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
 import co.unicauca.onlinerestaurant.commons.domain.MainDish;
 
 /**
- *
+ * Crea una jframe para crear un usuario
  * @author Santiago Acuña
  */
 public class GUICreateDishe extends javax.swing.JInternalFrame {

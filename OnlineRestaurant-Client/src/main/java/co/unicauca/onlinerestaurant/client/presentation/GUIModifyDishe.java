@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.client.presentation;
 
 import co.unicauca.onlinerestaurant.client.access.Factory;
@@ -13,6 +8,7 @@ import static co.unicauca.onlinerestaurant.client.infra.Messages.successMessage;
 import co.unicauca.onlinerestaurant.commons.domain.MainDish;
 
 /**
+ * Crea un jframe para modificar un plato
  *
  * @author Santiago Acuña
  */
@@ -121,11 +117,21 @@ public class GUIModifyDishe extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Cierra la ventana del formulario
+     *
+     * @param evt evento del boton
+     */
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
 
         this.doDefaultCloseAction();
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
+    /**
+     * Modifica un plato con los atributos que tiene el formulario
+     *
+     * @param evt evento del boton
+     */
     private void jBtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnModificarActionPerformed
 
         String nombre = jTxfNombre.getText();

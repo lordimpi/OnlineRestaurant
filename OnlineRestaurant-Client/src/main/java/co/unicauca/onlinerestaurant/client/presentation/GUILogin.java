@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.client.presentation;
 
 import co.unicauca.onlinerestaurant.client.access.Factory;
@@ -24,12 +19,19 @@ import javax.swing.ImageIcon;
 import static jdk.nashorn.internal.runtime.Debug.id;
 
 /**
+ * Crea un formulario para el login
  *
  * @author Santiago Acuña
  */
 public class GUILogin extends javax.swing.JFrame {
 
+    /**
+     * Posicion del puntero en eje x
+     */
     private int x = 0;
+    /**
+     * Posicion del puntero en eje y
+     */
     private int y = 0;
 
     /**
@@ -66,7 +68,7 @@ public class GUILogin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPswField = new javax.swing.JPasswordField();
         BtnIngresar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        jLblBotonCerrar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
@@ -95,7 +97,6 @@ public class GUILogin extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("LOGIN");
 
-        TxbUser.setBackground(new java.awt.Color(255, 255, 255));
         TxbUser.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         TxbUser.setForeground(new java.awt.Color(102, 102, 102));
         TxbUser.setText("User");
@@ -110,7 +111,6 @@ public class GUILogin extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Password");
 
-        jPswField.setBackground(new java.awt.Color(255, 255, 255));
         jPswField.setForeground(new java.awt.Color(102, 102, 102));
         jPswField.setText("jPasswordField1");
         jPswField.setToolTipText("Enter your password");
@@ -134,14 +134,14 @@ public class GUILogin extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("X");
-        jLabel4.setToolTipText("Close the application");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLblBotonCerrar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLblBotonCerrar.setForeground(new java.awt.Color(102, 102, 102));
+        jLblBotonCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLblBotonCerrar.setText("X");
+        jLblBotonCerrar.setToolTipText("Close the application");
+        jLblBotonCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                jLblBotonCerrarMouseClicked(evt);
             }
         });
 
@@ -170,13 +170,13 @@ public class GUILogin extends javax.swing.JFrame {
                                 .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                                 .addComponent(BtnIngresar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGap(53, 53, 53)))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLblBotonCerrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLbLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel4)
+                .addComponent(jLblBotonCerrar)
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70)
@@ -201,6 +201,12 @@ public class GUILogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metodo encargado de capturar las coordenadas del raton para poder mover
+     * el formulario
+     *
+     * @param evt Evento del Mouse pressed
+     */
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
 
         x = evt.getX();
@@ -208,20 +214,31 @@ public class GUILogin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jPanel2MousePressed
 
+    /**
+     * Metodo encargado de insertar las coordenada del formulario para ubicar el
+     * formulario luego de mover con el raton
+     *
+     * @param evt Evento del mouse dragged
+     */
     private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jPanel2MouseDragged
 
+    /**
+     * Se encarga de hacer las validaciones para el ingreso de un usuario
+     *
+     * @param evt
+     */
     private void BtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresarActionPerformed
         String name = this.TxbUser.getText();
-        String pws=this.jPswField.getText();
+        String pws = this.jPswField.getText();
         ICustomerAccess service = Factory.getInstance().getCustomerService();
         // Inyecta la dependencia
         CustomerService CustomerService = new CustomerService(service);
         Customer cus;
         try {
-            cus = CustomerService.findCustomer(name,pws);
+            cus = CustomerService.findCustomer(name, pws);
         } catch (Exception ex) {
             successMessage(ex.getMessage(), "Atención");
             return;
@@ -261,15 +278,25 @@ public class GUILogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
+    /**
+     * Oculta los caracteres para la contraseña
+     *
+     * @param evt evento de la caja de texto
+     */
     private void jPswFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPswFieldKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             BtnIngresarActionPerformed(null);
         }
     }//GEN-LAST:event_jPswFieldKeyPressed
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    /**
+     * Boton que cierra el formulario login
+     *
+     * @param evt
+     */
+    private void jLblBotonCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLblBotonCerrarMouseClicked
         System.exit(0);
-    }//GEN-LAST:event_jLabel4MouseClicked
+    }//GEN-LAST:event_jLblBotonCerrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -319,8 +346,8 @@ public class GUILogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLbLogo;
+    private javax.swing.JLabel jLblBotonCerrar;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPswField;
     private javax.swing.JSeparator jSeparator1;

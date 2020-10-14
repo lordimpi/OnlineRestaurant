@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.client.presentation;
 
 import co.unicauca.onlinerestaurant.client.access.Factory;
@@ -20,17 +15,22 @@ import javax.swing.JLabel;
 import javax.swing.table.TableModel;
 
 /**
+ * Crea un formulario para poder listar todos los restaurantes
  *
  * @author Santiago Acuña
  */
 public class GUIListRestaurants extends javax.swing.JInternalFrame {
 
+    /**
+     * Almacena una lista de restaurantes
+     */
     private List<Restaurant> restaurants;
 
     /**
      * Creates new form GUIListRestaurants
      *
      * @param restaurants Lista de restaurante
+     * @throws java.beans.PropertyVetoException
      */
     public GUIListRestaurants(List<Restaurant> restaurants) throws PropertyVetoException {
         initComponents();
@@ -227,6 +227,12 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Se encarga de seleccionar un nombre de un restaurante que fue
+     * seleccionada de un jtable
+     *
+     * @param evt evento del boton
+     */
     private void jBtnSeleccionarRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSeleccionarRestauranteActionPerformed
 
         if (jLblRestaurantNombre.getText().equals("Nombre")) {
@@ -241,6 +247,12 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBtnSeleccionarRestauranteActionPerformed
 
+    /**
+     * Metodo encargado de almacenar el identificador de una fila que
+     * seleccionada por el mouse del jtable
+     *
+     * @param evt evento del mouse
+     */
     private void jTblRestaurantsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblRestaurantsMouseClicked
 
         int i = jTblRestaurants.getSelectedRow();
@@ -252,6 +264,11 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jTblRestaurantsMouseClicked
 
+    /**
+     * Cancela la seleccio de un restaurante
+     *
+     * @param evt evento del boton
+     */
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
 
         jLblRestaurantNombre.setText("Nombre");
@@ -280,6 +297,9 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTblRestaurants;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Metodo encargado de mostrar los datos en un jtable
+     */
     private void mostrarTabla() {
         String dataTable[][] = new String[restaurants.size()][3];
 
@@ -310,6 +330,9 @@ public class GUIListRestaurants extends javax.swing.JInternalFrame {
         this.repaint();
     }
 
+    /**
+     * Carga un lista a traves de un socket
+     */
     private void cargarLista() {
         IRestaurantAccess service = Factory.getInstance().getRestaurantService();
         // Inyecta la dependencia

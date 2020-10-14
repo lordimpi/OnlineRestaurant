@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.client.presentation;
 
 import co.unicauca.onlinerestaurant.client.access.Factory;
@@ -25,19 +20,35 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
+ * Crea un formulario para un cliente
  *
  * @author Santiago Acuña
  */
 public class GUIMenuCustomer extends javax.swing.JFrame {
 
+    /**
+     * Guarda el nombre de un restaurante
+     */
     public static String restaurantName;
 
+    /**
+     * Guarda una lista de restaurantes
+     */
     private List<Restaurant> restaurants = new ArrayList<>();
 
+    /**
+     * Guarda la instancia del formulario para listar restaurantes
+     */
     private GUIListRestaurants listRestaurants;
 
+    /**
+     * Guarda la instancia para mostrar un menu
+     */
     private GUIShowMenu ShowMenu;
 
+    /**
+     * Bandera para cerrar o minimizar una ventana
+     */
     private boolean state = false;
     /**
      * Guarda la coordenada en eje x para poder mover el formulario con el raton
@@ -48,6 +59,11 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
      */
     private int y = 0;
 
+    /**
+     * Constructor para inicializar componentes del formulario
+     *
+     * @throws PropertyVetoException
+     */
     public GUIMenuCustomer() throws PropertyVetoException {
         initComponents();
         cargarLista();
@@ -309,12 +325,22 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Boton para ir al home
+     *
+     * @param evt evento del boton
+     */
     private void BtnHomePageMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnHomePageMousePressed
         setColor(BtnHomePage);
         resetColor(BtnRestaurant);
         resetColor(BtnMenus);
     }//GEN-LAST:event_BtnHomePageMousePressed
 
+    /**
+     * Boton para mostrar un menu del dia
+     *
+     * @param evt evento del boton
+     */
     private void BtnMenusMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnMenusMousePressed
         resetColor(BtnHomePage);
         resetColor(BtnRestaurant);
@@ -324,16 +350,21 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(GUIMenuCustomer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         if (!ShowMenu.isVisible()) {
             ShowMenu.setMaximizable(true);
             dskEscritorio.add(ShowMenu);
             ShowMenu.show();
         }
-        
-       
+
+
     }//GEN-LAST:event_BtnMenusMousePressed
 
+    /**
+     * Boton para mostrar una lista de restaurantes
+     *
+     * @param evt evento del boton
+     */
     private void BtnRestaurantMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnRestaurantMousePressed
         resetColor(BtnHomePage);
         setColor(BtnRestaurant);
@@ -349,6 +380,11 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BtnRestaurantMousePressed
 
+    /**
+     * Maximiza o minimiza el formulario
+     *
+     * @param evt evento del boton
+     */
     private void jLbMaxMinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbMaxMinMouseClicked
 
         if (state) {
@@ -360,25 +396,48 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLbMaxMinMouseClicked
 
+    /**
+     * Boton para ocultar el formulario
+     *
+     * @param evt evento del boton
+     */
     private void jLbHideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbHideMouseClicked
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_jLbHideMouseClicked
-
+    /**
+     * Boton para cerrar un formulario por completo
+     *
+     * @param evt evento del boton
+     */
     private void jLbClose1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbClose1MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLbClose1MouseClicked
 
+    /**
+     * Metodo encargado de insertar las coordenada del formulario para ubicar el
+     * formulario luego de mover con el raton
+     *
+     * @param evt Evento del mouse dragged
+     */
     private void jPnlCMHMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPnlCMHMouseDragged
         Point point = MouseInfo.getPointerInfo().getLocation();
         setLocation(point.x - x, point.y - y);
     }//GEN-LAST:event_jPnlCMHMouseDragged
 
+    /**
+     * Metodo encargado de capturar las coordenadas del raton para poder mover
+     * el formulario
+     *
+     * @param evt Evento del Mouse pressed
+     */
     private void jPnlCMHMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPnlCMHMousePressed
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jPnlCMHMousePressed
 
     /**
+     * Inicializa el formulario menu customer
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -440,6 +499,9 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Carga un lista a traves de un socket
+     */
     private void cargarLista() {
         IRestaurantAccess service = Factory.getInstance().getRestaurantService();
         // Inyecta la dependencia
@@ -452,16 +514,30 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Asigna un especifico a un panel
+     *
+     * @param panel Panel a cambiar el color
+     */
     private void setColor(JPanel panel) {
         panel.setBackground(new Color(85, 65, 118));
 
     }
 
+    /**
+     * Metodo encargado de reiniciar un color en especifico
+     *
+     * @param panel Paenel al que se le reiniciara el colo
+     */
     private void resetColor(JPanel panel) {
         panel.setBackground(new Color(64, 43, 100));
 
     }
 
+    /**
+     * Metodo encargado de cargar varios iconos para varias etiquetas del
+     * formulario
+     */
     private void initIcons() {
         addIcon(jLbHomePageIcono, "src/main/java/resources/home.png");
         addIcon(jLbRestaurantIcon, "src/main/java/resources/restaurant.png");
@@ -469,6 +545,12 @@ public class GUIMenuCustomer extends javax.swing.JFrame {
         addIcon(jLbUserPhoto, "src/main/java/resources/userPhoto.png");
     }
 
+    /**
+     * Metodo encargado de cargar un icono para una etiquetas
+     *
+     * @param lb Etiqueta que funciona como icono
+     * @param pathIcon Direccion donde se encuentra el icono
+     */
     private void addIcon(JLabel lb, String pathIcon) {
         ImageIcon img = new ImageIcon(pathIcon);
         Icon icono = new ImageIcon(img.getImage().getScaledInstance(

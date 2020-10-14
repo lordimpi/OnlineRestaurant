@@ -1,24 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.client.presentation;
 
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.beans.PropertyVetoException;
 
 /**
+ * Crea un jInternalFrame para el CRUD de platos principales
  *
  * @author Santiago Acuña
  */
 public class GUIMenuFoodDishes extends javax.swing.JInternalFrame {
 
+    /**
+     * Guarda la instancia del formulario crear plato
+     */
     private final GUICreateDishe CreateDishe = new GUICreateDishe();
+    /**
+     * Guarda la instancia del formulario buscar plato
+     */
     private final GUIFindDishe FindDishe = new GUIFindDishe();
+    /**
+     * Guarda la instancia del formulario modificar plato
+     */
     private final GUIModifyDishe ModifyDishe = new GUIModifyDishe();
+    /**
+     * Guarda la instancia del formulario borrar plato
+     */
     private final GUIDeleteDishe DeleteDishe = new GUIDeleteDishe();
 
+    /**
+     * Constructor para inicializar componentes
+     *
+     * @throws PropertyVetoException
+     */
     public GUIMenuFoodDishes() throws PropertyVetoException {
         initComponents();
         this.setMaximum(true);
@@ -110,6 +123,11 @@ public class GUIMenuFoodDishes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Inicializa el formulario crear plato
+     *
+     * @param evt evento del menu item
+     */
     private void jMenuItemCreateDisheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCreateDisheActionPerformed
 
         if (!CreateDishe.isVisible()) {
@@ -120,6 +138,11 @@ public class GUIMenuFoodDishes extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jMenuItemCreateDisheActionPerformed
 
+    /**
+     * Inicializar el formulario buscar plato
+     *
+     * @param evt evento del menu item
+     */
     private void jMenuItemFindDisheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFindDisheActionPerformed
         if (!FindDishe.isVisible()) {
             FindDishe.setMaximizable(true);
@@ -129,24 +152,41 @@ public class GUIMenuFoodDishes extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jMenuItemFindDisheActionPerformed
 
+    /**
+     * Inicializa el formulario modificar plato
+     *
+     * @param evt evento del menu item
+     */
     private void jMenuItemModifyDisheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModifyDisheActionPerformed
         if (!ModifyDishe.isVisible()) {
             ModifyDishe.setMaximizable(true);
             dskEscritorio.add(ModifyDishe);
             ModifyDishe.show();
-        }        
-        
+        }
+
     }//GEN-LAST:event_jMenuItemModifyDisheActionPerformed
 
+    /**
+     * Inicializa el formulario borrar plato
+     *
+     * @param evt evento del meun item
+     */
     private void jMenuItemDeleteDisheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteDisheActionPerformed
         if (!DeleteDishe.isVisible()) {
             DeleteDishe.setMaximizable(true);
             dskEscritorio.add(DeleteDishe);
             DeleteDishe.show();
-        }        
-        
+        }
+
     }//GEN-LAST:event_jMenuItemDeleteDisheActionPerformed
 
+    /**
+     * Metodo encargado de inicializar el formulario de menu para platos de
+     * comida
+     *
+     * @param args
+     * @throws PropertyVetoException
+     */
     public static void main(String[] args) throws PropertyVetoException {
         GUIMenuFoodDishes gui = new GUIMenuFoodDishes();
         gui.setVisible(true);

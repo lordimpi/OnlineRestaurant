@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.client.presentation;
 
 import co.unicauca.onlinerestaurant.client.access.Factory;
@@ -16,6 +11,7 @@ import java.util.List;
 import javax.swing.table.TableModel;
 
 /**
+ * Crear un jInternalFrame para borrar platos
  *
  * @author Santiago Acuña
  */
@@ -145,11 +141,21 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metodo encargado de actualizar un jtable con nuevos datos
+     *
+     * @param evt evento del boton
+     */
     private void jBtnRecargarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRecargarTablaActionPerformed
         cargarLista();
         mostrarTabla();
     }//GEN-LAST:event_jBtnRecargarTablaActionPerformed
 
+    /**
+     * Boton encargado de eliminar platos
+     *
+     * @param evt evento del boton
+     */
     private void jBtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEliminarActionPerformed
 
         String id = jTxfID.getText().trim();
@@ -177,6 +183,12 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
         mostrarTabla();
     }//GEN-LAST:event_jBtnEliminarActionPerformed
 
+    /**
+     * Metodo encargado de almacenar el identificador de una fila que
+     * seleccionada por el mouse del jtable
+     *
+     * @param evt evento del mouse
+     */
     private void jTblPlatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblPlatosMouseClicked
 
         int i = jTblPlatos.getSelectedRow();
@@ -197,6 +209,9 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTxfID;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Carga un lista a traves de un socket
+     */
     private void cargarLista() {
         IMainDishAccess service = Factory.getInstance().getMainDishService();
         // Inyecta la dependencia
@@ -209,6 +224,9 @@ public class GUIDeleteDishe extends javax.swing.JInternalFrame {
         }
     }
 
+    /**
+     * Metodo encargado de mostrar los datos en un jtable
+     */
     private void mostrarTabla() {
         String dataTable[][] = new String[platos.size()][3];
 
