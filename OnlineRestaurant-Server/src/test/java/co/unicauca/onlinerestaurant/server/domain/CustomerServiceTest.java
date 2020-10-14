@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
- * @author Santiago Acuña
+ * @author Mariat Trujillo
  */
 public class CustomerServiceTest {   
 

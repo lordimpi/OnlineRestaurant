@@ -37,6 +37,14 @@ public class Menu {
      */
     private Dessert dessert;
 
+    public Menu(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    public Menu()
+    {
+        
+    }
+
     //getters y setters
     public String getId_menu() {
         return id_menu;

@@ -1,40 +1,36 @@
-package co.unicauca.onlinerestaurant.server.domain.services;
+package co.unicauca.onlinerestaurant.client.domain.services;
 
+import co.unicauca.onlinerestaurant.client.access.IRestaurantAccess;
+import co.unicauca.onlinerestaurant.client.access.RestaurantAccessImplSockets;
 import co.unicauca.onlinerestaurant.commons.domain.Restaurant;
-import co.unicauca.onlinerestaurant.server.access.Factory;
-import co.unicauca.onlinerestaurant.server.access.IRestaurantRepository;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
- * @author Santiago Acuña
+ * @author Mariat Trujillo
+ * 
  */
 public class RestaurantServiceTest {
-
+    
     public RestaurantServiceTest() {
     }
 //    /**
-//     * Test of listRestaurant method, of class RestaurantService.
+//     * Test of listRestaurants method, of class RestaurantService.
 //     */
 //    @Test
-//    public void testListRestaurant() {
-//
-//        System.out.println("listRestaurant");
+//    public void testListRestaurants() throws Exception {
+//        System.out.println("listRestaurants");
+//        IRestaurantAccess res=new RestaurantAccessImplSockets();
+//        RestaurantService instance = new RestaurantService(res);
+//        
 //        List<Restaurant> Restaurants = new ArrayList<>();
 //        List<Restaurant> Resperado = new ArrayList<>();
 //        Restaurants.add(new Restaurant("1", "mister pollo", "calle 50", "312333222", "1"));
 //        Restaurants.add(new Restaurant("7", "Andres carne de res", "carrera 12 con calle 10", "312333222", "7"));
-//
-//        IRestaurantRepository repo = Factory.getInstance().getRepository5();
-//        RestaurantService instance = new RestaurantService(repo);
-//        Resperado = instance.listRestaurant();
+//        Resperado = instance.listRestaurants();
 //
 //        assertEquals(Resperado.get(0).getIdRestaurant(), Restaurants.get(0).getIdRestaurant());
 //        assertEquals(Resperado.get(0).getNameRestaurant(), Restaurants.get(0).getNameRestaurant());
@@ -47,6 +43,8 @@ public class RestaurantServiceTest {
 //        assertEquals(Resperado.get(Resperado.size() - 1).getAddressRestaurant(), Restaurants.get(Restaurants.size() - 1).getAddressRestaurant());
 //        assertEquals(Resperado.get(Resperado.size() - 1).getPhone(), Restaurants.get(Restaurants.size() - 1).getPhone());
 //        assertEquals(Resperado.get(Resperado.size() - 1).getIdmenu(), Restaurants.get(Restaurants.size() - 1).getIdmenu());
+//        
+//        
 //    }
-
+//    
 }
