@@ -66,14 +66,14 @@ public class GUIShowMenu extends javax.swing.JInternalFrame {
         jBtnCancelar = new javax.swing.JButton();
         jPnCentro = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         entry = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         drink = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         maindish = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         salad = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         dessert = new javax.swing.JTextField();
 
         setClosable(true);
@@ -104,7 +104,7 @@ public class GUIShowMenu extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(27, 27, 27)
                 .addComponent(jtxtnamerestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPnNorteLayout.setVerticalGroup(
             jPnNorteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,70 +132,38 @@ public class GUIShowMenu extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPnSur, java.awt.BorderLayout.PAGE_END);
 
+        jPnCentro.setLayout(new java.awt.GridLayout(5, 2));
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Entrada:");
+        jPnCentro.add(jLabel2);
+        jPnCentro.add(entry);
 
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Bebida:");
+        jPnCentro.add(jLabel3);
+        jPnCentro.add(drink);
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Plato principal:");
+        jPnCentro.add(jLabel4);
+        jPnCentro.add(maindish);
 
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Ensalada:");
-
-        jLabel6.setText("Postre:");
+        jPnCentro.add(jLabel5);
 
         salad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saladActionPerformed(evt);
             }
         });
+        jPnCentro.add(salad);
 
-        javax.swing.GroupLayout jPnCentroLayout = new javax.swing.GroupLayout(jPnCentro);
-        jPnCentro.setLayout(jPnCentroLayout);
-        jPnCentroLayout.setHorizontalGroup(
-            jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPnCentroLayout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addGroup(jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addGroup(jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(salad)
-                    .addComponent(maindish, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(drink, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPnCentroLayout.createSequentialGroup()
-                        .addComponent(entry, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(dessert, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(60, Short.MAX_VALUE))
-        );
-        jPnCentroLayout.setVerticalGroup(
-            jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPnCentroLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(entry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(drink, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(maindish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(salad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPnCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(dessert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Postre:");
+        jPnCentro.add(jLabel6);
+        jPnCentro.add(dessert);
 
         getContentPane().add(jPnCentro, java.awt.BorderLayout.CENTER);
 
