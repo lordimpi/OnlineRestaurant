@@ -27,14 +27,11 @@ Tables creations
 ```ssh
 	CREATE TABLE `restaurante`.`users` ( 
 		`id_user` VARCHAR(10) NOT NULL , 
-		`first_name` VARCHAR(40) NOT NULL , 
-		`last_name` VARCHAR(40) NOT NULL , 
-		`address` VARCHAR(40) NOT NULL , 
-		`mobile` VARCHAR(10) NOT NULL , 
-		`email` VARCHAR(20) NOT NULL , 
-		`rol` VARCHAR(10) NOT NULL,
-		`pws` VARCHAR(40) NOT NULL , 
-		PRIMARY KEY (`id_user`), UNIQUE (`first_name`)) ENGINE = InnoDB;
+		`first_name` VARCHAR(40) NOT NULL , `last_name` VARCHAR(40) NOT NULL , 
+		`address` VARCHAR(40) NOT NULL , `mobile` VARCHAR(10) NOT NULL , 
+		`email` VARCHAR(20) NOT NULL , `rol` VARCHAR(10) NOT NULL,
+		`pws` VARCHAR(40) NOT NULL , PRIMARY KEY (`id_user`), 
+	UNIQUE (`first_name`)) ENGINE = InnoDB;
 
 	CREATE TABLE `restaurante`.`maindish` ( 
 		`id_dish` VARCHAR(10) NOT NULL , 
