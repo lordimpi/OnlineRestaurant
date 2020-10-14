@@ -34,11 +34,16 @@ public interface IMainDishRepository {
      * @param id identificador del plato
      * @param name Nombre del plato
      * @param price Precio del plato
+     * @return true si pudo actualizar, false de lo contrario
      */
+    public boolean updateDish(String id, String name, String price);
 
-    public boolean updateDish(String id,String name,String price);
-    
-  
+    /**
+     * Declaracion del metodo borrar plato
+     *
+     * @param id identificador del plato
+     * @return true si pudo borrar, false de lo contrario
+     */
     public boolean deleteDish(String id);
 
     /**

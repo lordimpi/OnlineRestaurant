@@ -32,12 +32,17 @@ public class RestaurantService {
      * Metodo que busca un restaurante
      *
      * @param id identificador restaurante
-     * @return
+     * @return objeto tipo restaurante
      */
     public Restaurant findRestaurant(String id) {
         return repo.findRestaurant(id);
     }
 
+    /**
+     * Metodo que lista restaurantes
+     *
+     * @return lista de restaurantes
+     */
     public List<Restaurant> listRestaurant() {
         return repo.list();
     }
@@ -46,7 +51,7 @@ public class RestaurantService {
      * Metodo para crear un restaurante
      *
      * @param restaurant tipo restaurante
-     * @return cadena
+     * @return true si pudo crear un restaurante, false de lo contrario
      */
     public boolean createRestaurant(Restaurant restaurant) {
         List<JsonError> errors = new ArrayList<>();
@@ -77,6 +82,7 @@ public class RestaurantService {
      * @param address direccion
      * @param phone telefono
      * @param idmenu id del menu
+     * @return true si pudo actualizar, false de lo contrario
      */
     public boolean updateRestaurant(String id, String name, String address, String phone, String idmenu) {
         return repo.updateRestaurant(id, name, address, phone, idmenu);
@@ -86,6 +92,7 @@ public class RestaurantService {
      * Metodo de eliminar un restaurante
      *
      * @param id identificador
+     * @return True si pudo remover, false de lo contrario
      */
     public boolean removeRestaurant(String id) {
         return repo.removeRestaurant(id);

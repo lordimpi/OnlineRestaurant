@@ -23,7 +23,7 @@ public interface ISaladRepository {
      * @param id identificador
      * @param name nombre
      * @param cost costo
-     * @return
+     * @return True si crear la ensalda, false de lo contrario
      */
     public boolean createSalad(String id, String name, double cost);
 
@@ -33,13 +33,15 @@ public interface ISaladRepository {
      * @param id dentificador de ensalada
      * @param name nombre
      * @param cost precio
+     * @return true si pudo actualizar, false de lo contrario
      */
     public boolean updateSalad(String id, String name, double cost);
 
     /**
      * Metod encargado de eliminar ensalada
      *
-     * @param id identificador
+     * @param id identificador de ensalda
+     * @return true si pudo borrar, false de lo contrario
      */
     public boolean deleteSalad(String id);
 

@@ -9,6 +9,9 @@ import co.unicauca.onlinerestaurant.commons.infra.Utilities;
  */
 public class Factory {
 
+    /**
+     * Fabrica que se encarga de obtener las instancias de sus repositorios
+     */
     private static Factory instance;
 
     private Factory() {
@@ -149,6 +152,11 @@ public class Factory {
         return result;
     }
 
+    /**
+     * Crea una instancia concreta de la jerarquia ISaladRepository
+     *
+     * @return Una clase hija de la abstracción IRepositorioEnsalada
+     */
     public ISaladRepository getRepository6() {
         String type = Utilities.loadProperty("salad.repository");
         if (type.isEmpty()) {
@@ -166,6 +174,11 @@ public class Factory {
         return result;
     }
 
+    /**
+     * Crea una instancia concreta de la jerarquia IDrinkRepository
+     *
+     * @return Una clase hija de la abstracción IRepositorioBebida
+     */
     public IDrinkRepository getRepositoryDrink() {
         String type = Utilities.loadProperty("drink.repository");
         if (type.isEmpty()) {
@@ -184,6 +197,11 @@ public class Factory {
         return result;
     }
 
+    /**
+     * Crea una instancia concreta de la jerarquia IMenuRepository
+     *
+     * @return Una clase hija de la abstracción IRepositorioMenu
+     */
     public IMenuRepository getRepositoryMenu() {
         String type = Utilities.loadProperty("menu.repository");
         if (type.isEmpty()) {
@@ -200,6 +218,5 @@ public class Factory {
         }
         return result;
     }
-
 
 }

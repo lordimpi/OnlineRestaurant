@@ -32,7 +32,7 @@ public class SaladService {
      * Metodo que busca una ensalada
      *
      * @param id identificador
-     * @return
+     * @return Objeto tipo salad
      */
     public Salad findSalad(String id) {
         return repo.findSalad(id);
@@ -42,7 +42,7 @@ public class SaladService {
      * Metodo para crear Ensalada
      *
      * @param salad tipo ensalada
-     * @return cadena
+     * @return true si pudo borrar, false de lo contrario
      */
     public boolean createSalad(Salad salad) {
         List<JsonError> errors = new ArrayList<>();
@@ -68,6 +68,7 @@ public class SaladService {
      * @param id identificador
      * @param name nombre
      * @param cost costo
+     * @return True si pudo actualizar, false de lo contrario
      */
     public boolean updateSalad(String id, String name, Double cost) {
         return repo.updateSalad(id, name, cost);
@@ -77,6 +78,7 @@ public class SaladService {
      * Metodo de eliminar ensalada
      *
      * @param id identificador
+     * @return true si pudo borrar, false de lo contrario
      */
     public boolean deleteSalad(String id) {
         return repo.deleteSalad(id);

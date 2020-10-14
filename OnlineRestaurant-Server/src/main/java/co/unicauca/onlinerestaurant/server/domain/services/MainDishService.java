@@ -30,19 +30,28 @@ public class MainDishService {
     /**
      * Metodo busqueda de plato principal
      *
-     * @param id
-     * @return
+     * @param id identificador del plato principal
+     * @return objeto tipo plato principal
      */
     public MainDish findMainDish(String id) {
         return repo.findDish(id);
     }
 
-   
-    public List<MainDish> listMainDish(){
+    /**
+     * Lista todos los platos principales
+     *
+     * @return lista de platos principales
+     */
+    public List<MainDish> listMainDish() {
         return repo.list();
     }
-  
 
+    /**
+     * Elimina un plato principal
+     *
+     * @param id identificador del plato principal
+     * @return true si pudo borrar, false de lo contrario
+     */
     public boolean deleteMainDish(String id) {
         return repo.deleteDish(id);
     }
@@ -53,8 +62,8 @@ public class MainDishService {
      * @param id identificador
      * @param name nombre
      * @param price precio
+     * @return true si pudo actualizar, false de lo contrario
      */
-
     public boolean updateMainDish(String id, String name, String price) {
         return repo.updateDish(id, name, price);
     }
@@ -63,7 +72,7 @@ public class MainDishService {
      * Crea un nuevo mainDish. Aplica validaciones de negocio
      *
      * @param mainDish plato
-     * @return devuelve el id del plato creado
+     * @return true si pudo crear, false de lo contrario
      */
     public boolean createMainDish(MainDish mainDish) {
         List<JsonError> errors = new ArrayList<>();

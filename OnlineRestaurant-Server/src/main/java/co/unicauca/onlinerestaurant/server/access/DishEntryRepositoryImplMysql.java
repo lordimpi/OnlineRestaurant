@@ -18,20 +18,24 @@ import java.util.logging.Logger;
  * @author Ximena Gallego
  */
 public class DishEntryRepositoryImplMysql implements IDishEntryRepository {
-      /**
+
+    /**
      * Conección con Mysql
      */
     private Connection conn;
+
     /**
      * Constructor por defecto
      */
     public DishEntryRepositoryImplMysql() {
-   
+
     }
+
     /**
-     * Metodo encargado de buscar un plato de entrada en BD     
+     * Metodo encargado de buscar un plato de entrada en BD
+     *
      * @param id identificador de plato de entrada
-     * @return un objeto de plato de entrada 
+     * @return un objeto de plato de entrada
      */
     @Override
     public DishEntry findDishEntry(String id) {
@@ -47,7 +51,7 @@ public class DishEntryRepositoryImplMysql implements IDishEntryRepository {
                 dishEntry = new DishEntry();
                 dishEntry.setIdDishEntry(res.getString("idDishEntry"));
                 dishEntry.setNameDishEntry(res.getString("nameDishEntry"));
-                dishEntry.setCostDishEntry((int) res.getDouble("costDishEntry"));               
+                dishEntry.setCostDishEntry((int) res.getDouble("costDishEntry"));
 
             }
             pstmt.close();
@@ -58,6 +62,12 @@ public class DishEntryRepositoryImplMysql implements IDishEntryRepository {
         return dishEntry;
     }
 
+    /**
+     * Crea un plato de entrada y lo guarda en la base de datos
+     *
+     * @param entry Obejto plato de entrada
+     * @return Retorna true si puedo crear el plato, false de lo contrario
+     */
     @Override
     public boolean createDish(DishEntry entry) {
         try {
@@ -67,7 +77,7 @@ public class DishEntryRepositoryImplMysql implements IDishEntryRepository {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, entry.getIdDishEntry());
             pstmt.setString(2, entry.getNameDishEntry());
-            pstmt.setDouble(3, entry.getCostDishEntry());         
+            pstmt.setDouble(3, entry.getCostDishEntry());
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
@@ -78,6 +88,13 @@ public class DishEntryRepositoryImplMysql implements IDishEntryRepository {
         return false;
     }
 
+    /**
+     * Borra un plato de entrada en la base de datos
+     *
+     * @param id Identificador del plato de entrada
+     * @return Retora true si pudo borrar el plato de entrada, false de lo
+     * contrario
+     */
     @Override
     public boolean deleteDishEntry(int id) {
         try {
@@ -85,7 +102,7 @@ public class DishEntryRepositoryImplMysql implements IDishEntryRepository {
             this.connect();
             String sql = "DELETE FROM dishentry WHERE=";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);           
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
@@ -96,6 +113,11 @@ public class DishEntryRepositoryImplMysql implements IDishEntryRepository {
         return false;
     }
 
+    /**
+     * Lista todos los platos de entrada que hay en la base de tados
+     *
+     * @return Retorna una lista de platos de entrada.
+     */
     @Override
     public List<DishEntry> listDishEntry() {
         List<DishEntry> DishEntry = new ArrayList<>();
@@ -104,22 +126,23 @@ public class DishEntryRepositoryImplMysql implements IDishEntryRepository {
             String sql = "SELECT idDishEntry, nameDishEntry, costDishEntry from dishentry";
             this.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            ResultSet res = pstmt.executeQuery();            
+            ResultSet res = pstmt.executeQuery();
             while (res.next()) {
                 DishEntry newDishEntry = new DishEntry();
                 newDishEntry.setIdDishEntry(res.getString("idDishEntry"));
                 newDishEntry.setNameDishEntry(res.getString("nameDishEntry"));
                 newDishEntry.setCostDishEntry((int) res.getDouble("costDishEntry"));
-                DishEntry.add(newDishEntry);                
+                DishEntry.add(newDishEntry);
             }
             //this.disconnect();
 
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al Selecionar los datos de platos de Entrada de la base de datos", ex);
         }
-        return DishEntry; 
+        return DishEntry;
     }
-      /**
+
+    /**
      * Permite hacer la conexion con la base de datos
      *
      * @return
@@ -138,6 +161,7 @@ public class DishEntryRepositoryImplMysql implements IDishEntryRepository {
         }
         return -1;
     }
+
     /**
      * Cierra la conexion con la base de datos
      *

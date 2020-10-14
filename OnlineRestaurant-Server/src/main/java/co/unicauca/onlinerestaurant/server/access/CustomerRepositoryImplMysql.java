@@ -104,6 +104,12 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
         }
     }
 
+    /**
+     * Crea un cliente y lo guarda en la base de datos
+     *
+     * @param customer Objeto cliente
+     * @return Retorna true si pudo crear, false de lo contrario
+     */
     @Override
     public boolean createCustomer(Customer customer) {
 
@@ -131,6 +137,12 @@ public class CustomerRepositoryImplMysql implements ICustomerRepository {
 
     }
 
+    /**
+     * Elimina un cliente de la base de datos
+     *
+     * @param id Identificador del cliente
+     * @return Retorna true si pudo borrar, false de lo contrario
+     */
     @Override
     public boolean deleteCustomer(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

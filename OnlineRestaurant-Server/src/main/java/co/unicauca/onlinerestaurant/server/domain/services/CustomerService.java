@@ -54,7 +54,7 @@ public class CustomerService {
      * Crea un nuevo customer. Aplica validaciones de negocio
      *
      * @param customer cliente
-     * @return devuelve la cedula del customer creado
+     * @return true si pudo crear, false de lo contrario
      */
     public boolean createCustomer(Customer customer) {
         List<JsonError> errors = new ArrayList<>();
