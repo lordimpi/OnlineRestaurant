@@ -1,4 +1,3 @@
-
 package co.unicauca.onlinerestaurant.commons.domain;
 
 /**
