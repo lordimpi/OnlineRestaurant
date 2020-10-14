@@ -10,20 +10,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * 
+ * Servicio de Menu. Permite hacer el CRUD de menus solicitando los servicios
+ * con la aplicación server. Maneja los errores devueltos
+ *
  * @author Santiago Acuña
  */
-public class MenuAccessImplSockets implements IMenuAccess{
+public class MenuAccessImplSockets implements IMenuAccess {
 
-      private OnlineRestaurantSocket mySocket;
+    private OnlineRestaurantSocket mySocket;
 
     public MenuAccessImplSockets() {
 
         this.mySocket = new OnlineRestaurantSocket();
     }
 
-    
-    
     @Override
     public Menu findMenu(String id) throws Exception {
         String jsonResponse = null;
@@ -51,9 +51,7 @@ public class MenuAccessImplSockets implements IMenuAccess{
             }
         }
     }
-    
-    
-    
+
     @Override
     public Menu findMenubyRN(String name) throws Exception {
         String jsonResponse = null;
@@ -82,17 +80,16 @@ public class MenuAccessImplSockets implements IMenuAccess{
         }
     }
 
-
     @Override
-    public boolean updateMenu(String id, String id_dish,String id_drink,String id_entry,String id_salad,String id_dessert) throws Exception {
+    public boolean updateMenu(String id, String id_dish, String id_drink, String id_entry, String id_salad, String id_dessert) throws Exception {
         String jsonResponse = null;
-        String requestJson = updateMenuRequestJson( id,  id_dish, id_drink, id_entry, id_salad, id_dessert);
+        String requestJson = updateMenuRequestJson(id, id_dish, id_drink, id_entry, id_salad, id_dessert);
         try {
             mySocket.connect();
             jsonResponse = mySocket.sendStream(requestJson);
             mySocket.closeStream();
             mySocket.disconnect();
-            return true; 
+            return true;
 
         } catch (IOException ex) {
             Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
@@ -124,9 +121,8 @@ public class MenuAccessImplSockets implements IMenuAccess{
     }
 
     @Override
-    public boolean createMenu(String id)  throws Exception{
-    
-       
+    public boolean createMenu(String id) throws Exception {
+
         String jsonResponse = null;
         String requestJson = createMenuRequestJson(id);
         try {
@@ -146,14 +142,13 @@ public class MenuAccessImplSockets implements IMenuAccess{
                 //Devolvió algún error                
                 Logger.getLogger(MainDishAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 throw new Exception(extractMessages(jsonResponse));
-            } 
+            }
             return jsonResponse.contains("true");
         }
-    
+
     }
 
-    
-      /**
+    /**
      * Extra los mensajes de la lista de errores
      *
      * @param jsonResponse lista de mensajes json
@@ -199,8 +194,8 @@ public class MenuAccessImplSockets implements IMenuAccess{
 
         return requestJson;
     }
-    
-     private String findMenubyRNRequestJson(String name) {
+
+    private String findMenubyRNRequestJson(String name) {
 
         Protocol protocol = new Protocol();
         protocol.setResource("menu");
@@ -219,8 +214,7 @@ public class MenuAccessImplSockets implements IMenuAccess{
      * @param idMainDish
      * @return
      */
-
-    private String updateMenuRequestJson(String id_menu, String id_dish,String id_drink,String id_entry,String id_salad,String id_dessert) {
+    private String updateMenuRequestJson(String id_menu, String id_dish, String id_drink, String id_entry, String id_salad, String id_dessert) {
 
         Protocol protocol = new Protocol();
         protocol.setResource("menu");
@@ -231,14 +225,12 @@ public class MenuAccessImplSockets implements IMenuAccess{
         protocol.addParameter("id_entry", id_entry);
         protocol.addParameter("id_salad", id_salad);
         protocol.addParameter("id_dessert", id_dessert);
-        
+
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);
 
         return requestJson;
     }
-    
-    
 
     private String deleteMenuRequestJson(String id) {
 

@@ -94,14 +94,21 @@ public class RestaurantAccessImplSockets implements IRestaurantAccess {
                 //Devolvió algún error                
                 Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 throw new Exception(extractMessages(jsonResponse));
-            } 
-            
+            }
+
             return jsonResponse.contains("true");
 
         }
 
     }
 
+    /**
+     * Crea una lista de restaurante. Utiliza un socket para pedir el servicio
+     * del servidor
+     *
+     * @return la lista de restaurantes creada
+     * @throws Exception error al crear la lista de restaurantes
+     */
     @Override
     public List<Restaurant> list() throws Exception {
 

@@ -65,12 +65,11 @@ public class CustomerAccessImplSockets implements ICustomerAccess {
     /**
      * Busca un Customer. Utiliza socket para pedir el servicio al servidor
      *
-     * @param name
-     * @param pws
-     * @return
+     * @param name Nombre del usuario
+     * @param pws clave del usuario
+     * @return objeto tipo customer
      * @throws Exception
      */
-
     @Override
     public Customer findCustomer(String name, String pws) throws Exception {
         String jsonResponse = null;
@@ -170,7 +169,6 @@ public class CustomerAccessImplSockets implements ICustomerAccess {
     /**
      * Crea una solicitud json para ser enviada por el socket
      *
-     *
      * @param idCustomer identificación del cliente
      * @return solicitud de consulta del cliente en formato Json, algo como:
      * {"resource":"customer","action":"get","parameters":[{"name":"id","value":"98000001"}]}
@@ -193,9 +191,8 @@ public class CustomerAccessImplSockets implements ICustomerAccess {
      *
      * @param name nombre
      * @param pws constraseña
-     * @return
+     * @return respuesta en formato json
      */
-
     private String findCustomerRequestJson(String name, String pws) {
 
         Protocol protocol = new Protocol();
