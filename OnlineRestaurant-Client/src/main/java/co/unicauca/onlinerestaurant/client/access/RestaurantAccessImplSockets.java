@@ -25,7 +25,9 @@ public class RestaurantAccessImplSockets implements IRestaurantAccess {
      * El servicio utiliza un socket para comunicarse con la aplicación server
      */
     private OnlineRestaurantSocket mySocket;
-
+    /**
+     * Constructor por defecto
+     */
     public RestaurantAccessImplSockets() {
         this.mySocket = new OnlineRestaurantSocket();
     }
@@ -74,7 +76,7 @@ public class RestaurantAccessImplSockets implements IRestaurantAccess {
      * @throws Exception error crear el restaurante
      */
     @Override
-    public String createRestaurant(Restaurant restaurant) throws Exception {
+    public boolean createRestaurant(Restaurant restaurant) throws Exception {
         String jsonResponse = null;
         String requestJson = createRestaurantRequestJson(restaurant);
         try {
@@ -94,15 +96,21 @@ public class RestaurantAccessImplSockets implements IRestaurantAccess {
                 //Devolvió algún error                
                 Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 throw new Exception(extractMessages(jsonResponse));
-            } else {
-                //Agregó correctamente, devuelve la cedula del customer 
-                return restaurant.getIdRestaurant();
             }
+
+            return jsonResponse.contains("true");
 
         }
 
     }
 
+    /**
+     * Crea una lista de restaurante. Utiliza un socket para pedir el servicio
+     * del servidor
+     *
+     * @return la lista de restaurantes creada
+     * @throws Exception error al crear la lista de restaurantes
+     */
     @Override
     public List<Restaurant> list() throws Exception {
 

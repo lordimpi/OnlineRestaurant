@@ -1,10 +1,12 @@
 package co.unicauca.onlinerestaurant.commons.domain;
 
 /**
+ * Clase postre
  *
  * @author Camilo Otaya Bravo
  */
 public class Dessert {
+
     /**
      * Identificacion
      */
@@ -38,10 +40,7 @@ public class Dessert {
     public Dessert() {
     }
 
-
-    /*
-    getters y setters
-     */
+    // getters y setters
     public String getId_Dish_Dessert() {
         return id_Dish_Dessert;
     }

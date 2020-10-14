@@ -34,6 +34,12 @@ public class DishEntryService {
         this.repo = repo;
     }
 
+    /**
+     * Busca un plato de entrada
+     *
+     * @param id identificador del plato de entrada
+     * @return true si lo encontro, false de lo contrario
+     */
     public DishEntry findDishEntry(String id) {
         return repo.findDishEntry(id);
     }
@@ -41,10 +47,10 @@ public class DishEntryService {
     /**
      * Crea un nuevo DishEntry. Aplica validaciones de negocio
      *
-     * @param dishentry plato de
-     * @return devuelve el id del plato creado
+     * @param dishentry plato de entrada
+     * @return true si pudo crear, false de lo contrario
      */
-    public String createDishEntry(DishEntry dishentry) {
+    public boolean createDishEntry(DishEntry dishentry) {
         List<JsonError> errors = new ArrayList<>();
 
         String id = dishentry.getIdDishEntry();
@@ -62,13 +68,16 @@ public class DishEntryService {
         }
 
         if (!errors.isEmpty()) {
-            Gson gson = new Gson();
-            String errorsJson = gson.toJson(errors);
-            return errorsJson;
+            return false;
         }
         return repo.createDish(dishentry);
     }
 
+    /**
+     * Lista todos los platos de entrada que existan
+     *
+     * @return lista de plato de entradas
+     */
     public List<DishEntry> listDishEntry() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

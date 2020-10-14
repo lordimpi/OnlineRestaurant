@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.unicauca.onlinerestaurant.server.domain.services;
 
-import co.unicauca.onlinerestaurant.commons.domain.MainDish;
 import co.unicauca.onlinerestaurant.commons.domain.Menu;
 import co.unicauca.onlinerestaurant.commons.infra.JsonError;
 import co.unicauca.onlinerestaurant.server.access.IMenuRepository;
@@ -14,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Servicio de Menu. Da acceso a la lógica de negocio
  *
  * @author soces
  */
@@ -34,20 +29,31 @@ public class MenuService {
     }
 
     /**
-     * Metodo busqueda de plato principal
+     * Metodo de busqueda de plato principal
      *
-     * @param id
-     * @return
+     * @param id identificador del plato
+     * @return objeto de tipo menu
      */
     public Menu findMenu(String id) {
         return repo.findMenu(id);
     }
-    
-    
+
+    /**
+     * Metodo que busca un menu por medio del nombre del restaurante
+     *
+     * @param name nombre del restaurante
+     * @return true si lo encontro, false de lo contrario
+     */
     public Menu findMenubyRN(String name) {
         return repo.findMenubyRN(name);
     }
 
+    /**
+     * Metodo que eliminar un menu
+     *
+     * @param id identificador del menu
+     * @return true si pudo borrar, false de lo contrario
+     */
     public boolean deleteMenu(String id) {
         return repo.deleteMenu(id);
     }
@@ -55,21 +61,25 @@ public class MenuService {
     /**
      * Metodo encargado de actualizar un plato
      *
-    * @param id identificador
-     * @param name nombre
-     * @param price precio
+     * @param id_menu identificador del menu
+     * @param id_dish identificador del plato principal
+     * @param id_drink identificador de la bebida
+     * @param id_entry identificador el plato de entrada
+     * @param id_salad identificador de la ensalada
+     * @param id_dessert identificador del postre
+     * @return true si pudo actualizar, false de lo contrario
      */
-    public boolean updateMenu(String id_menu,String id_dish,String id_drink,String id_entry,String id_salad,String id_dessert) {
-        return repo.updateMenu(id_menu,id_dish,id_drink,id_entry,id_salad,id_dessert);
+    public boolean updateMenu(String id_menu, String id_dish, String id_drink, String id_entry, String id_salad, String id_dessert) {
+        return repo.updateMenu(id_menu, id_dish, id_drink, id_entry, id_salad, id_dessert);
     }
 
     /**
-     * Crea un nuevo mainDish. Aplica validaciones de negocio
+     * Crea un nuevo mainDish.Aplica validaciones de negocio
      *
-     * @param mainDish plato
-     * @return devuelve el id del plato creado
+     * @param id_menu identificador del menu
+     * @return true si pudo crear, false de lo contrario
      */
-    public String createMenu(String id_menu) {
+    public boolean createMenu(String id_menu) {
         List<JsonError> errors = new ArrayList<>();
         // Validaciones y reglas de negocio
         if (id_menu.isEmpty()) {
@@ -77,9 +87,7 @@ public class MenuService {
         }
         // Que no esté repetido
         if (!errors.isEmpty()) {
-            Gson gson = new Gson();
-            String errorsJson = gson.toJson(errors);
-            return errorsJson;
+            return false;
         }
         return repo.createMenu(id_menu);
     }

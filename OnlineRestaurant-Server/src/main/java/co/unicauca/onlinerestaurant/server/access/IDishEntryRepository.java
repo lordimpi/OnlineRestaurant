@@ -22,22 +22,22 @@ public interface IDishEntryRepository {
      * metodo encargado de crear un plato de entrada
      *
      * @param entry entrada
-     * @return una cadena información
+     * @return true si pudo crear, false de lo contrario
      */
-    public String createDish(DishEntry entry);
+    public boolean createDish(DishEntry entry);
 
     /**
      * Metodo encargado de eliminar un plato de entrada
      *
      * @param id identificador del plato de entrada
-     * @return true o false
+     * @return true si pudo borrar, false de lo contrario
      */
     public boolean deleteDishEntry(int id);
 
     /**
      * Metodo encargado de listar los objetos platos de entrada
      *
-     * @return list
+     * @return lista de platos de entrada
      */
     public List<DishEntry> listDishEntry();
 

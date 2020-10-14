@@ -10,11 +10,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Servicio de Bebida. Permite hacer el CRUD de Bebidas solicitando los
+ * servicios con la aplicación server. Maneja los errores devueltos
  *
  * @author Mariat Trujillo
  */
 public class DrinkAccessImplSockets implements IDrinkAccess {
-    
+
     private OnlineRestaurantSocket mySocket;
 
     public DrinkAccessImplSockets() {
@@ -58,6 +60,14 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
         }
 
     }
+
+    /**
+     * Elimina una Bebida. Utiliza socket para pedir el servicio al servidor
+     *
+     * @param id identificador
+     * @return true o false segunsea el caso
+     * @throws Exception cuando no pueda conectarse con el servidor
+     */
     @Override
     public boolean deleteDrink(String id) throws Exception {
 
@@ -68,20 +78,28 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
             jsonResponse = mySocket.sendStream(requestJson);
             mySocket.closeStream();
             mySocket.disconnect();
-            return true;
 
         } catch (IOException ex) {
             Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
         }
         if (jsonResponse == null) {
             throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
-        } 
+        }
+        if (jsonResponse.contains("true")) {
+            return true;
+        }
         return false;
     }
 
-
+    /**
+     * Crea una bebida. Utiliza socket para pedir el servicio al servidor
+     *
+     * @param drink objeto de tipo bebida
+     * @return true o false
+     * @throws Exception cuando no pueda conectarse con el servidor
+     */
     @Override
-    public String createDrink(Drink drink) throws Exception {
+    public boolean createDrink(Drink drink) throws Exception {
 
         String jsonResponse = null;
         String requestJson = createDrinkRequestJson(drink);
@@ -102,10 +120,12 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
                 //Devolvió algún error                
                 Logger.getLogger(MainDishAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 throw new Exception(extractMessages(jsonResponse));
-            } else {
-                //Agregó correctamente, devuelve la cedula del customer 
-                return drink.getId_Drink();
             }
+            if (jsonResponse.contains("true")) {
+
+                return true;
+            }
+            return false;
 
         }
 
@@ -158,6 +178,12 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
         return requestJson;
     }
 
+    /**
+     * Elimina una solicitud json para ser enviada por el socket
+     *
+     * @param idDrink identificación de la bebida
+     * @return solicitud de eliminacion de administrador en formato Json
+     */
     private String deleteDrinkRequestJson(String idDrink) {
 
         Protocol protocol = new Protocol();
@@ -170,6 +196,7 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
 
         return requestJson;
     }
+
     /**
      * Crea la solicitud json de creación del drink para ser enviado por el
      * socket
@@ -209,5 +236,4 @@ public class DrinkAccessImplSockets implements IDrinkAccess {
 
     }
 
-    
 }

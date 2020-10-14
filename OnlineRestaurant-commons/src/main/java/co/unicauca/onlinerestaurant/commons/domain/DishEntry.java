@@ -39,6 +39,7 @@ public class DishEntry {
         this.costDishEntry = costDishEntry;
     }
 
+    //GETER AND SETTER
     public String getIdDishEntry() {
         return idDishEntry;
     }

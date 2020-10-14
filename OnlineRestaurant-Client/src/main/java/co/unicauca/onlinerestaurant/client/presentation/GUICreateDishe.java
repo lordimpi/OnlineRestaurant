@@ -158,8 +158,12 @@ public class GUICreateDishe extends javax.swing.JInternalFrame {
         maindish.setDishPrice(cost);
 
         try {
-            String response = maindishService.createMainDish(maindish);
-            successMessage("Plato " + response + " agregado con éxito.", "Atención");
+            boolean response = maindishService.createMainDish(maindish);
+            if(response){
+                successMessage("Plato agregado con éxito.", "Atención");
+            }else{
+                Messages.warningMessage("el planto no pudo ser agregado", "Warning");
+            }
             clearControls();
             jTxfId.setText("");
 

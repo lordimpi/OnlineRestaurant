@@ -31,28 +31,4 @@ public class DessertService {
         return repo.findDessert(id);
     }
 
-    public String createDessert(Dessert dish) {
-        List<JsonError> errors = new ArrayList<>();
-        
-        String id = dish.getId_Dish_Dessert();
-        String precio = Double.toString(dish.getCost_Dish_Dessert());
-        // Validaciones y reglas de negocio
-        if (id.isEmpty() || dish.getName_Dish_Dessert().isEmpty()
-                || precio.isEmpty() ) {
-            errors.add(new JsonError("400", "BAD_REQUEST", "id, nombre y precio son obligatorios. "));
-        }
-        // Que no esté repetido
-
-        Dessert dishSearched = this.findDessert(id);
-        if (dishSearched != null) {
-            errors.add(new JsonError("400", "BAD_REQUEST", "El identificado ya existe. "));
-        }
-
-        if (!errors.isEmpty()) {
-            Gson gson = new Gson();
-            String errorsJson = gson.toJson(errors);
-            return errorsJson;
-        }
-        return repo.createDessert(dish);
-    }
 }

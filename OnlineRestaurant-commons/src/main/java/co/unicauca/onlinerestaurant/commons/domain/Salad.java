@@ -24,6 +24,7 @@ public class Salad {
      */
     private double costSalad;
 
+    //GETER AND SETTER
     public String getIdSalad() {
         return idSalad;
     }

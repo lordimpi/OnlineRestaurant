@@ -23,7 +23,7 @@ public interface ICustomerRepository {
      *
      * @param name nombre
      * @param pws contraseña
-     * @return
+     * @return Un customer en concreto
      */
     public Customer findCustomer(String name, String pws);
 
@@ -33,27 +33,21 @@ public interface ICustomerRepository {
      * @param customer
      * @return una cadena información
      */
-    public String createCustomer(Customer customer);
+    public boolean createCustomer(Customer customer);
 
     /**
      * lista de clientes
      *
-     * @return
+     * @return Una lista de customers
      */
     public List<Customer> list();
-    /**
-     * metodo para borrar customer
-     * @param id
-     * @return 
-     */
 
+    /**
+     * Mtodo para borrar customer
+     *
+     * @param id Identificador del customer
+     * @return True si pudo eliminar, False de lo contrario
+     */
     public boolean deleteCustomer(int id);
-    
-    /**
-     * metodo Lista de customers
-     * @return 
-     */
-
-    public List<Customer> Costomers();
 
 }

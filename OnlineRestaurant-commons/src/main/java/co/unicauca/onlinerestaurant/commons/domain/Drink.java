@@ -1,26 +1,45 @@
 package co.unicauca.onlinerestaurant.commons.domain;
 
 /**
+ * Clase bebida
  *
  * @author alejo
  */
 public class Drink {
-   
+
+    /**
+     * Identificador de bebida
+     */
     private String id_Drink;
-    
+    /**
+     * Nombre de bebida
+     */
     private String nameDrink;
-    
+    /**
+     * Precio de la bebida
+     */
     private double drinkPrice;
 
+    /**
+     * Constructor por defecto
+     *
+     * @param id_Drink Identificador de bebida
+     * @param nameDrink Nombre de la bebida
+     * @param drinkPrice Precio de la bebida
+     */
     public Drink(String id_Drink, String nameDrink, double drinkPrice) {
         this.id_Drink = id_Drink;
         this.nameDrink = nameDrink;
         this.drinkPrice = drinkPrice;
     }
 
+    /**
+     * Constructor por defecto
+     */
     public Drink() {
     }
 
+    //GETER AND SETTER
     public String getId_Drink() {
         return id_Drink;
     }
@@ -45,5 +64,4 @@ public class Drink {
         this.drinkPrice = drinkPrice;
     }
 
-    
 }

@@ -5,6 +5,7 @@ import co.unicauca.onlinerestaurant.commons.domain.Restaurant;
 import java.util.List;
 
 /**
+ * Es una fachada para comunicar la presentación con el dominio
  *
  * @author Santiago Acuña
  */
@@ -25,6 +26,7 @@ public class RestaurantService {
 
     /**
      * Lista todos los restaurantes
+     *
      * @return Lista de restaurantes encontrados
      * @throws Exception Si no encuentra lista de restaurantes
      */
@@ -32,5 +34,5 @@ public class RestaurantService {
         return service.list();
 
     }
-    
+
 }

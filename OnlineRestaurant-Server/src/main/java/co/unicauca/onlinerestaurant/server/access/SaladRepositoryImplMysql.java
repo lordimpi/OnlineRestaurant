@@ -31,8 +31,8 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
     /**
      * Metodo encargado de Buscar Ensalada
      *
-     * @param id
-     * @return
+     * @param id Identificado de la Ensalada
+     * @return Una ensalda de la base de datos
      */
     @Override
     public Salad findSalad(String id) {
@@ -63,10 +63,10 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
      * @param id identificador
      * @param name nombre
      * @param cost costo
-     * @return
+     * @return True si pudo crear una ensalada, False de lo contrario
      */
     @Override
-    public String createSalad(String id, String name, double cost) {
+    public boolean createSalad(String id, String name, double cost) {
         this.connect();
         try {
             String sql = "INSERT INTO salad(idsalad, namesalad, pricesalada) VALUES (?,?,?)";
@@ -77,11 +77,11 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
-            return id;
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Ensalada de la base de datos", ex);
         }
-        return "";
+        return false;
     }
 
     /**
@@ -90,6 +90,7 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
      * @param id identificador
      * @param name nombre
      * @param cost costo
+     * @return True si pudo actualizar, false de lo contrario
      */
     @Override
     public boolean updateSalad(String id, String name, double cost) {
@@ -114,9 +115,10 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
      * Metodo encargado de Eliminar Ensalada
      *
      * @param id identificador
+     * @return true si pudo borrar una ensalada, false de lo contrario
      */
     @Override
-    public boolean deleteSalad(String id) {  
+    public boolean deleteSalad(String id) {
         this.connect();
         try {
             String sql = "DELETE FROM salad where idsalad=? ";
@@ -135,7 +137,7 @@ public class SaladRepositoryImplMysql implements ISaladRepository {
     /**
      * Permite hacer la conexion con la base de datos
      *
-     * @return
+     * @return 1 si pudo conectarse, -1 de lo contrario
      */
     private int connect() {
         try {

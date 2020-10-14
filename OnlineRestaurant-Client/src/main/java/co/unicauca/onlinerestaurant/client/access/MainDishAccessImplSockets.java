@@ -2,7 +2,6 @@ package co.unicauca.onlinerestaurant.client.access;
 
 import co.unicauca.onlinerestaurant.client.infra.OnlineRestaurantSocket;
 import co.unicauca.onlinerestaurant.commons.domain.MainDish;
-import co.unicauca.onlinerestaurant.commons.domain.Restaurant;
 import co.unicauca.onlinerestaurant.commons.infra.JsonError;
 import co.unicauca.onlinerestaurant.commons.infra.Protocol;
 import com.google.gson.Gson;
@@ -15,13 +14,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Servicio de Cliente. Permite hacer el CRUD de Plato solicitando los servicios
+ * con la aplicación server. Maneja los errores devueltos
  *
  * @author Santiago Acuña
  */
 public class MainDishAccessImplSockets implements IMainDishAccess {
 
+    /**
+     * El servicio utiliza un socket para comunicarse con la aplicación server
+     */
     private OnlineRestaurantSocket mySocket;
 
+    /**
+     * Constructor por defecto
+     */
     public MainDishAccessImplSockets() {
 
         this.mySocket = new OnlineRestaurantSocket();
@@ -64,6 +71,15 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
 
     }
 
+    /**
+     * Actualiza un Plato. Utiliza socket para pedir el servicio al servidor
+     *
+     * @param id identificador del plato
+     * @param name nombre del plato
+     * @param price precio del plato
+     * @return objeto de tipo MainDish
+     * @throws Exception cuando no pueda conectarse con el servidor
+     */
     @Override
     public MainDish updateMainDish(String id, String name, String price) throws Exception {
 
@@ -94,9 +110,17 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
 
     }
 
+    /**
+     * Elimina un plato. Utiliza socket para pedir el servicio al servidor
+     *
+     * @param id identificador del plato
+     * @return true si realizo la actualizacion correctamente false en caso
+     * contrario
+     * @throws Exception cuando no pueda conectarse con el servidor
+     */
     @Override
     public boolean deleteMainDish(String id) throws Exception {
-
+        boolean res = false;
         String jsonResponse = null;
         String requestJson = deleteMainDishRequestJson(id);
         try {
@@ -104,20 +128,36 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
             jsonResponse = mySocket.sendStream(requestJson);
             mySocket.closeStream();
             mySocket.disconnect();
-            return true;
 
         } catch (IOException ex) {
             Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
         }
         if (jsonResponse == null) {
             throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
-           
+
         }
-        return false;
+        if (jsonResponse.contains("true")) {
+            res = true;
+        }
+
+        if (jsonResponse.contains("error")) {
+            //Devolvió algún error
+            Logger.getLogger(CustomerAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
+            throw new Exception(extractMessages(jsonResponse));
+        }
+
+        return res;
     }
 
+    /**
+     * Crea un plato. Utiliza socket para pedir el servicio al servidor
+     *
+     * @param mainDish objeto de tipo mainDish
+     * @return true si se creo correctamente o false en caso contrario
+     * @throws Exception cuando no pueda conectarse con el servidor
+     */
     @Override
-    public String createMainDish(MainDish mainDish) throws Exception {
+    public boolean createMainDish(MainDish mainDish) throws Exception {
 
         String jsonResponse = null;
         String requestJson = createMainDishRequestJson(mainDish);
@@ -132,21 +172,21 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
         }
         if (jsonResponse == null) {
             throw new Exception("No se pudo conectar con el servidor");
+        }
+        if (jsonResponse.contains("false")) {
+            return false; //Agregó correctamente, devuelve la cedula del customer
         } else {
-
-            if (jsonResponse.contains("error")) {
-                //Devolvió algún error                
-                Logger.getLogger(MainDishAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
-                throw new Exception(extractMessages(jsonResponse));
-            } else {
-                //Agregó correctamente, devuelve la cedula del customer 
-                return mainDish.getId_mainDishe();
-            }
-
+            return true;
         }
 
     }
 
+    /**
+     * Lista los platos.
+     *
+     * @return lista de objetos mainDish
+     * @throws Exception cuando no pueda conectarse con el servidor
+     */
     @Override
     public List<MainDish> list() throws Exception {
 
@@ -196,7 +236,7 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
     /**
      * Convierte el jsonError a un array de objetos jsonError
      *
-     * @param jsonError
+     * @param jsonError objeto tipo JsonError
      * @return objeto MyError
      */
     private JsonError[] jsonToErrors(String jsonError) {
@@ -228,8 +268,8 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
     /**
      * crea una solicitud json para ser enviada por el socket
      *
-     * @param idMainDish
-     * @return
+     * @param idMainDish identificador de plato
+     * @return true realizado correctamente false en caso contrario
      */
     private String updateMainDishRequestJson(String id, String name, String price) {
 
@@ -245,6 +285,12 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
         return requestJson;
     }
 
+    /**
+     * Elimina una solicitud json para ser enviada por el socket
+     *
+     * @param idMainDish objeto de tipo mainDish
+     * @return true realizado correctamente false en caso contrario
+     */
     private String deleteMainDishRequestJson(String idMainDish) {
 
         Protocol protocol = new Protocol();
@@ -262,7 +308,7 @@ public class MainDishAccessImplSockets implements IMainDishAccess {
      * Crea la solicitud json de creación del maindish para ser enviado por el
      * socket
      *
-     * @param mainDish objeto customer
+     * @param mainDish objeto mainDish
      * @return devulve algo como:
      * {"resource":"maindish","action":"post","parameters":[{"name":"id","value":"980000012"},{"name":"fistName","value":"Juan"},...}]}
      */

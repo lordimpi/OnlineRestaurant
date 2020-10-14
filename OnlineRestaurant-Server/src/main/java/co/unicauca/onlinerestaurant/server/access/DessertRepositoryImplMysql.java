@@ -49,7 +49,7 @@ public class DessertRepositoryImplMysql implements IDessertRepository {
                 dishdessert = new Dessert();
                 dishdessert.setId_Dish_Dessert(res.getString("id_dessert"));
                 dishdessert.setName_Dish_Dessert(res.getString("dessert_name"));
-                dishdessert.setCost_Dish_Dessert(res.getInt("dessert_cost"));
+                dishdessert.setCost_Dish_Dessert(res.getInt("dessert_price"));
 
             }
             pstmt.close();
@@ -59,20 +59,7 @@ public class DessertRepositoryImplMysql implements IDessertRepository {
         }
         return dishdessert;
     }
-    /**
-     * crea en la base de datos un postre
-     * 
-     * @param dish
-     * @return 
-     */
 
-    
-    @Override
-    public String  createDessert(Dessert dish) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
     /**
      * Permite hacer la conexion con la base de datos
      *

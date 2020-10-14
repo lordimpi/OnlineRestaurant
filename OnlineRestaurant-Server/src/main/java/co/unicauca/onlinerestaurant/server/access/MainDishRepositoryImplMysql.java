@@ -58,8 +58,16 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
 
     }
 
+    /**
+     * Crea un plato principal en la base de datos
+     *
+     * @param id Identificador del plato principal
+     * @param name Nombre del plato principal
+     * @param cost Precio del plato principal
+     * @return True si pudo crear el plato principal, false de lo contrario
+     */
     @Override
-    public String createMainDish(String id, String name, String cost) {
+    public boolean createMainDish(String id, String name, String cost) {
 
         Double price = Double.parseDouble(cost);
 
@@ -73,17 +81,23 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
             pstmt.executeUpdate();
             pstmt.close();
             this.disconnect();
-            return id;
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al consultar Plato de la base de datos", ex);
         }
 
-        return "";
+        return false;
     }
 
+    /**
+     * Borra un plato principal de la base de datos
+     *
+     * @param id Identificador del plato principal a borrar
+     * @return True si pudo borrar, false de lo contrario
+     */
     @Override
     public boolean deleteDish(String id) {
-                    this.connect();
+        this.connect();
         try {
             String sql = "DELETE FROM maindish where id_dish=? ";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -99,11 +113,12 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
     }
 
     /**
-     * Permite actualizar un plato en la base de datos
+     * Permite actualizar un plato principal en la base de datos
      *
      * @param id identificador del plato
      * @param name Nombredel plato
      * @param price Precio del plato
+     * @return True si pudo actualizar, false de lo contrario
      */
     @Override
     public boolean updateDish(String id, String name, String price) {
@@ -128,9 +143,9 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
     }
 
     /**
-     * metodo que perimte listar los restaurantes
+     * metodo que perimte listar los restaurantes de la base de datos
      *
-     * @return list
+     * @return lista de platos principales
      */
     @Override
     public List<MainDish> list() {
@@ -141,7 +156,9 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
             this.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet res = pstmt.executeQuery();
+
             while (res.next()) {
+
                 MainDish newmaindish = new MainDish();
 
                 newmaindish.setId_mainDishe(res.getString("id_dish"));
@@ -154,13 +171,14 @@ public class MainDishRepositoryImplMysql implements IMainDishRepository {
         } catch (SQLException ex) {
             Logger.getLogger(CustomerRepositoryImplMysql.class.getName()).log(Level.SEVERE, "Error al Selecionar los datos de la tabla maindish de la base de datos", ex);
         }
+
         return platos;
     }
 
     /**
      * Permite hacer la conexion con la base de datos
      *
-     * @return
+     * @return 1 si pudo conectarse, -1 de lo contrario
      */
     public int connect() {
         try {

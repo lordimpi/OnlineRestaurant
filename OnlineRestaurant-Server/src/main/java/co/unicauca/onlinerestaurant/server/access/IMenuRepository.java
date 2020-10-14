@@ -8,37 +8,57 @@ package co.unicauca.onlinerestaurant.server.access;
 import co.unicauca.onlinerestaurant.commons.domain.MainDish;
 import co.unicauca.onlinerestaurant.commons.domain.Menu;
 
-/**
- * Interface del respositorio de Menu
+ /**
+ * Interfaz de repositorios de Menus
+ *
  * @author soces
  */
 public interface IMenuRepository {
+
     /**
-     * Busca un menu por su ID
-     * @param id identificador 
-     * @return objeto de tipo menu
+     * Declaracion del metodo buscar plato
+     *
+     * @param id Identificador de un menu
+     * @return un menu
      */
     public Menu findMenu(String id);
+
     /**
-     * Elimina un menu por su id
-     * @param id identificador
-     * @return true o false 
+     * Declaracion del metodo elimar menu
+     *
+     * @param id identificador del menu
+     * @return true si pudo borrar, false de lo contrario
      */
     public boolean deleteMenu(String id);
+
     /**
-     * Actualiza menu
-     * @param id_menu idmenu
-     * @param id_dish  idPlato
-     * @param id_drink id bebida
-     * @param id_entry  idEntrada
-     * @param id_salad   idensalada
-     * @param id_dessert idpostre
-     * @return true o false
+     * Declaracion del metodo actualizar menu
+     *
+     * @param id_menu identificador del menu
+     * @param id_dish identificador del plato
+     * @param id_drink identificador de la bebida
+     * @param id_entry identificador del plato de entrada
+     * @param id_salad identificador de la ensalada
+     * @param id_dessert identificador del postre
+     * @return true si pudo actualizar, false de lo contrario
      */
-    public boolean updateMenu(String id_menu,String id_dish,String id_drink,String id_entry,String id_salad,String id_dessert);
-   
-    public String createMenu(String id_menu);
-    
+    public boolean updateMenu(String id_menu, String id_dish, String id_drink, String id_entry, String id_salad, String id_dessert);
+
+    /**
+     * Declaracion del metodo crear menu
+     *
+     * @param id_menu identificador del menu
+     * @return true si pudo crear el menu, false de lo contrario
+     */
+    public boolean createMenu(String id_menu);
+
+    /**
+     * Declaracion del metodo buscar menu por medio del nombre del restaurante
+     *
+     * @param rname Nombre del restaurante
+     * @return objeto tipo menu
+     */
+
     public Menu findMenubyRN(String rname);
-    
+
 }
